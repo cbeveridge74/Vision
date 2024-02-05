@@ -1,0 +1,12 @@
+<div class="detail-container">
+	<div class="title">{{ currentMailItem.type.displayname }}</div>
+	<div ng-if="currentMailItem.file == null" ng-show="currentMailItem != null">Message detail here</div>
+
+	<div class="scan-image" ng-if="currentMailItem.file != null">
+		<div class="overlay">
+			<div class="fa fa-cog" ng-click="handleScanClick()"></div>
+		</div>
+		
+     	<img ng-src="/data/clinicaldocs/{{ currentMailItem.file }}">
+    </div>
+</div>

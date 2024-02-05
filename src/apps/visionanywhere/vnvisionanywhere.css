@@ -1,0 +1,12 @@
+.vision-anywhere{
+	height: 100%;
+	width: 100%;
+	background-color: #FFF;
+}
+
+.vision-anywhere .main{
+	width: 20em;
+	margin: 10em auto;
+	font-size: 1.7em;
+	color: #1E81E7
+}

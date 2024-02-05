@@ -1,0 +1,9 @@
+<vn-css vn-id="vnreadsearch" vn-css-file="apps/visionthree/forms/vnreadsearch.css"></vn-css>
+<div class="read-search">
+	<vn-search
+	    solr-url="'http://ec2-75-101-214-153.compute-1.amazonaws.com:8983/solr/statedecoded/search'"
+	    query=""
+	    display-field="'catch_line'"
+	    model="model">
+	</vn-search>
+</div>

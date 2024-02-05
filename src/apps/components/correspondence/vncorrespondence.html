@@ -1,0 +1,47 @@
+<vn-css vn-id="vncorrespondence" vn-css-file="apps/components/correspondence/vncorrespondence.css"></vn-css>
+<div class="category list-group"
+    ng-controller="vnCorrespondenceController"
+    ng-init="init();">
+    <div class="no-data" ng-show="mail.length < 1">
+        No correspondence
+    </div>
+    <div class="task list-group-item mail" ng-repeat="mailitem in mail"  ng-right-click="handleRightClick( $event, this );">
+        <div>
+            <div class="when">
+                <div class="time">{{ mailitem.date | date:'HH:mm' }}</div>
+                <div class="date">{{ mailitem.date | date:'dd-MMM-yyyy' }}</div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="title"><div>{{ mailitem.title }}</div></div>
+                <div class="subtitle"><div>{{ mailitem.subtitle }}</div></div>
+                <div ng-class="( mailitem.patient.displayname == 'Unassigned' ) ? 'patient unassigned' : 'patient'" ng-click="handlePatientClick( $event );">
+                    <div><img ng-src="{{ mailitem.patient.displayname == 'Unassigned' && 'apps/components/images/patient_red.svg' || 'apps/components/images/patient.svg'}}"></div>
+                    <div>{{ mailitem.patient.displayname}}</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="info">
+                <div ng-class="( mailitem.person == 'Unallocated' ) ? 'person unallocated' : 'person'">{{ mailitem.person }}</div>
+                <div class="filed">
+                    <img ng-src="{{ mailitem.filed && 'apps/components/images/unfiled.svg' || 'apps/components/images/filed.svg'}}">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div>
+                <img src="apps/components/images/actions.svg">
+                <div ng-show="mailitem.actions.length > 0" 
+                     ng-repeat="action in mailitem.actions | filter:{ read : false }" 
+                     class="badge">{{$index + 1}}</div>
+            </div>
+        </div>
+        <div class="warnings">
+            <div>
+                <img src="apps/components/images/warning.svg">
+            </div>
+        </div>
+    </div>
+</div>

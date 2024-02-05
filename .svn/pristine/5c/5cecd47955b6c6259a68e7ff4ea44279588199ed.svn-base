@@ -1,0 +1,42 @@
+angular.module('vnTitleBarModule', [],function () {})
+.controller('vnTitleBarController', function( $scope, $rootScope, vnSearchFactory, vnScreenManagementFactory ){
+	var hasBeenShown = false;
+
+	if( !hasBeenShown ){
+        $('.title-bar .typeahead').typeahead({
+          hint: false,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'patients',
+          displayKey: 'name',
+          source: vnSearchFactory.substringMatcher(new DataStore().patients)
+        });
+
+        $('.title-bar .typeahead').on( 'typeahead:selected', handleSelected );
+
+        hasBeenShown = true;
+    }
+
+    function handleSelected(event, selected){
+        if( vnScreenManagementFactory.isDoubleClick() ){
+          return;
+        }
+        $('.title-bar .typeahead').typeahead('val', '');
+        $rootScope.patientid = selected.id;
+        vnScreenManagementFactory.switchScreens( 'VN_REP__HOME', 'VN_REP__PATIENT' );
+      };
+})
+.directive('vnTitleBar', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        title: '@vnTitle',
+        backbutton: '@vnShowBackButton'
+      },
+      templateUrl: function(elem, attr){
+        return 'layout/vntitlebar.html';
+      }
+    };
+});

@@ -1,0 +1,65 @@
+<div  ng-init="init();" ng-controller="vnVisionAppointmentsCalendarController">
+	<vn-css vn-id="vncalendar" vn-css-file="apps/visionappointments/calendar/vncalendar.css"></vn-css>
+	<div class="slider-container" ng-click="handleSliderContainerClick($event);">
+		<div class="slider">
+		</div>
+		<div ng-repeat="(date, owners) in calendar" class="slider-date" ng-class="( $index % 5 == 0 && $index > 0) ? 'highlight' : ''">
+			<div>{{ date | date:'dd' }}</div>
+			<div>{{ date | date:'MMM' }}</div>
+		</div>
+	</div>
+	<vn-tour
+                    vn-item-top="4em"
+                    vn-item-left="10em"
+                    vn-item-height="3.5em"
+                    vn-item-width="12em"
+                    vn-arrow-top="3.3em"
+                    vn-arrow-left="15.4em"
+                    vn-arrow-direction="up"
+                    vn-text="Switch back to day view"></vn-tour>
+
+                    <vn-tour
+                    vn-item-top="20em"
+                    vn-item-left="40em"
+                    vn-item-height="5em"
+                    vn-item-width="9em"
+                    vn-arrow-top="-100em"
+                    vn-arrow-left="-100em"
+                    vn-arrow-direction="left"
+                    vn-text="Click a square to book free slot"></vn-tour>
+
+
+	<div class="calendar-scroller">
+		<vn-scroll 
+            vn-class-selector="calendar-scroller"
+            vn-x-scroll="true"
+            vn-watch="screens.VN_APP__CALENDAR"
+            vn-top-offset="90"
+            vn-use-zoom-version="false"
+            vn-on-created-callback="handleResize();">
+            
+			<div class="calendar">
+				<div ng-repeat="(date, owners) in calendar" class="date">
+					<div class="date-title" ng-click="handleDateClick(date, $event)">
+						<div class="day-label">{{ date | date:'EEEE' }}</div>
+						<div>{{ date | date:'dd-MMM-yyyy' }}</div>
+					</div>
+					<div ng-repeat="(owner, timegroups) in owners" class="owner">
+						<div class="title">{{ owner }}</div>
+						<div ng-repeat="(timegroup, times) in timegroups" class="timegroup">
+							<div 
+								 ng-repeat="time in times" 
+								 ng-click="handleSlotClick( this );" 
+								 style="border-top-color:{{ time.color }}"
+								 class="{{ time.id }}"
+								 ng-class="( time.label == '00:00' || time.status != 'AVAILABLE' ) ? 'time hiddenINPS' : 'time'" >
+								<div class="time-label">{{ time.label }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</vn-scroll>
+	</div>
+</div>
+

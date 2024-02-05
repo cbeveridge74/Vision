@@ -1,0 +1,98 @@
+.title-bar{
+	height: 6em;
+	padding-top: 1em;
+	background-color: #FFFFFF;
+}
+
+.title-bar .left{
+	text-align: left;
+}
+
+.title-bar .right{
+	text-align: right;
+}
+
+.title-bar .left,
+.title-bar .right,
+.title-bar .inform-command-buttons,
+.title-bar .title,
+.title-bar .typeahead,
+.title-bar .backbutton,
+.title-bar .width-spacer {
+	display: inline-block;
+}
+
+.title-bar .left,
+.title-bar .right {
+	width: 48vw;
+}
+
+.title-bar .inform-command-buttons,
+.title-bar .title,
+.title-bar .typeahead,
+.title-bar .backbutton{
+	vertical-align: top;
+	color: #20335E;
+} 
+
+.title-bar .inform-command-buttons,
+.title-bar .title,
+.title-bar .typeahead {
+	margin: auto 0;
+}
+
+.title-bar .title{
+	font-size: 3em;
+}
+
+.title-bar .search{
+	position: absolute;
+	right: 1em;
+}
+
+.title-bar .typeahead {
+	width: 25em;
+	height: 2em; 
+	font-size: 0.9em;
+	padding-left: 0.5em;
+	//margin-top: 2em;
+}
+
+.title-bar .backbutton{
+	margin-left: 1em;
+	padding-right: 2em;
+}
+
+.title-bar .backbutton.ng-hide{
+	opacity: 0;
+	//display: block !important;
+}
+
+.title-bar .width-spacer{
+	width: 5em;
+}
+
+.title-bar .width-spacer.ng-hide{
+	opacity: 0;
+	display: block !important;
+}
+
+.title-bar img{
+	cursor: pointer;
+	width: 3em;
+}
+
+.title-bar .inform-command-buttons {
+	text-align: right;
+	margin-right: 1em;
+}
+
+.title-bar .inform-command-button {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.title-bar .inform-command-button img,
+.title-bar .backbutton img{
+	width: 4em;
+}

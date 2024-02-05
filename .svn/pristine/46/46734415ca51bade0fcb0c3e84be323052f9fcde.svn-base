@@ -1,0 +1,21 @@
+angular.module('vnWorkflowModule', [],function () {})
+.directive('vnWorkflow', function() {
+    return {
+      restrict: 'E',
+      controller: function( $scope ){
+      	$scope.taskoutercreators = [{ showouterbrick : true, minimise : true }];
+		$scope.handleOuterAddClick = function(){
+			$scope.taskoutercreators[ $scope.taskoutercreators.length - 1 ].showouterbrick = false;
+			$scope.taskoutercreators[ $scope.taskoutercreators.length - 1 ].minimise = true;
+			$scope.taskoutercreators.push( { showouterbrick : true, minimise : true } );
+			angular.forEach( this.taskinnercreators, function( value, index ){
+				value.minimise = true;
+			});
+		};
+
+      },
+      templateUrl: 'apps/visiontasks/workflow/vnworkflow.html'
+    };
+});
+
+

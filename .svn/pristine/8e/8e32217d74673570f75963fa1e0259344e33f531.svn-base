@@ -1,0 +1,13 @@
+<vn-css vn-id="vntitlebar" vn-css-file="layout/vntitlebar.css"></vn-css>
+<div class="title-bar" 
+	ng-controller="vnTitleBarController"
+	ng-init="init();">
+	<div class="width-spacer" ng-show="!backbutton"></div>
+	<div class="backbutton" ng-show="backbutton">
+		<img src="images/left_arrow_blue.svg" ng-click="handleBackButtonClick();" >
+	</div>
+    <div class="title">{{title}}</div>
+    <div class="search" ng-show="showsearch">
+        <input class="typeahead" type="text" placeholder="Patient Search...">
+    </div>
+</div>

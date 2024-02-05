@@ -1,0 +1,80 @@
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-ExtraBold.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: none;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: none;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-LightItalic.ttf') format('truetype');
+  font-weight: light;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-Light.ttf') format('truetype');
+  font-weight: light;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: 	url('fonts/open-sans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-Italic.ttf') format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('fonts/open-sans/OpenSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: FontAwesome;
+  src: url('fonts/FontAwesome.otf');
+}
+
+html, body{
+	font-family: OpenSans;
+	height: 100%;
+	width: 100%;
+	background-color: #1E81E7;
+}
+
+.vision-parent-module .detail-view,
+.vision-parent-module .create-view{
+  //left: 30em;
+  //top: 3em;
+  display: none;
+}
+
+.vision-parent-module .detail-view.open,
+.vision-parent-module .create-view.open{
+  display: inline-block;
+}
+
+.vision-parent-module.command-bar-open md-toast.md-bottom{
+	bottom: 76px;
+}
+

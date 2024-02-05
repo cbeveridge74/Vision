@@ -1,0 +1,14 @@
+.document-review{
+	width: 100%;
+	height: 100%;
+}
+
+.document-review .document-content{
+
+	font-size: 1.5em;
+	padding: 2em;
+	margin: 1em 1em;
+	background-color: #EEE;
+}
+
+

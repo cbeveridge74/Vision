@@ -1,0 +1,203 @@
+.task-card-create {
+	//position: absolute;
+	//z-index: 2;
+	background-color: #FFF;
+}
+
+.task-card-create md-card{
+	width: 330px;
+	margin: 0;
+	box-shadow: 3px 3px 9px #777;
+}
+
+
+.task-card-create .task-widgets {
+	width: 100%;
+	height: 100%;
+	margin-top: -10px;
+	margin-bottom: 1.5em;
+	white-space: nowrap;
+	text-align: right;
+
+}
+
+.task-card-create .task-widgets .task-widget{
+	display: inline-block;
+	margin-left: 15px;
+	vertical-align: bottom;
+	text-align: center;
+	cursor: pointer; 
+}
+
+.task-card-create .task-widgets .task-widget .urgency-label{
+	font-size: 0.4em;
+	padding-right: 1em;
+}
+
+.task-card-create .task-widgets .task-widget .urgency-label.urgent{
+	color: red;
+}
+
+.task-card-create .task-widgets .task-widget md-switch{
+	margin: 0;
+}
+
+.task-card-create .task-widgets .task-widget img{
+	width: 24px;
+	height: 24px;
+}
+	
+
+.task-card-create .chipsInput {
+	height: inherit;
+	width: inherit;
+}
+
+.task-card-create .chips-mini-title{
+	height: 20px;
+	padding: 3px;
+	padding-right: 6px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+}
+
+.task-card-create .chips-mini {
+	height: 24px;
+}
+
+.task-card-create .image-default-mini {
+	height: 24px;
+	width: 24px;
+}
+
+.task-card-create .chips-active {
+	width: inherit;
+}
+
+.task-card-create .recipients {
+	border-bottom: solid 1px #DDD;
+}
+
+.task-card-create .subject {
+	margin-top: 1em;
+}
+
+.task-card-create .description {
+	margin-top: 1em;
+}
+
+.task-card-create .subject,
+.task-card-create  .description md-input-container {
+	width: 300px;
+}
+
+.task-card-create md-select {
+	display: block;
+}
+
+.task-card-create .md-select-label > span{
+	width: 100%;
+}
+
+.task-card-create .md-select-label .md-select-icon {
+	//width: 200px;
+}
+
+.task-card-create md-switch .md-bar{
+
+}
+
+.task-card-create md-switch:not(.md-dragging) .md-bar, md-switch:not(.md-dragging) .md-thumb-container, md-switch:not(.md-dragging) .md-thumb {
+
+
+}
+
+.task-card-create md-switch .md-container{
+
+}
+
+.task-card-create md-switch .md-thumb-container {
+
+}
+
+.task-card-create md-switch .md-label {
+
+}
+
+.task-card-create .subject label,
+.task-card-create .recipients label,
+.task-card-create .description label {
+	color: #AAA;
+}
+
+.task-card-create .chips-mini-img {
+	height: 16px;
+}
+
+.task-card-create .chips-mini-img img {
+	height: 16px;
+}
+
+.task-card-create #chips-list {
+	z-index: 2;
+	max-height: 40em;
+}
+
+.task-card-create .command-buttons{
+	width: 100%;
+	margin-top: 2em;
+}
+
+.task-card-create .md-button{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+/**/
+.task-card-create{
+
+}
+
+.task-card-create.minimised .description {
+	margin-top: 0em;
+}
+
+.task-card-create.minimised .description textarea{
+	border: none;
+	overflow: auto;
+	resize: none;
+	height: 2em;
+	
+}
+
+.task-card-create.minimised .description ::-webkit-input-placeholder{
+	color: #888;
+	font-size: 1.2em;
+}
+
+.task-card-create.minimised md-card{
+	height: 4em;
+	-webkit-transition: height 0.5s;
+	width: 51.5em;
+	margin: 8px;
+	box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26)
+}
+
+.task-card-create.minimised md-card-content{
+	text-indent: 1em;
+	padding: 0;
+	height: 5em;
+	margin-bottom: -0.4em;
+}
+
+.task-card-create.minimised .subject,
+.task-card-create.minimised .description md-input-container {
+	width: 500px;
+	padding: 0;
+}
+
+
+
+
+
+

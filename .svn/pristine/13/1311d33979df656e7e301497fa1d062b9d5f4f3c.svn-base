@@ -1,0 +1,124 @@
+.vision-tasks{
+	background-color: #FFFFFF;
+	height: 100%;
+}
+
+.vision-tasks .inbox-scroller{
+
+}
+
+.vision-tasks .no-data{
+	height: 100%;
+	margin-top: 10em;
+	font-size: 1.5em;
+	text-align: center;
+	color: #1e81e7;
+}
+
+.vision-tasks .folder-bar{
+	margin: -3.5em 0 0.3em -12em;
+	text-align: center;
+}
+
+@media(max-width: 1000px) {
+
+	.vision-tasks .folder-bar{
+		margin: -2em 0 0 0;
+	}
+
+}
+
+.vision-tasks .folder-bar-item{
+	display: inline-block;
+	margin-left: 1em;
+	margin-right: 1em;
+	cursor: pointer;
+}
+
+.vision-tasks .folder-bar-item.selected{
+	color: #1e81e7;
+	font-size: 1.2em;
+	cursor: default;
+}
+
+.vision-tasks .task-list-item{
+	border: solid 1px #BBB;
+	padding: 0.4em;
+	margin: 1em;
+	cursor: pointer;
+}
+
+.vision-tasks .task-list-item:active{
+	-webkit-transform: translate(1px,1px);
+}
+
+.vision-tasks .task-list-item .topline{
+	margin-bottom: 0.5em;
+	white-space: nowrap;
+}
+
+.vision-tasks .task-list-item .topline .subject,
+.vision-tasks .task-list-item .topline .assigner,
+.vision-tasks .task-list-item .topline .due{
+	display: inline-block;
+	width: 33%;
+;
+}
+
+.vision-tasks .task-list-item .topline .subject,
+.vision-tasks .task-list-item .topline .assigner,
+.vision-tasks .task-list-item .topline .due,
+.vision-tasks .task-list-item .description{
+	color: #BBB;
+	font-weight: normal;
+}
+
+.vision-tasks .task-list-item .topline .subject{
+	text-align: left;
+}
+
+.vision-tasks .task-list-item .topline .assigner{
+	text-align: center;
+	font-style: italic;
+	
+}
+
+.vision-tasks .task-list-item .topline .due{
+	text-align: right;
+}
+
+
+.vision-tasks .task-list-item .description{
+	font-size: 1.2em;
+}
+
+.vision-tasks .task-list-item .patientname{
+	margin-top: 0.5em;
+}
+
+
+/*.vision-tasks canvas{
+
+}
+
+.vision-tasks .source-image {
+	position: absolute;
+	z-index: -1;
+}
+
+.vision-tasks img{
+	
+}
+
+.vision-tasks #theFrame,
+.vision-tasks img{
+	display: none;
+}
+
+.highlight {
+	position: absolute;
+	background: yellow;
+	opacity: 0.5;
+	width: 10px;
+	height: 10px;
+}	*/

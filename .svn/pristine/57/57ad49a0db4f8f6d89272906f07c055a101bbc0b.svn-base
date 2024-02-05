@@ -1,0 +1,26 @@
+.vision-recurrence{
+
+}
+
+.vision-recurrence .inline{
+
+}
+
+.vision-recurrence .frequency input{
+	width: 3em;
+	margin-right: 1em;
+}
+
+.vision-recurrence md-select {
+	margin: 0;
+}
+
+.vision-recurrence label {
+	width: 10em;
+	margin-right: 1em;
+	text-align: right;
+}
+
+.vision-recurrence .md-select-label .md-select-icon {
+	width: 60px;
+}

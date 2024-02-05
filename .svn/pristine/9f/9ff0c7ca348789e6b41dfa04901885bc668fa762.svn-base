@@ -1,0 +1,480 @@
+angular.module('vnVisionMailModule', [],function () {})
+.run(function( vnAppManagementFactory ){
+	var APP_ID 			= "VN_MAIL";
+	var DOCUMENT_INBOX = APP_ID + '__MAIL_HOME';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: APP_ID, 
+		name: "Vision Mail",
+		icon: "images/scanned_doc.svg",
+		screens: [
+			DOCUMENT_INBOX
+		]});
+})
+.factory( 'vnVisionMailFactory', function(){
+    var factory = {};
+    return factory;
+})
+.controller('vnVisionMailController', function( 
+  $scope,
+  $rootScope,
+  $timeout,
+  $mdToast,
+  visionFactory,
+  vnScreenManagementFactory,
+  VN_MAIL_SCREENS ){
+
+  var self = this;
+  var patients = {};
+  var dataStore = new DataStore();
+  var filterCategories = dataStore.filterCategories;
+  $scope.currentFilter = [];
+  $scope.childModel = {};
+  $scope.childModel.showOnly = "all";
+  $scope.childModel.dateOnly = "all";
+  $scope.user = 0;
+  $scope.currentMailItem = null;
+  $scope.viewLandscape = false;
+  self.filteredMailItems = [];
+  $scope.masterAreaHeight = 30;
+  var filterToast;
+
+  var resetFilters = function(){
+    setMainFilter( $scope.INBOX );
+    $scope.childModel.showOnly = "all";
+    $scope.childModel.dateOnly = "all";
+  };
+
+  $scope.$watch(function () {
+       return self.filteredMailItems;
+   },function(value){
+        $scope.currentMailItem = null;
+        initialisePatients();
+        if( ( value != null && $scope.mailItems != null ) 
+          && value.length < $scope.mailItems.length
+          && $( '.vision-parent-module md-toast.md-left.md-bottom' ).length < 1 ){
+          filterToast = $mdToast.simple()
+            .action('CLEAR FILTERS')
+            .hideDelay(0)
+            .highlightAction(false)
+            .position('bottom left');
+
+          $mdToast.show(filterToast).then( function( response ) {
+            resetFilters();
+          });
+        } else if( ( value != null && $scope.mailItems != null ) 
+          && value.length == $scope.mailItems.length
+          && $( '.vision-parent-module md-toast.md-left.md-bottom' ).length > 0 ) {
+          $mdToast.hide();
+        }
+   }, true);
+
+  $scope.handleMailItemClick = function(){ 
+    $scope.currentMailItem = this.item;
+  };
+
+  var convertObjectToArray = function( obj ){
+    return Object.keys(obj).map(function(k) { return obj[k] });
+  };
+
+  var initialisePatients = function(){
+    patients = [];
+    if( $scope.mailItems == null ){
+      return;
+    }
+    $scope.mailItems.forEach( function( fMailItem ){
+      if( fMailItem.patient != null ){
+        patients[ fMailItem.patient.Id ] = fMailItem.patient;
+      }
+    });
+    patients = convertObjectToArray( patients );
+    patients.sort(function(a,b){
+      if(a.Surname < b.Surname) return -1;
+      if(a.Surname > b.Surname) return 1;
+      return 0;
+    });
+    $scope.names = patients;
+  };
+
+  $scope.handleViewChangeClick = function(){
+    $scope.viewLandscape = !$scope.viewLandscape;
+  };
+
+  $scope.handlePatientClick = function(){
+    $rootScope.patientid = this.name.Id;
+    $scope.search = '';
+  };
+  $scope.filterMailItems = function( value, index, array ){
+    var returnValue = false;
+    if( $scope.currentFilter.length < 1 ){
+      returnValue = true;
+    }
+    
+    $scope.currentFilter.forEach( function( filter ){
+      if( filter.id == value.category ){
+        returnValue = true;
+      }
+
+      if( filter.id  == filterCategories.PATIENT_RQD
+        && value.patientid == null ){
+        returnValue = true;
+      }
+
+      if( filter.id  == filterCategories.CLINICIAN_RQD
+        && value.userid < 0 ){
+        returnValue = true;
+      }
+
+      if( filter.id  == filterCategories.UOM_RQD
+        && value.uom == null ){
+        returnValue = true;
+      }
+    });
+
+
+    if( $scope.childModel.showOnly == "flagged" && value.flagged == false || 
+        $scope.childModel.showOnly == "unread" && value.read == true){
+      returnValue = false;
+    }
+
+    var datereceived = moment( value.datereceived );
+
+    if( $scope.childModel.dateOnly == "1d" ){
+      if( datereceived.format( "DD-MMM-YYYY" ) != moment().format( "DD-MMM-YYYY" ) ){
+        returnValue = false;
+      }
+    }else if( $scope.childModel.dateOnly == "2d" ){
+      if( datereceived.format( "DD-MMM-YYYY" ) != moment().format( "DD-MMM-YYYY" ) &&
+          datereceived.format( "DD-MMM-YYYY" ) != moment().subtract(1, 'days').format( "DD-MMM-YYYY" )){
+        returnValue = false;
+      }
+    }else if( $scope.childModel.dateOnly == "1w" ){
+      if( datereceived.isBefore( moment().subtract( 7, 'days' ) ) ){
+        returnValue = false;
+      }
+    }else if( $scope.childModel.dateOnly == "2w" ){
+      if( datereceived.isBefore( moment().subtract( 14, 'days' ) ) ){
+        returnValue = false;
+      }
+    }else if( $scope.childModel.dateOnly == "1m" ){
+      if( datereceived.isBefore( moment().subtract( 31, 'days' ) ) ){
+        returnValue = false;
+      }
+    }
+    if( $rootScope.patientid != null && $rootScope.patientid != value.patientid ){
+      returnValue = false;
+    }
+    return returnValue;
+  };
+
+  $scope.handleSearchFocus = function( event ){
+    vnScreenManagementFactory.openMenu( ".vision-mail .search-results.menu" );
+  };
+
+  $scope.$watch("screens." + VN_MAIL_SCREENS.DOCUMENT_INBOX, function( value ){
+    if( value ){
+      handleShow();
+    }
+  });
+
+
+  $scope.handleRightClick = function( event, element ){
+    vnScreenManagementFactory.handleListItemRightClick( this.item, this.filteredMailItems, mailLeftCommands, mailRightCommands );
+  };
+
+
+  $rootScope.$on( "COMMAND_SELECTED", function( name, command ){
+
+    if( command.id == VMSRT ){
+      vnScreenManagementFactory.openMenu( ".vision-mail .sort-menu.menu", true );
+    }  
+  } );
+
+  $scope.hasRole = function( filter ){
+
+    if( filter.roles == null ){
+      return true;
+    }
+
+    var returnValue = false;
+
+    filter.roles.forEach( function( filterRole ){
+      $rootScope.user.roleid.forEach( function( userRole ){
+        if( userRole == filterRole ){
+          returnValue = true;
+        }
+      });
+    });
+    return returnValue;
+  };
+
+  $scope.$watch( 'usermodel', function( nValue, oValue ){
+    if( nValue != null && ( nValue != oValue ) ){
+      $scope.currentUser =  JSON.parse( nValue );
+      retrieveMailItems( $scope.currentUser.id );
+    }
+  }, true);
+
+   var createListeners = function(){
+    removeFilterDataListener = $scope.$watch( 'filterData', function( nValue, oValue ){
+      if( nValue != null && ( nValue != oValue ) ){
+        var highlightedItem = findHighlightedItem();
+        var label = highlightedItem.label;
+        initialiseCurrentFilter( highlightedItem );
+        $scope.contentTitle = label;
+        visionFactory.updateData( database[ MAIL_FILTERS ].name, $scope.filterData, function( data ){})
+      }
+    }, true);
+  };
+  createListeners();
+
+
+  var initialiseCurrentFilter = function( highlightedItem ){
+    if( highlightedItem.id == filterCategories.INBOX ){
+      $scope.currentFilter = [];
+      return;
+    }else if( highlightedItem.id == filterCategories.FAVS ){
+      $scope.filterData.filters.forEach( function( topfilter ){
+        if( topfilter.id == filterCategories.FAVS ){
+          topfilter.filters.forEach( function( middlefilter ){
+            middlefilter.filter.forEach( function( innerfilter ){
+              if( innerfilter.favourite == true ){
+                $scope.currentFilter.push( innerfilter );
+              }
+            });
+          });
+        }
+      });
+    }else{
+      $scope.currentFilter = [ highlightedItem ];
+    }
+    
+  };
+
+   var handleShow = function(){
+    $scope.currentUser = $rootScope.user;
+    retrieveMailFilters();
+    retrieveMailItems( $scope.currentUser.id, function(){
+      $timeout( function(){
+        initialisePatients();
+      }, 1000 );
+    });
+   };
+
+  var retrieveMailFilters = function(){
+   visionFactory.retrieveData( database[ MAIL_FILTERS ].name, function( results ){
+      retrieveMailFiltersHandler( results );
+    }, "by_userid", { start: $rootScope.user.id, end: $rootScope.user.id });
+  };
+
+  var retrieveMailItems = function( userid, callback ){
+    var request = { start: userid, end: userid };
+    if( userid < -1 ){
+      request = null;
+    }
+    visionFactory.retrieveData( database[ MAIL_ITEMS ].name, function( results ){
+      retrieveMailItemsHandler( results );
+      if( callback != null ){
+        callback();
+      }
+    }, "by_userid", request);
+  };
+
+
+  var retrieveMailFiltersHandler = function( results ){
+    $scope.filterData = results[0];
+  };
+
+  var retrieveMailItemsHandler = function( results ){
+    $scope.mailItems = results;
+  };
+
+  $scope.handleFilterClick = function( e ){
+    this.item.favourite = !this.item.favourite;
+    e.stopPropagation();
+  };
+
+  $scope.contentTitle = "Inbox";
+
+  var removeGeneralClickListener;
+  var removeFilterDataListener;
+
+  $scope.INBOX          = filterCategories.INBOX;
+  $scope.FAVS           = filterCategories.FAVS;
+  $scope.CLINICIAN_RQD  = filterCategories.CLINICIAN_RQD;
+  $scope.FOLDER         = filterCategories.FOLDER;
+
+  var populateUsers = function(){
+    visionFactory.retrieveData( database[ PERSON ].name, function( results ){
+      retrieveUsersHandler( results );
+    });
+  };
+  populateUsers();
+
+  var retrieveUsersHandler = function( results ){
+    var anyUser = {
+      id: -2,
+      label: "All"
+    };
+    results.unshift( anyUser );
+
+    visionFactory.retrieveData( database[ PERSON_GROUPS ].name, function( groupResult ){
+      angular.forEach( groupResult, function( value, index ){
+        results.push({
+          id: value.id,
+          label: value.label,
+        });
+      });
+      $scope.users = results;
+    });
+  };
+
+  // isMoreClicked is for if the 'More...' option in the Filters
+  $scope.handlePluginOptionClick = function( event, isMoreClicked ){
+    if( !( this.item.moreoption && $scope.isFiltersSelected( this.item.id ) ) ){
+      if( this.item.moreoption != null ){
+        var dis = this;
+        if(  $scope.chosenFilters != null && (  $scope.chosenFilters.tag != this.item.id ) ){
+          $timeout(function(){
+            handlePluginOptionClickHelper( dis, event );
+          }, 350);
+        }else{
+          handlePluginOptionClickHelper( dis, event );
+        }
+      }
+    }
+    
+    /*if( this.item.selected == false ){
+      var currentHighlightedItem = findHighlightedItem();
+      var dis = this;
+      dis.item.highlighted = true;
+
+      //If this is a subchoice and it's not chosen as a favourite then highlight it's parent
+      // Need to remove listeners to avoid title changes etc
+      
+      dis.item.highlighted = false;
+      currentHighlightedItem.highlighted = true;
+      $timeout( function(){
+        //removeFilterDataListener();
+        //setMainFilter( $scope.FAVS );
+        //createListeners();
+      }, 500);
+    }else{*/
+      unhighlightAll();
+      this.item.highlighted = true;
+    //}
+  };
+
+  $scope.handleMoreClick = function( e ){
+    handlePluginOptionClickHelper( this.$parent.$parent, e );
+  };
+
+  $scope.isFiltersSelected = function( favItemId ){
+    var thereIsAFilterSelected = false;
+    $scope.filterData.filters.forEach( function( value ){
+      if( value.id == favItemId ){
+        value.filters.forEach( function( filterItem ){
+          filterItem.filter.forEach( function( filterItem ){
+            if( filterItem.favourite ){
+               thereIsAFilterSelected = true;
+            }
+          });
+        });
+      }
+    });
+    return thereIsAFilterSelected;
+  };
+
+  var unhighlightAll = function(){
+    $scope.filterData.filters.forEach( function( value ){
+      value.highlighted = false;
+      value.filters.forEach( function( filterItem ){
+        filterItem.filter.forEach( function( filterValue ){
+          filterValue.highlighted = false;
+        });
+      });
+    }); 
+  };
+
+  var findHighlightedItem = function(){
+    var returnValue;
+    $scope.filterData.filters.forEach( function( value ){
+      if( value.highlighted ){
+        returnValue = value;
+      }
+      value.filters.forEach( function( filterItem ){
+        filterItem.filter.forEach( function( filterValue ){
+          if( filterValue.highlighted ){
+             returnValue = filterValue;
+          }
+        });
+      });
+    });
+    
+    return returnValue;
+  };
+
+  var setMainFilter = function( itemId ){
+    unhighlightAll();
+    angular.forEach( $scope.filterData.filters, function( filter ){
+      if( filter.id == itemId ){
+        filter.highlighted = true;
+      }
+    });
+  };
+
+  var handlePluginOptionClickHelper = function( context, event ){
+    $scope.chosenFilters = context.item.filters;
+    $scope.chosenFilters.tag = context.item.id;
+    openFlyout( ".vision-mail .flyout" );
+    event.stopPropagation();
+  };
+
+  var openFlyout = function( selector ){
+      var element = $( selector );
+      if( $( element ).hasClass( "open" ) ){
+        closeFlyout( selector );
+        return;
+      }
+      $( element ).addClass( "open", 300, "easeOutCirc" );
+      addGeneralCLickListener();
+  };
+
+  var closeFlyout = function( selector ){
+      var highlightedItem = findHighlightedItem();
+      if( highlightedItem.label == null 
+        || highlightedItem.label.length < 1
+        || highlightedItem.id == $scope.FOLDER ){
+        setMainFilter( $scope.INBOX );
+      }
+      var element = $( selector );
+      $( element ).removeClass( "open", 300, "easeOutCirc" );
+      $scope.chosenFilters = null;
+      removeGeneralClickListener();
+  };
+
+  var addGeneralCLickListener = function(){
+    removeGeneralClickListener = $rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function(){
+      closeFlyout( ".vision-mail .flyout" );
+    });
+  };
+
+  $( window ).resize(function() {
+    handleResize();
+  });
+
+  var handleResize = function(){
+      
+  };
+})
+.directive('vnVisionMail', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionmail/vnvisionmail.html'
+    };
+  })
+.value('VN_MAIL_SCREENS',  { 
+	DOCUMENT_INBOX: "VN_MAIL__MAIL_HOME",
+});
+
+

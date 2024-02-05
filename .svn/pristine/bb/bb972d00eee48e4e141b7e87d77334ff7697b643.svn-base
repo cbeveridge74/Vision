@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root formid="" formname="" formtitle="undefined">
+   <row>
+      <left>
+         <type>textinput</type>
+         <settings>
+            <fieldid>txt1</fieldid>
+            <searchField />
+            <entityid />
+            <entityshortname />
+            <saveas />
+            <label>Text</label>
+            <labelweight />
+            <componentsize />
+            <containersize />
+            <horizontalalignment />
+            <restrictions />
+            <minchars />
+            <maxChars />
+            <hiddenvalue />
+            <units />
+         </settings>
+         <workflow>
+            <name>somename</name>
+            <triggeredby>#txt1</triggeredby>
+            <runoninitialise>false</runoninitialise>
+            <runonsave>false</runonsave>
+            <runonsaveonly>false</runonsaveonly>
+            <runoninitialiseonly>false</runoninitialiseonly>
+            <message>General validation message - OVERRIDE</message>
+            <rules>
+               <conditiontype>AND</conditiontype>
+               <rules>
+                  <selector>#txt1</selector>
+                  <operator>equal</operator>
+                  <value>craig</value>
+               </rules>
+               <rules>
+                  <selector>#txt2</selector>
+                  <operator>not-equal</operator>
+                  <value>tony</value>
+               </rules>
+               <actions>
+                  <tru>
+                     <action>hide</action>
+                     <selector>#txt1</selector>
+                     <actionmessage />
+                     <actionset />
+                  </tru>
+                  <fal>
+                     <action>show</action>
+                     <selector>#txt1</selector>
+                     <actionmessage />
+                     <actionset />
+                  </fal>
+               </actions>
+            </rules>
+         </workflow>
+      </left>
+   </row>
+   <row>
+      <left>
+         <type>textinput</type>
+         <settings>
+            <fieldid>txt2</fieldid>
+            <searchField />
+            <entityid />
+            <entityshortname />
+            <saveas />
+            <label>Text 2</label>
+            <labelweight />
+            <componentsize />
+            <containersize />
+            <horizontalalignment />
+            <restrictions />
+            <minchars />
+            <maxChars />
+            <hiddenvalue />
+            <units />
+         </settings>
+      </left>
+   </row>
+</root>

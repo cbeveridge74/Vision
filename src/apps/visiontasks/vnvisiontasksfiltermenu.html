@@ -1,0 +1,22 @@
+<div class="task-filter-menu menu" ng-click="handleGeneralClick( $event )">
+	<div class="clear-button">
+		<md-button class="md-raised md-primary" ng-click="handleClear();">Clear</md-button>
+	</div>
+	<div class="filter-section">
+		<div ng-class="$root.taskfilter.indexOf( '__' + person.shortlabel + '__' ) > -1 ? 'person-filter on':'person-filter'" ng-repeat="person in people" ng-click="handlePersonClick();">
+			<div class="image">
+				<img ng-src="{{person.image}}">
+			</div>
+			<div class="label">
+				{{ person.shortlabel }}
+			</div>
+		</div>
+	</div>
+	<div class="filter-section">
+		<div class="urgency">
+			<div ng-click="handleUrgencyClick( 'Urgent' );" ng-class="$root.taskfilter.indexOf( '__Urgent__' ) > -1 ? 'option urgency-filter on':'option urgency-filter'">Urgent</div>
+			<div ng-click="handleUrgencyClick( 'Routine' );" ng-class="$root.taskfilter.indexOf( '__Routine__') > -1 ? 'option urgency-filter on':'option urgency-filter'">Routine</div>
+		</div>
+	</div>
+	
+</div>

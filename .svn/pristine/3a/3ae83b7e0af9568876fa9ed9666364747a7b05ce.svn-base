@@ -1,0 +1,38 @@
+.title-bar{
+	height: 6em;
+	display: flex;
+	background-color: #E7EFF3;
+}
+
+.title-bar .title,
+.title-bar .typeahead{
+	display: inline-block;
+	padding-left: 4em;
+	font-size: 2em;
+	margin: auto 0;
+	color: #20335E;
+}
+
+.title-bar .search{
+	position: absolute;
+	right: 1em;
+}
+
+.title-bar .typeahead {
+	width: 25em;
+	height: 2em;
+	font-size: 0.9em;
+	padding-left: 0.5em;
+	margin-top: 2em;
+}
+
+.title-bar .backbutton{
+	/* position: absolute; */
+	top: 4.2em;
+	left: 3em;
+}
+
+.title-bar img{
+	cursor: pointer;
+	width: 3em;
+}

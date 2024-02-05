@@ -1,0 +1,77 @@
+.taskreminders > div {
+	display: inline-flex;
+	height: 50px;
+	vertical-align: top;
+}
+
+.taskreminders > div > div {
+	margin: auto 0;
+}
+
+.tasks .status{
+	width: 2em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+.tasks .status img{
+	width: 2em;
+	height: 2em;
+}
+
+.taskreminders > div > div {
+	display: block;
+	margin-left:5px;
+}
+
+.taskreminders > div {
+	display: inline-block;
+	height: 4em;
+}
+
+.taskreminders .patient > div{
+	display: inline-block;
+}
+
+.taskreminders .subject{
+	font-size: 0.9em;
+	height: 1em;
+	margin-top: -0.3em;
+	color: #999;
+}
+
+.taskreminders .workflow {
+	font-size: 1.1em;
+	margin-top: 0em;
+	color: #000
+}
+
+.taskreminders .patient {
+	margin-top: 0.8em;
+	height: 2em;
+	font-size: 0.75em;
+	padding-left: 0.5em;
+	cursor: pointer;
+}
+
+.taskreminders .patient img {
+	width: 1em;
+	vertical-align: top;
+	padding-top: 0.1em;
+	margin-right: 0.2em;
+}
+
+.taskreminders .image {
+	padding-top: 0.2em;
+}
+
+.taskreminders .image img{
+	width: 2.1em;
+}
+
+.tasks {
+}
+
+.tasks .status {
+	padding-left: 0.5em;
+}

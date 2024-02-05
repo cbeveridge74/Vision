@@ -1,0 +1,21 @@
+<div class="vision-dynamo-combo" ng-controller="vnComboController" ng-init="init();">
+	<vn-css vn-id="vndynamocombo" vn-css-file="apps/visiondynamo/common/component/combo/vncombo.css"></vn-css>
+	<div class="vn-label">{{ label }}</div>
+        <select id="{{ target }}" 
+                ng-blur="handleChange();" 
+                ng-model="selected"
+                ng-options="option.label for option in options track by option.id">
+        </select>
+
+
+        
+	<vn-validation-message
+        vn-item-top="0.5em"
+        vn-item-left="0em"
+        vn-item-height="3.5em"
+        vn-item-width="12.5em"
+        vn-arrow-top="0em"
+        vn-arrow-left="6em"
+        vn-arrow-direction="up"
+        vn-text="{{message}}"></vn-validation-message>
+</div>

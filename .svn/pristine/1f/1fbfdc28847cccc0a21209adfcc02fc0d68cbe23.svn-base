@@ -1,0 +1,25 @@
+angular.module('vnChipsModule', [ 'vnChipsDetailModule', 'mdChips', ],function () {})
+.controller('vnChipsController', function( $scope ){
+	$scope.initChips = function(){
+		
+	};
+})
+.directive('vnChips', function() {
+    return {
+	    restrict: 'E',
+	    scope: {
+			collection: '=',
+			ngModel: '=',
+			text: '@',
+			mdItem: '@',
+			mdTitle: '@',
+			mdThumbnail: '@',
+			mdSubtitle: '@',
+			vnPlaceholder: '@',
+			vnSecondaryPlaceholder: '@',
+			vnCustomShowMore: '=',
+			addChipsHandler: '&'
+		},
+	    templateUrl: 'apps/components/chips/vnchips.html'
+    };
+});

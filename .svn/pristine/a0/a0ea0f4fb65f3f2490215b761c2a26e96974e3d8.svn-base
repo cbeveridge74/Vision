@@ -1,0 +1,24 @@
+<vn-css vn-id="vnannouncements" vn-css-file="apps/components/announcements/vnannouncements.css"></vn-css>
+<div class="announcements" 
+     ng-controller="vnAnnouncementsController"
+     ng-init="init();" layout="column" layout-wrap>
+    
+    <div class="no-data" ng-show="announcements.length < 1">
+        No unread announcements
+    </div>
+
+    <vn-card 
+        ng-repeat="announcement in announcements"
+        ng-click="handleCardClick()"
+        vn-card-action-click="handleActionClick( action )"
+        vn-card-actions="getCardActions()"
+        vn-card-entity="task">
+        <div class="title">
+            {{ announcement.tasksubjects.label }}
+        </div>
+        <div class="description">
+            {{ announcement.description }}
+        </div>
+        <div class="urgency" ng-show="task.urgency == 'Urgent'"></div>
+    </vn-card>
+</div>

@@ -1,0 +1,186 @@
+angular.module('vnWorkflowModule', [],function () {})
+.factory('vnWorkflowFactory',  function( $rootScope, vnTaskFactory, visionFactory, vnDatabaseFactory ){
+	var factory = {};
+	factory.addTaskCardTo = function( outerBoxIdx, createNew ){
+
+		var container = $rootScope.taskoutercreators[ outerBoxIdx ];
+
+		if( createNew == null ){
+			createNew = true;
+		}
+
+		if( container.taskinnercreators == null ){
+			container.taskinnercreators = [];
+		}
+
+		if( container.taskinnercreators.length > 0 ){
+			container.taskinnercreators[ container.taskinnercreators.length - 1 ].minimise = true;
+		}
+		
+		if( createNew ){
+			container.taskinnercreators.push( { minimise: false, model: {} } );
+			$rootScope.invalidcardopen = true;
+		}
+
+		
+	};
+
+	factory.deleteTaskCard = function( cardIndex, cardContainerIndex ){
+		
+		//Delete the inner card
+		$rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators.splice( cardIndex, 1 );
+		var isLastInChain = $rootScope.taskoutercreators.length - 1 == cardContainerIndex;
+		
+		if( $rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators.length < 1 ){
+			// Is this the last container on the screen?
+			var isLastContainerOnScreen = $rootScope.taskoutercreators.length == 1;
+			// Remove the container
+			$rootScope.taskoutercreators.splice(cardContainerIndex--, 1);
+
+			// If this is the last one on the screen then create a brand new starter container
+			if( isLastContainerOnScreen ){
+				factory.addCardContainer();
+				return;
+			}
+		}
+		
+		if( isLastInChain ){
+			$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showouterbrick = true;
+		}
+		if( $rootScope.taskoutercreators[ cardContainerIndex ] != null ){
+			$rootScope.taskoutercreators[ cardContainerIndex ].showinnerbrick = true;
+		}
+		$rootScope.invalidcardopen = false;
+	}
+
+	factory.addCardContainer = function(){
+		$rootScope.invalidcardopen = true;
+		if( $rootScope.taskoutercreators == null || $rootScope.taskoutercreators.length < 1 ){
+			$rootScope.taskoutercreators = [{ showouterbrick : false, showinnerbrick : false, minimise : true }];
+			return;
+		}
+		
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showouterbrick = false;
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showinnerbrick = true;
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].minimise = true;
+		$rootScope.taskoutercreators.push( { showouterbrick : true, showinnerbrick : true, minimise : true } );
+		angular.forEach( $rootScope.taskoutercreators, function( outer, outerIndex ){
+			angular.forEach( outer.taskinnercreators, function( inner, innerIndex ){
+				inner.minimise = true;
+			});
+		});
+	};
+
+	factory.restoreCard = function( cardIndex, cardContainerIndex ){
+		$rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators[ cardIndex ].minimise = false;
+	};
+
+	factory.createWorkflow = function( attachments ){
+
+		var workflow = {
+			assigner: $rootScope.user.id,
+			attachments: attachments,
+			tasks:[]
+		};
+
+		var taskCounter = 0;
+
+		angular.forEach( $rootScope.taskoutercreators, function( outercreator, outercreatorindex ){
+			var parallel = new Array();
+			angular.forEach( outercreator.taskinnercreators, function( innercreator, innercreatorindex ){
+
+				var assigneeIds = [];
+
+				angular.forEach( innercreator.model.selectedRecipients, function( value, index ){
+					assigneeIds.push( value.id );
+				});
+
+				//stringValues note.  For binding strings, needed to use an object
+				var task = vnTaskFactory.buildTask( 
+					assigneeIds, 
+					innercreator.model.selectedSubjects.$$mdSelectId, 
+					innercreator.model.stringValues.description, 
+					innercreator.model.clinicaldocid, 
+					innercreator.model.patientid );
+				task.workflowtaskid = taskCounter++;
+
+				parallel.push( task );
+			});
+			workflow.tasks.push( parallel );
+		});	
+
+		visionFactory.updateData( database[ TASK_WORKFLOW ].name, workflow, function( data, event, request ){
+			// Now send off the first lot of tasks
+			visionFactory.retrieveDataByKey( database[ TASK_WORKFLOW ].name, request.result, function( result ){
+				var showToast = false;
+				var toastMessage = result.tasks[0].length + " tasks sent successfully";
+				angular.forEach( result.tasks[0], function( task, taskindex ){
+					task.workflowid = request.result;
+					if( ( result.tasks[0].length - 1 ) == taskindex ){
+						showToast = true;
+					}
+					vnTaskFactory.sendTask( task, function(){}, showToast, toastMessage);
+				});
+			});
+		});
+	};
+	return factory;
+})
+.directive('vnWorkflow', function() {
+    return {
+      restrict: 'E',
+      controller: function( $scope, 
+      						$rootScope, 
+      						$timeout, 
+      						vnScrollFactory, 
+      						vnWorkflowFactory){
+
+      	$scope.workflowInformCommands = workflowInformCommands;
+      	$scope.attachmentModel = {};
+      	$scope.init = function () {
+      		
+      		$scope.$watch( 
+		      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			//handleShow();
+	      		}
+	      	});
+      	};
+
+      	$rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value ){
+      		if( value == WRKSND ){
+      			console.log( $scope.attachmentModel );
+      			vnWorkflowFactory.createWorkflow( $scope.attachmentModel );
+      		}else if( value == WRKSVE ){
+      			console.log( "Saving" );
+      		}
+      	});
+
+      	
+      	vnWorkflowFactory.addCardContainer();
+
+      	$( window ).resize(function() {
+	        handleResize();
+	      });
+
+		$scope.handleOuterAddClick = function(){
+			vnWorkflowFactory.addCardContainer();
+			handleResize();
+			$timeout( function(){
+				//var width = - $( ".vision-workflow" ).width();
+				//vnScrollFactory.scrollTo( "vision-workflow", width, true, 300 );
+			}, 1 );
+		};
+
+		var handleResize = function(){
+    	$timeout( function(){
+    		vnScrollFactory.handleResize( "vision-workflow" );
+    	}, 1);
+    	
+    };
+      },
+      templateUrl: 'apps/visiontasks/workflow/vnworkflow.html'
+    };
+});
+
+

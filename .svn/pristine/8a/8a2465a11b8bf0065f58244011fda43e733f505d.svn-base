@@ -1,0 +1,31 @@
+angular.module('vnSearchModule', [],function () {})//'ngTouch'
+.factory('vnSearchFactory',  function(){
+	var factory = {};
+	factory.substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substrRegex;
+     
+        // an array that will be populated with substring matches
+        matches = [];
+     
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+     
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          if (substrRegex.test(str.Surname) 
+           || substrRegex.test(str.Forename)
+           || substrRegex.test(str.DOB)) {
+            // the typeahead jQuery plugin expects suggestions to a
+            // JavaScript object, refer to typeahead docs for more info
+            matches.push({ id: str.Id, name: str.Surname.toUpperCase() + ", " + str.Forename + " (" + str.DOB + ")" });
+          }
+        });
+     
+        cb(matches);
+      };
+    };
+
+	return factory;
+});

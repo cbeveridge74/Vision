@@ -1,0 +1,54 @@
+angular.module('vnTitleBarModule', [],function () {})
+.controller('vnTitleBarController', function( $scope, $rootScope, vnSearchFactory, vnScreenManagementFactory ){
+	var hasBeenShown = false;
+
+	if( !hasBeenShown ){
+        $('.title-bar .typeahead').typeahead({
+          hint: false,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'patients',
+          displayKey: 'name',
+          source: vnSearchFactory.substringMatcher(new DataStore().patients)
+        });
+
+        $('.title-bar .typeahead').on( 'typeahead:selected', handleSelected );
+
+        hasBeenShown = true;
+    }
+
+    $scope.handleBackButtonClick = function(){
+      $scope.backbuttonHandler();
+      if( vnScreenManagementFactory.isDoubleClick() ){
+        return;
+      }
+    };
+
+    function handleSelected (event, selected){
+        if( vnScreenManagementFactory.isDoubleClick() ){
+          return;
+        }
+        $('.title-bar .typeahead').typeahead('val', '');
+        $rootScope.patientid = selected.id;
+        $scope.searchHandler();
+    }
+})
+.directive('vnTitleBar', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        title: '@vnTitle',
+        backbutton: '@vnShowBackButton',
+        backbuttonHandler: '&vnBackbuttonHandler',
+        searchHandler: '&vnSearchHandler'
+      },
+      link: function(element, attr, scope){
+        scope.backbuttonhandler = attr.backbuttonhandler;
+      },
+      templateUrl: function(elem, attr){
+        return 'layout/vntitlebar.html';
+      }
+    };
+});

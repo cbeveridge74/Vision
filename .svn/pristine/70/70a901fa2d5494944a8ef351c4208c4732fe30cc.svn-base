@@ -1,0 +1,44 @@
+angular.module('vnNavigationModule', [],function () {})
+.factory('vnNavigationFactory',  function( $rootScope, $timeout, vnAppManagementFactory ){
+	var factory = {};
+
+	$rootScope.screens = {};
+	$rootScope.screens[ "VN_LOGIN" ] = true;
+
+  	factory.switchScreens = function( to ){
+  		angular.forEach( $rootScope.screens, function( value, index ){
+			$rootScope.screens[ index ] = false;
+		});
+		$timeout( function(){
+			$rootScope.screens[to] = true;
+			var appName = to.split( '__' );
+			if( appName != null ){
+				$rootScope.screens[appName[0]] = true;
+				var app = vnAppManagementFactory.getApp( appName[0] );
+				if( app != null ){
+					//$timeout( function(){
+						$rootScope.currentapp = app;	
+					//}, 1000, true );
+					
+				}
+				
+			}
+		}, 1, true );
+	 }; 
+
+
+
+	return factory;
+}).factory('vnActionFactory',  function(){
+	var factory = {};
+	var ableTo = {};
+
+	factory.registerHelper = function( actionName, callback ){
+		ableTo[ actionName ] = callback;
+	};
+
+	factory.helpMeTo = function( actionName, data, callback ){
+		ableTo[ actionName ].call( this, data, callback );
+	}
+	return factory;
+});

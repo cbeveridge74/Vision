@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="73.533669"
+   height="73.533669"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="disk_blue.svg"
+   inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Appointments\disk_blue_40.png"
+   inkscape:export-xdpi="48.860001"
+   inkscape:export-ydpi="48.860001">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#50abff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9814678"
+     inkscape:cx="29.858499"
+     inkscape:cy="56.679389"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1228"
+     inkscape:window-height="849"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.82023622,-978.00838)">
+    <g
+       id="g3831-1"
+       transform="matrix(0.83737421,0,0,0.83737421,-39.556027,992.19222)"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\save_40.png"
+       inkscape:export-xdpi="60.919998"
+       inkscape:export-ydpi="60.919998"
+       style="fill:#20335e;fill-opacity:1">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3041-7"
+         d="m 88.100658,14.043028 c 0,-3.333333 -0.38889,-4.5000004 -1.5,-4.5000004 -1.11111,0 -1.5,1.1666674 -1.5,4.5000004 0,3.333333 0.38889,4.5 1.5,4.5 1.11111,0 1.5,-1.166667 1.5,-4.5 z"
+         style="fill:#20335e;fill-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3039-4"
+         d="m 102.84877,14.188703 0,-6.4999995 -6.499998,0 -6.5,0 0,6.4999995 0,6.5 6.5,0 6.499998,0 z"
+         style="fill:#20335e;fill-opacity:1" />
+      <path
+         id="path2996-1"
+         d="m 68.125,2.96875 0,24 0,24 24,0 24,0 0,-21.1875 0,-21.1875 -2.6875,-2.8125 -2.6875,-2.8125 -21.3125,0 -21.3125,0 z m 11.65625,3.1875 12.5,0 12.5,0 0,8 0,8 -12.25,0.09375 -12.75,-0.03125 0,-8.09375 0,-7.96875 z m -6.4375,19.125 19,0 19,0 0,10.5 0,10.5 -19,0 -19,0 0,-10.5 0,-10.5 z"
+         style="fill:#20335e;fill-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#20355e;stroke-width:1.35440719;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path4519-7"
+       sodipodi:cx="12.5"
+       sodipodi:cy="9"
+       sodipodi:rx="22.5"
+       sodipodi:ry="25"
+       d="M 35,9 C 35,22.807119 24.926407,34 12.5,34 0.07359313,34 -10,22.807119 -10,9 -10,-4.8071187 0.07359313,-16 12.5,-16 24.926407,-16 35,-4.8071187 35,9 z"
+       transform="matrix(1.5887182,0,0,1.4298464,17.728093,1001.9066)"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\save_40.png"
+       inkscape:export-xdpi="60.919998"
+       inkscape:export-ydpi="60.919998" />
+  </g>
+</svg>

@@ -1,0 +1,87 @@
+<div class="vision-tasks" ng-controller="vnVisionTasksController" ng-init="init();">
+	<vn-css vn-id="vntasksmodule" vn-css-file="apps/visiontasks/vnvisiontasks.css"></vn-css>
+	<vn-task-create ng-show="screens.VN_TASK__TASK_CREATE"></vn-task-create>
+	<div ng-show="screens.VN_TASK__HOME">
+		<vn-title-bar 
+			vn-title="Tasks"
+			vn-search-handler="handleSearchSelected()"
+			vn-show-back-button="true"
+			vn-backbutton-handler="handleBackButton()"
+			vn-show-search="false"></vn-title-bar>
+
+		<!--<div class="folder-bar">
+			<div class="folder-bar-item selected">To do ({{taskreminders.length}})</div>
+			<div class="folder-bar-item">For filing (9)</div>
+			<div class="folder-bar-item">Sent (29)</div>
+			<div class="folder-bar-item">Following (29)</div>
+			<div class="folder-bar-item">Done (29)</div>
+		</div>-->
+
+		<md-tabs md-selected="selectedIndex" md-stretch-tabs>
+			<md-tab label="To do">
+				<div class="inbox-scroller">
+			        <vn-scroll 
+			            vn-class-selector="inbox-scroller"
+			            vn-x-scroll="false"
+			            vn-watch="screens.VN_TASK"
+			            vn-top-offset="150">
+			            <md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" 
+				            ng-repeat="item in taskreminders"
+				            ng-click="handleTaskItemClick()">
+				            <div class="task-list-item" layout="column">
+						        <div class="topline" layout="row">
+						            <div class="subject" flex>{{item.subject.label}}</div>
+						            <div class="assigner" flex><div>From: {{item.assigner.displaynamelong}}</div></div>
+						            <div class="due" flex>{{item.due | date:'dd-MMM-yyyy'}}</div>
+						        </div>
+						        <div class="description">{{item.description}}</div>
+						        <div class="patientname">{{item.patientdisplay}}</div>
+					        </div>
+					    </md-whiteframe>
+			        </vn-scroll>
+			    </div>
+			</md-tab>
+			<md-tab label="Filing">
+				<div>
+			       This is the filing tab
+			    </div>
+			</md-tab>
+			<md-tab label="Following">
+				<div class="tab2">
+			       
+			    </div>
+			</md-tab>
+			<md-tab label="Sent">
+				<div class="tab3">
+			       
+			    </div>
+			</md-tab>
+			<md-tab label="Done">
+				<div class="tab4">
+			       
+			    </div>
+			</md-tab>
+		</md-tabs>
+
+		<div class="no-data" ng-show="taskreminders.length < 1">
+	        No tasks
+	    </div>
+
+	    
+	    
+	    
+		<!--<button ng-click="handleAddTask();">Add</button>
+		<div ng-repeat="task in tasks">{{ task.name }}</div>
+		<div class="source-image">
+			<img id="scream" src="apps/visiontasks/letters/Scan.jpeg">
+		</div>
+		<canvas id="myCanvas" width="1600" height="1200">
+
+		</canvas>
+		<input type="file" id="picker">	
+		<iframe id="theFrame" src="apps/visiontasks/ocr.html"></iframe>-->
+
+	</div>
+	<vn-document-review ng-show="screens.VN_TASK__DOCUMENT_REVIEW"></vn-document-review>
+	
+</div>

@@ -1,0 +1,54 @@
+angular.module('vnAppManagementModule', [],function () {})
+.factory('vnAppManagementFactory', function( $rootScope ){
+	var factory = {};
+	var registeredApps = {};
+	var appCounter = 0;
+
+	factory.registerApp = function( app ){
+		appCounter++;
+		registeredApps[ app.id ] = app;
+
+		if( $rootScope.screens == null ){
+			$rootScope.screens = {};
+		}
+		angular.forEach( app.screens, function( value, index ){
+			$rootScope.screens[value] = false;
+			var app = value.split( '__' );
+			if( app != null ){
+				$rootScope.screens[app[0]] = false;
+			}
+		});
+	};
+
+	factory.numberOfApps = function(){
+		return appCounter;
+	};
+
+	factory.deregisterApp = function( app ){
+		delete registeredApps[ app.id ];
+	};
+
+	factory.getDefaultApp = function(){
+		return factory.getApps()[ DEFAULT_APP ];
+
+		
+		/*var returnValue;
+		angular.forEach( factory.getApps(), function( value, index ){
+			if( value.defaultapp ){
+				returnValue = value;
+			}
+		});
+		return returnValue;*/
+	};
+
+	factory.getApp = function( id ){
+		var returnApp = registeredApps[ id ];
+		return returnApp;
+	};
+
+	factory.getApps = function(){
+		return registeredApps;
+	};
+
+	return factory;
+});

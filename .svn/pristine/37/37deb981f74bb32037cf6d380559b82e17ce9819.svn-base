@@ -1,0 +1,39 @@
+angular.module('vnPrescriptionModule', [],function () {})
+.controller('vnPrescriptionController', function ( 
+	$scope, 
+	visionFactory, 
+	vnScreenManagementFactory,
+	vnNavigationFactory) {
+	$scope.init = function ( callback ) {
+
+	    visionFactory.retrieveData( database[ THERAPY ].name, function( results ){
+			retrieveTherapyHandler( results );
+			if( callback ){
+            	callback();
+            }
+		});
+	};
+
+	$scope.handleItemClick = function( event, element ){
+		vnScreenManagementFactory.handleItemClick( event, element, {}, prescriptionRightCommands, true );
+	};
+
+	$scope.handlePatientClick = function(){
+        visionFactory.handlePatientClick( this.therapyitem.patient.id );
+        event.stopPropagation();
+	};
+
+	var retrieveTherapyHandler = function( results ){
+        $scope.$apply(function(){
+          $scope.therapy = results;
+        });
+    };
+}).directive('vnPrescription', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/components/prescriptions/vnprescription.html'
+    };
+  });
+
+
+

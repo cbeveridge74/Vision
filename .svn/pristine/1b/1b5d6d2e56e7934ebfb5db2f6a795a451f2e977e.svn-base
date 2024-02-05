@@ -1,0 +1,13 @@
+<md-dialog >
+  <md-content class="sticky-container">
+    <md-input-container flex>
+      <label>Workflow Name</label>
+      <input ng-model="workflowName">
+    </md-input-container>
+  </md-content>
+  <div class="md-actions" layout="row">
+    <md-button class="md-primary" ng-click="handleSave()">
+     Save
+    </md-button>
+  </div>
+</md-dialog>

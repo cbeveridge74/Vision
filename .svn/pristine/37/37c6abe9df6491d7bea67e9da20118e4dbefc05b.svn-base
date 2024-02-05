@@ -1,0 +1,95 @@
+<div class="master-container" ng-class="( viewLandscape ) ? 'landscape':'portrait'">
+	<div class="title-area">
+		<div>
+			<div class="title">{{ contentTitle }}</div>
+			<div class="view-change fa fa-desktop" ng-click="handleViewChangeClick()"></div>
+		</div>
+		<div class="toolbar">
+			<div class="sort"> 
+				<md-select ng-model="childModel.showOnly">
+		          <md-option value="all">All</md-option>
+		          <md-option value="unread">Unread</md-option>
+		          <md-option value="flagged">Flagged</md-option>
+		        </md-select>
+			</div>
+			<div class="date">
+				<md-select ng-model="childModel.dateOnly" >
+		          <md-option value="all">All dates</md-option>
+		          <md-option value="1d">1 day</md-option>
+		          <md-option value="2d">2 days</md-option>
+		          <md-option value="1w">1 week</md-option>
+		          <md-option value="2w">2 weeks</md-option>
+		          <md-option value="1m">1 month</md-option>
+		          <md-option value="custom">Custom...</md-option>
+		        </md-select>
+			</div>
+		</div>
+	</div>
+	<div class="mail-items">
+		<div ng-if="viewLandscape != true" 
+				ng-repeat="item in mailController.filteredMailItems = ( mailItems | filter:filterMailItems )" 
+				class="mail-item" 
+				ng-class="{ 'unread' : item.read == false, 'selected' : item.selected == true, 'current' : item.id == currentMailItem.id }"
+				ng-right-click="handleRightClick( $event, $element );"
+				ng-click="handleMailItemClick()">
+			<div>
+				<div class="title">{{item.type.displayname}}</div>
+				<div class="statuses">
+					<div class="status uom fa fa-balance-scale" ng-if="item.uom == null"></div>
+					<div class="status flagged fa fa-flag" ng-if="item.flagged == true"></div>
+				</div>
+				
+			</div>
+			
+			<div class="content">
+				<div class="patient">
+					<div ng-if="item.patient != null">
+						<div class="name-container">
+							<div class="name">{{item.patient.Surname | uppercase}}, {{ item.patient.Forename }} ({{ item.patient.DOB }})</div>
+						</div>
+						<div class="number-container">
+							<div class="label">NHS</div>
+							<div class="value">{{item.patient.PatientNumber}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="right-container">
+					<div class="date">{{item.datereceived | date:'dd-MMM'}}</div>
+					<div class="user" ng-if="item.user != null">{{item.user.shortlabel}}</div>
+					<div class="no-user" ng-if="item.user == null">NO CLINICIAN</div>
+				</div>
+				<div class="triangle"></div>
+				<div class="fa fa-check check"></div>
+			</div>
+			<div ng-if="item.patient == null">
+				<div class="no-patient">NO PATIENT</div>
+			</div>
+		</div>
+		<!-- landscape --> <!--ng-right-click="handleRightClick( $event, $element );"-->
+		<div ng-if="viewLandscape == true" 
+		ng-repeat="item in filteredMailItems = ( mailItems | filter:filterMailItems )" 
+		class="mail-item" 
+		ng-class="{ 'unread' : item.read == false, 'selected' : item.selected == true, 'current' : item.id == currentMailItem.id  }"
+		ng-click="handleMailItemClick()"
+		ng-right-click="handleRightClick( $event, $element );">
+			<div class="title">{{item.type.displayname}}</div>
+			<div class="patient" ng-if="item.patient != null">
+				<div class="name">{{item.patient.Surname | uppercase}}, {{ item.patient.Forename }} ({{ item.patient.DOB }})</div>
+				<div class="label">NHS</div>
+				<div class="value">{{item.patient.PatientNumber}}</div>
+			</div>
+			<div ng-if="item.patient == null" class="no-patient">NO PATIENT</div>
+			<div class="no-user" ng-if="item.user == null">NO CLINICIAN</div>
+			<div class="user" ng-if="item.user != null">{{item.user.label}}</div>
+			<div class="statuses">
+				<div class="status uom fa fa-balance-scale" ng-show="item.uom == null"></div>
+				<div class="status flagged fa fa-flag" ng-show="item.flagged == true"></div>
+			</div>
+			<div class="date">{{item.datereceived | date:'dd-MMM'}}</div>
+			<div class="triangle"></div>
+			<div class="fa fa-check check"></div>
+		</div>
+			<!-- landscape end -->
+		<div ng-if="filteredMailItems.length < 1" class="no-messages">No messages found</div>
+	</div>
+</div>

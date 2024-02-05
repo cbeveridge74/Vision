@@ -1,0 +1,36 @@
+angular.module('vnActionModule', [],function () {})
+.factory('vnActionFactory',  function( visionFactory ){
+	var factory = {};
+	var canHelpWith = {};
+
+	factory.REVIEW_DOC 	= 1;
+	factory.BOOK_SLOT 	= 2;
+	factory.GENERAL 	= 3;
+
+
+	factory.canHelpWith = function( actionName, callback ){
+		canHelpWith[ actionName ] = callback;
+	};
+
+	factory.needHelpWith = function( action, data, callback ){
+		var helper = canHelpWith[ action.name ];
+		if( helper != null ){
+			helper.call( this, data, callback );
+		}else{
+			
+			visionFactory.retrieveData( database[ ACTION_TYPES ].name, function( results ){
+				chrome.notifications.create("NO_HELPER", {
+				  type: "basic",
+				  title: "No Available Apps",
+				  message: "Sorry, we don't yet have an app for " + results[0].description + ", but we're working on it...",
+				  iconUrl: "../images/Vision_128.png",
+				  priority: 2
+				}, function(){});
+			}, 
+	        null,
+	        { start: action.name, end: action.name });
+		}
+		
+	}
+	return factory;
+});

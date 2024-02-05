@@ -1,0 +1,66 @@
+angular.module('vnReceptionModule', [ 
+	'vnPeopleModule', 
+	'vnDiscussionsModule',
+	'vnAppointmentsModule'],function () {})
+.controller('vnReceptionController', function( 
+	$scope, 
+	$timeout,
+	vnActionFactory, 
+	vnAppManagementFactory, 
+	vnNavigationFactory,
+	vnScrollFactory,
+	VN_REP_SCREENS ){
+	
+	$scope.backbutton = false;
+	var APP_ID 	= "VN_REP";
+	var HOME 	= APP_ID + '__HOME';
+	var PATIENT = APP_ID + '__PATIENT';
+
+	$scope.init = function () {
+      $scope.$watch( "screens." + VN_REP_SCREENS.HOME, function( value ){
+        if( value ){
+          handleResize();
+        }
+      });
+      handleResize();
+  	};
+
+	vnAppManagementFactory.registerApp( 
+		{ id: "VN_REP", 
+		name: "Vision Reception",
+		defaultapp: true,
+		icon: "images/reception_bell.svg",
+		screens: [
+			HOME,
+			PATIENT
+		]});
+
+	$( window ).resize(function() {
+        handleResize();
+      });
+
+	$scope.handleSearchSelected = function(){
+        vnNavigationFactory.switchScreens( PATIENT );
+    };
+
+    $scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( HOME);
+    };
+
+    var handleResize = function(){
+    	$timeout( function(){
+    		vnScrollFactory.handleResize( "home" );
+    	}, 1);
+    	
+    };
+})
+.directive('vnReception', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionreception/vnreception.html'
+    };
+})
+.value('VN_REP_SCREENS',  { 
+	HOME: "VN_REP__HOME",
+	PATIENT: "VN_REP__PATIENT" 
+});

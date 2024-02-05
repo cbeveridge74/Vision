@@ -1,0 +1,257 @@
+angular.module('vnTaskCreateModule', [],function () {})
+.directive('vnTaskCreate', function() {
+    return {
+      restrict: 'E',
+      controller:  function ( 
+			$scope, 
+			$rootScope,
+			$mdToast,
+			$timeout,
+			visionFactory,
+			vnTaskFactory,
+			vnScreenManagementFactory,
+			vnNavigationFactory,
+			vnWorkflowFactory,
+			VN_TASK_SCREENS
+			) {
+			
+			$scope.recipientCollection = [];
+
+			$scope.init = function ( callback ) {
+				
+				$rootScope.$watch( "screens." + VN_TASK_SCREENS.TASK_CREATE, function( value ){
+					if( value ){
+						handleShow();
+			    	}
+		      	});
+
+		      	$rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function( event, clickEvent ){
+
+		      		if( clickEvent == null ||
+		      			clickEvent.target.tagName == "BUTTON" || 
+		      			clickEvent.target.tagName == "MD-ICON" ){
+		      			return;
+		      		}
+	      			if( !$scope.minimise && minCriteria() ){
+	      				vnWorkflowFactory.minimiseAllCards();
+	      			}
+	      		});
+
+		      	$scope.selectedRecipients = [];
+				$scope.selectedSubjects = {};
+				$scope.urgency = "Routine";
+				$scope.dueDateLabel = "No due date"
+				$scope.recipientsLabel = ""
+				$scope.isAnnouncement = false;
+				$scope.customShowMore = false;
+
+				$scope.$watch( "dueDate", function( newValue, oldValue ){
+					if( newValue == null ){
+						$scope.dueDateLabel = "No due date";
+						return;
+					}
+					$scope.dueDateLabel = newValue;
+				});
+				
+		      	// If external model
+				if( $scope.model != null ){
+					if( $scope.model.selectedRecipients != null ){
+						$scope.selectedRecipients = $scope.model.selectedRecipients;
+					}
+
+					if( $scope.model.selectedSubjects != null ){
+						$timeout( function(){
+							$scope.selectedSubjects = $scope.model.selectedSubjects;
+						}, 1000 );
+						
+					}
+
+					if( $scope.model.description != null ){
+						$scope.description = $scope.model.description;
+					}
+
+					$scope.$watch( "selectedRecipients", function( newValue, oldValue ){ 
+						if( newValue != oldValue ){
+							$scope.model.selectedRecipients = newValue; 
+							//$scope.recipientsLabel = newValue;
+
+							var recipientString = "";
+							angular.forEach( newValue, function( recipientValue, recipientIndex ){
+
+								//if( recipientString < 10 ){
+									recipientString += recipientValue.title + ", ";
+								//}
+								/*else{
+									$scope.recipientsLabel = recipientString.substring(0, recipientString.length - 2);
+									recipientString += " + " + newValue.length - ( recipientIndex + 1 ) + " others";
+									return;
+								}*/
+								$scope.recipientsLabel = recipientString.substring(0, recipientString.length - 2);
+							});
+							
+						}
+					}, true);
+
+					$scope.$watch( "selectedSubjects", function( newValue, oldValue ){ 
+						if( newValue != oldValue ){
+							$scope.model.selectedSubjects = newValue; 
+						}
+					}, true);
+
+					$scope.$watch( "description", function( newValue, oldValue ){ 
+						if( newValue != oldValue ){
+							$scope.model.description = newValue; 
+						}
+					}, true);
+
+					$scope.$watch( "urgency", function( newValue, oldValue ){ 
+						if( newValue != oldValue ){
+							$scope.model.urgency = newValue; 
+						}
+					}, true);
+					//$scope.model.stringValues = $scope.bindableString;
+				}
+		      	
+				$scope.$watch( 'selectedRecipients', function(){
+					handleMinFieldsChange();
+				}, true );
+
+				$scope.$watch( 'selectedSubjects', function(){
+					handleMinFieldsChange();
+				}, true );
+
+				var handleMinFieldsChange = function(){
+					$scope.mincriteriaachieved = minCriteria();
+					if( $scope.minimumFieldsSatisfiedCallback != null ){
+						$scope.minimumFieldsSatisfiedCallback( {isSatisfied: minCriteria()} );
+						$rootScope.$broadcast( "TASK_MIN_FIELDS_SATISFIED", $scope.mincriteriaachieved );
+					}
+				};
+
+				var minCriteria = function(){
+					return $scope.selectedRecipients.length > 0 && $scope.selectedSubjects > 0;
+				};
+
+				$scope.mincriteriaachieved = minCriteria();
+
+				visionFactory.retrieveData( database[ PERSON ].name, function( peopleResult ){
+						var recipients = new Array();
+						visionFactory.retrieveData( database[ PERSON_GROUPS ].name, function( groupResult ){
+							angular.forEach( peopleResult, function( value, index ){
+								recipients.push({
+									id: value.id,
+								    thumbnailUrl: '',
+								    title: value.label,
+								    subtitle: value.email
+								});
+							});
+
+							angular.forEach( groupResult, function( value, index ){
+								recipients.push({
+									id: value.id,
+								    thumbnailUrl: '',
+								    title: value.label,
+								    subtitle: value.description
+								});
+							});
+
+						});
+						$scope.recipientCollection = recipients;
+				});
+
+				visionFactory.retrieveData( database[ TASK_SUBJECTS ].name, function( result ){
+					$scope.subjectCollection = result;
+				});
+				
+			};
+
+			$scope.handleCalendarClick = function( event ){
+				
+			};
+
+			$scope.handleAnnouncementClick = function( event ){
+				$scope.isAnnouncement = !$scope.isAnnouncement;
+			};
+
+			$scope.handleGeneralClick = function( event ){
+				if( event != null ){
+			      	event.stopPropagation();
+			    }
+			};
+
+
+			/* NOTE: this is only used on the workflow screen  */
+			$scope.handleDeleteClick = function( idx, outerBoxIdx ){
+				vnWorkflowFactory.deleteTaskCard( idx, outerBoxIdx );
+			};
+
+			$scope.handleAddClick = function( outerBoxIdx ){
+				//vnWorkflowFactory.addTaskCardTo( outerBoxIdx, null );
+				//vnWorkflowFactory.minimiseLastCard( outerBoxIdx );
+				vnWorkflowFactory.minimiseAllCards();
+			};
+
+			$scope.handleEditClick = function( idx, outerBoxIdx ){
+				if( $scope.minimise ){
+					vnWorkflowFactory.minimiseAllCards();
+					vnWorkflowFactory.restoreCard( idx, outerBoxIdx );
+				}
+			};
+
+			/****************************************************/
+
+
+
+			$scope.handleAdvancedClick = function( event ){
+				vnWorkflowFactory.clearWorkflow();
+				vnWorkflowFactory.initialiseWorkflowWithModel({ 
+					selectedRecipients: $scope.selectedRecipients,
+					selectedSubjects: $scope.selectedSubjects,
+					description: $scope.description 
+				}, false);//Don't minimise it.
+
+				vnNavigationFactory.switchScreens( VN_TASK_SCREENS.WORKFLOW );
+			};
+
+			$scope.handleCancelClick = function( event ){
+				//$( ".vision-reception .tasks-cat .task-create" ).attr( "style", "" );
+				vnScreenManagementFactory.closeMenus();
+				$scope.selectedRecipients = [];
+				$scope.selectedSubjects = {};
+				$scope.description = "";
+				$scope.urgency = "Routine";
+				$scope.dueDateLabel = "No due date"
+			};
+
+			$scope.handleSaveClick = function( event ){
+
+				
+				var task = vnTaskFactory.buildTask( 
+					$scope.selectedRecipients, 
+					$scope.selectedSubjects, 
+					$scope.description, 
+					-1, 
+					78 );
+
+				vnWorkflowFactory.convertTaskToWorkflow( task, function( workflowedTask ){
+					vnWorkflowFactory.saveWorkflow ( workflowedTask, function(){
+						vnWorkflowFactory.beginWorkflow( workflowedTask.name );
+						$scope.handleCancelClick();
+					});
+				});
+
+			};
+
+			var handleShow = function(){
+
+				
+			};
+	  },
+      scope: {
+      	minimumFieldsSatisfiedCallback: "&minimumFieldsSatisfiedHandler",
+      	model: "=",
+      	minimise: "="
+      },
+      templateUrl: 'apps/components/tasks/vntaskcreate.html'
+    };
+  });

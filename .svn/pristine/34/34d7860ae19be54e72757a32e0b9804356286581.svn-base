@@ -1,0 +1,37 @@
+function DemoServices( vnAssemblerFactory, databaseFactory ){
+	var demoServices = this;
+	
+	demoServices.authenticate = function( username, password, callback ){
+		callback();
+	};
+
+	demoServices.retrieveData = function( item, callback, index, bounds, count, overrideDBLoaded, passthroughData){
+
+		databaseFactory.retrieveData( item, callback, index, bounds, count, overrideDBLoaded, passthroughData );
+		
+	};
+
+	demoServices.retrieveDataWithJoin = function( item1, item2, joinOn, callback ){
+
+		databaseFactory.retrieveDataWithJoin( item1, item2, joinOn, callback );
+		
+	};
+
+	demoServices.retrieveDataByKey = function( item, key, callback ){
+
+		databaseFactory.retrieveDataByKey( item, key, callback );
+		
+	};
+
+	demoServices.retrieveDataAggregateWithResults = function( resultSet, item, resultSetAttribute, index, bounds, count, callback ){
+
+		databaseFactory.retrieveDataAggregateWithResults( resultSet, item, resultSetAttribute, index, bounds, count, callback );
+		
+	};
+
+	demoServices.updateData = function( item, data, callback ){
+
+		databaseFactory.updateData( item, data, callback );
+		
+	};
+}

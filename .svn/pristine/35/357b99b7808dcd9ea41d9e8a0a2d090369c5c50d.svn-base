@@ -1,0 +1,17 @@
+<vn-css vn-id="vncommandmenu" vn-css-file="menus/vncommandmenu.css"></vn-css>
+<div class="command" 
+	 ng-controller="vnCommandMenuController"
+	 ng-init="init();">
+	<div class="left">
+		<div class="button" tag="{{ command.id }}" ng-repeat="command in leftCommands" ng-click="handleCommandClick();">
+			<img ng-src="images/{{ command.icon }}">
+			<div class="description">{{ command.label }}</div>
+		</div>
+	</div>
+	<div class="right">
+		<div class="button" tag="{{ command.id }}" ng-repeat="command in rightCommands" ng-click="handleCommandClick();">
+			<img ng-src="images/{{ command.icon }}">
+			<div class="description">{{ command.label }}</div>
+		</div>
+	</div>
+</div>

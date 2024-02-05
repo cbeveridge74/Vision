@@ -1,0 +1,105 @@
+.comments{
+	
+}
+
+.comments .count{
+	font-size: 1.1em;
+}
+
+.comments .input-container{
+	
+}
+
+.comments .input-container .image,
+.comments .input-container .comment,
+.comments .input-container .add{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.comments .input-container .add{
+	margin-left: 1em;
+}
+
+.comments .input-container .image{
+
+}
+
+.comments .input-container img{
+	margin-left: 0em;
+	margin-top: -1em;
+}
+
+.comments .added-comments img,
+.comments .input-container img{
+	width: 3em;
+}
+
+.comments .input-container .comment{
+	
+}
+
+.comments md-input-container.md-default-theme .md-placeholder {
+	margin-top: -1.3em;
+}
+
+.comments .input-container md-input-container{
+	width: 350px;
+}
+
+.comments .added-comments{
+	height: 12em;
+	width: 40.5em;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.comments .added-comments .comment-container{
+	margin-bottom: 1em;
+	border-top: solid 1px #DDD;
+	padding-top: 1em;
+	width: 38em;
+}
+
+.comments .added-comments .comment-container.first{
+	border-top: none;
+	padding-top: 0;
+}
+
+.comments .added-comments .left-column{
+	vertical-align: top;
+}
+
+.comments .added-comments .left-column,
+.comments .added-comments .right-column{
+	display: inline-block;
+}
+.comments .added-comments .right-column{
+	//width: 40%;
+}
+
+.comments .added-comments .top-line {
+	white-space: nowrap;
+}
+
+.comments .added-comments .top-line .time,
+.comments .added-comments .top-line .name{
+	display: inline-block;
+	vertical-align: top;
+	width: 17em;
+}
+
+.comments .added-comments .top-line .time{
+	text-align: right;
+}
+
+.comments .added-comments .top-line .name{
+	font-weight: bold;
+}
+
+.comments .added-comments .comment{
+	white-space: normal;
+	margin-top: 0.5em;
+	margin-left: 0.5em;
+	font-family: OpenSans;
+}

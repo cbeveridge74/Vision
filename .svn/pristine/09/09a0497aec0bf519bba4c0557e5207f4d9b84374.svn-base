@@ -1,0 +1,105 @@
+angular.module('vnScreenManagementModule', [],function () {})//'ngRoute', 'ngTouch', 'ngAnimate'
+.factory('vnScreenManagementFactory',  function( $rootScope, $timeout, vnScrollFactory ){
+	var factory = {};
+	var timeMilliseconds = new Date();
+	$rootScope.screens = {};
+	$rootScope.screens.VN_LOGIN = true;
+
+  	//factory.checkIfScrolling = function(){
+	    //return false;//$rootScope.homeScroll.moved || $rootScope.scrolling;
+	//};
+
+	factory.openMenu = function( selector ){ 
+		factory.handleGeneralClick();
+		$timeout( function(){
+			var element = $( selector );
+			$( element ).effect("fade", { duration: 50, queue: false }, "easeOutCirc");
+			$( element ).addClass( "open", 500, "easeOutCirc" );
+		}, 1 );
+	};
+
+	factory.toggleBars = function( commandOnly ){
+		$( ".command" ).toggleClass( "open", 300, "easeOutCirc" );
+		if( !commandOnly || commandOnly == null ){
+			$( ".navigation" ).toggleClass( "open", 300, "easeOutCirc" );
+		}
+	};
+
+	factory.closeBars = function(){
+		$( ".command" ).removeClass( "open", 300, "easeOutCirc" );
+		$( ".navigation" ).removeClass( "open", 300, "easeOutCirc" );
+		$( ".category .selected" ).removeClass( "selected" );
+	};
+
+	factory.closeMenus = function(){
+		$( ".menu" ).removeClass( "open" );
+		$( ".menu" ).attr( "style", "" );
+	};
+
+	factory.initialiseMenuOptions = function( leftCommandValues, rightCommandsValues ){
+		$rootScope.leftCommands = leftCommandValues;
+  		$rootScope.rightCommands = rightCommandsValues;
+	};	
+
+	var isSpecialCase = function( event ){
+		if( event != null ){
+			if( $( event.target ).parents( ".md-select-menu-container" ).length > 0 ){
+				return true;
+			}
+		}
+		return false;
+	};
+
+	factory.handleGeneralClick = function( event ){
+		if( isSpecialCase( event ) ){
+			return;
+		}
+
+
+		if( factory.isMenusOpen() ){
+			factory.closeBars();
+		    factory.closeMenus();
+		    if( event != null ){
+		      event.stopPropagation();
+		    }
+		}
+	  };
+
+	factory.isDoubleClick = function(){
+		var timeMillisecondsClick = new Date(); 
+		if(timeMillisecondsClick.getTime() > timeMilliseconds.getTime() + 500 ) { 
+			timeMilliseconds = new Date();
+			return false;
+		}else{
+			return true;
+		}
+	};
+
+	factory.isMenusOpen = function(){
+		return $( ".navigation, .command, .menu" ).hasClass( "open" );
+	};
+
+	factory.handleItemClick = function( event, element, leftCommands, rightCommands, commandOnly ){
+        if( vnScrollFactory.isScrolling() ){
+	      return;
+	    }
+        if( !factory.isDoubleClick() ){
+            if( !factory.isMenusOpen() ) {
+              factory.initialiseMenuOptions(leftCommands, rightCommands);
+              factory.toggleBars( commandOnly );
+              $( event.currentTarget ).addClass( "selected" );
+            }else{
+              $( ".category .list-group-item.selected" ).removeClass( "selected" );
+            }
+        }
+      };
+
+    factory.initialiseAppBarIcons = function( topBarIcons ){
+    	$rootScope.appBarIcons = topBarIcons;
+    };
+
+	$( "body" ).click( function( event ){
+		factory.handleGeneralClick( event );
+	});
+	return factory;
+});

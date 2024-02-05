@@ -1,0 +1,21 @@
+<div>SHONA DONALDSON</div>
+<div>
+	<div class="detail">
+		<div>GP</div>
+		<div>Hillbank Health Centre</div>
+	</div>
+</div>
+<div class="horizontal-divider"></div>
+<div class="options">
+	<img src="../images/chat.svg">
+	<div class="option">Chat...</div>
+</div>
+<div class="options">
+	<img src="../images/out_of_office.svg">
+	<div class="option">Activate Out Of Office...</div>
+<div class="options">
+	<img src="../images/logout.svg">
+	<div class="option">Sign Out</div>
+</div>
+
+

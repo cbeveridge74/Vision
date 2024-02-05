@@ -1,0 +1,38 @@
+.user-menu {
+	font-size: 1.2em;
+	width: 15em;
+	height: 14em;
+	padding: 0.5em;
+	top: 0em;
+	left: 2em;
+	font-family: "Arial";
+	color: #FFF;
+}
+
+.user-menu .options img{
+	position: relative;
+	width: 1.1em;
+	padding-top: 0.5em;
+	margin-right: 0.3em;
+	margin-left: 0.3em;
+}
+
+.user-menu .options img,
+.user-menu .options .option{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.user-menu .detail{
+	padding: 0.3em 0 0.8em 0;
+	font-size: 0.8em;
+}
+
+.user-menu .option {
+	padding: 0.8em 0 0 0;
+}
+
+.user-menu.open {
+	display: inline-block;
+	left: 2.5em;
+}

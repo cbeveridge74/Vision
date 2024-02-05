@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="68"
+   height="68"
+   id="svg3888"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="patient.svg"
+   inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Appointments\patient_48.png"
+   inkscape:export-xdpi="29.700001"
+   inkscape:export-ydpi="29.700001">
+  <defs
+     id="defs3890" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#737373"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.319853"
+     inkscape:cx="-72.916221"
+     inkscape:cy="-2.6893154"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="1139"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3893">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-984.36218)">
+    <path
+       style="fill:#20335e;fill-opacity:1"
+       d="m 0.20155469,1049.0784 c 0,-5.103 8.80128971,-13.4292 14.19501931,-13.4292 2.46441,0 6.50841,-2.2527 8.98666,-5.006 4.33363,-4.8142 4.34151,-5.3127 0.20628,-13.0327 -6.37039,-11.893 -4.56943,-25.9574 3.93346,-30.7182 15.7191,-8.80076 26.96274,10.96732 17.56405,30.8804 -3.75367,7.953 -3.74,8.7902 0.21527,13.1844 2.32291,2.5807 6.23982,4.6921 8.70423,4.6921 5.39373,0 14.19503,8.3262 14.19503,13.4292 0,3.081 -5.39683,3.6625 -34,3.6625 -28.6031796,0 -33.99999931,-0.5815 -33.99999931,-3.6625 z"
+       id="path2996"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\clinician_33.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="42.349998"
+       inkscape:export-xdpi="42.349998"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Patient Services\patient_white_32.png"
+       inkscape:connector-curvature="0"
+       id="path2983"
+       d="m 2.0088636,1127.9976 c 0,-5.103 8.8012894,-13.4292 14.1950194,-13.4292 2.46441,0 6.50841,-2.2527 8.98666,-5.006 4.33363,-4.8142 4.34151,-5.3127 0.20628,-13.0327 -6.37039,-11.893 -4.56943,-25.9574 3.93346,-30.7182 15.7191,-8.8008 26.96274,10.9673 17.56405,30.8804 -3.75367,7.953 -3.74,8.7902 0.21527,13.1844 2.32291,2.5807 6.23982,4.6921 8.70423,4.6921 5.39373,0 14.19503,8.3262 14.19503,13.4292 0,3.081 -5.39683,3.6625 -34,3.6625 -28.6031797,0 -33.9999994,-0.5815 -33.9999994,-3.6625 z"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+</svg>

@@ -1,0 +1,4 @@
+<div class="vision-dynamo">
+	<vn-css vn-id="vndynamo" vn-css-file="apps/visiondynamo/vndynamo.css"></vn-css>
+	<vn-form-lifecycle-directive></vn-form-lifecycle-directive>
+</div>

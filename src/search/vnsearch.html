@@ -1,0 +1,39 @@
+<vn-css vn-id="vnsearch" vn-css-file="search/vnsearch.css"></vn-css>
+<div class="vision-search">
+	<div class="results-container" ng-show="results.length > 0">
+		<div class="title">Search results</div>
+		<div ng-repeat="result in results">
+			<div ng-if="$index == firstDrugIndex && hasDrug" class="sub-title">DRUG</div>
+			<div class="result" 
+				ng-class="( selectedItemIndex == $index ) ? 'result selected' : 'result'"
+				ng-click="handleClick( $event )" ng-bind-html="result.term"
+				ng-if="result.group == 'D'">
+			</div>
+			<div ng-if="$index == firstReadIndex && hasRead" class="sub-title">READ</div>
+			<div class="result"
+				ng-class="( selectedItemIndex == $index ) ? 'result selected' : 'result'"
+				ng-click="handleClick( $event )"
+				ng-if="result.group == 'R'">
+				<div class="read-code" ng-bind-html="result.read_code"></div>
+				<div class="term" ng-bind-html="result.term"></div>
+			</div>
+			<div class="result" 
+				ng-class="( selectedItemIndex == $index ) ? 'result selected' : 'result'"
+				ng-click="handleClick( $event )" ng-bind-html="result.term"
+				ng-if="result.group == null">
+			</div>
+		</div>
+	</div>
+	<div class="suggestions-container" ng-show="suggestions.length > 0">
+		<div class="title">Search suggestions</div>
+		<div class="word-suggestion" ng-repeat="suggestion in suggestions" >
+			<div ng-repeat="suggestioninner in suggestion" 
+				 ng-bind-html="suggestioninner.word"
+				 ng-class="( selectedItemIndex == $index ) ? 'suggestion selected' : 'suggestion'"
+				 ng-click="handleClick( $event )">
+			</div>
+		</div>
+	</div>
+	<input ng-model="query" name="Search" ng-keydown="handleKeydown( $event )" autofocus data-ng-trim="false">
+	<div class="ghost-suggestion" ng-bind-html="ghostText"></div>
+</div>

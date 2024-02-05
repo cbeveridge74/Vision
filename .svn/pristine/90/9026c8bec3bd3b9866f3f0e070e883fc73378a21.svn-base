@@ -1,0 +1,3 @@
+<div ng-controller="vnSummariseController" ng-right-click="handleRightClick( $event, this )">
+	Summarise
+</div>

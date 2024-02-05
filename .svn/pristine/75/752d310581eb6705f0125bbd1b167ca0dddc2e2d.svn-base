@@ -1,0 +1,501 @@
+.vision-tasks{
+	background-color: #FFFFFF;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.vision-tasks .selected-user{
+	position: absolute;
+	z-index: 1;
+	top: 0em;
+	left: 40%;
+	font-size: 1.4em;
+	background-color: #D2E5EA;
+	padding: 0.5em 1em;
+	margin-top: 1em;
+}
+
+.vision-tasks .selected-user .label,
+.vision-tasks .selected-user md-select {
+	display: inline-block;
+}
+
+.vision-tasks .selected-user md-select{
+	margin-top: 0;
+}
+
+.vision-tasks .selected-user .label {
+	color: #1E81E7;
+	font-size: 0.75em;
+	margin-right: 1em
+}
+
+
+.vision-tasks .task-filter-menu
+{
+	position: absolute;
+	top: 4em;
+	display: none;
+	background-color: #20335E;
+	color: #FFF;
+	right: 6em;
+	z-index: 1;
+	width: 32em;
+	padding: 0.5em;
+}
+
+.vision-parent-module .vision-tasks .vision-tasks-create.create-view {
+	top: 4.5em;
+	left: initial;
+	right: 3em;
+}
+
+.vision-parent-module .vision-tasks .vision-tasks-create.create-view.open {
+	right: 4em;
+	
+}
+
+.taskfilter-on .awesome-icon .fa.fa-filter {
+	color: orange;
+}
+
+.vision-tasks .task-filter-menu .person-filter{
+	font-size: 1em;
+	display: inline-block;
+	cursor: pointer;
+	margin: 0.2em;
+}
+
+.vision-tasks .task-filter-menu .person-filter.on,
+.vision-tasks .task-filter-menu .urgency .urgency-filter.on {
+	background-color: #FFA100;
+	color: #2F3F5F;
+}
+
+.vision-tasks .task-filter-menu .person-filter.on:hover,
+.vision-tasks .task-filter-menu .urgency .urgency-filter.on:hover {
+	background-color: #FEBC09;
+}
+
+.vision-tasks .task-filter-menu .person-filter:hover{
+	background-color: #3B5588;
+}
+
+.vision-tasks .task-filter-menu.open {
+	display: inline-block;
+	right: 8em;
+}
+
+.vision-tasks .task-filter-menu .person-filter .image img{
+	height: 5em;
+	border-radius: 2.5em;
+	vertical-align: middle;
+}
+
+.vision-tasks .task-filter-menu .person-filter .image {
+	padding: 1em;
+}
+
+.vision-tasks .task-filter-menu .clear-button{
+	text-align: right;
+	padding: 1em;
+	padding-bottom: 0;
+}
+
+.vision-tasks .task-filter-menu .filter-section{
+	background-color: #264586;
+	margin: 1em 0.5em;
+	padding: 0.1em 0;
+}
+
+.vision-tasks .task-filter-menu .person-filter .label {
+	text-align: center;
+	margin-top: -0.8em;
+}
+
+.vision-tasks .task-filter-menu .urgency {
+	margin: 2em;
+}
+
+.vision-tasks .task-filter-menu .urgency .option {
+	font-size: 1.2em;
+	width: 5em;
+	height: 5em;
+	background-color: #3B5588;
+	text-align: center;
+	display: inline-block;
+	padding-top: 1.8em;
+	margin-right: 1em;
+	cursor: pointer;
+}
+
+.vision-tasks .task-filter-menu .urgency .option:hover{
+	background-color: #3B61AB;
+}
+
+.vision-tasks md-tabs {
+	overflow: visible;
+}
+
+.vision-tasks .md-header{
+	/* height: 20px; */
+}
+
+.vision-tasks .md-whiteframe-z1{
+	margin: 1em;
+}
+
+.vision-tasks .md-whiteframe-z1.selected{
+	border: solid 1px #FFA100;
+}
+
+.vision-tasks .todo-scroller,
+.vision-tasks .done-scroller,
+.vision-tasks .sent-scroller,
+.vision-tasks .tracking-scroller,
+.vision-tasks .workflow-scroller{
+	height: 100%;
+	width: 100%;
+}
+
+.vision-tasks .view-by{
+	position: absolute;
+	width: 3em;
+	height: 2em;
+	text-align: center;
+	z-index: 1;
+	right: 4em;
+	top: 2em;
+	background-color: #CCC;
+	cursor: pointer;
+}
+
+.vision-tasks .view-by .menu {
+	position: absolute;
+	top: 2.5em;
+	left: -2em;
+	display: none;
+	text-align: left;
+}
+
+.vision-tasks .view-by .menu.open {
+	display: block;
+	background-color: darkblue;
+	color: lightblue;
+}
+
+.vision-tasks .view-by .menu .option {
+	padding: 0.8em 1.5em;
+}
+
+.vision-tasks .view-by .menu .option:hover {
+	background-color: lightblue;
+	color: darkblue;
+}
+
+.vision-tasks .view-by .icon{
+	font-size: 1.2em;
+	vertical-align: middle;
+}
+
+.vision-tasks .no-data{
+	height: 100%;
+	margin-top: 10em;
+	font-size: 1.5em;
+	text-align: center;
+	color: #1e81e7;
+}
+
+.vision-tasks .folder-bar{
+	margin: -3.5em 0 0.3em -12em;
+	text-align: center;
+}
+
+@media(max-width: 1000px) {
+
+	.vision-tasks .folder-bar{
+		margin: -2em 0 0 0;
+	}
+
+}
+
+.vision-tasks .folder-bar-item{
+	display: inline-block;
+	margin-left: 1em;
+	margin-right: 1em;
+	cursor: pointer;
+}
+
+.vision-tasks .folder-bar-item.selected{
+	color: #1e81e7;
+	font-size: 1.2em;
+	cursor: default;
+}
+
+.vision-tasks .task-list-item{
+	position: relative;
+	border: none;
+	padding: 0.4em;
+	padding-left: 1em;
+	cursor: pointer;
+	width: 100%;
+	color: #20335E;
+	min-height: 6.5em;
+}
+
+.vision-tasks .task-list-item:active{
+	-webkit-transform: translate(1px,1px);
+}
+
+.vision-tasks .task-list-item .topline{
+	margin-bottom: 0.5em;
+	white-space: nowrap;
+}
+
+.vision-tasks .task-list-item .topline .right{
+	text-align: right;
+}
+
+.vision-tasks .task-list-item .topline .left,
+.vision-tasks .task-list-item .topline .right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.vision-tasks .task-list-item .topline .left{
+	//width: 70%;
+}
+
+.vision-tasks .task-list-item .topline .right{
+	position: absolute;
+	width: 30em;
+	right: 1em;
+}
+
+.vision-tasks .task-list-item .topline .due{
+	display: inline-block;
+	/* width: 33%; */
+
+}
+
+.vision-tasks .task-list-item .topline .subject,
+.vision-tasks .task-list-item .topline .due{
+	//color: #BBB;
+}
+
+.vision-tasks .task-list-item .topline .image,
+.vision-tasks .task-list-item .topline .content-container{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.vision-tasks .task-list-item .topline .assigner{
+	text-align: center;
+	font-size: 0.8em;
+}
+
+.vision-tasks .task-list-item .topline .image img{
+	width: 2.7em;
+}
+
+.vision-tasks .task-list-item .topline .image {
+	margin-right: 1em;
+}
+
+.vision-tasks .task-list-item .topline .subject{
+	text-align: left;
+	font-size: 2em;
+	font-weight: lighter;
+}
+
+/* Workflow specific */
+.vision-tasks .task-list-item.workflow .topline .subject{
+	font-size: 1.2em;
+}
+
+.vision-tasks .task-list-item .topline .due{
+	font-size: 1em;
+	color: #20335E;
+}
+
+.vision-tasks .task-list-item .topline .due span,
+.vision-tasks .task-list-item .topline .right .sent span,
+.vision-tasks .task-list-item .topline .right .due span{
+	font-size: 0.7em;
+	color: #ABB4C3;
+}
+
+.vision-tasks .task-list-item .topline .assignee,
+.vision-tasks .task-list-item .topline .more-label {
+	display: inline-block;
+	margin-right: 0.5em;
+}
+
+.vision-tasks .task-list-item .topline .more-label {
+	margin-left: -1em;
+	color: #1E81E7;
+	cursor: pointer;
+}
+
+.vision-tasks .task-list-item .topline .due{
+	text-align: right;
+}
+
+.vision-tasks .task-list-item .topline .attachments .icon{
+	margin-left: 1em;
+}
+
+.vision-tasks .task-list-item .topline .attachments .patients,
+.vision-tasks .task-list-item .topline .attachments .documents,
+.vision-tasks .task-list-item .topline .attachments .comments,
+.vision-tasks .task-list-item .description .content-container{
+	display: inline-block;
+}
+
+.vision-tasks .task-list-item .urgency {
+	position: absolute;
+	background-color: #FF0000;
+	width: 5px;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+
+.vision-tasks .task-list-item .description{
+	white-space: normal;
+	max-width: 80%
+}
+
+.vision-tasks .task-list-item .patientname{
+	margin-top: 0.5em;
+	font-weight: bold;
+}
+
+/*********** GENERAL LIST ITEM *************************/
+.vision-tasks .tracking-list-item {
+	height: 6em;
+	width: 100%;
+	padding: 1em;
+}
+
+.vision-tasks .tracking-list-item .title-area{
+	width: 50%;
+	vertical-align: top;
+}
+
+.vision-tasks .tracking-list-item .title-area .title {
+	font-size: 2.0em;
+	margin-top: -0.3em;
+
+}
+
+.vision-tasks .tracking-list-item .title-area,
+.vision-tasks .tracking-list-item .title-area .status {
+	display: inline-block
+}
+
+.vision-tasks .tracking-list-item .title-area .status {
+	color: #1E81E7;
+	font-size: 1.2em;
+	margin-right: 0.5em
+}
+
+/**************** APPOINTMENT LIST ITEM ****************/
+.vision-tasks .tracking-list-item.appointment-item .patient-name{
+	width: 50%;
+	vertical-align: top;
+}
+
+.vision-tasks .tracking-list-item.appointment-item .patient-name,
+.vision-tasks .tracking-list-item.appointment-item .title-area .date,
+.vision-tasks .tracking-list-item.appointment-item .title-area .time,
+.vision-tasks .tracking-list-item.appointment-item .title-area .owner {
+	display: inline-block
+}
+
+.vision-tasks .tracking-list-item.appointment-item .title-area .date {
+
+}
+
+.vision-tasks .tracking-list-item.appointment-item .title-area .time {
+
+}
+
+.vision-tasks .tracking-list-item.appointment-item .title-area .owner {
+
+}
+
+.vision-tasks .tracking-list-item.appointment-item .patient-name{
+	font-size: 1.3em;
+}
+
+.vision-tasks .tracking-list-item.appointment-item .booker {
+	font-size: 0.9em;
+}
+
+.vision-tasks .tracking-list-item.appointment-item .patient-name,
+.vision-tasks .tracking-list-item.appointment-item .booker {
+	text-align: right;
+}
+/************* APPOINTMENT LIST ITEM END ***********/
+.vision-tasks .tracking-list-item.task-item .assigner-container,
+.vision-tasks .tracking-list-item.task-item .assignee,
+.vision-tasks .tracking-list-item.task-item .prep {
+	display: inline-block;
+}
+
+.vision-tasks .tracking-list-item.task-item .prep {
+	margin-left: 0.6em;
+}
+
+.vision-tasks .filing {
+	background-color: #D2E5EA;
+	width: 30em;
+	height: 4em;
+	margin: auto;
+	margin-top: -5em;
+	margin-bottom: 2em;
+	cursor: pointer;
+	padding-top: 0.2em;
+}
+
+.vision-tasks .filing .number {
+	font-size: 1.4em;
+	color: #20335E;
+	text-align: center;
+	font-weight: lighter;
+}
+.vision-tasks .filing .number span{
+	font-size: 2em;
+	font-weight: 500;
+	vertical-align: middle;
+	margin-left: 0.5em;
+}
+
+/*.vision-tasks canvas{
+
+}
+
+.vision-tasks .source-image {
+	position: absolute;
+	z-index: -1;
+}
+
+.vision-tasks img{
+	
+}
+
+.vision-tasks #theFrame,
+.vision-tasks img{
+	display: none;
+}
+
+.highlight {
+	position: absolute;
+	background: yellow;
+	opacity: 0.5;
+	width: 10px;
+	height: 10px;
+}	*/

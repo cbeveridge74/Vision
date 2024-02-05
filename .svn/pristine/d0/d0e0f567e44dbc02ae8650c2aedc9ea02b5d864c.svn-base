@@ -1,0 +1,89 @@
+<vn-css vn-id="vntaskcreate" vn-css-file="apps/visiontasks/workflow/vntaskcreate.css"></vn-css>
+
+<div ng-click="handleGeneralClick( $event );" 
+    ng-init="init()"
+    ng-class="( minimise == true ) ? 'task-create menu minimise' : 'task-create menu'">
+    <div class="complete fa fa-check-circle" ng-show="model.status == 2">
+        
+    </div>
+    <md-card ng-click="handleEditClick( $parent.$index, $parent.$parent.$index, $event )">
+     
+      <div ng-class="( model.urgency == 'Routine' ) ? 'urgent-indicator' : 'urgent-indicator urgent'"></div>
+      <div class="workflow-buttons" >
+        <div class="delete" ng-show="minimise && model.status != 2">
+          <div ng-click="handleDeleteClick( $parent.$index, $parent.$parent.$index )" class="fa fa-trash-o"></div>
+        </div>
+      </div>
+      <md-card-content layout="column" layout-align="center start">
+        <div class="task-widgets" ng-show="!minimise">
+          <div class="left">
+             <div class="task-widget announcement">
+              <div ng-click="handleAnnouncementClick( $event )" ng-class="( model.isAnnouncement ) ? 'fa fa-thumb-tack fa-rotate-45' : 'fa fa-thumb-tack'"></div>
+            </div>
+          </div>
+          <div class="right">
+            <div ng-class="( model.due == null ) ? 'task-widget due' : 'task-widget due set'" ng-click="handleCalendarClick( $event )">
+              <input type="date" ng-model="model.due" class="hidden-date">
+              <div class="fa fa-calendar"></div>
+              <div class="due-label">
+                {{ model.due | date:'dd-MMM-yyyy' }}
+              </div>
+            </div>
+            <div class="task-widget">
+              <md-switch ng-model="model.urgency" aria-label="Urgency" ng-true-value="'Urgent'" ng-false-value="'Routine'" class="md-warn">
+              </md-switch>
+              <div ng-class="( model.urgency == 'Routine' ) ? 'urgency-label' : 'urgency-label urgent'">
+                {{ model.urgency }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="recipients">
+          <label class="label">To</label>
+          <vn-user-chips ng-model='model.selectedRecipients'></vn-user-chips>
+        </div>
+        <div class="subject">
+          <label class="label">Subject</label>
+          <md-select ng-model="model.selectedSubjects">
+            
+            <md-option ng-value="item.id" ng-repeat="item in subjectCollection">{{ item.label }}</md-option>
+            <md-select-label><div class="subject-label-hack">{{ subjectCollection[ model.selectedSubjects - 1 ].label }}</div></md-select-label>
+          </md-select>
+        </div>
+        <div class="recipients-label">
+          {{recipientsLabel}}
+        </div>
+        <div class="subject-label">
+          {{ subjectCollection[ model.selectedSubjects - 1 ].label }}
+        </div>  
+        <div ng-class="( model.due == null ) ? 'due-label-min' : 'due-label-min set'">
+          {{ model.due | date:'dd-MMM-yyyy' }}
+        </div>  
+        <div class="description">
+          <label>Description</label>
+          <md-input-container flex>
+            <textarea ng-model="model.description" columns="1"></textarea>
+          </md-input-container>
+        </div>
+        <div class="delete" ng-click="handleDeleteClick( $parent.$index, $parent.$parent.$index )" ng-show="!minimise">
+          <div class="fa fa-trash-o"></div>
+        </div>
+        
+        
+        <div class="command-buttons">
+          <md-content>
+            <section layout="row" layout-sm="column" layout-align="center center">
+              <md-button ng-click="handleAdvancedClick( $event )">Advanced...</md-button>
+              <!-- Only show this if it's not an existing task -->
+              <md-button class="md-primary" ng-show="mincriteriaachieved && model.task == null" ng-click="handleSaveClick( $event )" >Send</md-button>
+            </section>
+          </md-content>
+        </div>
+      </md-card-content>
+
+    </md-card>
+    <!--<div class="task-widget">
+    <div class="patient">PARSONS, Nicholas (10-Oct-1923)</div>
+    <div class="button">Send</div>
+    </div>-->
+</div>

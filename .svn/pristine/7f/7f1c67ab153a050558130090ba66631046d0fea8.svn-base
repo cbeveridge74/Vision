@@ -1,0 +1,4 @@
+<div class="detail-container">
+	<div class="title">{{ currentMailItem.type.displayname }}</div>
+	<div ng-show="currentMailItem != null">Message detail here</div>
+</div>

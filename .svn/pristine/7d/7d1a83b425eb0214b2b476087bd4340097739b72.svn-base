@@ -1,0 +1,18 @@
+angular.module('vnUserMenuModule', [],function () {})
+.controller('vnUserMenuController', function( $scope, vnTourFactory ){
+	$scope.tipslabel = "Show hints";
+	$scope.handleTourToggleClick = function(){
+		if( $scope.tipslabel == "Hide hints" ){
+			$scope.tipslabel = "Show hints";
+		}else{
+			$scope.tipslabel = "Hide hints";
+		}
+		vnTourFactory.toggleTips();
+	};
+})
+.directive('vnUserMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'menus/vnusermenu.html'
+    };
+  });;

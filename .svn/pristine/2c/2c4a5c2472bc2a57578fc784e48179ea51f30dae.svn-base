@@ -1,0 +1,48 @@
+angular.module('vnBannerModule', [],function () {})
+.controller('vnBannerController', function($rootScope, $scope, visionFactory){
+
+$scope.init = function () {
+
+  $rootScope.$watch("screens.VN_REP__PATIENT", function( value ){
+    if( value ){
+      setTimeout( function(){
+        handleShow();
+      }, 1);
+    }
+  });
+
+  $rootScope.$watch( 'patientid', function( nValue, oValue ){
+    if( nValue != null && nValue != oValue  ){
+      handleShow();
+    }
+  });
+};
+
+$scope.handleContextClick = function(){
+  $rootScope.patientid = null;
+};
+
+var handleShow = function(){
+  visionFactory.retrieveData( 
+    database[ PATIENT ].name, 
+    handlePatientRetrieved, 
+    null, 
+    {start: $rootScope.patientid, end: $rootScope.patientid} )};
+
+   var handlePatientRetrieved = function( data ){
+      $scope.patient = data[0];
+      $scope.$apply();
+    };
+
+})
+.directive('vnBanner', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        contextButton: "@"
+      },
+      templateUrl: function(elem, attr){
+        return 'patient/vnbanner.html';
+      }
+    };
+});

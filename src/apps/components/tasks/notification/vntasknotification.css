@@ -1,0 +1,55 @@
+.task-notification{
+	position: relative;
+}
+
+/*.task-notification .sent{
+	text-align: right;
+	font-size: 0.8em;
+	margin-bottom: -0.5em;
+	opacity: 0.3;
+}
+
+.task-notification .title{
+	font-size: 1.2em;
+}
+
+.task-notification .info-container{
+	white-space: nowrap;
+}
+
+.task-notification .info-container .text{
+	overflow: hidden;
+	max-width: 20em;
+	text-overflow:ellipsis;
+	opacity: 0.6;
+}*/
+
+.task-notification .info-container .comment-count{
+	position:absolute;
+	right: -0.9em;
+	bottom: -0.2em;
+	font-size: 0.9em;
+}
+
+/*
+.task-notification .info-container,
+.task-notification .image{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.task-notification .image{
+	margin-right: 1em;
+	text-align: center;
+	
+}
+
+.task-notification .image .assigner {
+	opacity: 0.6;
+}
+
+.task-notification .image img {
+	border-radius: 18px;
+	width: 36px;
+	height: 36px;
+}*/

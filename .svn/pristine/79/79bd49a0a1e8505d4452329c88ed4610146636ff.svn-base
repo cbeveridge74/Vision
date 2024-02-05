@@ -1,0 +1,41 @@
+<vn-css vn-id="vntasks" vn-css-file="apps/components/tasks/vntask.css"></vn-css>
+<div class="tasks" 
+     ng-controller="vnTaskController"
+     ng-init="init();" layout="column" layout-wrap>
+    <!--<div class="add" ng-click="handleAddClick( $event );">
+        <div><img src="apps/components/images/add.svg"></div>
+        <div class="description">Add new task</div>
+    </div>-->
+    <div class="no-data" ng-show="taskreminders.length < 1">
+        No tasks<span ng-show="patientcentric == true"> or reminders</span>
+    </div>
+    
+    <vn-card 
+        ng-repeat="task in taskreminders" 
+        ng-click="handleCardClick()"
+        vn-card-actions="cardOptions"
+        vn-card-entity="task">
+        <div class="topline">
+            <div class="subject">{{task.subject.label}}</div>
+            <div class="assigner"><div>{{task.assigner.displayname}}</div></div>
+        </div>
+        <div class="description">{{task.description}}</div>
+        <div class="patientname">{{task.patientdisplay}}</div>
+    </vn-card>
+
+
+    <!-- <div class="tasks taskreminders list-group-item" ng-repeat="item in taskreminders" ng-right-click="handleRightClick( $event, this )">
+        <div class="image"><div><img ng-src="apps/components/images/{{ item.image }}"></div></div>
+        <div>
+            <div class="workflow"><div>{{ item.workflowname }}</div></div>
+            <div class="subject"><div>{{ item.shortdescription }}</div></div>
+            <div class="patient" ng-click="handlePatientClick( $event );" ng-show="{{ item.patient != null }}">
+                <div><img ng-src="apps/components/images/patient.svg"></div>
+                <div>{{ item.patient.displayname}}</div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="action">RE-ALLOCATE</div>
+        </div>
+    </div> -->
+</div>

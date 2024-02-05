@@ -1,0 +1,10 @@
+.vision-reception{
+	background-color: #E7EFF3;
+	width: 100%;
+	height: 100%;
+}
+
+.content {
+	margin: 0 5em 0 8em;
+	white-space: nowrap;
+}

@@ -1,0 +1,9 @@
+.vision-chips{
+
+}
+
+.vision-chips .chipsInput {
+	height: inherit;
+	width: inherit;
+	text-indent: 1em;
+}

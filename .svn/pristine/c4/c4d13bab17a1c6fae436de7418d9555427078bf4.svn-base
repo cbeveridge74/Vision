@@ -1,0 +1,24 @@
+<vn-css vn-id="vntrends" vn-css-file="apps/visionmail/parts/vntrends.css"></vn-css>
+<div class="trends">
+	<vn-title-bar 
+        vn-title="Trends"
+        vn-show-back-button="true"
+        vn-backbutton-handler="handleBackButtonClick()"
+        vn-show-search="false"
+        vn-show-commands="false"></vn-title-bar>
+
+    <div class="chart">
+		<nvd3-line-with-focus-chart
+	            data="exampleData"
+	            id="exampleId"
+	            height="400"
+	            height2="50"
+	            showLegend="true"
+	            margin="{left:80,top:50,bottom:30,right:50}"
+	            yAxisTickFormat="yAxisTickFormatFunction()"
+	            xAxisTickFormat="xAxisTickFormatFunction()"
+	            x2AxisTickFormat="xAxisTickFormatFunction()">
+	         <svg></svg>
+	    </nvd3-line-with-focus-chart>
+    </div>
+</div>

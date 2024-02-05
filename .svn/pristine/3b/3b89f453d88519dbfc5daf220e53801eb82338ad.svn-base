@@ -1,0 +1,426 @@
+angular.module('vnDatabaseModule', [],function () {})
+.factory('vnDatabaseFactory', function( 
+  $filter,
+  $rootScope,
+  DATE_FORMAT, 
+  vnAssemblerFactory ){
+  
+  var factory = {};
+  factory.db = null;
+
+  $rootScope.$watch( "dbloaded", function( value ){
+    if( value ){
+      angular.forEach( queue, function( value, index ){
+        factory.retrieveData( value.item, value.callback, value.index, value.bounds, value.count );
+      });
+
+      angular.forEach( joinQueue, function( value, index ){
+        factory.retrieveDataWithJoin( value.items, value.joinOn, value.callback );
+      });
+
+      angular.forEach( calendarQueue, function( value, index ){
+        factory.retrieveSlotDataForCalendar( value.callback );
+      });
+
+      
+    }
+  });
+
+  var queue = new Array();
+  var joinQueue = new Array();
+  var calendarQueue = new Array();
+  
+  /*factory.doesDatabaseExist = function( callback ){
+    if( factory.db == null ){
+      callback( false );
+      return;
+    }
+    var store = factory.db.transaction([database[0].name], "readwrite").objectStore(database[0].name);
+    var count = store.count();
+    count.onsuccess = function() {
+      if( callback != null ){
+        callback.call( this, count.result > 0 );
+      }
+    }
+  };*/
+
+  factory.open = function( successHandler ) {
+
+      var version = config.local_database_version;
+      var request = indexedDB.open("patientmanagementdatabase", version);
+      var rebuiltDB = false;
+      // We can only create Object stores in a versionchange transaction.
+      request.onupgradeneeded = function(e) {
+        rebuiltDB = true;
+        var db = e.target.result;
+        e.target.transaction.onerror = factory.onerror;
+
+        if(db.objectStoreNames.contains(database[0].name)) {
+          angular.forEach( database, function( value, key ){
+            db.deleteObjectStore( value.name );
+          });
+        }
+        angular.forEach( database, function( value, key ){
+          var store;
+          var autoincrement     = value.index[0].autoincrement;
+          var compound          = value.index[0].compound;
+          var unique            = value.index[0].unique;
+
+          if( unique == null ){
+            unique = true;
+          }
+          if( autoincrement == true ){
+            store = db.createObjectStore(value.name,{ autoIncrement : true });
+          }else if( compound == true ){
+            store = db.createObjectStore(value.name,{keyPath: value.index[0].attributes}, { unique:unique });
+          }else{
+            store = db.createObjectStore(value.name,{keyPath: value.index[0].key});
+          }
+
+          angular.forEach( value.index, function( indexValue, indexKey ){
+            var multi     = indexValue.multi;
+            var compound  = indexValue.compound;
+            var uniquei    = indexValue.unique;
+
+            if( uniquei == null ){
+              uniquei = true;
+            }
+            // Multi used to show that the index comes from a property that is an array
+            // and you don't want that array to be a compound index (i.e. every array element
+              // must be present for the row to be found).
+            if( multi ){
+              store.createIndex( indexValue.name, indexValue.key, {unique:false,multiEntry:true} );
+            }else if( compound ){
+              store.createIndex(indexValue.name, indexValue.attributes, {unique:uniquei});
+            }else{
+              store.createIndex( indexValue.name, indexValue.key );
+            }
+          });
+        });
+      };
+
+      request.onsuccess = function(e) {
+        factory.db = e.target.result;
+        if( rebuiltDB ){
+          bulkLoadData( function(){
+            loadDocuments( successHandler );
+          });
+        }else{
+          if( successHandler != null ){
+            successHandler();
+          }
+        }
+      };
+
+      request.onerror = factory.onerror;
+  };
+
+  var loadDocuments = function( callback ){
+    factory.retrieveData( database[ CLINICAL_DOCS ].name, function( results ){
+
+      
+      chrome.runtime.getPackageDirectoryEntry( function ( dirEntry ) {
+        var directoryReader = dirEntry.createReader();
+          directoryReader.readEntries( function( results ){
+            for( var resultCount = 0;resultCount < results.length; resultCount++){
+              if( results[ resultCount ].fullPath == "/crxfs/data" ){
+                var dataDirectoryReader = results[ resultCount ].createReader();
+                dataDirectoryReader.readEntries( function( dataResults ){
+                  for( var dataResultCount = 0; dataResultCount < dataResults.length; dataResultCount++){
+                    if( dataResults[ dataResultCount ].fullPath == "/crxfs/data/clinicaldocs" ){
+                      var directory = dataResults[ dataResultCount ];
+                      var docDirectoryReader = directory.createReader();
+                      docDirectoryReader.readEntries( function( docResults ){
+                        insertDocuments( docResults, directory, callback );
+                      });
+                      break;
+                    }
+                  }
+                });
+                break;
+              }
+            }
+          });
+        });
+    }, null, null, null, true);   
+  };
+
+  var docCount = 0;
+
+  var insertDocuments = function( documents, directory, callback ){
+
+    var theCallback = null;
+    if( docCount != ( documents.length - 1 ) ){
+      theCallback = function(){
+        docCount++;
+        insertDocuments( documents, directory, callback );
+      };
+    }else{
+      theCallback = callback;
+    }
+
+    directory.getFile( documents[docCount].name, null, function( file ){
+      file.file( function( fileInstance ){
+        var fileReader = new FileReader();
+        fileReader.onloadend = function( fileContent ){
+          factory.updateData ( database[ CLINICAL_DOCS ].name,
+          { 
+            id: docCount,
+            name: documents[docCount].name,
+            patientid: docCount + 1,
+            content: fileContent.target.result
+          }, theCallback );
+        };
+        fileReader.readAsText( fileInstance );
+      });
+    });
+  };
+
+  factory.onerror = function(a, b, c){
+    console.log( a );
+  };
+
+  factory.loadData = function( callback ){
+    if( callback ){
+      callback.apply( this );
+    }
+  };
+
+  factory.bulkLoadData = function( data, item, callback ){
+    var db = factory.db;
+    var trans = db.transaction([item], "readwrite");
+    var store = trans.objectStore(item);
+    
+    angular.forEach(data, function(value, key) {
+        store.put(value);
+    });
+
+    if( callback ){
+      callback();
+    }
+  };
+
+  factory.retrieveSlotDataForCalendar = function( callback){
+    if( $rootScope.dbloaded != true ){
+        calendarQueue.push({
+          callback: callback
+        });
+        return;
+      }
+      
+      var db = factory.db;
+      var trans = db.transaction(["appointment"], "readwrite");
+      var store = trans.objectStore("appointment");
+      // Get everything in the store;
+      var cursorRequest = store.index('by_date').openCursor();
+      var calendarStruct = {};
+      
+      cursorRequest.onsuccess = function(e) {
+        var result = e.target.result;
+        if(result && result.value){ 
+
+          if( calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ] == null ){
+            calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ] = {};
+          }
+          if( calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ][result.value.owner] == null ){
+            calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ][result.value.owner] = {};
+          }
+          var date = $filter('date')(result.value.date,DATE_FORMAT);
+          var time = {};
+          time.label = $filter('date')(result.value.date,'HH:mm');
+          time.color = result.value.slotcolor;
+          time.status = result.value.status;
+          time.id = result.value.id;
+
+          if( calendarStruct[ date ][result.value.owner]["09"] == null ){
+            calendarStruct[ date ][result.value.owner]["09"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["10"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["11"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["12"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["13"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["14"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["15"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["16"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["17"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["18"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["19"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["20"] = [{label: "00:00", color: "#FFFFFF"}];
+          }
+          
+          if( calendarStruct[ date ][result.value.owner][time.label.split(":")[0]][0].label == "00:00" ){
+            calendarStruct[ date ][result.value.owner][time.label.split(":")[0]] = new Array();
+          }
+          calendarStruct[ date ][result.value.owner][time.label.split(":")[0]].push( time);
+          result.continue();
+       }else{
+        if( callback ){
+          callback.call( this, calendarStruct );
+        }
+       }
+      };
+      cursorRequest.onerror = factory.onerror;
+  };
+
+  factory.updateData = function( item, data, callback ) {
+    //DCB note: If you're updating existing data ensure that the default key is first in the
+    // config list (e.g. see TASKS)
+
+
+    var db = factory.db;
+    var trans = db.transaction([item], "readwrite");
+    var store = trans.objectStore(item);
+    var request = store.put(data);
+
+
+    request.onsuccess = function(e) {
+      if( callback != null ){
+        callback( data, e, this );
+      }
+    };
+
+    request.onerror = function(e) {
+      console.log(e);
+    };
+  };
+
+  factory.retrieveDataWithJoin = function( items, joinOn, callback ){
+    if( $rootScope.dbloaded != true ){
+        joinQueue.push({
+          items: items,
+          joinOn: joinOn,
+          callback: callback
+        });
+        return;
+      }
+    factory.retrieveData( items[0].item, function( result1 ){
+      factory.retrieveData( items[1].item, function( result2 ){
+        angular.forEach( result1, function( result1Value, result1Index ){
+          angular.forEach( result2, function( result2Value, result2Index ){
+            if( result1Value[ joinOn[0] ] == result2Value[ joinOn[1] ]){
+              result1Value[ items[1].item ] = result2Value;
+            }
+          });
+        });
+        callback( result1 );
+      }, items[1].index, items[1].bounds, items[1].count );
+    }, items[0].index, items[0].bounds, items[0].count );
+  };
+
+  factory.retrieveDataAggregateWithResults = function( resultSet, resultSetAttribute, item, bounds, callback ){
+    var aggregatedResults = new Array();
+    angular.forEach( resultSet, function( value, resultsSetIndex ){
+      var thisCallback = function( result, itemname, passthroughData ){
+        if( result != null && result.length == 1 ){
+          passthroughData[ resultSetAttribute ] = result[0];
+        }
+        
+        aggregatedResults.push( passthroughData );
+        if( resultsSetIndex == resultSet.length - 1 ){
+          callback( aggregatedResults );
+        }
+      };
+
+      var thisBounds = { start: ref( value, bounds.start ), end: ref( value, bounds.end )  };
+      if( thisBounds.start == null ){
+        thisBounds = null;
+      }
+      factory.retrieveData( item, thisCallback, null, thisBounds, null, null, value );
+    });
+  };
+
+  function ref(obj, str) {
+    return str.split(".").reduce(
+      function(o, x) {
+        if( o == null ){ 
+          return null;
+        }
+        return o[x];
+      }, obj);
+  }
+
+  factory.retrieveDataByKey = function( item, key, callback ){
+    var db = factory.db;
+    var trans = db.transaction([item], "readwrite");
+    var store = trans.objectStore(item);
+    var request = store.get( key );
+
+    request.onsuccess = function(e) {
+        var result = e.target.result;
+        if( callback ){
+          callback( result );
+        }
+    };
+    request.onerror = factory.onerror;
+  };
+
+  /*overrideDBLoaded added as there are some things that are being loaded outsisde of the main loading process
+   such as documents
+   passthroughData added as sometimes need to do something to the data that triggered the async call to the DB
+  */
+  factory.retrieveData = function( item, callback, index, bounds, count, overrideDBLoaded, passthroughData ) {
+      if( $rootScope.dbloaded != true && overrideDBLoaded == null ){
+        queue.push({
+          item: item,
+          callback: callback,
+          index: index,
+          bounds: bounds,
+          count: count
+        });
+        return;
+      }
+
+      var numResults = 10;
+      var db = factory.db;
+      var trans = db.transaction([item], "readwrite");
+      var store = trans.objectStore(item);
+      var results = new Array();
+      var counter = 0;
+      var _index = "by_id";
+      var cursorRequest;
+      if( index != null ){
+        _index = index;
+      }
+
+      if( count != null ){
+        numResults = count;
+      }
+
+      if( bounds != null ){
+        cursorRequest = store.index(_index).openCursor( IDBKeyRange.bound( bounds.start, bounds.end ) );
+      }else{
+        cursorRequest = store.index(_index).openCursor();
+      }
+      cursorRequest.onsuccess = function(e) {
+        
+        var result = e.target.result;
+        if(result && result.value && counter < numResults ){             
+            results.push( result.value );   
+            counter++;      
+            result.continue();
+        }else{
+          if( callback ){
+            callback( results, item, passthroughData );
+          }
+        }
+      };
+      cursorRequest.onerror = factory.onerror;
+  };
+  var dataStore = new DataStore();
+
+  var bulkLoadData = function( callback, index ){
+    if( index == null ){
+      index = 0;
+    }
+    var table = database[index];
+    if( table == null ){
+      callback();
+      return;
+    }
+    var data = vnAssemblerFactory[ table.assembler ].call( this, dataStore[ table.data ] );
+    factory.bulkLoadData( data, table.name, function(){
+      bulkLoadData( callback, ++index );
+    });
+  };
+
+  return factory;
+});

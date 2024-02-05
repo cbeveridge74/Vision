@@ -1,0 +1,35 @@
+angular.module('vnBannerModule', [],function () {})
+.controller('vnBannerController', function($rootScope, $scope, visionFactory){
+
+$scope.init = function () {
+
+      $rootScope.$watch("screens.VN_REP__PATIENT", function( value ){
+        if( value ){
+          setTimeout( function(){
+            handleShow();
+          }, 1);
+        }
+      });
+};
+
+var handleShow = function(){
+  visionFactory.retrieveData( 
+    database[ PATIENT ].name, 
+    handlePatientRetrieved, 
+    null, 
+    {start: $rootScope.patientid, end: $rootScope.patientid} )};
+
+   var handlePatientRetrieved = function( data ){
+      $scope.patient = data[0];
+      $scope.$apply();
+    };
+
+})
+.directive('vnBanner', function() {
+    return {
+      restrict: 'E',
+      templateUrl: function(elem, attr){
+        return 'patient/vnbanner.html';
+      }
+    };
+});

@@ -1,0 +1,73 @@
+.brick-widget .label{
+	color: #000;
+}
+.brick-widget .add .arrow,
+.brick-widget .add .md-fab,
+.brick-widget .brick.add .arrow,
+.brick-widget .brick.add .md-fab{
+	display: inline-block;
+}
+
+.brick-widget .fa{
+	color: #BBB;
+	vertical-align: middle;
+}
+
+
+
+.brick-widget .minimise .decline {
+	position: absolute;
+	color: red;
+	right: 0.5em;
+	top: 0em;
+}
+
+.brick-widget .decline {
+	position: absolute;
+	color: red;
+	top: 6.5em;
+	right: 42%;
+	z-index: 2;
+}
+
+
+.brick-widget .fa.fa-plus{
+	font-size: 2em;
+}
+
+.brick-widget .para .fa.fa-plus{
+	font-size: 1.3em;
+}
+
+
+
+.brick-widget .fa:hover{
+	color: #CCC;
+}
+
+.brick-widget .add .arrow.fa  {
+	color: #AAA;
+}
+
+.brick-widget .add .arrow.fa:hover  {
+	color: #AAA;
+}
+
+.brick-widget .brick.add{
+	padding-bottom: 4em;
+	width: 8em;
+}
+
+
+.brick-widget .add.para .arrow {
+	font-size: 2em;
+}
+
+.brick-widget .add.para{
+	height: 3em;
+}
+
+.brick-widget md-icon {
+	width: 20px;
+	height: 20px;
+}

@@ -1,0 +1,57 @@
+function DataServices( impl ){
+
+	var dataServices = this;
+	dataServices.PARAMETER_REQUIRED_EXCEPTION = 0;
+	
+	if( impl == null ){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "An implementation class is required for the data service"};
+	}
+
+	dataServices.authenticate = function(){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "authenticate() has not been implemented"};
+	}
+
+	dataServices.retrieveData = function(){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "retrieveData() has not been implemented"};
+	};
+
+	dataServices.retrieveDataByKey = function(){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "retrieveDataByKey() has not been implemented"};
+	};
+
+	dataServices.retrieveDataWithJoin = function(){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "retrieveDataWithJoin() has not been implemented"};
+	};
+
+	dataServices.retrieveDataAggregateWithResults = function(){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "retrieveDataAggregateWithResults() has not been implemented"};
+	};
+
+	dataServices.updateData = function(){
+		throw {name : dataServices.PARAMETER_REQUIRED_EXCEPTION, message : "updateData() has not been implemented"};
+	};
+
+	if( impl.authenticate ){
+		dataServices.authenticate = impl.authenticate;
+	}
+
+	if( impl.retrieveData ){
+		dataServices.retrieveData = impl.retrieveData;
+	}
+
+	if( impl.retrieveDataByKey ){
+		dataServices.retrieveDataByKey = impl.retrieveDataByKey;
+	}
+
+	if( impl.retrieveDataWithJoin ){
+		dataServices.retrieveDataWithJoin = impl.retrieveDataWithJoin;
+	}
+
+	if( impl.retrieveDataAggregateWithResults ){
+		dataServices.retrieveDataAggregateWithResults = impl.retrieveDataAggregateWithResults;
+	}
+
+	if( impl.updateData ){
+		dataServices.updateData = impl.updateData;
+	}
+}

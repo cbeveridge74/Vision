@@ -1,0 +1,17 @@
+<vn-css vn-id="vnpatientchipsdetail" vn-css-file="apps/components/chips/patient/vnpatientchipsdetail.css"></vn-css>
+<div class="vision-patient-chips-detail" ng-controller="vnPatientChipsDetailController" ng-click="handleClick( $event )" ng-init="initPatientChipsDetail()"> 
+	<div class="patient-details">
+		<div class="name">{{ patient.Surname | uppercase}}, {{ patient.Forename }}</div>
+		<div class="dob">({{ patient.DOB }})</div>
+	</div>
+	<div class="title">Tracking</div>
+    <md-checkbox aria-label="appointments" ng-model="patient.track.appointments.selected" class="md-primary">
+		appointments
+	</md-checkbox>
+	<md-checkbox aria-label="clinical recordings" ng-model="patient.track.clinicalrecordings.selected" class="md-primary">
+		clinical recordings
+	</md-checkbox>
+	<md-checkbox aria-label="document filing" ng-model="patient.track.documentfiling.selected" class="md-primary">
+		document filing
+	</md-checkbox>
+</div>

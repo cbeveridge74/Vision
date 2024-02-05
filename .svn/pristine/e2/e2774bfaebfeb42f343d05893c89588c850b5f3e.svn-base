@@ -1,0 +1,60 @@
+.card{
+	width: 25em;
+	vertical-align: bottom;
+	-webkit-transform: translate(0px,0px)}
+
+.card .action-content {
+	//padding: 0.6em;
+	padding-bottom: 0;
+	cursor: pointer;
+}
+
+.card .action-content:hover{
+	background-color: #fdfdfd;
+}
+
+.card.pressed{
+	
+	box-shadow: 0px 0px 0px #FFFFFF;
+	-webkit-transform: translate(1px,1px);
+}
+
+.card .actions {
+	height: 1.8em;
+	background-color: #2F4B9B;
+	color: white;
+	margin-right: -1.4em;
+	margin-left: -1.4em;
+	margin-bottom: -1.4em;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	
+
+}
+
+.card .action {
+	padding-top: 0.2em;
+	padding-right: 1em;
+	padding-left: 1em;
+	font-weight: light;
+	cursor: pointer;
+	
+}
+
+.card .left,
+.card .right{
+	display: inline-block;
+	width: 50%;
+}
+
+.card .left{
+	text-align: left;
+}
+
+.card .right{
+	text-align: right;
+}
+
+.card .action:hover {
+	color: #dddddd;
+}

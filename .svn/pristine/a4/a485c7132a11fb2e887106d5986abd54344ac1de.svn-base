@@ -1,0 +1,8 @@
+<vn-css vn-id="vnscroll" vn-css-file="layout/vnscroll.css"></vn-css>
+<div class="iscroll-wrapper"
+	 ng-controller="vnScrollController"
+	 ng-init="init();">
+	<div class="iscroll">
+		<div ng-transclude></div>
+    </div>
+</div>

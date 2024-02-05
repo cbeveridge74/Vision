@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link href="lib/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="lib/css/typeahead.css" rel="stylesheet">
+		<link href="lib/css/angular-csp.css" rel="stylesheet" />
+		<link href="lib/css/jquery-ui.min.css" rel="stylesheet" />
+		<link href="lib/css/iThing-min.css" rel="stylesheet" />
+	    <link href="vnvision.css" rel="stylesheet" />
+	    
+	</head>
+	<script src="jquery.js"></script>
+	<script data-main="main" src="require.js"></script>
+	<body class="vision-parent-module" ng-controller="VisionController" ng-csp>
+		<div class="tour"></div>
+		<vn-bar ng-show="!screens.VN_LOGIN"></vn-bar>
+		<vn-login ng-show="screens.VN_LOGIN"></vn-login>
+		<vn-reception ng-show="screens.VN_REP"></vn-reception>
+		<vn-vision-appointments ng-show="screens.VN_APP"></vn-vision-appointments>
+		<vn-forms ng-show="screens.VN_FORMS"></vn-forms>
+		<vn-data-entry ng-show="screens.VN_DATA_ENTRY"></vn-data-entry>
+		<vn-dynamo ng-show="screens.VN_DYNAMO"></vn-dynamo>
+		<vn-navigation-menu></vn-navigation-menu>
+		<vn-command-menu></vn-command-menu>
+		<div class="connectivity-indicator"></div>
+	</body>
+</html>

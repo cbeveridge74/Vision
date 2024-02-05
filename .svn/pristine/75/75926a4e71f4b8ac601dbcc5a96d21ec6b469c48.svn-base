@@ -1,0 +1,254 @@
+.vision-tasks{
+	background-color: #FFFFFF;
+	height: 100%;
+	width: 100%;
+}
+
+.vision-tasks md-tabs {
+	overflow: visible;
+}
+
+.vision-tasks .md-header{
+	/* height: 20px; */
+}
+
+.vision-tasks .md-whiteframe-z1{
+	margin: 1em;
+}
+
+.vision-tasks .inbox-scroller,
+.vision-tasks .tracking-scroller{
+	height: 100%;
+	width: 100%;
+}
+
+.vision-tasks .no-data{
+	height: 100%;
+	margin-top: 10em;
+	font-size: 1.5em;
+	text-align: center;
+	color: #1e81e7;
+}
+
+.vision-tasks .folder-bar{
+	margin: -3.5em 0 0.3em -12em;
+	text-align: center;
+}
+
+@media(max-width: 1000px) {
+
+	.vision-tasks .folder-bar{
+		margin: -2em 0 0 0;
+	}
+
+}
+
+.vision-tasks .folder-bar-item{
+	display: inline-block;
+	margin-left: 1em;
+	margin-right: 1em;
+	cursor: pointer;
+}
+
+.vision-tasks .folder-bar-item.selected{
+	color: #1e81e7;
+	font-size: 1.2em;
+	cursor: default;
+}
+
+.vision-tasks .task-list-item{
+	position: relative;
+	border: none;
+	padding: 0.4em;
+	padding-left: 1em;
+	cursor: pointer;
+	width: 100%;
+}
+
+.vision-tasks .task-list-item:active{
+	-webkit-transform: translate(1px,1px);
+}
+
+.vision-tasks .task-list-item .topline{
+	margin-bottom: 0.5em;
+	color: #2b2b2b;
+	/* white-space: nowrap; */
+}
+
+.vision-tasks .task-list-item .topline .subject,
+.vision-tasks .task-list-item .topline .assigner,
+.vision-tasks .task-list-item .topline .due{
+	/* display: inline-block; */
+	/* width: 33%; */
+
+}
+
+.vision-tasks .task-list-item .topline .subject,
+.vision-tasks .task-list-item .topline .assigner,
+.vision-tasks .task-list-item .topline .due,
+.vision-tasks .task-list-item .description{
+	//color: #BBB;
+}
+
+.vision-tasks .task-list-item .topline .subject{
+	text-align: left;
+	font-size: 1.2em;
+	font-weight: lighter;
+}
+
+.vision-tasks .task-list-item .topline .assigner{
+	text-align: center;
+	font-style: italic;
+	
+}
+
+.vision-tasks .task-list-item .topline .due{
+	text-align: right;
+}
+
+.vision-tasks .task-list-item .urgency {
+	position: absolute;
+	background-color: #FF0000;
+	width: 5px;
+	height: 7.5em;
+	left: 0;
+	top: 0;
+}
+
+
+.vision-tasks .task-list-item .description{
+	font-size: 1.4em;
+	margin-bottom: 0.5em;
+}
+
+.vision-tasks .task-list-item .patientname{
+	margin-top: 0.5em;
+	font-weight: bold;
+}
+
+/*********** GENERAL LIST ITEM *************************/
+.vision-tasks .tracking-list-item {
+	height: 6em;
+	width: 100%;
+	padding: 1em;
+}
+
+.vision-tasks .tracking-list-item .title-area{
+	width: 50%;
+	vertical-align: top;
+}
+
+.vision-tasks .tracking-list-item .title-area .title {
+	font-size: 2.0em;
+	margin-top: -0.3em;
+
+}
+
+.vision-tasks .tracking-list-item .title-area,
+.vision-tasks .tracking-list-item .title-area .status {
+	display: inline-block
+}
+
+.vision-tasks .tracking-list-item .title-area .status {
+	color: #1E81E7;
+	font-size: 1.2em;
+	margin-right: 0.5em
+}
+
+/**************** APPOINTMENT LIST ITEM ****************/
+.vision-tasks .tracking-list-item.appointment-item .patient-name{
+	width: 50%;
+	vertical-align: top;
+}
+
+.vision-tasks .tracking-list-item.appointment-item .patient-name,
+.vision-tasks .tracking-list-item.appointment-item .title-area .date,
+.vision-tasks .tracking-list-item.appointment-item .title-area .time,
+.vision-tasks .tracking-list-item.appointment-item .title-area .owner {
+	display: inline-block
+}
+
+.vision-tasks .tracking-list-item.appointment-item .title-area .date {
+
+}
+
+.vision-tasks .tracking-list-item.appointment-item .title-area .time {
+
+}
+
+.vision-tasks .tracking-list-item.appointment-item .title-area .owner {
+
+}
+
+.vision-tasks .tracking-list-item.appointment-item .patient-name{
+	font-size: 1.3em;
+}
+
+.vision-tasks .tracking-list-item.appointment-item .booker {
+	font-size: 0.9em;
+}
+
+.vision-tasks .tracking-list-item.appointment-item .patient-name,
+.vision-tasks .tracking-list-item.appointment-item .booker {
+	text-align: right;
+}
+/************* APPOINTMENT LIST ITEM END ***********/
+
+.vision-tasks .tracking-list-item.task-item .assignee,
+.vision-tasks .tracking-list-item.task-item .prep {
+	display: inline-block;
+}
+
+.vision-tasks .tracking-list-item.task-item .prep {
+	margin-left: 0.6em;
+}
+
+.vision-tasks .filing {
+	background-color: #D2E5EA;
+	width: 30em;
+	height: 4em;
+	margin: auto;
+	margin-top: -5em;
+	margin-bottom: 2em;
+	cursor: pointer;
+	padding-top: 0.2em;
+}
+
+.vision-tasks .filing .number {
+	font-size: 1.4em;
+	color: #20335E;
+	text-align: center;
+	font-weight: lighter;
+}
+.vision-tasks .filing .number span{
+	font-size: 2em;
+	font-weight: 500;
+	vertical-align: middle;
+	margin-left: 0.5em;
+}
+
+/*.vision-tasks canvas{
+
+}
+
+.vision-tasks .source-image {
+	position: absolute;
+	z-index: -1;
+}
+
+.vision-tasks img{
+	
+}
+
+.vision-tasks #theFrame,
+.vision-tasks img{
+	display: none;
+}
+
+.highlight {
+	position: absolute;
+	background: yellow;
+	opacity: 0.5;
+	width: 10px;
+	height: 10px;
+}	*/

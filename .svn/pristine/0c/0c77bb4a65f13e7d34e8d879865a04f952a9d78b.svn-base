@@ -1,0 +1,71 @@
+angular.module('vnHubCategoryModule', [],function () {})
+.controller('vnHubCategoryController', ['$scope', '$rootScope', 'vnScreenManagementFactory', 'vnNavigationFactory', 
+	function( $scope, $rootScope, vnScreenManagementFactory, vnNavigationFactory ){
+	$rootScope.$watch("filteron", function( value ){
+		if( value ){
+			$scope.filterimage = $scope.onfilterimage;
+		}else{
+			$scope.filterimage = $scope.offfilterimage;
+		}
+	});
+
+	$scope.handleTitleClick = function( event ){
+		if( vnScreenManagementFactory.isDoubleClick() ){
+			return;
+		}
+		if( $scope.titleclick != null ){
+			$scope.titleclick();
+		}
+	    
+	  };
+
+	$scope.handleAddClick = function( e ){
+		if( vnScreenManagementFactory.isDoubleClick() ){
+			return;
+		}
+	    if( $scope.addClickHandler != null ){
+	    	$scope.addClickHandler();
+
+	    }
+	      
+	  };
+
+	$scope.handleFilterClick = function( event ){
+		if( vnScreenManagementFactory.isDoubleClick() ){
+			return;
+		}
+	    if( $( ".category-header .filter-menu" ).hasClass( "open" ) ){
+	      vnScreenManagementFactory.closeMenus();
+	      $( ".category-header .filter-menu" ).removeClass( "open" ) 
+	    }else{
+	      vnScreenManagementFactory.openMenu( ".category-header .filter-menu" );
+	    }
+	  };
+
+	  if( $scope.showadd == "false" ){
+	  	$scope.showadd = false;
+	  }
+}])
+.directive('vnHubCategory', function() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: {
+      	title: '@vnTitle',
+      	titleclick: '&vnTitleClick',
+      	image: '@vnImage',
+      	showfilter: '@vnShowFilter',
+      	showadd: '@vnShowAdd',
+      	addClickHandler: '&vnAddClickHandler',
+      	filtermenu: '@vnFilterMenu',
+      	name: '@vnName',
+      	filterimage: '@vnOffFilterImage',
+      	addimage: '@vnAddImage',
+      	onfilterimage: '@vnOnFilterImage',
+      	offfilterimage: '@vnOffFilterImage'
+      },
+      templateUrl: function(elem, attr){
+        return 'layout/vnhubcategory.html';
+      }
+    };
+});

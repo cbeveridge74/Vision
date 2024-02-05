@@ -1,0 +1,248 @@
+﻿/*angular.element($( ".vision-parent-module" )).ready(function() {
+    // Manually setting up angular as need to load the DB first
+    setTimeout( function(){
+      angular.bootstrap($( ".vision-parent-module" ), [ 'vnVisionModule' ]);
+
+    }, 2 );
+      
+});*/
+angular.module('vnVisionModule', [
+        'vnDatabaseModule',
+        'vnScrollModule',
+        'vnAssemblerModule',
+        'vnSearchModule',
+        'vnBannerModule',
+        'vnNavigationMenuModule',
+        'vnBarModule',
+        'vnTitleBarModule',
+        'vnCommandMenuModule',
+        'vnActionModule',
+        'vnLoginModule',
+        //'vnDynamoModule',
+        'vnReceptionModule',
+        //'vnVisionAppointmentsModule',
+        'vnVisionDocumentManagementModule',
+        'vnVisionTasksModule',
+        'vnHubCategoryModule',
+        'vnCardModule',
+        'vnDocumentModule',
+        'vnScreenManagementModule',
+        'vnNavigationModule',
+        'vnAppMenuModule',
+        'vnAppManagementModule',
+        'vnTourModule',
+        'vnUserMenuModule',
+        'vnActivitiServiceModule',
+        'vnValidationMessageModule',
+        'ngMaterial',
+        'vnChipsModule',
+        'vnPatientChipsModule',
+        'vnChipsDetailModule'
+        //'vnFormsModule',
+        //'vnDataEntryModule'
+        ],function () {
+  }).config( [
+    '$compileProvider',
+    '$mdThemingProvider',
+    function( $compileProvider, $mdThemingProvider )
+    {   
+        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+        var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+        + '|chrome-extension:'
+        +currentImgSrcSanitizationWhitelist.toString().slice(-1);
+        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('blue')
+            .accentPalette('indigo');
+          }
+])//'ngRoute', 'ngTouch', 'ngAnimate'
+
+.controller('VisionController', function ( $scope, $window ) {
+  $window.addEventListener("online", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Online' );
+      indicator.removeClass( 'offline' );
+      indicator.addClass( 'online' );
+      indicator.fadeTo( 1000, 0, function(){ 
+        indicator.removeClass( 'online' );
+        indicator.attr( 'style', '' );
+        indicator.text( '' );
+         } );
+    }, true);
+
+    $window.addEventListener("offline", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Offline' );
+      indicator.addClass( 'offline' );
+      indicator.removeClass( 'online' );
+    }, true);
+    
+})
+
+.factory('visionFactory',  function( 
+  $rootScope, 
+  user, 
+  vnAssemblerFactory, 
+  vnDatabaseFactory, 
+  vnNavigationFactory, 
+  vnScrollFactory ){
+  
+  var factory = {};
+  var service;
+  
+
+  factory.TASK = vnDatabaseFactory.TASK;
+  
+
+  if( config.mode === "webservice" ){
+    //service = new WebServices( $http, token, vnAssemblerFactory, databaseFactory );
+  }else{
+    service = new DemoServices( vnAssemblerFactory, vnDatabaseFactory );
+  }
+
+  var dataServices = new DataServices( service );
+
+  factory.updateData = function( item, data, callback ){
+    return dataServices.updateData( item, data, callback  );
+  };
+  
+  factory.retrieveData = function( item, callback, index, bounds, count ){
+    return dataServices.retrieveData( item, callback, index, bounds, count );
+  };
+
+  factory.retrieveDataByKey = function( item, key, callback ){
+    return dataServices.retrieveDataByKey( item, key, callback );
+  }
+
+  factory.retrieveDataWithJoin = function( item1, item2, joinOn, callback ){
+    return dataServices.retrieveDataWithJoin( item1, item2, joinOn, callback );
+  };
+
+  factory.retrieveDataAggregateWithResults = function( resultSet, item, resultSetAttribute, index, bounds, count, callback ){
+    return dataServices.retrieveDataAggregateWithResults( resultSet, item, resultSetAttribute, index, bounds, count, callback );
+  };
+
+  factory.authenticate = function( username, password, callback ){
+    return dataServices.authenticate( username, password, function(){
+      if( callback != null ){
+        callback();
+        user.token = btoa( username + ":" + password );
+      }
+    });
+  };
+
+  factory.handlePatientClick = function( patientid ){
+      if( vnScrollFactory.isScrolling() ){
+        return;
+      }
+      $rootScope.patientid = patientid;
+      vnNavigationFactory.switchScreens( 'VN_REP__PATIENT' );
+  };
+
+  return factory;
+})
+
+.run(function(
+  $rootScope, 
+  $window, 
+  $timeout,
+  vnDatabaseFactory, 
+  vnScreenManagementFactory,
+  vnNavigationFactory,
+  visionFactory){
+
+  $rootScope.commandBroadcaster = {};
+
+  vnDatabaseFactory.open( function(){
+    $rootScope.dbloaded = true;
+    $rootScope.$apply();
+  });
+  $rootScope.extensionUrl = "chrome-extension://"+chrome.runtime.id; 
+
+  vnNavigationFactory.switchScreens( 'VN_LOGIN' ); 
+  vnScreenManagementFactory.initialiseAppBarIcons( defaultAppBar );
+  visionFactory.retrieveData( database[ APP_INFO ].name, function( results ){
+      
+      if( results[0].firstuse == true ){
+        $rootScope.$watch( 'screens.VN_LOGIN', function( value ){
+          if( !value ){
+              $timeout( function(){
+                $( "vn-tour[vn-first-time='true']" ).find( ".tour-container" ).effect("fade", { duration: 300, queue: false }, "easeOutCirc");
+              }, 2000 );
+
+              $timeout( function(){
+                $( "vn-tour[vn-first-time='true']" ).find( ".tour-container" ).fadeOut();
+              }, 8000 );
+          }
+        });
+        results[0].firstuse = false;
+        visionFactory.updateData( database[ APP_INFO ].name, results[0], null );
+      }
+    },null, null);
+})
+.value('DATE_FORMAT', 'yyyy-MM-dd')
+.value('user', {})
+.value( "patientid", null )
+.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                fn(scope, {$event:event});
+            });
+        });
+    };
+})
+.directive('stopEvent', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attr) {
+                element.bind(attr.stopEvent, function (e) {
+                    e.stopPropagation();
+                });
+            }
+        };
+     })
+.directive('vnCss', function( ) {
+  var styleSheets = {};
+
+    return {
+      restrict: 'E',
+      link: function(scope, element, attrs){
+    if( styleSheets[ attrs.vnId ] == null ){
+          styleSheets[ attrs.vnId ] = true;
+          $( 'body' ).append( "<link id='" + attrs.vnId + "' href='" + attrs.vnCssFile + "' type='text/css' rel='stylesheet' />" );
+        }
+      }
+    }
+});
+
+
+
+
+/*
+This is how a right click menu could be created
+
+$scope.handleRightClick = function( event ){
+    console.log( event );
+    if( !vnScreenManagementFactory.isDoubleClick() ){
+        clientX = event.target.x + 30;
+        clientY = event.target.y - 80;
+        $( ".menu.context" ).css( "left", clientX );
+        $( ".menu.context" ).css( "top", clientY );
+        vnScreenManagementFactory.openMenu( ".menu.context" );
+      }
+  };
+
+<div class="menu context">
+        <div>Create new message...</div>
+        <div>Create new task...</div>
+    </div>
+
+
+         ng-right-click="handleRightClick( $event );"
+  */
+
+

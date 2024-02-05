@@ -1,0 +1,152 @@
+angular.module('vnDynamoModule', [
+		'vnExceptionModule',
+		'vnViewComponentFinderModule'
+	],function () {})
+.run(function( 	vnAppManagementFactory,
+				vnComponent,
+				vnComponentState,
+				vnComponentTwoState,
+				vnOnChangeListener,
+				vnSelectionComponent,
+				vnAbstractRuleAction,
+				vnClearValidationMessage,
+				vnDisable,
+				vnEnable,
+				vnSetValue,
+				vnShowValidationMessage,
+				vnOperator,
+				vnAbstractOperator,
+				vnAbstractOperatorTwoState,
+				vnChecked,
+				vnContains,
+				vnDisabled,
+				vnEndsWith,
+				vnEquals,
+				vnGreaterThan,
+				vnLessThan,
+				vnDerivedValuesModel,
+				vnCondition,
+				vnRuleBlock,
+				vnStateRule,
+				vnStateRulesModel,
+				vnStateEngine,
+				vnValue,
+				vnField,
+				vnFormDefinition, 
+				vnFormDefinitionModel,
+				vnFormLifecycle,
+				vnHeightDefinition){
+	var APP_ID 	= "VN_DYNAMO";
+	var HOME 	= APP_ID + '__HOME';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: "VN_DYNAMO", 
+		name: "Vision Dynamo",
+		icon: "images/reception_bell.svg",
+		screens: [
+			HOME
+		]});
+
+	function TestImpl(){
+		this.isDisabled = function(){};
+		this.isChecked = function(){};
+		this.onChange = function(){};
+		this.setDataSource = function(){};
+		this.getValue = function(){};
+		this.setValue = function(){};
+		this.disable = function(){};
+		this.enable = function(){};
+		this.setOnChangeListener = function(){};
+		this.isListenerSet = function(){};
+		this.showValidationMessage = function(){};
+		this.clearValidationMessage = function(){};
+		this.execute = function(){};
+
+		
+
+		this.retrieveStateRules = function(){};
+		this.retrieveFormDefinition = function(){};
+
+		this.render = function(){};
+		
+	}
+
+	var DOB = moment( '2014-Jul-11', 'YYYY-MMM-DD' ).format( "YYYY-MM-DD" );
+	vnDerivedValuesModel.insertValue( "DOB", DOB );
+	vnDerivedValuesModel.insertValue ("DEFAULT_CLINICIAN", 1);
+
+
+	var test = new vnComponent.instance( new TestImpl() ); 
+	test = new vnComponentState.instance( new TestImpl() );
+	test = new vnComponentTwoState.instance( new TestImpl() );
+	test = new vnOnChangeListener.instance( new TestImpl() );
+	test = new vnSelectionComponent.instance( new TestImpl() );
+	test = new vnAbstractRuleAction.instance( new TestImpl(), ["abstract target"] );
+	var clear = new vnClearValidationMessage.instance(["clearmessage target"] );
+	var disable = new vnDisable.instance(["disable target"] );
+	var enable = new vnEnable.instance(["enable target"] );
+	var setValue = new vnSetValue.instance(["set value on target", "value to set"] );
+	var showValidationMessage = new vnShowValidationMessage.instance(["show message", "message to show"] );
+	var operator = new vnOperator.instance( new TestImpl() );
+	var abstractOperator = new vnAbstractOperator.instance( new TestImpl() );
+	var abstractOperatorTwoState = new vnAbstractOperatorTwoState.instance( new TestImpl() );
+	var checked = new vnChecked.instance( new TestImpl() );
+	var contains = new vnContains.instance( new TestImpl() );
+	var disabled = new vnDisabled.instance( new TestImpl() );
+	var endsWith = new vnEndsWith.instance( new TestImpl() );
+	var equals = new vnEquals.instance( new TestImpl() );
+	var greaterThan = new vnGreaterThan.instance( new TestImpl() );
+	var lessThan = new vnLessThan.instance( new TestImpl() );
+	var condition = new vnCondition.instance();
+	var ruleBlock = new vnRuleBlock.instance();
+	var stateRule = new vnStateRule.instance();
+	var stateRulesModel = new vnStateRulesModel.instance( new TestImpl() );
+	var value = new vnValue.instance();
+	var field = new vnField.instance();
+	var formDefinition = new vnFormDefinition.instance();
+	var formDefinitionModel = new vnFormDefinitionModel.instance( new TestImpl() );
+	var formLifecycle = new vnFormLifecycle.instance( ["FormDefinition"] );
+	//clear.execute();
+	//disable.execute();
+	//enable.execute();
+	//setValue.execute();
+	//showValidationMessage.execute();
+	//operator.execute( "operatorTarget", "operatorOptionalValue" );
+	//abstractOperator.execute( "abstractOperatorTarget" );
+	//abstractOperatorTwoState.execute( "abstractOperatorTwoStateTarget" );
+	//checked.execute( "checked target", "checked value" );
+	//console.log( "Contains the value :: " + contains.execute( "SomeTarget", "containsValue" ) );
+	//console.log( "Contains the value :: " + contains.execute( "SomeTarget", "dummyValue" ) );
+	//console.log( "Disabled:: " + disabled.execute( "SomeTarget", "" ) );
+	//console.log( "EndsWith :: " + endsWith.execute( "SomeTarget", "value" ) );
+	//console.log( "Equals :: " + equals.execute( "SomeTarget", "dummyValue" ) );
+	//console.log( "GreaterThan :: " + greaterThan.execute( "SomeTarget", 1 ) );
+	//console.log( "LessThan :: " + lessThan.execute( "SomeTarget", 3 ) );
+	
+
+	/*var stateRule = new vnStateRule.StateRule();
+	stateRule.target = "value";
+	stateRule.runOnInitialise = true;
+	var ruleBlock = new vnRuleBlock.RuleBlock();
+	ruleBlock.ruleBlocks = null;
+	ruleBlock.conditions = [new vnCondition.Condition( "condTarget", new vnEquals.Equals(), 0 )];
+	ruleBlock.gate = vnRuleBlock.AND;
+	ruleBlock.trueActions = null;
+	ruleBlock.falseActions = null
+	stateRule.ruleBlocks = [ruleBlock];
+	
+	var stateEngine = new vnStateEngine.StateEngine();
+	stateEngine.addStateRules([stateRule]);*/
+})
+.controller('vnDynamoController', function(){
+
+})
+.directive('vnDynamo', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiondynamo/vndynamo.html'
+    };
+})
+.value('VN_DYNAMO',  { 
+	HOME: "VN_DYNAMO__HOME" 
+});

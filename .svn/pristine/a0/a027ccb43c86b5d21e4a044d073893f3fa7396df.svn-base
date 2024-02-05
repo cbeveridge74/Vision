@@ -1,0 +1,51 @@
+<div class="content">
+    <vn-css vn-id="vnday" vn-css-file="apps/visionappointments/day/vnday.css"></vn-css>
+    <div class="appointments-module"
+         ng-controller="vnVisionAppointmentsDayController"  ng-init="init();">
+        
+        <div class="day-title">
+            <div class="day-inline arrow-container" ng-click="handleArrowClick( this, 'left' )">
+                <img src="apps/visionappointments/images/left_arrow_white_40.png">
+            </div>
+            <div class="day-inline">
+                <div class="day-label">{{ selectedDate | date:'EEEE' }}</div>
+                <div>{{ selectedDate | date:'dd-MMM-yyyy' }}</div>
+            </div>
+            <div class="day-inline arrow-container" ng-click="handleArrowClick( this, 'right' )">
+                <img src="apps/visionappointments/images/right_arrow_white_40.png">
+            </div>
+        </div>
+        <div class="day-scroller">
+            <vn-scroll 
+                vn-class-selector="day-scroller"
+                vn-x-scroll="false"
+                vn-watch="screens.VN_APP__DAY"
+                vn-top-offset="90">
+                <div class="list-group day">
+                  <div class="loader"></div>
+                  <div ng-repeat="slot in slots" class="list-group-item active slot {{ slot.id }}" ng-click="handleSlotClick( this )">
+                    <div class="time">{{ slot.date | date:'HH:mm' }}</div>
+                    <div class="owner">
+                        <img class="showme" inps-owner-src="{{ slot.ownerimage }}">
+                        <div class="owner alias">ALI</div>
+                    </div>
+                    <div class="status" ng-click="handleStatusClick( this );$event.stopPropagation();">
+                        <img ng-src="../images/slottypes/{{ slot.statusimage }}">
+                    </div>
+                    <div class="subject">
+                        <div class="title">{{slot.displayname}}</div>
+                        <div class="sub-title">{{slot.dob}}</div>
+                    </div>
+                    <div class="detail">
+                        <div class="comment">Here is a comment</div>
+                        <div class="note">Here is a note</div>
+                    </div>
+                    <div class="type" style="background-color : {{ slot.slotcolor }}">{{ slot.slottype | uppercase }}</div>
+                    
+                  </div>
+                </div>
+            </vn-scroll>
+        </div>
+        <div class="zoom-button-day" ng-click="handleZoomOutClick();">-</div>
+    </div>
+</div>

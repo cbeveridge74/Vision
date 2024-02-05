@@ -1,0 +1,142 @@
+angular.module('vnWorkflowModule', [],function () {})
+.factory('vnWorkflowFactory',  function( $rootScope ){
+	var factory = {};
+	factory.addTaskCardTo = function( outerBoxIdx, createNew ){
+
+		var container = $rootScope.taskoutercreators[ outerBoxIdx ];
+
+		if( createNew == null ){
+			createNew = true;
+		}
+
+		if( container.taskinnercreators == null ){
+			container.taskinnercreators = [];
+		}
+
+		if( container.taskinnercreators.length > 0 ){
+			container.taskinnercreators[ container.taskinnercreators.length - 1 ].minimise = true;
+		}
+		
+		if( createNew ){
+			container.taskinnercreators.push( { minimise: false } );
+			$rootScope.invalidcardopen = true;
+		}
+
+		
+	};
+
+	factory.deleteTaskCard = function( cardIndex, cardContainerIndex ){
+		
+		//Delete the inner card
+		$rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators.splice( cardIndex, 1 );
+		var isLastInChain = $rootScope.taskoutercreators.length - 1 == cardContainerIndex;
+		
+		if( $rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators.length < 1 ){
+			// Is this the last container on the screen?
+			var isLastContainerOnScreen = $rootScope.taskoutercreators.length == 1;
+			// Remove the container
+			$rootScope.taskoutercreators.splice(cardContainerIndex--, 1);
+
+			// If this is the last one on the screen then create a brand new starter container
+			if( isLastContainerOnScreen ){
+				factory.addCardContainer();
+				return;
+			}
+		}
+		
+		if( isLastInChain ){
+			$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showouterbrick = true;
+		}
+		if( $rootScope.taskoutercreators[ cardContainerIndex ] != null ){
+			$rootScope.taskoutercreators[ cardContainerIndex ].showinnerbrick = true;
+		}
+		$rootScope.invalidcardopen = false;
+	}
+
+	factory.addCardContainer = function(){
+		$rootScope.invalidcardopen = true;
+		if( $rootScope.taskoutercreators == null || $rootScope.taskoutercreators.length < 1 ){
+			$rootScope.taskoutercreators = [{ showouterbrick : false, showinnerbrick : false, minimise : true }];
+			return;
+		}
+		
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showouterbrick = false;
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showinnerbrick = true;
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].minimise = true;
+		$rootScope.taskoutercreators.push( { showouterbrick : true, showinnerbrick : true, minimise : true } );
+		angular.forEach( $rootScope.taskoutercreators, function( outer, outerIndex ){
+			angular.forEach( outer.taskinnercreators, function( inner, innerIndex ){
+				inner.minimise = true;
+			});
+		});
+	};
+	return factory;
+})
+.directive('vnWorkflow', function() {
+    return {
+      restrict: 'E',
+      controller: function( $scope, 
+      						$rootScope, 
+      						$timeout, 
+      						vnScrollFactory, 
+      						vnWorkflowFactory, 
+      						vnScreenManagementFactory,
+      						vnNavigationFactory,
+      						VN_TASK_SCREENS ){
+      	
+      	$scope.workflowInformCommands = workflowInformCommands;
+
+      	$scope.handlePatientClick = function( e ){
+      		console.log( "Patient Clicked" );
+      	};
+
+      	$scope.handleClinicalItemClick = function( e ){
+      		console.log( "Clinical Item Clicked" );
+      	};
+      	
+      	$rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value ){
+      		if( value == ATT ){
+      			vnScreenManagementFactory.openMenu( ".vision-workflow .attach-options" );
+      		}else if( value == TRK ){
+      			vnNavigationFactory.switchScreens( VN_TASK_SCREENS.TRACKING);
+      		}
+      	});
+
+      	vnScreenManagementFactory.initialiseMenuOptions( correspondenceLeftCommands, workflowRightCommands );
+      	$rootScope.$on( "COMMAND_SELECTED", function( scope, value ){
+			if( value == ATT ){
+				
+			}
+		});
+
+
+      	vnWorkflowFactory.addCardContainer();
+      	$rootScope.cardopen = false;
+
+
+
+      	$( window ).resize(function() {
+	        handleResize();
+	      });
+
+		$scope.handleOuterAddClick = function(){
+			vnWorkflowFactory.addCardContainer();
+			handleResize();
+			$timeout( function(){
+				//var width = - $( ".vision-workflow" ).width();
+				//vnScrollFactory.scrollTo( "vision-workflow", width, true, 300 );
+			}, 1 );
+		};
+
+		var handleResize = function(){
+    	$timeout( function(){
+    		vnScrollFactory.handleResize( "vision-workflow" );
+    	}, 1);
+    	
+    };
+      },
+      templateUrl: 'apps/visiontasks/workflow/vnworkflow.html'
+    };
+});
+
+

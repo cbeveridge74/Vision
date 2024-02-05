@@ -1,0 +1,88 @@
+angular.module('vnTaskDetailModule', [],function () {})
+.factory('vnTaskDetailFactory', function( $rootScope ){
+	var factory = {};
+	var model;
+
+	factory.setModel = function( value ){
+		model = value
+		$rootScope.$broadcast( "TASK_DETAIL_UPDATED" );
+	};
+
+	factory.getModel = function(){
+		return model;
+	};
+
+	factory.clearModel = function(){
+		factory.setModel({});
+	};
+	factory.clearModel();
+
+	return factory;
+})
+.directive('vnTaskDetail', function() {
+    return {
+      restrict: 'E',
+      controller:  function ( 
+			$scope, 
+			$rootScope,
+			visionFactory,
+			vnActionFactory,
+			vnTaskDetailFactory,
+			vnScreenManagementFactory){
+
+		/*$rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function( event ){
+			if( $rootScope.screens.VN_REP__HOME == true ){
+				closeDialog();
+			}
+		});*/
+
+		$rootScope.$on( "TASK_DETAIL_UPDATED", function(){ 
+  			initModel(); 
+  		});
+
+		var initModel = function(){
+			var taskModel = vnTaskDetailFactory.getModel();
+			if( taskModel != null && taskModel.workflowid != null ){
+				visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( workflow ){
+					workflow = workflow[0];
+					
+					var count = 0;
+					angular.forEach( workflow.tasks, function( task, taskIndex ){
+						count += task.length; 
+					});
+					taskModel.taskCount = count;
+					$scope.model = taskModel;
+					$scope.$apply();
+				}, null, { start: taskModel.workflowid, end: taskModel.workflowid });
+			}else{
+				$scope.model = taskModel;
+			}
+			
+			
+		};
+
+		if( $scope.model == null ){
+			initModel();
+		}
+
+		$scope.handleGeneralClick = function( event ){
+			if( event != null ){
+		      	event.stopPropagation();
+		    }
+		};
+
+		$scope.handleWorkflowClick = function(){
+			vnActionFactory.needHelpWith( vnActionFactory.GENERAL, [ this.task ], function(){
+  					});
+			closeDialog();
+		};
+		
+		var closeDialog = function(){;
+			$( ".menu.task-detail" ).removeClass( "open" );
+			$( ".menu.task-detail" ).attr( "style", "" );
+		};
+      		
+	  },
+      templateUrl: 'apps/visiontasks/vntaskdetail.html'
+    };
+  });

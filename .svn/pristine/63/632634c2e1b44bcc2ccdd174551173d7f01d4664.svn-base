@@ -1,0 +1,11 @@
+<vn-css vn-id="vnhubcategory" vn-css-file="layout/vnhubcategory.css"></vn-css>
+<div class="category {{ name }}" ng-controller="vnHubCategoryController">
+    <div class="category-header">
+    	<div><img ng-src="{{image}}"></div>
+    	<div class="title">{{title}}</div>
+    	<div ng-show="showfilter" class="filter" ng-click="handleFilterClick();"><img ng-src="{{filterimage}}"></div>
+    	<div class="filter-menu menu" 
+    	ng-include="filtermenu"></div>
+    </div>
+    <div ng-transclude></div>
+</div>

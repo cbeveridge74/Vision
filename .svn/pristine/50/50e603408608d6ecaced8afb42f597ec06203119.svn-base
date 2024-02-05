@@ -1,0 +1,47 @@
+.menu.app-menu{
+	color: white;
+	min-width: 21em;
+	min-height: 21em;
+	padding: 1em;
+	border: solid 0.3em #3B5588;
+}
+
+.app-menu .app img {
+	position: relative;
+}
+
+.app-menu .app {
+	width: 7em;
+	height: 7em;
+	text-align: center;
+	margin: 0.3em;
+	display: inline-block;
+	cursor: pointer;
+	padding-top: 1em;
+}
+
+.app-menu .app .name{
+	font-size: 0.9em;
+	margin-top: 0.7em;
+}
+
+.app-menu .app .icon{
+	background-color: #1E81E7;
+	width: 3em;
+	height: 3em;
+	margin-left: 1.9em;
+	border-radius: 0.5em;
+	text-align: center;
+	padding-top: 0.3em;
+}
+
+.app-menu .app.current {
+	font-size: 1em;
+	background-color: #3B5588;
+}
+
+.app-menu.open {
+	display: inline-block;
+	left: 1em;
+	//top: 2.2em;
+}

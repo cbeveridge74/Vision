@@ -1,0 +1,104 @@
+.bar {
+	height:2.4em;
+	width: 100%;
+	top: 0;
+}
+
+ .bar > div {
+	position: absolute;
+	cursor: pointer;
+	top: 0.2em;
+	color: #FFF;
+	height: 24px;
+}
+.bar img{
+	height: 24px;
+	margin-top: 0.25em;
+	cursor: pointer;
+}
+
+
+.bar .user{
+	left: 3em;
+	font-size: 1.2em;
+}
+
+.bar .user {
+	padding-top: 0.15em;
+}
+
+.bar .awesome-icon .fa {
+	font-size: 1.5em;
+	color: #FFF;
+}
+
+.bar .app .awesome-icon .fa{
+	font-size: 1.5em;
+	margin-top: 0.3em;
+}
+
+.bar .app-menu-icon .fa {
+	margin-left: 0.4em;
+	margin-top: 0.35em;
+}
+
+.bar .fa:hover {
+	cursor: pointer;
+}
+
+.bar .right-button-container{
+	position: absolute;
+	right: 0.5em;
+	top: 0em;
+	width:20em;
+	text-align: right;
+}
+
+.bar .right-button-container{
+	cursor: pointer;
+}
+
+/*DCB specific sizing for notification*/
+.bar .right-button-container div.notification {
+
+}
+
+.bar .right-button-container div {
+	display: inline-block;
+}
+
+.bar .right-button-container .awesome-icon {
+	margin-right: 0.5em;
+	margin-left: 0.8em;
+	margin-top: 0.5em;
+}
+
+.bar .right-button-container .awesome-icon:hover{
+	color: #EEE;
+}
+
+.bar .menu {
+	position: absolute;
+	display: none;
+	top: 2em;
+	background-color: #073763; 
+	z-index: 3;
+}
+
+.bar .inps-logo {
+	margin-left: 0.5em;
+}
+
+.bar .hamburger {
+	right: 0.5em;
+	z-index: 1;
+}
+
+.bar .button{
+	opacity: 0.9;
+}
+
+.bar .button:hover
+{
+	opacity: 1;
+}

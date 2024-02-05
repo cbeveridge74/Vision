@@ -1,0 +1,112 @@
+angular.module('vnVisionAppointmentsCalendarModule', function () {})
+.controller('vnVisionAppointmentsCalendarController', function (
+  $scope, 
+  $rootScope, 
+  $window, 
+  $filter,
+  $timeout,
+  vnDatabaseFactory,
+  vnScrollFactory,
+  vnNavigationFactory,
+  SCREENS,
+  DATE_FORMAT) {
+
+    var BORDER_THICKNESS = 1;
+    var iScrollListenerAdded = false;
+    var shown = false;
+
+    $scope.init = function () {
+      $scope.$watch( "screens." + SCREENS.CALENDAR, function( value ){
+        if( value ){
+           $timeout( function(){
+            // DCB this was outside the 'show' function cos slowing down login
+            // Still need to find was of resizing after render
+            vnDatabaseFactory.retrievevSlotDataForCalendar(  function( results ){
+              retrieveSlotsHandler( results );
+              $scope.handleResize();
+            });
+            
+          }, 1 );
+        }
+      });
+
+      
+      
+      
+    };
+
+    $scope.handleSliderContainerClick = function( event ){
+      var xValue;
+      var slider = $( ".slider" );
+      if( event.pageX != null ){
+        xValue = event.pageX - ( slider.width() / 2 );
+      }else{
+        xValue = event.changedTouches[0].clientX - ( slider.width() / 2 );
+      }
+      slider.css( 'left', xValue );
+      vnScrollFactory.retrieveScroller( "calendar-scroller" ).scrollTo( -( xValue / getRatio() ), 0);
+    };
+
+    $scope.handleDateClick = function(date, $event){
+      scrollPosition = vnScrollFactory.retrieveScroller( "calendar-scroller" ).x;
+      $rootScope.selectedDate = date;
+      
+      vnNavigationFactory.switchScreens( SCREENS.DAY );
+    }; 
+      
+    var results = new Array();
+    var retrieveSlotsHandler = function( results ){
+      
+      $scope.calendar = results;
+      
+      $( window ).resize(function() {
+        $scope.handleResize();
+      });
+    };
+
+
+    $scope.handleResize = function(){
+      if( $scope.screens[ SCREENS.CALENDAR ] == true ){
+        var scrollWidth = $(".calendar").prop( "scrollWidth" );
+        
+        $(".calendar").width( scrollWidth );
+        // Set the width of the slider
+        $( ".slider" ).width( $window.innerWidth * getRatio());
+
+        // Set the width of the individual dates
+        var sliderDates = $(".slider-container .slider-date");
+        $.each( $(".calendar .date"), function( index, element ){
+          var sliderDate = $( sliderDates[index] );
+          sliderDate.width( ( $(element).width() * getRatio() ) - BORDER_THICKNESS );
+        });
+
+        vnScrollFactory.handleResize( "calendar-scroller" );
+        var iScroller = vnScrollFactory.retrieveScroller( "calendar-scroller" );
+        if( iScroller != null && !iScrollListenerAdded ){
+          iScroller.on('scroll', function(){
+            $( ".slider-container .slider" ).css( "left", -this.x * getRatio() );
+          });
+          iScrollListenerAdded = true;
+        }
+
+      }
+    };
+
+    $scope.handleSlotClick = function( element ){
+      //if( myScroll.moved || scrolling ){
+      //  return;
+      //}
+      //scrollPosition = myScroll.x;
+      $rootScope.selectedSlot = element.time.id;
+      vnNavigationFactory.switchScreens( SCREENS.BOOKING_FORM );
+    };
+
+    var getRatio = function(){
+      return $window.innerWidth / $(".calendar").prop( "scrollWidth" );
+    };
+}).directive('vnCalendar', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionappointments/calendar/vncalendar.html'
+    };
+});

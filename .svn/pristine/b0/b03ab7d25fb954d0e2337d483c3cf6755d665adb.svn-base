@@ -1,0 +1,139 @@
+.vision-workflow {
+	font-size: 0.9em;
+	height: 100%;
+}
+
+.vision-workflow .brick-widget {
+	display: inline-flex; 
+	vertical-align: top;
+	height: 100%;
+}
+
+.vision-workflow .task-create .command-buttons {
+	display: none;
+}
+
+.vision-workflow .task-create .task-widgets {
+	display: none;
+}
+
+.vision-workflow .md-whiteframe-z1{
+	padding: 1em;
+	background-color: #EEE;
+	display: block;
+	vertical-align: middle;
+}
+
+.vision-workflow .md-whiteframe-z1 .add,
+.vision-workflow .md-whiteframe-z1 .brick.add,
+.vision-workflow .brick.add{
+	width: 3em;
+	height: 3em;
+	//box-shadow: 1px 1px 3px #777;
+	//cursor: pointer;
+}
+
+.vision-workflow .md-whiteframe-z1,
+.vision-workflow .brick.add{
+	margin: auto 0.5em;
+}
+
+.vision-workflow .md-whiteframe-z1 img,
+.vision-workflow .brick.add img{
+	width: 3em;
+	height: 3em;
+	margin: 0.3em;
+}
+
+.vision-workflow .md-whiteframe-z1 .add,
+.vision-workflow .md-whiteframe-z1 .brick.add{
+	margin: 0.5em auto 1.5em auto;
+	//background-color: #FFF;
+}
+
+
+.vision-workflow .task-create {
+	position: relative;
+}
+
+.vision-workflow .task-create md-card{
+	margin-bottom: 1em;
+}
+
+/**/
+.vision-workflow .task-create .recipients .chipsInput {
+	height: 3em;
+}
+
+.vision-workflow .task-create md-select {
+	margin-top: 0;
+}
+
+.vision-workflow .task-create md-input-container {
+	padding-bottom: 0;
+}
+
+.vision-workflow .task-create md-input-container .md-input {
+	line-height: 13px;
+}
+
+.vision-workflow .md-button.md-default-theme.md-fab {
+	background-color: #FFF;
+}
+
+.vision-workflow .md-button.md-default-theme.md-fab:hover{
+	background-color: #FFF;
+}
+
+.vision-workflow .task-create .workflow-buttons {
+	width: 100%;
+	text-align: right;
+	height: 0.5em;
+	margin-top: -0.5em;
+	display: block;
+}
+
+.vision-workflow .task-create .workflow-buttons .ok,
+.vision-workflow .task-create .workflow-buttons .delete{
+	display: inline-block;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.vision-workflow .task-create .workflow-buttons img{
+	width: 1.5em;
+}
+
+
+
+/* Minimising */
+.vision-workflow .task-create.minimise {
+	
+}
+
+.vision-workflow .task-create.minimise .recipients,
+.vision-workflow .task-create.minimise .description,
+.vision-workflow .task-create.minimise .subject .label,
+.vision-workflow .task-create.minimise .subject .md-select-icon,
+.vision-workflow .task-create.minimise .workflow-buttons .ok {
+	display: none;
+}
+
+.vision-workflow .task-create.minimise md-select.md-default-theme .md-select-label{
+	font-size: 1.6em;
+	border: none;
+}
+
+.vision-workflow .task-create.minimise .subject{
+	margin: 0;
+	width: 15em;
+	white-space: nowrap;
+}
+
+.vision-workflow .task-create.minimise md-select{
+	vertical-align: top;
+}
+
+
+
+

@@ -1,0 +1,28 @@
+{
+  "name": "Vision Mail",
+  "short_name": "Vision Mail",
+  "description": "Vision Chrome App",
+  "version": "0.0.1.6",
+  "manifest_version": 2,
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "http://*/*", 
+    "https://*/*",
+    "*://*/*/",
+    "notifications",
+    "https://www.google-analytics.com/",
+    {"fileSystem": ["write", "retainEntries", "directory"]}
+  ],
+  "sandbox": {
+     "pages": ["apps/visiontasks/ocr.html"],
+     "content_security_policy":"sandbox allow-scripts;"
+  },
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "images/inps_logo_blue_32.png", "128": "images/inps_logo_blue_128.png" }
+}
+

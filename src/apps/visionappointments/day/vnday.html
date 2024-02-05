@@ -1,0 +1,83 @@
+<div class="content">
+    <vn-css vn-id="vnday" vn-css-file="apps/visionappointments/day/vnday.css"></vn-css>
+    <div class="appointments-module"
+         ng-controller="vnVisionAppointmentsDayController"  ng-init="init();">
+        
+        <div class="day-title">
+            <div class="day-inline arrow-container" ng-click="handleArrowClick( this, 'left' )">
+                <img src="apps/visionappointments/images/left_arrow_white_40.png">
+            </div>
+            <div class="day-inline">
+                <div class="day-label">{{ selectedDate | date:'EEEE' }}</div>
+                <div>{{ selectedDate | date:'dd-MMM-yyyy' }}</div>
+            </div>
+            <div class="day-inline arrow-container" ng-click="handleArrowClick( this, 'right' )">
+                <img src="apps/visionappointments/images/right_arrow_white_40.png">
+            </div>
+        </div>
+        <div class="day-scroller">
+            
+            <vn-scroll 
+                vn-class-selector="day-scroller"
+                vn-x-scroll="false"
+                vn-watch="screens.VN_APP__DAY"
+                vn-top-offset="90">
+                <vn-tour
+                    vn-item-top="5.7em"
+                    vn-item-left="9em"
+                    vn-item-height="3.5em"
+                    vn-item-width="12.5em"
+                    vn-arrow-top="5em"
+                    vn-arrow-left="14.8em"
+                    vn-arrow-direction="up"
+                    vn-text="Status of the appointment"></vn-tour>
+
+                <vn-tour
+                    vn-item-top="11em"
+                    vn-item-left="13.5em"
+                    vn-item-height="4em"
+                    vn-item-width="9em"
+                    vn-arrow-top="12.3em"
+                    vn-arrow-left="12.8em"
+                    vn-arrow-direction="left"
+                    vn-text="Clinician or clinic"></vn-tour>
+
+                <div class="list-group day">
+                  <div class="loader"></div>
+                  <div ng-repeat="slot in slots" class="list-group-item active slot {{ slot.id }}" ng-click="handleSlotClick( this )">
+                    <div class="time">{{ slot.date | date:'HH:mm' }}</div>
+                     <div class="type" style="background-color : {{ slot.slotcolor }}">{{ slot.slottype | uppercase }}</div>
+                    <div class="owner">
+                        <img class="showme" inps-owner-src="{{ slot.ownerimage }}">
+                        <div class="owner alias">ALI</div>
+                    </div>
+                    <div class="status" ng-click="handleStatusClick( this );$event.stopPropagation();">
+                        <img ng-src="../images/slottypes/{{ slot.statusimage }}">
+                    </div>
+                    <div class="subject">
+                        <div class="title">{{slot.patient.displayname}}</div>
+                        <div class="sub-title">{{slot.patient.dob}}</div>
+                    </div>
+                    <div class="detail">
+                        <div class="comment">Here is a comment</div>
+                        <div class="note">Here is a note</div>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+            </vn-scroll>
+        </div>
+        <div class="zoom-button-day" ng-click="handleZoomOutClick();">-
+        <vn-tour
+                    vn-item-top="-3.3em"
+                    vn-item-left="-13em"
+                    vn-item-height="3.5em"
+                    vn-item-width="12em"
+                    vn-arrow-top="-1.6em"
+                    vn-arrow-left="-1.1em"
+                    vn-arrow-direction="right"
+                    vn-text="Switch to calendar view"></vn-tour></div>
+        
+    </div>
+</div>

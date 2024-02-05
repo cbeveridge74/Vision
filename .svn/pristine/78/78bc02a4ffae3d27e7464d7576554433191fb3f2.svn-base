@@ -1,0 +1,13 @@
+require([ 	"apps/components/people/vnpeoplemodule",
+			"apps/components/discussions/vndiscussionsmodule",
+			"apps/components/appointments/vnappointmentsmodule",
+			"apps/components/tasks/vntaskmodule",
+			"apps/components/prescriptions/vnprescriptionmodule",
+			"apps/components/correspondence/vncorrespondencemodule"], function(
+		 	vnpeoplemodule,
+		 	vndiscussionsmodule,
+		 	vnappointmentsmodule,
+		 	vntaskmodule,
+		 	vnprescriptionmodule,
+		 	vncorrespondencemodule){
+});

@@ -1,0 +1,49 @@
+<vn-css vn-id="vntracking" vn-css-file="apps/visiontasks/workflow/vntracking.css"></vn-css>
+<div class="vision-tracking">
+	<vn-title-bar 
+		vn-title="Tracking"
+		vn-show-back-button="true"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false"
+		vn-show-commands="false"></vn-title-bar>
+	
+	    <form name="userForm">
+	    	<section>
+				<md-subheader class="md-primary">Task</md-subheader>
+				<div class="content">
+					<md-input-container layout="center center">
+			          <label>Due by</label>
+			          <input type="date" ng-model="user.submissionDate">
+			        </md-input-container>
+					<md-checkbox layout="center center" aria-label="task assignee change" ng-model="data.cb6" class="md-primary">
+					    task assignee change
+					</md-checkbox>
+					<md-checkbox layout="center center" aria-label="comment added" ng-model="data.cb5" class="md-primary">
+					    comment added
+					</md-checkbox>
+				</div>
+			</section>
+			<section>
+				<md-subheader class="md-primary">Patient</md-subheader>
+				<div class="content">
+				    <md-checkbox aria-label="appointments" ng-model="data.cb4" class="md-primary">
+						appointments
+					</md-checkbox>
+					<md-checkbox aria-label="clinical recordings" ng-model="data.cb3" class="md-primary">
+						clinical recordings
+					</md-checkbox>
+					<md-checkbox aria-label="document filing" ng-model="data.cb2" class="md-primary">
+						document filing
+					</md-checkbox>
+				</div>
+			</section>
+			<section>
+				<md-subheader class="md-primary">General</md-subheader>
+				<div class="general content">
+					<md-checkbox aria-label="no activity" ng-model="data.cb1" class="md-primary noactivity">notify me every </md-checkbox><input ng-model="user.firstName" class="noactivity"><div class="noactivity"> hours if no activity</div>
+				</div>
+
+			</section>
+		</form>
+	
+</div>

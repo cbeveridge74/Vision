@@ -1,0 +1,198 @@
+angular.module('vnScrollModule', [],function () {})
+.controller('vnScrollController', function( $scope, $rootScope, $timeout, vnScrollFactory ){
+	$scope.init = function(){
+		$rootScope.$watch($scope.vnWatch, function( value ){
+			if( value ){
+				vnScrollFactory.createScroller( 
+					"." + $scope.vnClassSelector + " .iscroll-wrapper",
+					$scope.vnXScroll,
+					$scope.vnTopOffset,
+					$scope.vnUseZoomVersion,
+					$scope.vnOnCreatedCallback,
+					$scope.vnRightOffset  );
+			}
+		});
+	};
+})
+.factory('vnScrollFactory',  function( $rootScope, $timeout, $window ){
+	var factory = {};
+	var scroller = {};
+	var scrolling;
+
+	factory.retrieveScroller = function( selector ){
+		var scrollerObject = scroller[ "." + selector + " .iscroll-wrapper" ];
+		if( scrollerObject != null ){
+			return scrollerObject.iScrollWidget;
+		}else{
+			return null;
+		}
+	};
+
+  	factory.createScroller = function( selectorValue, xScroll, topOffsetValue, useZoomVersion, onCreatedCallback, rightOffsetValue ){
+  		var yScroll;
+				
+		if( xScroll == null || xScroll == "true"){
+			xScroll = true;
+			yScroll = false;
+		}else{
+			xScroll = false;
+			yScroll = true;
+			$( selectorValue + " .iscroll" ).css( "width", "" );
+			$( selectorValue + " .iscroll" ).css( "width", "100%" );
+		}
+
+		var create = false;
+
+  		if( scroller[ selectorValue ] == null ){
+  			scroller[ selectorValue ] = {};
+  			create = true;
+  		}else{
+  			
+  			return;
+  		}
+
+  		if( create ){
+
+			if( useZoomVersion == null ){
+				useZoomVersion = "true";
+			}
+
+			if( rightOffsetValue == null ){
+				rightOffsetValue = 0;
+			}
+
+	  		var handleScrollStart = function(){
+		        scrolling = true;
+		      };
+
+		    var handleScrollEnd = function(){
+		        $timeout(function(){
+		          scrolling = false;
+		        }, 500);
+		    };
+	   
+		
+		
+			scroller[ selectorValue ].selector = selectorValue;
+			scroller[ selectorValue ].topOffset = topOffsetValue;
+			scroller[ selectorValue ].rightOffset = rightOffsetValue;
+			if(useZoomVersion == "true"){
+				scroller[ selectorValue ].iScrollWidget = new IScrollZoom(selectorValue, {
+				mouseWheel: true,
+				scrollbars: true,
+				scrollX: xScroll,
+				scrollY: yScroll,
+				zoom: true,
+				zoomStart: 1,
+				zoomMin: 0.8,
+				zoomMax: 1,
+				tap: true,//true
+				click: true,//false
+				interactiveScrollbars: true });
+			}else{
+				scroller[ selectorValue ].iScrollWidget = new IScrollProbe(selectorValue, {
+		          mouseWheel: true,
+		          probeType: 3,
+		          scrollbars: false,
+		          scrollX: xScroll,
+		          scrollY: yScroll,
+		          tap: true,//true
+		          click: true,//false
+		          zoom: false
+		        });
+			}
+
+			scroller[ selectorValue ].iScrollWidget.on('scrollStart', handleScrollStart);
+			scroller[ selectorValue ].iScrollWidget.on('scrollEnd', handleScrollEnd);
+
+			$timeout( function(){
+				if( onCreatedCallback ){
+					onCreatedCallback();
+				}
+				handleResize( selectorValue );
+			}, 500 );
+		}
+		
+		
+		
+		
+  	};
+
+  	/*factory.disableScrolling = function( selectorValue ){
+  		factory.retrieveScroller( selectorValue ).disable();
+  	};
+
+  	factory.enableScrolling = function( selectorValue ){
+  		factory.retrieveScroller( selectorValue ).enable();
+  	};*/
+
+  	factory.disableScrolling = function(){
+  		//factory.retrieveScroller( selectorValue ).disable();
+  		for( var scrollItem in scroller ){
+  			scroller[ scrollItem ].iScrollWidget.disable()
+  		}
+  	};
+
+  	factory.enableScrolling = function(){
+  		//factory.retrieveScroller( selectorValue ).enable();
+  		for( var scrollItem in scroller ){
+  			scroller[ scrollItem ].iScrollWidget.enable()
+  		}
+  	};
+
+  	
+
+  	factory.scrollTo = function( selectorValue, value, yAxis, duration ){
+  		if( yAxis == null ){
+  			yAxis = false;
+  		}
+  		if( duration == null ){
+  			duration = 1000;
+  		}
+  		var scollerObj = scroller[ "." + selectorValue + " .iscroll-wrapper" ];
+  		if( scollerObj != null && !yAxis ){
+  			scollerObj.iScrollWidget.scrollTo(0, value, duration );
+  		}
+
+  		if( scollerObj != null && yAxis ){
+  			scollerObj.iScrollWidget.scrollTo(value, 0, duration );
+  		}
+  		
+  	};
+
+  	factory.handleResize = function( selectorValue ){
+		handleResize( "." + selectorValue + " .iscroll-wrapper" );
+  	};
+
+  	var handleResize = function( selectorValue ){
+  		var scrollerObject = scroller[ selectorValue ];
+  		if( scrollerObject != null ){
+			$( scrollerObject.selector ).width( $window.innerWidth - scrollerObject.rightOffset );
+			$( scrollerObject.selector ).height( $window.innerHeight - scrollerObject.topOffset );
+			if( scrollerObject.iScrollWidget != null ){
+				scrollerObject.iScrollWidget.refresh();
+			}
+		}
+  	};
+
+  	factory.isScrolling = function(){
+	    return scrolling;//$rootScope.homeScroll.moved || $rootScope.scrolling;
+	};
+	return factory;
+})
+.directive('vnScroll', function() {
+	return {
+	  restrict: 'E',
+	  transclude: true,
+	  scope: {
+      	vnClassSelector: '@vnClassSelector',
+      	vnWatch: '@vnWatch',
+      	vnXScroll: '@vnXScroll',
+      	vnTopOffset: '@vnTopOffset',
+      	vnRightOffset: '@vnRightOffset',
+      	vnUseZoomVersion : '@vnUseZoomVersion',
+      	vnOnCreatedCallback : '&vnOnCreatedCallback'
+      },
+	  templateUrl: 'layout/vnscroll.html'
+	};
+});

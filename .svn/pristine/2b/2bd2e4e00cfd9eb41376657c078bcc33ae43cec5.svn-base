@@ -1,0 +1,38 @@
+<vn-css vn-id="vncomments" vn-css-file="apps/components/comments/vncomments.css"></vn-css>
+<div class="comments" 
+     ng-controller="vnCommentsController"
+     ng-init="init();">
+     <div class="input-container">
+        <div class="image">
+            <img ng-src="{{ $root.user.image }}">
+        </div>
+        <div class="comment">
+            <md-input-container flex>
+                <textarea columns="1" placeholder="Add a comment" ng-model="commentText"></textarea>
+            </md-input-container>
+        </div>
+        <div class="add">
+            <md-button class="md-raised" ng-click="handleAddComment()">Add</md-button>
+
+        </div>
+     </div>
+     <div class="added-comments">
+
+        <div ng-class="( $index == 0 ) ? 'comment-container first' : 'comment-container'" ng-repeat="comment in model.comments track by $index">
+            <div class="left-column">
+                <div class="image">
+                    <img ng-src="{{ comment.user.image }}">
+                </div>
+            </div>
+            <div class="right-column">
+                 <div class="top-line">
+                    <div class="name">{{ comment.user.label }}</div>
+                    <div class="time">
+                        {{ comment.time | date:'HH:mm:ss dd-MMM-yyyy' }}
+                    </div>
+                </div>
+                <pre class="comment">{{ comment.comment }}</pre>
+            </div>
+        </div>
+     </div>
+</div>

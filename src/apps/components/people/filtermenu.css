@@ -1,0 +1,22 @@
+.filter-menu .section .location,
+.filter-menu .section .skill {
+	display: inline-block;
+	background-color: #FFF;
+	color: #1E81E7;
+	padding-top: 1.3em;
+	text-align: center;
+}
+
+.filter-menu .section .location.selected,
+.filter-menu .section .skill.selected {
+	border: solid 3px orange;
+}
+
+.filter-menu .location,
+.filter-menu .skill {
+	width: 4.5em;
+	height: 4.5em;
+	margin: 0.5em;
+	vertical-align: top;
+	cursor: pointer;
+}

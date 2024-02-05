@@ -1,0 +1,323 @@
+var config = {
+	system: "CLOUD_PRACTICE_1",
+	web_server: "https://www.inpsprototypes.co.uk",
+	socket_server: "https://www.inpsprototypes.co.uk",
+	local_database_version: 1,
+	mode: "demoservices",
+	start_date: "2014-07-11",
+	end_date: "2014-07-30"
+};
+
+var DEFAULT_APP = "VN_REP";
+
+// Cross app helpers
+var BOOK_SLOT = {
+	name: "BOOK_SLOT",
+	description: "booking a slot"
+};
+
+var TASK 			= 0;
+var THERAPY 		= 1;
+var APPOINTMENT 	= 2;
+var MAIL 			= 3;
+var REMINDER 		= 4;
+var PERSON 			= 5;
+var DISCUSSION 		= 6;
+var PATIENT 		= 7;
+var APP_INFO 		= 8;
+var ENTITY 			= 9;
+var ATTRIBUTE		= 10;
+var FORMS			= 11;
+var DYNOFORMS		= 12;
+var CLINICAL_DOCS	= 13;
+var ACTION_TYPES	= 14;
+var PERSON_GROUPS	= 15;
+var TASK_SUBJECTS	= 16;
+var TASK_WORKFLOW	= 17;
+var TRACKING		= 18;
+var TRACKING_DATA	= 19;
+var ANNOUNCEMENTS	= 20;
+var COMMENTS		= 21;
+
+var database = [{
+	name: 'task',
+	index: [{ //DCB Made this the first so that it's the key.  Haven't fully tested.
+		name: "by_workflowid_and_id",
+		key: "by_workflowid_and_id",
+		attributes: ["workflowid", "id"],
+		compound: true
+	},{
+		name: "by_id",
+		key: "id",
+		autoincrement: true
+	},{
+		name: "by_date",
+		key: "date"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	},{
+		name: "by_workflow_id",
+		key: "workflowid"
+	},{
+		name: "by_assigner_id",
+		key: "assigner.id"
+	},{
+		name: "by_assignee",
+		key: "assignee",
+		multi: true
+	}],
+	assembler: "assembleTasks",
+	data: "demoDataTasks"
+},
+{
+	name: 'therapy',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleTherapies",
+	data: "demoDataTherapies"
+},
+{
+	name: 'appointment',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_date",
+		key: "date"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleAppointments",
+	data: "demoDataAppointments"
+},
+{
+	name: 'mail',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleMail",
+	data: "demoDataMail"
+},
+{
+	name: 'reminder',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleReminders",
+	data: "demoDataReminders"
+},
+{
+	name: 'person',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},
+	{
+		name: "by_email",
+		key: "email"
+	}],
+	assembler: "assemblePersons",
+	data: "demoDataPersons"
+},
+{
+	name: 'discussion',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleDiscussions",
+	data: "demoDataDiscussions"
+},{
+	name: 'patient',
+	index: [{
+		name: "by_id",
+		key: "Id"
+	}],
+	assembler: "assemblePatients",
+	data: "patients"
+},
+{
+	name: 'appinfo',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleAppInfo",
+	data: "appInfo"
+},
+{
+	name: 'entity',
+	index: [{
+		name: "by_id",
+		key: "FIELD1"
+	}],
+	assembler: "assembleEntity",
+	data: "demoEntityData"
+},
+{
+	name: 'attribute',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleAttributes",
+	data: "demoAttributesData"
+},
+{
+	name: 'forms',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_name",
+		key: "name"
+	}],
+	assembler: "assembleForms",
+	data: "demoFormsData"
+},
+{
+	name: 'dynamoforms',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_name",
+		key: "name"
+	}],
+	assembler: "assembleDynamoForms",
+	data: "demoDynamoForms"
+},
+{
+	name: 'clinicaldocs',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleClinicalDocs",
+	data: "demoClinicalDocs"
+},
+{
+	name: 'actiontypes',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleActionTypes",
+	data: "demoActionTypes"
+},
+{
+	name: 'persongroups',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assemblePersonGroups",
+	data: "demoDataPersonGroups"
+},
+{
+	name: 'tasksubjects',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleTaskSubjects",
+	data: "demoDataTaskSubjects"
+},
+{
+	name: 'taskworkflow',
+	index: [{ //DCB put this one first, trying to update a workflow
+		name: "by_id",
+		key: "name"
+	},{ 
+		name: "by_assigner",
+		key: "assigner"
+	},{
+		name: "by_assigner_and_id",
+		attributes: ["name", "assigner"],
+		compound: true
+	}],
+	assembler: "assembleTaskWorkflow",
+	data: "demoDataTaskWorkflow"
+},
+{
+	name: 'tracking',
+	index: [{ 
+		name: "by_patientid_and_userid",
+		key: "by_patientid_and_userid",
+		attributes: ["patientid", "userid"],
+		compound: true
+	},{ 
+		name: "by_taskid_and_userid",
+		key: "by_taskid_and_userid",
+		attributes: ["taskid", "userid"],
+		compound: true
+	},
+	{ 
+		name: "by_userid",
+		key: "userid"
+	}],
+	assembler: "assembleTracking",
+	data: "demoDataTracking"
+},
+{
+	name: 'tracking_data',
+	index: [{
+		name: "by_id",
+		key: "id",
+		autoincrement: true
+	},{ 
+		name: "by_patientid",
+		key: "patientid"
+	},{ 
+		name: "by_trackingevent",
+		key: "trackingevent"
+	},{ 
+		name: "by_userid",
+		key: "userid"
+	}],
+	assembler: "assembleTrackingData",
+	data: "demoDataTrackingData"
+},
+{
+	name: 'announcements',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_assignee",
+		key: "assignee",
+		multi: true
+	},{
+		name: "by_assigner",
+		key: "assigner.id"
+	}],
+	assembler: "assembleAnnouncements",
+	data: "demoDataAnnouncements"
+},
+{
+	name: 'comments',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleComments",
+	data: "demoDataComments"
+}];
+
+
+

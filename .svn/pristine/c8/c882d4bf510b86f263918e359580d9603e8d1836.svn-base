@@ -1,0 +1,70 @@
+angular.module('vnDynamoModule')
+.controller('vnFormLifecycleController', function( 
+	$scope,
+	$rootScope,
+	$timeout,
+	vnFormDefinitionModel,
+	vnStateEngine,
+	vnDatabaseFactory,
+	vnField ){
+
+	$scope.init = function(){
+		//$scope.formDefinition = new vnFormDefinitionModel.instance().retrieveFormDefinition();
+		$rootScope.$watch( "screens.VN_DYNAMO", function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      });
+	};
+
+	$scope.handleFormClick = function( name ){
+		$scope.formDefinition = new vnFormDefinitionModel.instance().retrieveFormDefinition( name );
+		$timeout( function(){
+			new vnStateEngine.instance().addStateRules( $scope.formDefinition.stateRules );
+		}, 100 );
+		
+	};
+
+	var handleShow = function(){
+
+		//new vnStateEngine.instance().addStateRules( $scope.formDefinition.stateRules );
+	};
+	
+})
+.factory('vnFormLifecycle', function( 
+	vnExceptionFactory,
+	vnComponent,
+	vnViewComponentFinderFactory ){
+	var factory = {};
+
+	factory.instance = function( args ){ //args[0] = formdefinition
+		var _self = this;
+		
+		if( args == null || args.length < 1 ){
+			vnExceptionFactory.raiseException( 
+				vnExceptionFactory.PARAMETER_REQUIRED_EXCEPTION, 
+				"<args> required" );
+			return;
+		}
+
+		_self.render = function(){
+			console.log( "FormLifeCycleImpl.render" );
+			var formDefinition = args[ 0 ];
+			
+			if( formDefinition == null ){
+				vnExceptionFactory.raiseException( 
+					vnExceptionFactory.PARAMETER_REQUIRED_EXCEPTION, 
+					"<formDefinition> required" );
+				return;
+			}
+			//Render the form from here
+		}
+		
+	}
+	return factory;
+}).directive('vnFormLifecycleDirective', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiondynamo/common/vnformrenderer.html'
+    };
+});

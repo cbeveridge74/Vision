@@ -1,0 +1,41 @@
+.vision-notifications{
+	color: white;
+}
+
+.vision-notifications .menu.open {
+	display: inline-block;
+	right: 1em;
+	background-color: #2B2B2B;
+}
+
+.vision-notifications .badge {
+	position: absolute;
+	width: 1.2em;
+	height: 1.2em;
+	right: 1.3em;
+	top: 1.1em;
+	color: #FFF;
+	z-index: 1;
+	border: solid 1px #FFF;
+	border-radius: 0.6em;
+	text-align: center;
+	background-color: red;
+	vertical-align: top;
+}
+
+.vision-notifications .badge .count{
+	margin-top: -0.2em;
+	font-weight: bold;
+}
+
+.vision-notifications .notification-container{
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 0.5em 1.5em;
+	border-top: solid 1px #444;
+	min-width: 25em;
+}
+
+.vision-notifications .notification-container:hover{
+	background-color:  #2F2F2F;
+}

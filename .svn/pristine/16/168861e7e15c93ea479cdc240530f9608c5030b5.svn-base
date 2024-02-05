@@ -1,0 +1,177 @@
+.vision-workflow {
+	height: 100%;
+	width: 100%;
+}
+
+.vision-workflow .start {
+	vertical-align: middle;
+	margin-right: 0em;
+}
+
+.vision-workflow .circle{ 
+	height: 5em;
+	width: 5em;
+	border: solid 1px #BBB;
+	border-radius: 2.5em;
+	vertical-align: middle;
+	margin: auto 1em;
+	padding-top: 1.7em;
+	color: #999
+}
+
+.vision-workflow .arrow{
+	vertical-align: middle;
+	margin-right: 0em;
+	font-size: 4em;
+	color: #888;
+}
+
+.vision-workflow .start,
+.vision-workflow .arrow,
+.vision-workflow .brick {
+	display: inline-block;
+}
+
+.vision-workflow .brick-widget {
+	display: inline-flex; 
+	text-align: left;
+	vertical-align: middle;
+	height: 60vh;
+}
+
+.vision-workflow .task-create .command-buttons {
+	display: none;
+}
+
+.vision-workflow .task-create .task-widgets {
+	display: none;
+}
+
+.vision-workflow .md-whiteframe-z1{
+	padding: 1em;
+	background-color: #EEE;
+	display: block;
+	vertical-align: middle;
+}
+
+.vision-workflow .md-whiteframe-z1 .add,
+.vision-workflow .md-whiteframe-z1 .brick.add,
+.vision-workflow .brick.add{
+	width: 3em;
+	height: 3em;
+	//box-shadow: 1px 1px 3px #777;
+	//cursor: pointer;
+}
+
+.vision-workflow .md-whiteframe-z1,
+.vision-workflow .brick.add{
+	margin: auto 0.5em;
+}
+
+.vision-workflow .md-whiteframe-z1 img,
+.vision-workflow .brick.add img{
+	width: 3em;
+	height: 3em;
+	margin: 0.3em;
+}
+
+.vision-workflow .md-whiteframe-z1 .add,
+.vision-workflow .md-whiteframe-z1 .brick.add{
+	margin: 0.5em auto 1.5em auto;
+	//background-color: #FFF;
+}
+
+
+.vision-workflow .task-create {
+	position: relative;
+}
+
+.vision-workflow .task-create md-card{
+	margin-bottom: 1em;
+}
+
+/**/
+.vision-workflow .task-create .recipients .chipsInput {
+	height: 3em;
+}
+
+.vision-workflow .task-create md-select {
+	margin-top: 0;
+}
+
+.vision-workflow .task-create md-input-container {
+	padding-bottom: 0;
+}
+
+.vision-workflow .task-create md-input-container .md-input {
+	line-height: 13px;
+}
+
+.vision-workflow .md-button.md-default-theme.md-fab{
+	background-color: #FFF;
+	height: 4em;
+	width: 4em;
+	opacity: 0.5;
+}
+
+
+.vision-workflow .md-button.md-default-theme.md-fab:hover{
+	background-color: #FFF;
+}
+
+.vision-workflow .task-create .workflow-buttons {
+	width: 100%;
+	text-align: right;
+	height: 0.5em;
+	margin-top: -0.5em;
+	display: block;
+}
+
+.vision-workflow .task-create .workflow-buttons .ok,
+.vision-workflow .task-create .workflow-buttons .edit,
+.vision-workflow .task-create .workflow-buttons .delete{
+	display: inline-block;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.vision-workflow .task-create .workflow-buttons img{
+	width: 1.5em;
+}
+
+
+
+/* Minimising */
+.vision-workflow .task-create.minimise {
+	
+}
+
+.vision-workflow .task-create.minimise .recipients,
+.vision-workflow .task-create.minimise .description,
+.vision-workflow .task-create.minimise .subject,
+.vision-workflow .task-create.minimise .workflow-buttons .ok,
+.vision-workflow .task-create .subject-label {
+	display: none;
+}
+
+.vision-workflow .task-create.minimise .subject-label {
+	display: inline-block;
+	margin: 0;
+	width: 15em;
+	font-size: 1.5em;
+	white-space: nowrap;
+}
+
+
+.vision-workflow .task-create.minimise md-select.md-default-theme .md-select-label{
+	font-size: 1.6em;
+	border: none;
+}
+
+.vision-workflow .task-create.minimise md-select{
+	vertical-align: top;
+}
+
+
+
+

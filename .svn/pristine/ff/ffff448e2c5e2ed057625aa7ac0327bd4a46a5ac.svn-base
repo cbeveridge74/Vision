@@ -1,0 +1,535 @@
+angular.module('vnWorkflowModule', [],function () {})
+.factory('vnWorkflowFactory',  function( 
+	$rootScope, 
+	$timeout,
+	vnTaskFactory, 
+	visionFactory, 
+	vnDatabaseFactory,
+	vnWorkflowBarFactory,
+	vnTrackingFactory,
+	vnRecurrenceFactory ){
+	var factory = {};
+	factory.CURRENT_WORKFLOW = null;
+	
+	$rootScope.$watch( "dbloaded", function( value ){
+	    if( value ){
+	      //Start all the task workflows
+	      visionFactory.retrieveData( database[ TASK ].name, function( results ){
+	        if( results.length < 1 ){
+	          visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( workflows ){
+	            angular.forEach( workflows, function( workflow, index ){
+	              factory.beginWorkflow( workflow.name, true );
+	            });
+	          });
+	        }
+	      });
+	    }
+	  });
+
+	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+ 		handleTaskUpdated( task );
+ 	});
+
+	// Find the task in the respective workflow and update
+ 	var handleTaskUpdated = function( task ){
+ 		factory.retrieveWorkflow( task.workflowid, function( result ){
+ 			angular.forEach( result[0].tasks, function( oTaskValue, oTaskIndex ){
+ 				angular.forEach( oTaskValue, function( iTaskValue, iTaskIndex ){
+ 					if( iTaskValue.id == task.id ){
+ 						result[0].tasks[oTaskIndex][iTaskIndex] = task;
+ 						factory.saveWorkflow( result[0], function( result ){
+ 							
+ 						});
+ 					}
+ 				});
+ 			});
+ 		});
+ 	};
+
+	factory.clearWorkflow = function(){
+		$rootScope.taskoutercreators = null;
+		vnWorkflowBarFactory.clearPatients();
+		vnTrackingFactory.clearTracking();
+		vnRecurrenceFactory.clearRecurrence();
+	};
+
+	factory.initialiseWorkflowWithModel = function( model, minimise ){
+		factory.addCardContainer();
+		factory.addTaskCardTo( 0, model, minimise );
+	}
+
+	factory.addTaskCardTo = function( outerBoxIdx, model, minimiseArg ){
+
+		var container = $rootScope.taskoutercreators[ outerBoxIdx ];
+		var minimise = true;
+		if( minimiseArg == null || minimiseArg == false ){
+			minimise = false;
+		}
+
+		if( container.taskinnercreators == null ){
+			container.taskinnercreators = [];
+		}
+
+		factory.minimiseLastCard( outerBoxIdx );
+		
+		if( model == null ){
+			model = {
+				selectedRecipients: [],
+				selectedSubjects: {},
+				description: "",
+				urgency: "Routine",
+				due: null,
+				isAnnouncement: false
+			};
+		}
+		container.taskinnercreators.push( { minimise: minimise, model: model });
+		$rootScope.invalidcardopen = true;
+	};
+
+	factory.minimiseLastCard = function( outerBoxIdx ){
+		var container = $rootScope.taskoutercreators[ outerBoxIdx ];
+
+		if( container.taskinnercreators.length > 0 ){
+			container.taskinnercreators[ container.taskinnercreators.length - 1 ].minimise = true;
+		}
+	}; 
+
+	factory.minimiseAllCards = function(){
+		angular.forEach( $rootScope.taskoutercreators, function( outer, outerIndex ){
+			angular.forEach( outer.taskinnercreators, function( inner, innerIndex ){
+				//$timeout( function(){ 
+					inner.minimise = true 
+					
+				//},2000 );
+				//Just now, get rid of nonmincriteria cards so don't get left with orphans
+				if( inner.model.selectedRecipients.length < 1 || inner.model.selectedSubjects.$$mdSelectId != null ){
+					factory.deleteTaskCard( innerIndex, outerIndex );
+				}
+			});
+		});
+		
+	}
+
+	factory.deleteTaskCard = function( cardIndex, cardContainerIndex ){
+		
+		//Delete the inner card
+		$rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators.splice( cardIndex, 1 );
+		var isLastInChain = $rootScope.taskoutercreators.length - 1 == cardContainerIndex;
+		
+		if( $rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators.length < 1 ){
+			// Is this the last container on the screen?
+			var isLastContainerOnScreen = $rootScope.taskoutercreators.length == 1;
+			// Remove the container
+			$rootScope.taskoutercreators.splice(cardContainerIndex--, 1);
+
+			// If this is the last one on the screen then create a brand new starter container
+			if( isLastContainerOnScreen ){
+				factory.addCardContainer();
+				return;
+			}
+		}
+		
+		if( isLastInChain ){
+			$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showouterbrick = true;
+		}
+		if( $rootScope.taskoutercreators[ cardContainerIndex ] != null ){
+			$rootScope.taskoutercreators[ cardContainerIndex ].showinnerbrick = true;
+		}
+		$rootScope.invalidcardopen = false;
+	}
+
+	factory.addCardContainer = function(){
+
+		$rootScope.invalidcardopen = true;
+		if( $rootScope.taskoutercreators == null || $rootScope.taskoutercreators.length < 1 ){
+			
+
+			$rootScope.taskoutercreators = [{ 
+				showouterbrick : false, 
+				showinnerbrick : false, 
+				minimise : true
+
+			}];
+			return;
+		}
+		
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showouterbrick = false;
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].showinnerbrick = true;
+		$rootScope.taskoutercreators[ $rootScope.taskoutercreators.length - 1 ].minimise = true;
+		$rootScope.taskoutercreators.push( { showouterbrick : true, showinnerbrick : true, minimise : true } );
+		factory.minimiseAllCards();
+	};
+
+	factory.restoreCard = function( cardIndex, cardContainerIndex ){
+		$rootScope.taskoutercreators[ cardContainerIndex ].taskinnercreators[ cardIndex ].minimise = false;
+	};
+
+	factory.restoreWorkflow = function( workflowName, callback ){
+		visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( workflow ){
+			angular.forEach( workflow[0].tasks, function( outerTaskValue, outerTaskIndex ){
+				factory.addCardContainer();
+				angular.forEach( outerTaskValue, function( innerTaskValue, innerTaskIndex ){
+
+					var due = moment( innerTaskValue.due ).toDate();
+
+					var model = {
+						selectedRecipients: innerTaskValue.assigneefull,
+						selectedSubjects: innerTaskValue.subjectid,
+						description: innerTaskValue.description,
+						urgency: innerTaskValue.urgency,
+						isAnnouncement: innerTaskValue.announcement,
+						due: due
+					};
+					factory.addTaskCardTo( outerTaskIndex, model );
+					if( callback != null ){
+						callback( workflow );
+					}
+				});
+			});
+		}, 'by_id', {start: workflowName, end: workflowName});
+	};
+	//DCB
+	//factory.restoreWorkflow();
+
+	factory.createWorkflow = function( attachmentModel ){
+
+		var workflow = {
+			name: null,
+			assigner: $rootScope.user.id,
+			attachments: attachmentModel,
+			tasks:[]
+		};
+		
+
+		var taskCounter = 0;
+		var attachedDocument = {};
+
+		if( attachmentModel.attachedDocs != null && attachmentModel.attachedDocs.length > 0 ){
+			attachedDocument = attachmentModel.attachedDocs[0];
+		}
+		var idCounter = 0;
+		angular.forEach( $rootScope.taskoutercreators, function( outercreator, outercreatorindex ){
+			var parallel = new Array();
+			angular.forEach( outercreator.taskinnercreators, function( innercreator, innercreatorindex ){
+
+				//stringValues note.  For binding strings, needed to use an object
+				var task = vnTaskFactory.buildTask( 
+					innercreator.model.selectedRecipients, 
+					innercreator.model.selectedSubjects,
+					innercreator.model.description, 
+					innercreator.model.clinicaldocid, 
+					innercreator.model.patientid,
+					attachedDocument,
+					innercreator.model.urgency,
+					innercreator.model.isAnnouncement,
+					innercreator.model.due,
+					idCounter++);
+				task.workflowtaskid = taskCounter++;
+				task.selectedRecipients = innercreator.model.selectedRecipients;
+				parallel.push( task );
+			});
+			workflow.tasks.push( parallel );
+		});	
+		return workflow;
+	};
+
+	factory.saveWorkflow = function( workflow, callback ){
+		visionFactory.updateData( database[ TASK_WORKFLOW ].name, workflow, function( data, event, request ){
+			if( callback != null ){
+				callback( data, event, request );
+			}
+		});
+	};
+
+	factory.workflowExistsForCurrentUser = function( name, callback ){
+		visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( result ){
+			if( callback != null ){
+				callback( result.length > 0 );
+			}
+		}, 'by_assigner_and_id', {start: [ name, $rootScope.user.id ], end: [ name, $rootScope.user.id ]});
+	};
+
+	factory.beginWorkflow = function( name, suppressToasts ){
+
+		if( suppressToasts == null ){
+			suppressToasts = false;
+		}
+									
+		factory.retrieveWorkflow( name, function( result ){
+			var showToast = false;
+			var firstSetOfTasks = result[0].tasks[0];
+			var suffixString = " tasks sent successfully";
+			if( firstSetOfTasks.length < 2  ){
+				suffixString = " task sent successfully";
+			}
+			var toastMessage = firstSetOfTasks.length + suffixString;
+			angular.forEach( firstSetOfTasks, function( task, taskindex ){
+				task.workflowid = name;//firstSetOfTasks.id;
+				if( ( firstSetOfTasks.length - 1 ) == taskindex ){
+					showToast = true;
+				}
+				vnTaskFactory.sendTask( task, function(){}, showToast && !suppressToasts, toastMessage );
+			});
+		} );
+	};
+
+	factory.convertTaskToWorkflow = function( task, attachments, callback ){
+
+		var localAttachments = {
+		      "attachedDocs": [],
+		      "recurrenceSummary": {},
+		      "selectedPatients": [],
+		      "trackingSummary": {}   
+		    };
+
+		if( attachments != null ){
+			localAttachments.attachedDocs 		= attachments.attachedDocs 		? attachments.attachedDocs : [];
+			localAttachments.recurrenceSummary 	= attachments.recurrenceSummary ? attachments.recurrenceSummary : {};
+			localAttachments.selectedPatients 	= attachments.selectedPatients 	? attachments.selectedPatients : [];
+			localAttachments.trackingSummary 	= attachments.trackingSummary 	? attachments.trackingSummary : {};
+		}
+
+		factory.retrieveWorkflow( null, function( results ){
+			task.workflowid = results.length;
+			var workflowedTask = {
+			    "assigner": task.assigner.id,
+			    "attachments" : attachments,
+			    "name": results.length,
+			    "tasks": [[ task ]]
+			};
+			if( callback ){
+				callback( workflowedTask );
+			}
+		});
+	};
+
+	factory.retrieveWorkflow = function( name, callback ){
+		var bounds = {start: name, end: name};
+		var count = null;
+		if( name == null ){
+			bounds = null;
+			count = 10000;
+		}
+
+		visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( result ){
+			if( callback != null ){
+				callback( result );
+			}
+		}, 'by_id', bounds, count);
+	};
+
+
+
+	return factory;
+})
+.directive('vnWorkflow', function() {
+    return {
+      restrict: 'E',
+      controller: function( $scope, 
+      						$rootScope, 
+      						$timeout,
+      						$mdDialog,
+      						$mdToast,
+      						vnActionFactory,
+      						vnScrollFactory, 
+      						vnWorkflowFactory,
+      						vnNavigationFactory,
+      						vnWorkflowBarFactory,
+      						VN_REP_SCREENS,
+      						VN_TASK_SCREENS){
+
+      	$scope.workflowInformCommands = workflowInformCommands;
+      	$scope.reinitialise = false;
+      	vnWorkflowFactory.CURRENT_WORKFLOW = null;
+      	$scope.showCommandButtons = false;
+      	$scope.attachmentModel = {};
+
+      	$rootScope.$on( "TASK_MIN_FIELDS_SATISFIED", function( event, isSatisfied ){
+      		$scope.showCommandButtons = isSatisfied;
+      	});
+
+      	$rootScope.$on( "LOGOUT", function(){
+      		clearWorkflow();
+      	});
+
+      	vnActionFactory.canHelpWith( vnActionFactory.GENERAL, function( data, callback ){
+	 		var task = data[0];
+
+			if( task.workflowid == null){
+				vnWorkflowFactory.initialiseWorkflowWithModel({ 
+					selectedRecipients: task.assigneefull,
+					selectedSubjects: task.subjectid,
+					description: task.description,
+					urgency: task.urgency,
+					due: task.due,
+					isAnnouncement: task.announcement });
+				vnNavigationFactory.switchScreens( VN_TASK_SCREENS.WORKFLOW);
+
+			}else{
+				vnWorkflowFactory.restoreWorkflow( task.workflowid, function( workflowDefinition ){
+					vnNavigationFactory.switchScreens( VN_TASK_SCREENS.WORKFLOW);
+					$scope.attachmentModel = workflowDefinition[0].attachments;
+					vnWorkflowBarFactory.setTracking( $scope.attachmentModel.trackingSummary );
+					vnWorkflowBarFactory.setRecurrence( $scope.attachmentModel.recurrenceSummary );
+					$scope.$apply();
+					vnWorkflowFactory.minimiseAllCards();
+					vnWorkflowFactory.CURRENT_WORKFLOW = workflowDefinition[0];
+					if( callback != null ){
+						callback();
+					}
+				} );
+			}
+			
+			
+		});
+
+      	var clearWorkflow = function(){
+      		vnWorkflowFactory.clearWorkflow();
+      		vnWorkflowFactory.CURRENT_WORKFLOW = null
+      		$scope.attachmentModel = {};
+      		$scope.reinitialise = !$scope.reinitialise;
+      	};
+
+
+      	$scope.handleBackButton = function(){
+			clearWorkflow();
+			vnNavigationFactory.switchScreens( VN_REP_SCREENS.HOME );
+		};
+
+
+      	$scope.initWorkflow = function () {
+      		
+      		$scope.$watch( 
+		      	"screens.VN_TASK__WORKFLOW", function( value ){
+
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+      	};
+
+      	var handleShow = function(){
+      		if( $rootScope.taskoutercreators == null ){
+      			vnWorkflowFactory.addCardContainer();
+      		}
+      		if( vnWorkflowFactory.CURRENT_WORKFLOW == null ){
+      			$scope.workflowOwner = $rootScope.user.shortlabel;
+      		}else{
+      			$scope.workflowOwner = vnWorkflowFactory.CURRENT_WORKFLOW.tasks[0][0].assigner.displayname;
+      		}
+      		
+      	};
+
+      	$rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value, e ){
+      		if( value == WRKSND || value == WRKSVE ){
+      			handleInformCommandSelected( scope, value, e );
+      		}
+      	});
+
+      	var handleInformCommandSelected = function( scope, value, e ){
+      		if( vnWorkflowFactory.CURRENT_WORKFLOW == null ){
+      			vnWorkflowFactory.CURRENT_WORKFLOW = vnWorkflowFactory.createWorkflow( $scope.attachmentModel );
+      		}
+      		
+  			if( value == WRKSVE && vnWorkflowFactory.CURRENT_WORKFLOW.name == null ){
+				$mdDialog.show({
+					controller: function( $scope ){
+						$scope.workflowName = "";
+						$scope.handleSave = function(){
+							vnWorkflowFactory.CURRENT_WORKFLOW.name = $scope.workflowName;
+							$mdDialog.cancel();
+							vnWorkflowFactory.workflowExistsForCurrentUser( vnWorkflowFactory.CURRENT_WORKFLOW.name, function( exists ){
+
+				  				if( exists ){
+				  					$mdDialog.show({
+										controller: function( $scope ){
+											$scope.workflowName = "";
+											$scope.handleYes = function(){
+												$mdDialog.cancel();
+												executeCommands( value );
+											};
+
+											$scope.handleNo = function(){
+												$mdDialog.cancel();
+												vnWorkflowFactory.CURRENT_WORKFLOW.name = null;
+												handleInformCommandSelected( scope, value, e );
+											};
+										},
+										targetEvent: e,
+										hasBackdrop: false,
+										templateUrl: 'apps/visiontasks/workflow/dialog/workflowexists.html'
+								    });
+				  				}else{
+				  					handleInformCommandSelected( scope, value, e );
+				  				}
+				  			});	
+							
+							
+						};
+					},
+					targetEvent: e,
+					hasBackdrop: false,
+					templateUrl: 'apps/visiontasks/workflow/dialog/workflowname.html'
+			    });
+			    return;
+  			}
+
+  			executeCommands( value );
+
+  			
+      	};
+
+      	var executeCommands = function( value ){
+      		if( value == WRKSND ){
+      			if( vnWorkflowFactory.CURRENT_WORKFLOW.name == null ){
+      				vnWorkflowFactory.retrieveWorkflow( null, function( results ){
+      					vnWorkflowFactory.CURRENT_WORKFLOW.name = results.length + 1;
+      					executeCommands( value );
+      				});
+      				return;
+      			}
+
+  				vnWorkflowFactory.saveWorkflow( vnWorkflowFactory.CURRENT_WORKFLOW, function(){ 
+      				vnWorkflowFactory.beginWorkflow( vnWorkflowFactory.CURRENT_WORKFLOW.name );
+      				clearWorkflow();
+      				vnNavigationFactory.switchScreens( VN_REP_SCREENS.HOME );
+      			});
+      			
+      			
+      		}else if( value == WRKSVE ){
+      			var workflowName = vnWorkflowFactory.CURRENT_WORKFLOW.name;
+      			vnWorkflowFactory.CURRENT_WORKFLOW = vnWorkflowFactory.createWorkflow( $scope.attachmentModel );
+      			vnWorkflowFactory.CURRENT_WORKFLOW.name = workflowName;
+
+      			vnWorkflowFactory.saveWorkflow( vnWorkflowFactory.CURRENT_WORKFLOW, function(){ 
+      				$mdToast.show( $mdToast.simple().content( "Workflow saved" ).position("bottom right") );
+      			});
+      		}
+      	};
+      	
+
+      	$( window ).resize(function() {
+	        handleResize();
+	      });
+
+		$scope.handleOuterAddClick = function(){
+			vnWorkflowFactory.addCardContainer();
+			handleResize();
+			$timeout( function(){
+				var width = - $( ".vision-workflow" ).width();
+				vnScrollFactory.scrollTo( "vision-workflow", width - 200, true, 1 );
+			}, 200 );
+		};
+
+		var handleResize = function(){
+    	$timeout( function(){
+    		vnScrollFactory.handleResize( "vision-workflow" );
+    	}, 1);
+    	
+    };
+      },
+      templateUrl: 'apps/visiontasks/workflow/vnworkflow.html'
+    };
+});
+
+

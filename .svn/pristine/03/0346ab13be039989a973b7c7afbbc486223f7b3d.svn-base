@@ -1,0 +1,16 @@
+<vn-css vn-id="vnprescription" vn-css-file="apps/components/prescriptions/vnprescription.css"></vn-css>
+<div class="list-group" 
+     ng-controller="vnPrescriptionController"
+     ng-init="init();">
+    <div class="no-data" ng-show="therapy.length < 1">
+        No prescriptions
+    </div>
+    <div class="task prescription list-group-item" ng-repeat="therapyitem in therapy"  ng-click="handleItemClick( $event, this );">
+        <div class="subject"><div>{{ therapyitem.shortdescription }}</div></div>
+        <div class="drug"><div>{{ therapyitem.drugname }} {{ therapyitem.strength }}</div></div>
+        <div class="patient" ng-click="handlePatientClick( $event );">
+            <div><img ng-src="apps/components/images/patient.svg"></div>
+            <div>{{ therapyitem.patient.displayname}}</div>
+        </div>
+    </div>
+</div>

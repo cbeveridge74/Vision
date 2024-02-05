@@ -1,0 +1,45 @@
+angular.module('vnAppMenuModule', [],function () {})
+.controller('vnAppMenuController', function( 
+    $scope, 
+    $rootScope, 
+    vnScreenManagementFactory, 
+    vnNavigationFactory,
+    vnAppManagementFactory,
+    gaTracker
+     ){
+
+  $rootScope.$watch('currentapp', function( app ){
+    if( app != null ){
+      $scope.currentappicon = app.icon;
+    }
+  });
+
+	$scope.handleAppMenuClick = function( event ){
+      gaTracker.sendEvent('App Menu', "Opened", 'App menu');
+      if( $( ".app-menu" ).hasClass( "open" ) ){
+        vnScreenManagementFactory.closeMenus();
+      }else{
+        var registeredApps = vnAppManagementFactory.getApps();
+        if( registeredApps == null || vnAppManagementFactory.numberOfApps() < 2 ){
+          return;
+        }
+        $scope.registeredApps = registeredApps;
+        vnScreenManagementFactory.openMenu( ".app-menu" );  
+      }
+  };
+
+  $scope.handleItemClick = function(){
+    console.log( "handleItemClick" );
+    // Check that we haven't clicked on the current app
+    if( this.app.id == vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_CURRENT ).split( "__" )[0] ){
+      //return;
+    }
+    vnNavigationFactory.switchScreens( this.app.screens[0] );
+  };
+})
+.directive('vnAppMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'menus/vnappmenu.html'
+    };
+  });

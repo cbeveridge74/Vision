@@ -1,0 +1,146 @@
+.vision-search{
+	position: relative;
+	font-size: 1.2em;
+}
+
+
+.vision-search .suggestions-container {
+	position: absolute;
+	border: solid 1px #BBB;
+	left: 0em;
+	padding-top: 1.5em;
+}
+
+.vision-search .results-container,
+.vision-search .suggestions-container{
+	background-color: #FBFBFB;
+}
+
+.vision-search .read-code{
+	width: 5em;
+	font-size: 0.8em;
+	opacity: 0.8;
+}
+
+.vision-search .read-code,
+.vision-search .term {
+	display: inline-block;
+}
+
+.vision-search .suggestions-container .title {
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #AAA;
+	padding: 0.3em;
+	font-size: 0.9em;
+}
+
+
+.vision-search .word-suggestion {
+	display: inline-block;
+	padding: 0em 0em;
+	font-weight: bolder;
+}
+
+.vision-search .suggestions-container,
+.vision-search .word-suggestion{
+	min-width: 30em;
+}
+
+.vision-search .ghost-suggestion {
+	color: #AAA;
+	position: absolute;
+	top: 4px;
+	left: 5px;
+}
+
+.vision-search .ghost-suggestion .word{
+	opacity: 0;
+}
+
+
+.vision-search .word-suggestion .word{
+	font-weight: normal;
+	opacity: 0.9;
+}
+
+.vision-search .results-container {
+	position: absolute;
+	min-width: 43.5em;
+	border: solid 1px #D2E5EA;
+	color: #20335E;
+	left: -1.2em;
+	padding-top: 1.5em;
+	z-index: 1;
+	//top: -30em;
+}
+
+.vision-search .results-container .sub-title{
+	color: #1E81E7;
+	padding-left: 0.5em;
+	margin-top: 1.2em;
+	margin-bottom: 0.5em;
+	font-size: 0.8em;
+	padding-bottom: 0em;
+	border-bottom: solid 1px;
+	opacity: 0.8;
+}
+
+.vision-search .results-container .suggestions{
+	padding: 1.5em 0em 1em 0em;
+	border-bottom: solid #BBB 1px;
+	margin: 0.5em 0 1em 0;
+}
+
+.vision-search .results-container .suggestions .title {
+	top: 0.5em;
+}
+
+.vision-search .results-container .title{
+	position: absolute;
+	right: 0.5em;
+	top: 0.3em;
+	font-size: 0.9em;
+	color: #999;
+}
+
+
+.vision-search .results-container .suggestion,
+.vision-search .results-container .result{
+	padding: 0.5em;
+	padding-left: 1.5em;
+}
+
+.vision-search .suggestions-container .suggestion{
+	padding: 0.3em;
+}
+
+.vision-search .results-container .suggestions .suggestion .name{
+	color: #1E81E7;
+}
+
+.vision-search .results-container .suggestions .suggestion .query{
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.vision-search .results-container .result {
+	
+	border-bottom: solid #E7EFF3 1px;
+}
+
+.vision-search .suggestions-container .suggestion:hover,
+.vision-search .results-container .result:hover{
+	background-color: #E7EFF3;
+}
+
+.vision-search .suggestions-container .suggestion.selected,
+.vision-search .results-container .result.selected {
+	background-color: #D2E5EA;
+}
+
+.vision-search .suggestions-container .suggestion .highlight
+.vision-search .results-container .result .highlight {
+	font-weight: bold;
+}

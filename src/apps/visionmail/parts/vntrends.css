@@ -1,0 +1,10 @@
+.trends{
+    background-color: #FFF;
+    height: 100%;
+    width: 100%;
+}
+
+.trends svg.nvd3-svg{
+	width: 100%;
+}
+

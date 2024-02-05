@@ -1,0 +1,65 @@
+.vision-data_entry{
+	background-color: #2b2b2b;
+	height: 100%;
+}
+
+.vision-data_entry,
+.vision-data_entry .vn-row{
+	padding: 1em;
+
+}
+
+.vision-data_entry .vn-row .left,
+.vision-data_entry .vn-row .right,
+.vision-data_entry .vn-label,
+.vision-data_entry .input,
+.vision-data_entry .rowpart
+{
+	display: inline-block;
+}
+
+.vision-data_entry .vn-row .left,
+.vision-data_entry .vn-row .right{
+	width: 20em;
+}
+
+.vision-data_entry .vn-label {
+	color: #FFF;
+	min-width: 5em;
+	text-align: right;
+	margin-right: 0.5em;
+}
+
+.vision-data_entry .dateinput {
+	width: 9.22em;
+}
+
+.vision-data_entry select{
+	font-size:1em;
+}
+
+.vision-data_entry .vn-row .left,
+.vision-data_entry .vn-row .right {
+	white-space: nowrap;
+}
+
+.vision-data_entry .units{
+	color: #CCCCCC;
+	font-size: 0.7em;
+}
+
+.tinyTip.error {
+	background-color: red ;
+	padding: 0.3em;
+	color: white;
+	height: 2em;
+	z-index: 10 !important;
+}
+
+.tinyTip {
+	z-index: -10 !important;
+}
+
+.vision-data_entry .error{
+	border: solid 2px red;
+}

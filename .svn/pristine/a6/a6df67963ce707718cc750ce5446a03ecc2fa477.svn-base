@@ -1,0 +1,175 @@
+angular.module('vnVisionDocumentManagementModule', [],function () {})
+.run(function( vnAppManagementFactory ){
+	var APP_ID 			= "VN_DOCMAN";
+	var DOCUMENT_INBOX = APP_ID + '__DOCUMENT_INBOX';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: APP_ID, 
+		name: "Documents",
+		icon: "images/scanned_doc.svg",
+		screens: [
+			DOCUMENT_INBOX
+		]});
+})
+.factory( 'vnVisionDocumentManagementFactory', function(){
+    var factory = {};
+
+    
+})
+.controller('vnVisionDocumentManagementController', function( 
+	$scope, 
+    $timeout,
+	$rootScope,
+    vnActionFactory,
+	visionFactory, 
+	vnScrollFactory, 
+	vnNavigationFactory, 
+	vnScreenManagementFactory,
+    VN_DOCMAN_SCREENS ){
+
+	var documentScroller;
+    var unfiledScroller;
+    $scope.selectedIndex = 0;
+
+	var item1 = {};
+	item1.item = database[ CLINICAL_DOCS ].name;
+	item1.count = 100;
+
+
+	var item2 = {};
+	item2.item = database[ PATIENT ].name;
+	item2.count = 100;
+
+    var canHelpWithCallback = null;
+    vnActionFactory.canHelpWith( vnActionFactory.FILE_DOCUMENTS, fileDocuments );
+
+	visionFactory.retrieveDataWithJoin( [ item1, item2 ], ["patientid", "Id"],
+		function( results ){
+			retrieveDocumentsHandler( results );
+		}
+	);
+
+    $scope.$watch('selectedIndex', function(current, old){
+      if( current != old ){
+        $timeout( handleResize);
+      }
+    });
+
+    
+
+    function fileDocuments( data, callback ){
+        $scope.selectedIndex = 1;
+        vnNavigationFactory.switchScreens( VN_DOCMAN_SCREENS.DOCUMENT_INBOX );
+        canHelpWithCallback = callback;
+        canHelpWithCallback();
+    }
+
+	/*visionFactory.retrieveData( database[ CLINICAL_DOCS ].name, function( results ){
+		retrieveDocumentsHandler( results );
+	}, null, null, 3);*/
+
+	$( window ).resize(function() {
+        handleResize();
+      });
+
+	var retrieveDocumentsHandler = function( results ){
+		var filedDocuments = new Array();
+        var unfiledDocuments = new Array();
+        angular.forEach( results, function( value, index ){
+            var nameTemp = value.name.split( "." )[0]
+			
+            if( value.name.indexOf( "letter" ) < 0 ){
+                value.name = nameTemp;
+                filedDocuments.push( value );
+            }else{
+                unfiledDocuments.push( value );
+            }
+		});
+
+		$scope.filedDocuments = filedDocuments;
+        $scope.unfiledDocuments = unfiledDocuments;
+		handleResize();
+	};
+
+	var handleResize = function(){
+      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+        vnScrollFactory.handleResize( "document-scroller" );
+        getDocumentScroller().css( "height", "100vh" );
+        vnScrollFactory.handleResize( "unfiled-scroller" );
+        getUnfiledScroller().css( "height", "100vh" );
+      //}
+    };
+
+    var getDocumentScroller = function(){
+    	if( documentScroller == null ){
+    		documentScroller = $( ".document-scroller" );
+    	}
+    	return documentScroller;
+    }
+
+    var getUnfiledScroller = function(){
+        if( unfiledScroller == null ){
+            unfiledScroller = $( ".unfiled-scroller" );
+        }
+        return unfiledScroller;
+    }
+
+    $scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+    	vnScreenManagementFactory.overrideGeneralClick = false;
+     };
+
+    $rootScope.$on( "COMMAND_SELECTED", function( name, id ){
+    	if( id == DOCTSK ){
+    		var attachedDocument;
+    		vnScreenManagementFactory.toggleBars( true );
+    		for( var i = 0; i < $scope.filedDocuments.length; i++ ){
+	     		if( $scope.filedDocuments[i].selected == true ){
+	     			attachedDocument = $scope.filedDocuments[i];
+	     			$scope.filedDocuments[i].selected = false;
+	     		}
+	     	}
+	     	$scope.handleBackButton();
+	     	$rootScope.$broadcast( "DOCUMENT_ATTACHMENT", attachedDocument );
+	     	vnScreenManagementFactory.overrideGeneralClick = false;
+	     	
+    	}
+    } );
+
+     $scope.handleDocumentClicked = function(){
+     	if( this.item.selected == null ){
+     		this.item.selected = false;
+     		vnScreenManagementFactory.overrideGeneralClick = true;
+     	}
+
+     	this.item.selected = !this.item.selected;
+
+     	var openTheCommandBar = false;
+     	for( var i = 0; i < $scope.filedDocuments.length; i++ ){
+     		if( $scope.filedDocuments[i].selected == true ){
+     			openTheCommandBar = true
+     			break;
+     		}
+     	}
+     	if( openTheCommandBar ){
+     		vnScreenManagementFactory.initialiseMenuOptions( null, selectRightCommands );
+     		vnScreenManagementFactory.openCommandBar();
+     	}else{
+     		vnScreenManagementFactory.toggleBars( true );
+     	}
+     	
+     	
+     };
+
+})
+.directive('vnVisionDocumentManagement', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiondocumentmanagement/vndocumentmanagement.html'
+    };
+  })
+.value('VN_DOCMAN_SCREENS',  { 
+	DOCUMENT_INBOX: "VN_DOCMAN__DOCUMENT_INBOX"
+});
+
+

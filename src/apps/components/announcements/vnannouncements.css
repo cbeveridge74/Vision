@@ -1,0 +1,34 @@
+.announcements{
+	color: #20335E;
+}
+
+.announcements .title {
+	white-space: normal;
+}
+
+.announcements .description {
+	white-space: normal;
+}
+
+.announcements .assignee {
+	display: inline-block;
+	margin-right: 0.5em;
+	margin-top: 1em;
+}
+
+.announcements .urgency {
+	height: 5px;
+	width: 25.15em;
+	background-color: #FF0000;
+	margin-left: -1.4em;
+	margin-top: 0.2em
+}
+
+.announcements .bottomline .right .comment-count,
+.announcements .bottomline .right .attachment-count {
+	font-size: 1.1em;
+}
+
+.announcements .bottomline .right .comment-count{
+	margin-left: 0.7em;
+}

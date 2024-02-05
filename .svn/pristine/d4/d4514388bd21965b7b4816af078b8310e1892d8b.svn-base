@@ -1,0 +1,154 @@
+var requireQueue = function(modules, callback) {
+  function load(queue, results) {
+    if (queue.length) {
+      require([queue.shift()], function(result) {
+        results.push(result);
+        load(queue, results);
+      });
+    } else {
+      callback.apply(null, results);
+    }
+  }
+
+  load(modules, []);
+};
+
+requireQueue([
+	
+  "scripts/lib/angular",
+  //"scripts/lib/jquery",
+		 "scripts/lib/jquery_ui",
+		 "scripts/lib/google_analytics_bundle",
+		 "scripts/lib/angular_animate",
+		 "scripts/lib/angular_touch",
+		 "scripts/lib/moment",
+		 "scripts/lib/iscroll_zoom",
+		 "scripts/lib/iscroll_probe",
+		 "scripts/lib/socket_io",
+		 "scripts/lib/typeahead",
+		 "config",
+		 "actions/vnactionmodule",
+		 "data/demoassembler",
+		 "data/dataservices",
+		 "data/demoservices",
+		 "data/demodata",
+		 "data/referencedata",
+		 "menus/defaultcommands",
+		 "menus/vncommandmenumodule",
+		 "menus/vnnavigationmenumodule",
+		 "menus/vnappmenumodule",
+		 "menus/vnusermenumodule",
+		 "authentication/vnloginmodule",
+		 "layout/vnbarmodule",
+		 "layout/vntitlebarmodule",
+		 "layout/vnhubcategorymodule",
+		 "layout/vnscrollmodule",
+		 "screen/vnscreenmanagementmodule",
+		 "screen/navigation/vnnavigationmodule",
+		 "tour/vntourmodule",
+		 "patient/vnbannermodule",
+		 "search/vnsearchmodule",
+		 "data/vnassemblermodule",
+		 "data/vndatabasemodule",
+		 "apps/vnappmanagement",
+		 "apps/components/config/dependencies",
+		 "apps/visionreception/config/dependencies",
+		 "apps/visionappointments/config/dependencies",
+		 "scripts/lib/angular_route",
+		"scripts/lib/jQAllRangeSliders_withRuler_min",
+		"scripts/lib/bootstrap",
+		"vnvisionmodule"
+], function(App) {
+  $( document ).ready( function(){
+  	angular.bootstrap($( ".vision-parent-module" ), [ 'vnVisionModule' ]);
+  } );
+});
+
+
+/*require(["scripts/lib/angular",
+		 "scripts/lib/jquery",
+		 "scripts/lib/jquery_ui",
+		 "scripts/lib/google_analytics_bundle",
+		 "scripts/lib/angular_animate",
+		 "scripts/lib/angular_touch",
+		 "scripts/lib/moment",
+		 "scripts/lib/iscroll_zoom",
+		 "scripts/lib/iscroll_probe",
+		 "scripts/lib/socket_io",
+		 "scripts/lib/typeahead",
+		 "tour/tour",
+		 "config",
+		 "actions/vnactionmodule",
+		 "data/demoassembler",
+		 "data/dataservices",
+		 "data/demoservices",
+		 "data/demodata",
+		 "data/referencedata",
+		 "menus/defaultcommands",
+		 "menus/vncommandmenumodule",
+		 "menus/vnnavigationmenumodule",
+		 "menus/vnappmenumodule",
+		 "authentication/vnloginmodule",
+		 "layout/vnbarmodule",
+		 "layout/vntitlebarmodule",
+		 "layout/vnhubcategorymodule",
+		 "layout/vnscrollmodule",
+		 "screen/vnscreenmanagementmodule",
+		 "screen/navigation/vnnavigationmodule",
+		 "patient/vnbannermodule",
+		 "search/vnsearchmodule",
+		 "data/vnassemblermodule",
+		 "data/vndatabasemodule",
+		 "apps/vnappmanagement",
+		 "apps/components/config/dependencies",
+		 "apps/visionreception/config/dependencies",
+		 "apps/visionappointments/config/dependencies"
+		 ], function(
+		 	angular,
+		 	jquery,
+		 	jquery_ui,
+		 	google_analytics_bundle,
+		 	angular_animate,
+		 	angular_touch,
+		 	moment,
+		 	iscroll_zoom,
+		 	iscroll_probe,
+		 	socket_io,
+		 	typeahead,
+		 	tour,
+		 	config,
+		 	vnactionmodule,
+		 	demoassembler,
+		 	dataservices,
+		 	demoservices,
+		 	demodata,
+		 	referencedata,
+		 	defaultcommands,
+		 	vncommandmenumodule,
+		 	vnnavigationmenumodule,
+		 	vnappmenumodule,
+		 	vnloginmodule,
+		 	vnbarmodule,
+		 	vntitlebarmodule,
+		 	vnhubcategorymodule,
+		 	vnscrollmodule,
+		 	vnscreenmanagementmodule,
+		 	vnnavigationmodule,
+		 	vnbannermodule,
+		 	vnsearchmodule,
+		 	vnassemblermodule,
+		 	vndatabasemodule,
+		 	vnappmanagement,
+		 	dependencies,
+		 	dependencies
+		 	,dependencies
+		 	) {
+    require(["scripts/lib/angular_route",
+    		"scripts/lib/jQAllRangeSliders_withRuler_min",
+    		"scripts/lib/bootstrap",
+    		"vnvisionmodule"], function( 
+    			angular_route,
+    			jQAllRangeSliders_withRuler_min,
+    			bootstrap,
+    			vnvisionmodule ){});
+});*/

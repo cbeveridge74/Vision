@@ -1,0 +1,127 @@
+.title-bar{
+	height: 6em;
+	padding-top: 1em;
+	background-color: #FFFFFF;
+}
+
+.title-bar .left{
+	text-align: left;
+}
+
+.title-bar .right{
+	text-align: right;
+}
+
+.title-bar .left,
+.title-bar .right,
+.title-bar .inform-command-buttons,
+.title-bar .title,
+.title-bar .typeahead,
+.title-bar .backbutton,
+.title-bar .width-spacer {
+	display: inline-block;
+}
+
+.title-bar .left,
+.title-bar .right {
+	width: 48vw;
+}
+
+.title-bar .inform-command-buttons,
+.title-bar .title,
+.title-bar .typeahead,
+.title-bar .backbutton{
+	vertical-align: top;
+	color: #20335E;
+} 
+
+.title-bar .inform-command-buttons,
+.title-bar .title,
+.title-bar .typeahead {
+	margin: auto 0;
+}
+
+.title-bar .title{
+	font-size: 3em;
+}
+
+.title-bar .search{
+	position: absolute;
+	right: 1em;
+}
+
+.title-bar .typeahead {
+	width: 25em;
+	height: 2em; 
+	font-size: 0.9em;
+	padding-left: 0.5em;
+	//margin-top: 2em;
+}
+
+.title-bar .backbutton{
+	margin-left: 1em;
+	padding-right: 2em;
+}
+
+.title-bar .backbutton.ng-hide{
+	opacity: 0;
+	//display: block !important;
+}
+
+.title-bar .width-spacer{
+	width: 5em;
+}
+
+.title-bar .width-spacer.ng-hide{
+	opacity: 0;
+	display: block !important;
+}
+
+.title-bar img{
+	cursor: pointer;
+	width: 3em;
+}
+
+.title-bar .awesome-icon{
+	cursor: pointer;
+
+}
+
+
+.title-bar .awesome-icon {
+	color: #20335E;
+	vertical-align: middle;
+	border: solid 1px #20335E;
+	padding-top: 0.4em;
+	height: 3em;
+	width: 3em;
+	text-align: center;
+	border-radius: 1.5em;
+
+}
+
+.title-bar .awesome-icon:hover {
+	color: #FFF;
+	background-color: #20335E;
+}
+
+.title-bar .awesome-icon .fa{
+	font-size: 2em;
+}
+
+
+
+.title-bar .inform-command-buttons {
+	text-align: right;
+	margin-right: 1em;
+}
+
+.title-bar .inform-command-button {
+	display: inline-block;
+	margin-right: 1em;
+	vertical-align: top;
+}
+
+.title-bar .backbutton img{
+	width: 4em;
+}

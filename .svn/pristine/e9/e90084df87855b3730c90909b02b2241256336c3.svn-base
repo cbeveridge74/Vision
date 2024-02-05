@@ -1,0 +1,25 @@
+<div class="user-menu menu" ng-controller="vnUserMenuController">
+	<vn-css vn-id="vnusermenu" vn-css-file="menus/vnusermenu.css"></vn-css>
+	<div>SHONA DONALDSON</div>
+	<div>
+		<div class="detail">
+			<div>GP</div>
+			<div>Hillbank Health Centre</div>
+		</div>
+	</div>
+	<div class="horizontal-divider"></div>
+	<div class="options">
+		<img src="../images/chat.svg">
+		<div class="option">Chat...</div>
+	</div>
+	<div class="options">
+		<img src="../images/out_of_office.svg">
+		<div class="option">Activate Out Of Office...</div>
+	<div class="options" ng-click="handleTourToggleClick();">
+		<img src="../images/out_of_office.svg">
+		<div class="option">{{tipslabel}}</div>
+	<div class="options">
+		<img src="../images/logout.svg">
+		<div class="option">Sign Out</div>
+	</div>
+</div>

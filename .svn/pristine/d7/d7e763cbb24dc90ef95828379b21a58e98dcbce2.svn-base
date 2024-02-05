@@ -1,0 +1,301 @@
+/*************************** FOOT BAR ********************************/
+var ORD = 0;
+var COM = 4;
+
+var defaultLeftCommands = [
+		{ id: ORD, label: "Order by", icon: "hamburger.svg" }];
+
+var CRT = 0;
+var ARC = 1;
+var RDS = 2;
+
+var defaultRightCommands = [
+		{ id: CRT, label: "Item 1", icon: "hamburger.svg" },
+		{ id: ARC, label: "Item 2", icon: "hamburger.svg" },
+		{ id: RDS, label: "Item 3", icon: "hamburger.svg" }
+	];
+
+var VMFILE = "VMFILE";
+var VMTASK = "VMTASK";
+var VMUOM = "VMUOM";
+var VMRDC = "VMRDC";
+var VMPAT = "VMPAT";
+var VMSTF = "VMSTF";
+var VMAUD = "VMAUD";
+var VMSRT = "VMSRT";
+
+/* Vision Mail */
+var mailRightCommands = [
+	{ id: VMFILE, label: "File to record", 	icon: "fa fa-file-text-o" },
+	{ id: VMTASK, label: "Create task", 	icon: "fa fa-tasks", keepopen: true },
+	{ id: VMUOM, label: "Add UOM", 			icon: "fa fa-balance-scale" },
+	{ id: VMRDC, label: "Add read code", 	icon: "fa fa-book" },
+	{ id: VMPAT, label: "Assign patient", 	icon: "fa fa-user" },
+	{ id: VMSTF, label: "Assign staff", 	icon: "fa fa-user-md" },
+	{ id: VMAUD, label: "Audit trail", 		icon: "fa fa-link" }
+];
+
+var mailLeftCommands = [
+	{ id: VMSRT, label: "Sort by", icon: "fa fa-sort", keepopen: true }
+];
+
+/* Generic Selection */
+var DOCTSK = 0;
+
+
+var selectRightCommands = [
+	{ id: DOCTSK, label: "Attach", 	icon: "paperclip_white_circle.svg" }
+];
+
+
+/* People */
+var CRT = 0;
+var MSG = 1;
+
+var peopleRightCommands = [
+		{ id: CRT, label: "Create task", 	icon: "fa fa-plus" },
+		{ id: MSG, label: "Send message", 	icon: "fa fa-comment-o" }
+];
+
+/* Dicussions  */
+var CRT = 0;
+var MSG = 1;
+
+var discussionsRightCommands = [
+		{ id: CRT, label: "Create task", 	icon: "edit.svg" },
+		{ id: MSG, label: "Send message", 	icon: "accept.svg" }
+];
+
+/* Document Management */
+var DOCFIL = "DOCFIL";
+var DOCSORT = "DOCSORT";
+var DOCSEARCH = "DOCSEARCH";
+
+var docInformCommands = [
+	{ id: DOCSEARCH, label: "Patient", icon: "fa fa-search" },
+	{ id: DOCSORT, label: "Sort", icon: "fa fa-sort" },
+	{ id: DOCFIL, label: "Filter", icon: "fa fa-filter" }
+];
+
+var SCANCOMPLETE = "SCANCOMPLETE";
+
+var docScanCommands = [
+	{ id: SCANCOMPLETE, label: "Complete", icon: "fa fa-check", show: false }
+];
+
+
+
+var docNeedsAttentionRightCommands = [
+		{ id: EDT, label: "Assign", 		icon: "edit.svg" },
+		{ id: ACC, label: "Allocate", 		icon: "accept.svg" },
+		{ id: DEC, label: "Add read code", 	icon: "decline.svg" },
+		{ id: REJ, label: "Add UOM", 		icon: "reject.svg" },
+		{ id: COM, label: "File to record", icon: "complete.svg" },
+		{ id: COM, label: "Audit trail", 			icon: "complete.svg" }
+	];
+
+var docScansRightCommands = [
+	{ id: EDT, label: "Create task", 	icon: "edit.svg" },
+	{ id: ACC, label: "Flag", 			icon: "accept.svg" },
+	{ id: DEC, label: "Re-allocate", 	icon: "decline.svg" },
+	{ id: REJ, label: "Re-assign", 		icon: "reject.svg" },
+	{ id: COM, label: "Mark as read", 	icon: "complete.svg" },
+	{ id: COM, label: "Print", 			icon: "complete.svg" },
+	{ id: COM, label: "Delete", 		icon: "complete.svg" },
+	{ id: COM, label: "File", 			icon: "complete.svg" },
+	{ id: COM, label: "Audit trail", 	icon: "complete.svg" }
+];
+
+var docUnprocessedScansRightCommands = [
+	{ id: COM, label: "Audit trail", 	icon: "complete.svg" }
+];
+
+var docPathologyRightCommands = [
+	{ id: EDT, label: "Create task", 	icon: "edit.svg" },
+	{ id: ACC, label: "Flag", 			icon: "accept.svg" },
+	{ id: DEC, label: "Re-allocate", 	icon: "decline.svg" },
+	{ id: REJ, label: "Re-assign", 		icon: "reject.svg" },
+	{ id: COM, label: "Mark as read", 	icon: "complete.svg" },
+	{ id: COM, label: "Print", 			icon: "complete.svg" },
+	{ id: COM, label: "Delete", 		icon: "complete.svg" },
+	{ id: COM, label: "File", 			icon: "complete.svg" },
+	{ id: COM, label: "Audit trail", 	icon: "complete.svg" }
+];
+
+var docSummariseRightCommands = [
+	{ id: COM, label: "Audit trail", 	icon: "complete.svg" }
+];
+
+var docErrorsRightCommands = [
+	{ id: COM, label: "Audit trail", 	icon: "complete.svg" }
+];
+
+
+/* Task clicked on */
+var EDT = 0;
+var ACC = 1;
+var DEC = 2;
+var REJ = 3;
+
+var taskRightCommands = [
+		{ id: EDT, label: "Edit", 		icon: "edit.svg" },
+		{ id: ACC, label: "Accept", 	icon: "accept.svg" },
+		{ id: DEC, label: "Decline", 	icon: "decline.svg" },
+		{ id: REJ, label: "Reject", 	icon: "reject.svg" },
+		{ id: COM, label: "Complete", 	icon: "complete.svg" }
+	];
+
+var CLM = 0;
+var DCN = 1;
+
+var taskUnclaimedRightCommands = [
+	{ id: CLM, label: "Claim", 	icon: "accept.svg" },
+	{ id: DCN, label: "Decline", icon: "decline.svg" }
+];
+
+/* Task tab commands */
+var TASKFIL = "TASKFIL";
+var TASKADD = "TASKADD";
+var TASKSTATS = "TASKSTATS";
+
+var taskInformCommands = [
+	{ id: TASKFIL, label: "Filter", icon: "fa fa-filter" },
+	{ id: TASKADD, label: "Add", icon: "fa fa-plus" }
+];
+
+var taskStatsInformCommands = { id: TASKSTATS, label: "Stats", icon: "fa fa-bar-chart" };
+
+var RECSVE = "RECSVE";
+var RECCNL = "RECCNL";
+
+var recurrenceInformCommands = [
+	{ id: RECSVE, label: "Save", icon: "images/disk_blue.svg" },
+	{ id: RECCNL, label: "Cancel", icon: "apps/components/images/close.svg" }
+	//{ id: REC, label: "Recurrence", icon: "complete.svg" }
+];
+
+var TRKSVE = "TRKSVE";
+var TRKCNL = "TRKCNL";
+
+var trackingInformCommands = [
+	{ id: TRKSVE, label: "Save", icon: "images/disk_blue.svg" },
+	{ id: TRKCNL, label: "Cancel", icon: "apps/components/images/close.svg" }
+];
+
+var TRK = 0;
+var ATT = 1;
+var REC = 2;
+var WRKSND = 3;
+var WRKSVE = 4;
+
+/* Workflow screen */
+var workflowRightCommands = [
+	{ id: TRK, label: "Track", 	icon: "tracking.svg" }
+	//{ id: SND, label: "Send", 		icon: "complete.svg" },
+	//{ id: REC, label: "Recurrence", icon: "complete.svg" }
+];
+
+var workflowInformCommands = [
+	{ id: WRKSVE, label: "Save", icon: "images/disk_white.svg" },
+	{ id: WRKSND, label: "Send", icon: "images/paper_plane.svg" }
+	
+];
+
+
+/* Prescription clicked on */
+var prescriptionRightCommands = [
+	{ id: COM, label: "Complete", icon: "complete.svg" }
+];
+
+var ASN = 0;
+var ALL = 1;
+
+/* Corresondence clicked on */
+var correspondenceRightCommands = [
+	{ id: ASN, label: "Assign patient", icon: "patient_white.svg" },
+	{ id: ALL, label: "Allocate to staff", icon: "clinician_white.svg" }
+];
+
+var correspondenceLeftCommands = [];
+
+var CNL = 0;
+var SND = 1;
+
+/* Appointments clicked on */
+var appointmentsRightCommands = [
+		{ id: CNL, label: "Cancel appointment", icon: "reject.svg" },
+		{ id: SND, label: "Send message to ", icon: "reject.svg" }
+	];
+
+/*************************** BLUE APP BAR ********************************/
+var HMB = 0;
+var NTF = 1;
+var defaultAppBar = [
+	{ id: NTF, 	icon: "notification.svg", classname: "notification" }
+];
+//
+//{ id: HMB, 	icon: "hamburger.svg" }
+
+/***************************** CARDS *************************************/
+var CRDACN = "CRDACN";
+var CRDCLM = "CRDCLM";
+var CRDARV = "CRDARV";
+var CRDCPT = "CRDCPT";
+var CRDREJ = "CRDREJ";
+var CRDSNZ = "CRDSNZ";
+var CRDDCLN = "CRDDCLN";
+var CRDFWD = "CRDFWD";
+var CRDDEL = "CRDDEL";
+
+var rejectAction = { id: CRDREJ, label: "Reject", icon: "fa fa-thumbs-down" };
+var actionAction = { id: CRDACN, label: "Action", icon: "fa fa-play" };
+var completeAction = { id: CRDCPT, label: "Complete", icon: "fa fa-check" };
+var claimAction = { id: CRDCLM, label: "Claim", icon: "fa fa-thumbs-up" };
+var archiveAction = { id: CRDARV, label: "Archive" };
+var forwardAction = { id: CRDFWD, label: "Forward", icon: "fa fa-share" };
+var deleteAction = { id: CRDDEL, label: "Delete", icon: "fa fa-trash-o" };
+
+var snoozeAction = { id: CRDSNZ, label: "Snooze", icon: "fa fa-clock-o", defaultshow: "icon" };
+
+var defaultAction = [
+	rejectAction,
+	actionAction,
+	completeAction
+];
+
+var actionlessAction = [
+	rejectAction,
+	completeAction
+];
+
+var multiAssigneeAction = [
+	rejectAction,
+	claimAction
+];
+
+var leftActions = [
+	//snoozeAction
+];
+
+var declineActions = [
+	forwardAction,
+	deleteAction
+];
+
+
+
+
+
+/* announcments */
+var CRDMAR = "CRDMAR";
+var CRDMAU = "CRDMAR";
+var markAsRead = { id: CRDMAR, 	label: "Mark as read" };
+var markAsUnread = { id: CRDMAU, label: "Mark as unread" };
+
+/* Generic Selection */
+var DOCTSK = 0;
+
+var selectRightCommands = [
+	{ id: DOCTSK, label: "Attach", 	icon: "paperclip_white_circle.svg" }
+];
+

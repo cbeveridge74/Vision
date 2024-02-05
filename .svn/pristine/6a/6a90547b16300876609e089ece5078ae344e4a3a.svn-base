@@ -1,0 +1,256 @@
+.vision-scan{
+	background-color:#FFF;
+}
+
+.vision-scan .button-area {
+
+	width: 50%;
+	top: 6.7em;
+	white-space: nowrap;
+	padding-right: 1em;
+	padding-left: 1em;
+
+}
+
+.vision-scan .button-area .button {
+	font-size: 1.5em;
+	margin: 0.5em;
+	cursor: pointer;
+	color: #20335E;
+}
+
+.vision-scan .button-area .button.prev.disabled,
+.vision-scan .button-area .button.next.disabled {
+	pointer-events: none;
+	opacity: 0.1;
+}
+
+
+
+.vision-scan .button-area .left,
+.vision-scan .button-area .right  {
+	width: 50%;
+	display: inline-block;
+}
+
+.vision-scan .button-area .right{
+	text-align: right;
+
+}
+
+.vision-scan .navigation-buttons .button:hover {
+
+	color: #264586;
+}
+
+.vision-scan .content{
+	height: 100%;
+	width: 100%;
+	white-space: nowrap;
+}
+
+.vision-scan .content .scan-image{
+	width: 50%;
+}
+
+.vision-scan .content .text-version{
+	-webkit-user-select: text;
+	cursor: text;
+	margin: 3em;
+	font-size: 1vw;
+}
+
+
+
+.vision-scan .content .tools{
+	background: #FFF;
+	height: 100vh;
+}
+
+.vision-scan .content .scan-image img{
+	width: 100%;
+}
+
+.vision-scan .content .tools{
+	width: 50%;
+}
+
+.vision-scan .content .tools .generate-tags {
+	position: absolute;
+	width: 50%;
+	background-color: #000;
+	height: calc( 100% - 100px );
+	opacity: 0.5;
+}
+
+.vision-scan .content .tools .generate-tags .generate-container{
+	cursor: pointer;
+	opacity: 1;
+}
+
+.vision-scan .content .tools .generate-tags .generate-container:hover {
+	opacity: 0.9;
+}
+
+.vision-scan .content .tools .generate-tags .icon {
+	margin-top: 1em;
+	font-size: 15em;
+	width: 100%;
+}
+
+.vision-scan .content .tools .generate-tags .message {
+	margin-top: 2em;
+	font-size: 2em;
+}
+
+.vision-scan .content .tools .generate-tags .skip {
+	position: absolute;
+	bottom: 3.5em;
+	right: 1em;
+	cursor: pointer;
+}
+
+.vision-scan .content .tools .generate-tags .skip:hover {
+	opacity: 0.8;
+}
+
+.vision-scan .content .tools .generate-tags .message,
+.vision-scan .content .tools .generate-tags .icon,
+.vision-scan .content .tools .generate-tags .skip{
+	color: #FFF;
+	text-align: center;
+}
+
+.vision-scan .content .tools .section{
+	margin: 0 2em;
+	margin-bottom: 2.5em;
+}
+
+.vision-scan .content .tools .section .title{
+	text-transform: uppercase;
+	color: #1E81E7;
+	font-size: 0.9em;
+}
+
+.vision-scan .content .tools .section .results{
+	white-space: nowrap;
+	display:inline-block;
+}
+
+.vision-scan .content .tools .section .results .tag{
+	padding: 0.4em;
+	background: #D2E5EA;
+	display: inline-block;
+	color: #20335E;
+	cursor: pointer;
+	margin-left: 1em;
+	margin-top: 0.5em
+}
+
+.vision-scan .content .tools .section .results .tag:hover{
+	background: #E7EFF3;
+}
+
+.vision-scan .content .tools .section .results .tag.selected {
+	
+	background-color: #264586;
+}
+
+.vision-scan .content .tools .section .results .tag.selected,
+.vision-scan .content .tools .section .results .tag.selected .unmatched{
+	color: #FFF;
+}
+
+.vision-scan .content .tools .section .results .tag.selected:hover {
+	color: #FFF;
+	background-color: #3B5588;
+}
+
+
+
+
+.vision-scan .content .tools .section .results .tag .matched{
+	
+}
+
+.vision-scan .content .tools .section .results .tag .unmatched{
+	color: #FF0000;
+}
+
+.vision-scan .content .tools .section .results .tag .surname,
+.vision-scan .content .tools .section .results .tag .forename{
+	display: inline-block;
+	font-size: 1.2em;
+}
+
+.vision-scan .content .tools .section .results .tag .surname{
+	text-transform: uppercase;
+}
+
+.vision-scan .content .tools .section .results .tag .label,
+.vision-scan .content .tools .section .results .tag .value{
+	display: inline-block;
+	text-indent: 0.5em;
+}
+
+.vision-scan .content .tools .section .results .tag .label{
+	font-size: 0.8em;
+	opacity: 0.5;
+	font-style: italic;
+}
+
+.vision-scan .content .tools .section .results .tag .clinician .name,
+.vision-scan .content .tools .section .results .tag .clinician .image{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.vision-scan .content .tools .section .results .tag .clinician .image img{
+	border-radius: 1.5em;
+	width: 3em
+}
+
+.vision-scan .content .tools,
+.vision-scan .content .scan-image  {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.vision-scan #myCanvas{
+	display: none;
+}
+
+.vision-scan .source-image {
+	position: absolute;
+	z-index: -1;
+}
+
+.vision-scan img{
+	
+}
+
+.vision-scan #processing-version {
+	display: none;
+}
+
+.vision-scan #theFrame{
+	display: none;
+}
+
+.highlight {
+	position: absolute;
+	background: #FFA100;
+	opacity: 0.3;
+}
+
+.highlight-row {
+	position: absolute;
+	background: #FFA100;
+	opacity: 1;
+}
+
+.text-highlight {
+	color: #000;
+	background: orange;
+}
+

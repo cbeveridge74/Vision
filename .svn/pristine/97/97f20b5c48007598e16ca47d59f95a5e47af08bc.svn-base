@@ -1,0 +1,26 @@
+angular.module('vnBrickModule',function () {})
+.directive('vnBrick', function() {
+    return {
+      restrict: 'E',
+      controller: function( $scope, $timeout, $attrs ){
+      	$scope.buttonShow = false;
+		$scope.taskinnercreators = [{ minimise: false }];
+
+		$scope.minFieldsSatisfiedHandler = function( isSatisfied ){
+			$scope.buttonShow = isSatisfied;
+		};
+
+		$scope.handleInnerAddClick = function( createNew ){
+			if( createNew == null ){
+				createNew = true;
+			}
+			$scope.taskinnercreators[ $scope.taskinnercreators.length - 1 ].minimise = true;
+			if( createNew ){
+				$scope.taskinnercreators.push( { minimise: false } );
+			}
+			
+		};
+      },
+      templateUrl: 'apps/visiontasks/workflow/vnbrick.html'
+    };
+});

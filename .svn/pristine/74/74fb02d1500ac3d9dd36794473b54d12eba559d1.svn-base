@@ -1,0 +1,56 @@
+<div class="vision-tasks" ng-if="user != null" ng-controller="vnVisionTasksController as tabController" ng-init="init();">
+	<vn-css vn-id="vntasksmodule" vn-css-file="apps/visiontasks/vnvisiontasks.css"></vn-css>
+
+	<vn-workflow ng-show="screens.VN_TASK__WORKFLOW"></vn-workflow>
+	<vn-tracking ng-show="screens.VN_TASK__TRACKING"></vn-tracking>
+	<vn-recurrence ng-show="screens.VN_TASK__RECURRENCE"></vn-recurrence>
+	
+	<div ng-show="screens.VN_TASK__HOME">
+		<vn-title-bar 
+			vn-title="Tasks"
+			vn-search-handler="handleSearchSelected()"
+			vn-show-back-button="true"
+			vn-backbutton-handler="handleBackButton()"
+			vn-show-search="false"></vn-title-bar>
+		<!--
+		<div class="view-by" ng-click="handleViewByClick()">
+			<div class="icon fa fa-chevron-down"></div>
+			<div class="menu">
+				<div class="option" ng-click="handleTaskOptionClick()">Task</div>
+				<div class="option" ng-click="handleWorkflowOptionClick()">Workflow</div>
+			</div>
+		</div>-->
+		
+
+		<div class="filing" ng-if="user.id == 5" ng-click="handleDocumentFile()">
+			<div class="number">
+				Documents requiring attention <span>{{ fileCount }}</span>
+			</div>
+		</div>
+
+		<md-tabs md-selected="selectedIndex" md-stretch-tabs>
+			<md-tab label="To do ({{ counts.taskcount }})">
+				<vn-vision-tasks-to-do scroller="todo-scroller"></vn-vision-tasks-to-do>
+			</md-tab>
+			<md-tab label="Done ({{ counts.donetaskcount }})">
+			    <vn-vision-tasks-done scroller="done-scroller"
+			    ></vn-vision-tasks-done>
+			</md-tab>
+			<md-tab label="Sent ({{ counts.senttaskscount }})">
+				<vn-vision-tasks-sent scroller="sent-scroller"></vn-vision-tasks-sent>
+			</md-tab>
+			<md-tab label="Workflows ({{ counts.workflowcount }})">
+				<vn-vision-workflows-sent scroller="workflow-scroller"></vn-vision-workflows-sent>
+			</md-tab>
+			<md-tab label="Following ({{ counts.trackingcount }})">
+				<vn-vision-tracking-list scroller="tracking-scroller"></vn-vision-tracking-list>
+			</md-tab>
+		</md-tabs>
+
+		<div class="no-data" ng-show="taskreminders.length < 1">
+	        No tasks
+	    </div>
+	</div>
+	<vn-document-review ng-show="screens.VN_TASK__DOCUMENT_REVIEW"></vn-document-review>
+	
+</div>

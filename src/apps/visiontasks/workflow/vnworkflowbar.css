@@ -1,0 +1,412 @@
+.vision-workflow-bar {
+	background-color: #20335E;
+	text-align: left;
+	padding: 0.5em 0;
+	padding-bottom: 1em;
+	white-space: nowrap;
+}
+
+.vision-workflow-bar .indicator{
+	margin-bottom: -1.5em;
+	font-size: 0.6em
+}
+
+
+.vision-workflow-bar .md-button.md-default-theme.md-fab,
+.vision-workflow-bar .md-button.md-default-theme.md-fab:hover,
+.vision-workflow-bar .md-button.md-default-theme.md-fab:focus{
+	background-color: #FFF;
+	height: 5em;
+	width: 5em;
+	color: #264586;
+
+}
+
+.vision-workflow-bar .md-button.md-default-theme.md-fab.has-tracking,
+.vision-workflow-bar .md-button.md-default-theme.md-fab.has-tracking:hover,
+.vision-workflow-bar .md-button.md-default-theme.md-fab.has-tracking:focus,
+.vision-workflow-bar .md-button.md-default-theme.md-fab.has-recurrence,
+.vision-workflow-bar .md-button.md-default-theme.md-fab.has-recurrence:hover,
+.vision-workflow-bar .md-button.md-default-theme.md-fab.has-recurrence:focus{
+	background-color: green;
+	color: #FFF;
+}
+
+
+
+
+.vision-workflow-bar .md-whiteframe-z1{
+	background-color: #FFF;
+	text-align: left;
+	//font-size: 1.2em;
+	padding: 0;
+	padding-left: 1em;
+}
+
+.vision-workflow-bar .md-whiteframe-z1 .label{
+	width: 24em;
+	color: #000;
+}
+
+.vision-workflow-bar .md-whiteframe-z1 .label,
+.vision-workflow-bar .md-whiteframe-z1 img {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 0em;
+}
+
+.vision-workflow-bar .md-whiteframe-z1 img {
+	cursor: pointer;
+}
+
+.vision-workflow-bar .md-whiteframe-z1 img{
+	width: 1.5em;
+}
+
+/* TRACKING */
+.vision-workflow-bar .tracking {
+	
+}
+
+.vision-workflow-bar .md-whiteframe-z1 .tracking img,
+.vision-workflow-bar .md-whiteframe-z1 .tracking .label,
+.vision-workflow-bar .md-whiteframe-z1 .track {
+	display: inline-block;
+}
+
+.vision-workflow-bar .md-whiteframe-z1 .tracking img,
+.vision-workflow-bar .md-whiteframe-z1 .tracking .label{
+	white-space: nowrap;
+}
+
+.vision-workflow-bar .md-whiteframe-z1 .track{
+	//font-size: 0.8em;
+	//margin-right: 0.5em;
+}
+
+.vision-workflow-bar .add,
+.vision-workflow-bar .edit{
+	//background-color: #BBB;
+	cursor: pointer;
+}
+.vision-workflow-bar .add,
+.vision-workflow-bar .edit
+{
+	margin: 0em 0.5em;
+	margin-top: 1em;
+	height: 3em;
+	text-align: center;
+}
+
+.vision-workflow-bar .add {
+
+}
+
+.vision-workflow-bar .dropzone-container {
+	text-align: center;
+}
+
+.vision-workflow-bar .dropzone{
+	border: dashed 1px #BBB;
+	border-radius: 2em;
+	width: 3.2em;
+	height: 3.2em;
+	margin: 0 auto;
+	margin-top: 0.2em;
+	cursor: pointer;
+}
+
+.vision-workflow-bar .dropzone img{
+	margin-top: 0.5em;
+	opacity: 0.5;
+	width: 2em;
+	height: 2em;
+}
+
+.vision-workflow-bar .addition {
+	border: dashed 2px #60636A;
+	border-radius: 2em;
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	opacity: 0.3;
+	width: 4em;
+	height: 4em;
+}
+
+
+
+.vision-workflow-bar .vision-tracking {
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+	width: 35em;
+}
+
+.vision-workflow-bar .vision-tracking  md-input-container {
+	padding: 0;
+}
+
+.vision-workflow-bar .vision-tracking md-checkbox {
+	margin-bottom: 0;
+}
+
+.vision-workflow-bar .vision-tracking .md-subheader {
+	padding: 5px 0px 5px 16px;
+}
+
+.vision-workflow-bar .vision-tracking .md-subheader .md-subheader-content{
+	font-size: 1.5em;
+}
+
+.vision-workflow-bar .vision-tracking .noactivity{
+	display: inline-block;
+}
+
+.vision-workflow-bar .vision-tracking .general input.noactivity{
+	width: 3em;
+}
+
+.vision-workflow-bar .vision-tracking .general md-checkbox,
+.vision-workflow-bar .vision-tracking .general input.noactivity {
+	margin-right: 4px;
+}
+
+.vision-workflow-bar .vision-tracking md-input-container{
+	width: 15em;
+}
+
+.vision-workflow-bar .vision-tracking .content{
+	margin-left: 4em;
+	margin-bottom: 4em;
+}
+
+.vision-workflow-bar md-card{
+	background-color: #777;
+}
+
+.vision-workflow-bar md-card-content {
+	//-webkit-transition: height 1s;
+	padding-bottom: 0.5em;
+}
+
+.vision-workflow-bar .chipsInput {
+	height: inherit;
+	width: inherit;
+	text-indent: 1em;
+}
+
+.vision-workflow-bar .chipsInput::-webkit-input-placeholder{
+	color: #BBB;
+	font-size: 1.2em;
+	font-style: italic;
+}
+
+.vision-workflow-bar .chips-mini-title, 
+.vision-workflow-bar .chips-active-title{
+	height: 20px;
+	padding: 3px;
+	padding-right: 6px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+}
+
+.vision-workflow-bar .chips-active {
+	color: #000;
+	background-color: #FFF;
+	box-shadow: 1px 1px 4px #CCC;
+}
+
+.vision-workflow-bar .chips-active-title {
+	color: #000;
+}
+
+.vision-workflow-bar .chips-active-description {
+	color: #000;
+}
+
+.vision-workflow-bar .dcb-chips-mini-options{
+	display: inline-block;
+}
+
+.vision-workflow-bar .chips-mini {
+	height: 24px;
+}
+
+.vision-workflow-bar .image-default-mini {
+	height: 24px;
+	width: 24px;
+}
+
+.vision-workflow-bar .chips-active {
+	width: inherit;
+	z-index: 2;
+}
+
+.vision-workflow-bar .chips-active-wrap {
+	height: 18em;
+	color: #000;
+}
+
+.vision-workflow-bar .chips-active-main {
+	background-color: #FFF;
+	color: #000;
+}
+
+.vision-workflow-bar .md-chips {
+	width: 100%;
+	text-align: left;
+}
+
+.vision-workflow-bar .options {
+	padding-top: 0.4em;
+	margin-bottom: 0;
+	margin-bottom: 1em;
+}
+
+.vision-workflow-bar .option {
+	color: #CCC;
+	font-size: 1.3em;
+	cursor: pointer;
+	width: 12em;
+	position: relative;
+	text-align: center;
+}
+
+.vision-workflow-bar .option.selected {
+	color: #FFF;
+}
+
+
+.vision-workflow-bar .patient-search,
+.vision-workflow-bar .attachments{
+	width: 30em;
+	min-height: 5em;
+	
+	border: solid 1px #DDD;
+	border-radius: 5px;
+	background-color: #FFF;	
+}
+
+.vision-workflow-bar .patient-search-container,
+.vision-workflow-bar .attachments-container{
+	vertical-align: top;
+	color: #FFF;
+	margin-left: 2em;
+}
+
+
+.vision-workflow-bar .patient-search-container,
+.vision-workflow-bar .attachments-container,
+.vision-workflow-bar .right,
+.vision-workflow-bar .left,
+.vision-workflow-bar .tracking,
+.vision-workflow-bar .recurrence {
+	display: inline-block;
+}
+
+.vision-workflow-bar .left{
+	width: 65em;
+	text-align: left;
+	vertical-align: top;
+}
+
+.vision-workflow-bar .right{
+	width: 15%;
+	text-align: left;
+}
+
+.vision-workflow-bar .patient-search,
+.vision-workflow-bar .attachments,
+.vision-workflow-bar .tracking,
+.vision-workflow-bar .recurrence {
+	vertical-align: middle;
+}
+
+.vision-workflow-bar .tracking,
+.vision-workflow-bar .recurrence{
+	margin: 1em 1em;
+	margin-left: 4em;
+	margin-bottom: 0;
+}
+
+.vision-workflow-bar .recurrence{
+	margin-left: 2em;
+}
+
+.vision-workflow-bar .tracking .summary {
+	font-size: 1.2em;
+}
+
+.vision-workflow-bar .tracking .edit {
+	text-align: center;
+}
+
+.vision-workflow-bar .patient-search #chips-list {
+	z-index: 2;
+}
+
+.vision-workflow-bar .patient-search{
+	
+}
+
+.vision-workflow-bar .attached{
+	border: dashed 1px #BBB;
+	width: 25em;
+	margin: 0 auto;
+	padding: 1em;
+	border-radius: 1em;
+	text-align: left
+}
+
+.vision-workflow-bar .attached .title {
+	font-size: 2em;
+}
+
+.vision-workflow-bar .attached .subtitle,
+.vision-workflow-bar .attached .title {
+	color: #20335E;
+}
+
+.vision-workflow-bar .attached .close{
+	font-size: 2em;
+	height: 0.5em;
+	width: 100%;
+	text-align: right;
+	margin-top: -0.5em;
+	color: #20335E;
+	cursor: pointer;
+}
+
+.vision-workflow-bar .attached .close:hover{
+	color: #2033FF;
+}
+
+.vision-workflow-bar .attach-options {
+	position: absolute;
+	right: 1em;
+	top: 9em;
+	display: none;
+	background-color: #264586;
+	color: #FFF;
+	width: 15em;
+	text-align: left;
+	z-index: 1;
+}
+
+.vision-workflow-bar .attach-options.open {
+	display: inline-block;
+}
+
+.vision-workflow-bar .attach-option {
+	font-size: 1.5em;
+	padding: 0.6em;
+	cursor: pointer;
+}
+
+.vision-workflow-bar .attach-option:hover{
+	opacity: 0.9;
+	background-color: #3B5588;
+}
+
+

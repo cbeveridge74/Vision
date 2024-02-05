@@ -1,0 +1,3 @@
+require([ "apps/visionreception/vnreceptionmodule"], function( vnreceptionmodule ){
+
+});

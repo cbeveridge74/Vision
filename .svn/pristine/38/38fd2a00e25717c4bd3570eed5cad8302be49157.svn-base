@@ -1,0 +1,330 @@
+function DemoAssembler(){
+	var assembler = this;
+	var taskStatus = {};
+	var slotTypes = {};
+	var patientId = 1;
+	var patientCounter = 0;
+	var peopleCounter = 0;
+	var masterowners = {};
+	assembler.status = {};
+
+	masterowners[ 1 ] 	= { img: "MaleDoc1.png", mapping: "MBLA"};
+	masterowners[ 2 ] 	= { img: "FemaleDoc1.png", mapping: "DC" };
+	masterowners[ 3 ] 	= { img: "FemaleDoc2.png", mapping: "SMUK" };
+	masterowners[ 4 ] 	= { img: "FemaleDoc3.png", mapping: "PNAT" };
+	masterowners[ 5 ] 	= { img: "MaleDoc2.png", mapping: "PPAN" };
+	masterowners[ 6 ] 	= { img: "FemaleDoc4.png", mapping: "CL" };
+	masterowners[ 7 ] 	= { img: "FemaleDoc5.png" };
+	masterowners[ 8 ] 	= { img: "MaleDoc3.png" };
+	masterowners[ 9 ] 	= { img: "MaleDoc4.png" };
+	masterowners[ 10 ] 	= { img: "MaleDoc5.png" };
+	masterowners[ 11 ] 	= { img: "MaleDoc6.png" };
+	masterowners[ 12] 	= { img: "MaleDoc7.png" };
+	masterowners[ 13 ] 	= { img: "MaleDoc8.png" };
+	masterowners[ 14 ] 	= { img: "MaleDoc9.png" };
+	masterowners[ 15 ] 	= { img: "MaleDoc10.png" };
+	masterowners[ 16 ] 	= { img: "MaleDoc11.png" };
+	masterowners[ 17 ] 	= { img: "MaleDoc12.png" };
+
+	var ownerswithid = {};
+	ownerswithid[ "MBLA" ] 	= { img: "MaleDoc1.png", mapping: 1};
+	ownerswithid[ "DC" ] 	= { img: "FemaleDoc1.png", mapping: 2 };
+	ownerswithid[ "SMUK" ] 	= { img: "FemaleDoc2.png", mapping: 3 };
+	ownerswithid[ "PNAT" ] 	= { img: "FemaleDoc3.png", mapping: 4 };
+	ownerswithid[ "PPAN" ] 	= { img: "MaleDoc2.png", mapping: 5 };
+	ownerswithid[ "CL" ] 	= { img: "FemaleDoc4.png", mapping: 6 };
+
+	taskStatus[ "0" ] 		= "Did_not_arrive2.png";
+	taskStatus[ "1" ] 		= "Arrived2.png";
+	taskStatus[ "2" ] 		= "Completed2.png";
+	taskStatus[ "3" ] 		= "In_consultation2.png";
+
+	
+	assembler.status[ "AVAILABLE" ] 		= "Free2.png";
+	assembler.status[ "BOOKED" ] 			= "Booked2.png";
+	assembler.status[ "ARRIVED" ] 			= "Arrived2.png";
+	assembler.status[ "INCONSULTATION" ] 	= "In_consultation2.png";
+	assembler.status[ "COMPLETED" ] 		= "Completed2.png";
+	assembler.status[ "UNAVAILABLE" ] 		= "Booked2.png";
+	
+
+	assembler.assemblePatient = function( data ){
+		return data;
+	};
+
+	assembler.assembleAppointment = function( data ){
+
+		var ownerImage = ownerswithid[ 1 ];
+		var ownerId = 1;
+		if( data.owner != null && ownerswithid[ data.owner ] != null ){
+			ownerImage = ownerswithid[ data.owner ].img;
+			ownerId = ownerswithid[ data.owner ].mapping;
+		}
+
+		var item = {
+            "id" : data.id, 
+            "date" : new Date( data.date_time ), 
+            "status" : 'AVAILABLE', 
+            "slottype" : slotTypes[ data.details.service_slot_type_id ].description.substring( 0,3 ), 
+            "slotcolor": "#" + slotTypes[ data.details.service_slot_type_id ].display_colour.toString(16),
+            "patientid" : data.pat_id,
+            "owner" : data.owner,
+            "ownerimage" : ownerImage,
+            "ownerid" : ownerId,
+            "statusimage" : assembler.status[ data.details.status ]
+        };
+		return item;
+	};
+
+	assembler.assembleDiscussion = function( data ){
+
+		
+		var item = {
+            "id" : data.id,
+		    "shortdescription" : data.shortdescription,
+		    "subtitle" : data.subtitle,
+		    "status" : data.status,
+		    "time" : data.time,
+		    "image" : "/images/" + masterowners[ ++peopleCounter ].img
+        };
+		return item;
+	};
+
+	assembler.assembleReminder = function( data ){
+		var item = {
+            "id" : data.id,
+            "workflowname" : data.workflowname,
+		    "shortdescription" : data.shortdescription,
+		    "status" : data.status,
+		    "due" : new Date( data.due ),
+		    "priority" : data.priority,
+		    "recurrence" : data.recurrence,
+		    "private" : data.private,
+		    "overduealert" : data.overduealert,
+		    "status":data.status,
+		    "statusimage":taskStatus[data.status],
+		    "image":"reminder.svg"
+        };
+		return item;
+	};
+
+	assembler.assemblePerson = function( data ){
+		var item = {
+            "id" : data.id,
+		    "shortdescription" : data.title,
+		    "status" : data.status,
+		    "skill" : "",
+		    "location" : data.location,
+		    "locationdescription" : data.locationdescription,
+		    "role" : data.role,
+		    "image" : "images/" + masterowners[ ++peopleCounter ].img
+        };
+        angular.forEach( data.skills, function( value, key ){
+        	item.skill = item.skill + " " + value;
+        });
+
+        
+		return item;
+	};
+
+	assembler.assembleMailItem = function( data ){
+		var item = {
+            "id" : data.id,
+		    "date" : data.date,
+		    "title" : data.title,
+		    "subtitle" : data.subtitle,
+		    "filed": data.filed,
+		    "actions" : data.actions,
+		    "warnings" : data.warnings
+        };
+		return item;
+	};
+
+	assembler.assembleTherapy = function( data ){
+		var item = {
+            "id" : data.id,
+            "shortdescription" : data.shortdescription,
+		    "drugname" : data.drugname,
+		    "strength" : data.strength,
+		    "dose" : "2 daily"
+        };
+		return item;
+	};
+  
+
+	assembler.assembleTask = function( data ){
+		var item = {
+            "id" : data.id,
+            "workflowname" : data.workflowname,
+		    "shortdescription" : data.shortdescription,
+		    "status" : data.status,
+		    "due" : new Date( data.due ),
+		    "priority" : data.priority,
+		    "recurrence" : data.recurrence,
+		    "private" : data.private,
+		    "overduealert" : data.overduealert,
+		    "status":data.status,
+		    "statusimage":taskStatus[data.status],
+		    "image":"task_pad.svg"
+        };
+		return item;
+	};
+
+	var dataAssembler = function( data, singleItemAssemblerFunction ){
+		var returnData = new Array();
+
+		angular.forEach(data, function(value, key) {
+	       returnData.push( singleItemAssemblerFunction( value ) );
+	    });
+		return returnData;
+	};
+
+	assembler.assembleDiscussions = function( data ){
+		peopleCounter = 0;
+		var returnData =  dataAssembler( data.discussions, assembler.assembleDiscussion );
+	    return returnData;
+	};
+
+	assembler.assemblePatients = function( data ){
+		var returnData =  dataAssembler( data, assembler.assemblePatient );
+	    return returnData;
+	};
+
+	assembler.assembleAppointments = function( data ){
+
+		var patientCounter = 0;
+		var returnData = new Array();
+		// Get the slot types from the reference data
+		angular.forEach(referenceData.data.slot_types, function(value, key) {
+	       slotTypes[value.id] = value;
+	    });
+
+		// Remove/add elements as required for the app
+		angular.forEach(data.data, function(value, key) {
+			if(value.details != null && value.details.service_slot_type_id != null){
+				
+				var slot = assembler.assembleAppointment( value );
+
+				if( patientCounter < 10 ){
+                    createPatient( slot, patientCounter );
+                }
+                else if (patientCounter < 50 && ( patientCounter % 3 == 0 || patientCounter % 4 == 0))
+                {
+                    createPatient( slot, patientCounter );
+                }
+                else if (patientCounter < 105 && ( patientCounter % 7 == 0 || patientCounter % 12 == 0))
+                {
+                    createPatient( slot, patientCounter );
+                }
+                patientCounter++;
+                returnData.push( slot );
+
+			}else{
+				delete data.data[key];
+			}
+	    });
+		return returnData;
+	};
+
+	assembler.assembleMail = function( data ){
+		var returnData =  dataAssembler( data.mail, assembler.assembleMailItem );
+		var userCounter = 0;
+		angular.forEach(returnData, function(value, key) {
+			createUser( value, userCounter++ );
+			
+	    });
+	    return returnData;
+	};
+
+	assembler.assembleReminders = function( data ){
+		var returnData = dataAssembler( data.reminders, assembler.assembleReminder );
+	    // Remove/add elements as required for the app
+		angular.forEach(returnData, function(value, key) {
+			
+			patientCounter++;
+			if( patientCounter < 3 ){
+				createPatient( value, 0 );
+			}else{
+				createPatient( value, patientCounter );
+			}
+	    });
+
+		return returnData;
+	};
+
+	assembler.assemblePersons = function( data ){
+		var peopleCounter = 0;
+		return dataAssembler( data.persons, assembler.assemblePerson );
+	};
+
+	assembler.assembleTherapies = function( data ){
+
+		var returnData = dataAssembler( data.therapies, assembler.assembleTherapy );
+
+		angular.forEach(returnData, function(value, key) {
+			
+			patientCounter++;
+			if( patientCounter < 10){
+				createPatient( value, 0 );
+			}else{
+				createPatient( value, patientCounter );
+			}
+	    });
+
+		return returnData;
+	};
+
+	assembler.assembleTasks = function( data ){
+
+		var returnData = dataAssembler( data.tasks, assembler.assembleTask );
+	    // Remove/add elements as required for the app
+		angular.forEach(returnData, function(value, key) {
+			
+			if( value.workflowname != "Admin" ){
+				createPatient( value, patientCounter );
+				patientCounter++;
+			}
+			
+			/*if( patientCounter < 10 ){
+	            createPatient( value, patientCounter );
+	        }
+	        else if (patientCounter < 50 && ( patientCounter % 3 == 0 || patientCounter % 4 == 0))
+	        {
+	            createPatient( value, patientCounter );
+	        }
+	        else if (patientCounter < 105 && ( patientCounter % 7 == 0 || patientCounter % 12 == 0))
+	        {
+	            createPatient( value, patientCounter );
+	        }*/
+	    });
+
+		return returnData;
+	};
+
+
+	var dataStore = new DataStore();
+	var createPatient = function( value, patientCounter ){
+		
+		var patients = dataStore.patients;
+		value.patient = {};
+ 		value.patient.displayname = patients[patientCounter].Surname + ", " + patients[patientCounter].Forename + " (" + patients[patientCounter].Title + ")";
+        value.patient.dob = patients[patientCounter].DOB;
+        value.patient.id  = patients[patientCounter].Id;
+        value.status = "BOOKED";
+        value.statusimage = assembler.status[ value.status ];
+	};
+
+	var createUser = function( value, userCounter ){
+		if( userCounter > 2  ){
+			userCounter = 0;
+			value.person = "Unallocated";
+			createPatient( value, userCounter );
+			return;
+		}
+		value.patient = {};
+		value.patient.displayname = "Unassigned";
+		value.person = dataStore.demoDataPersons.persons[userCounter].title;
+	}
+
+	
+}

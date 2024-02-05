@@ -1,0 +1,17 @@
+<html>
+	<script src="../../scripts/lib/ocrad.js"></script>
+	<script type="text/javascript">
+		window.addEventListener("message", function (event) {
+		    if ( event.data.sResponseText ) {
+		       var string = OCRAD( event.data.sResponseText,{ verbose: true } );
+		       event.source.postMessage({
+		          data: JSON.stringify( string )
+		        }, event.origin );
+		    }
+		});
+	</script>
+	<body></body>
+</html>
+
+
+

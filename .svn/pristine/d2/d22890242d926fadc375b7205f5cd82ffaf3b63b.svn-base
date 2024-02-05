@@ -1,0 +1,42 @@
+.vision-docman{
+	width: 100%;
+	height: 100%;
+	background-color: #FFF;
+}
+
+.vision-docman md-tabs {
+	overflow: visible;
+}
+
+.vision-docman .document-scroller{
+	height: 100%;
+	width: 100%;
+}
+
+.vision-docman .document-item{
+	height: 3em;
+	margin: 1em;
+	font-size: 1.5em;
+}
+
+.vision-docman .document-item .name{
+	margin: auto 0em;
+}
+
+.vision-docman .document-item .patient{
+	font-size: 0.7em;
+}
+
+.vision-docman .md-whiteframe-z1 {
+	margin: 1em;
+	cursor: pointer;
+
+}
+
+.vision-docman .md-whiteframe-z1.selected{
+	border: solid 1px orange;
+}
+
+.vision-docman .md-whiteframe-z1:active{
+	-webkit-transform: translate(1px,1px);
+}

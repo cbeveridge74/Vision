@@ -1,0 +1,18 @@
+<div class="booking-form" 
+	ng-controller="vnVisionAppointmentsBookingController"
+	ng-init="init();">
+	<vn-css vn-id="vnbooking" vn-css-file="apps/visionappointments/booking/vnbooking.css"></vn-css>
+	<div class="top">
+		<vn-title-bar 
+			vn-title="Booking"
+			vn-backbutton-handler="handleBackClick()"
+			vn-show-back-button="true"
+			vn-show-search="false"></vn-title-bar>
+	</div>
+	<div class="middle">
+		<input class="booking typeahead" type="text" placeholder="Type 't' or 'g' to find a patient...">
+	</div>
+	<div class="bottom">
+		<div class="book-button btn btn-primary btn-lg" ng-click="handleBookClick();" role="button">Book</div>
+	</div>
+</div>

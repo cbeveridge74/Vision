@@ -1,0 +1,120 @@
+.task-create {
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+}
+
+.task-create md-card{
+	width: 330px;
+	margin: 0;
+	box-shadow: 3px 3px 9px #777;
+}
+
+
+.task-create .task-widgets {
+	width: 100%;
+	height: 100%;
+	white-space: nowrap
+}
+
+.task-create .task-widgets .task-widget{
+	display: inline-block;
+	margin: 7px
+}
+
+.task-create .task-widgets .task-widget md-switch{
+	margin: 0;
+}
+
+.task-create .task-widgets .task-widget img{
+	width: 24px;
+	height: 24px;
+}
+	
+
+.task-create .chipsInput {
+	height: inherit;
+	width: inherit;
+}
+
+.task-create .chips-mini-title{
+	height: 20px;
+	padding: 3px;
+	padding-right: 6px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+}
+
+.task-create .chips-mini {
+	height: 24px;
+}
+
+.task-create .image-default-mini {
+	height: 24px;
+	width: 24px;
+}
+
+.task-create .chips-active {
+	width: inherit;
+}
+
+.task-create .recipients {
+	border-bottom: solid 1px #DDD;
+}
+
+.task-create .subject {
+	margin-top: 1em;
+}
+
+.task-create .description {
+	margin-top: 1em;
+}
+
+.task-create .subject,
+.task-create  .description md-input-container {
+	width: 300px;
+}
+
+.task-create md-select {
+	display: block;
+}
+
+.task-create .md-select-label > span{
+	width: 100%;
+}
+
+.task-create .md-select-label .md-select-icon {
+	//width: 200px;
+}
+
+.task-create .subject label,
+.task-create .recipients label,
+.task-create .description label {
+	color: #AAA;
+}
+
+.task-create .chips-mini-img {
+	height: 16px;
+}
+
+.task-create .chips-mini-img img {
+	height: 16px;
+}
+
+.task-create #chips-list {
+	z-index: 2;
+	max-height: 40em;
+}
+
+.task-create .command-buttons{
+	width: 100%;
+	margin-top: 2em;
+}
+
+.task-create .md-button{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+
+

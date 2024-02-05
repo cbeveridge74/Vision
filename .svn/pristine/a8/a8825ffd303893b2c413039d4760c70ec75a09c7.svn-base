@@ -1,0 +1,15 @@
+angular.module('vnCommandMenuModule', [],function () {})
+.controller('vnCommandMenuController', function( $scope, $rootScope, gaTracker ){
+	$scope.handleCommandClick = function( ){
+		$rootScope.$broadcast( "COMMAND_SELECTED", this.command );
+		if( this.command != null ){
+			gaTracker.sendEvent('Command Selected', this.command.id, 'command');
+		}
+	};
+})
+.directive('vnCommandMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'menus/vncommandmenu.html'
+    };
+  });

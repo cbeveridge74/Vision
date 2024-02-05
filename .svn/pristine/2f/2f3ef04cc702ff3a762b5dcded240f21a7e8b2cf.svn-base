@@ -1,0 +1,12 @@
+angular.module('vnTrackingModule', [],function () {})
+.controller('vnTrackingController', function(){
+
+})
+.directive('vnTracking', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vntracking.html'
+    };
+});
+
+

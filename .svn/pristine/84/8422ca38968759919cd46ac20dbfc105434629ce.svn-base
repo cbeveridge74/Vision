@@ -1,0 +1,20 @@
+<div ng-init="init()" class="brick-widget" >
+	<md-whiteframe class="md-whiteframe-z1 brick" layout layout-align="start start">
+		<div class="task-create-container">
+			<vn-task-create 
+			minimum-fields-satisfied-handler="minFieldsSatisfiedHandler( isSatisfied )"
+			minimise="inneritem.minimise  && outeritem.minimise"
+			ng-repeat="(innerindex, inneritem) in outeritem.taskinnercreators"></vn-task-create>
+		</div>
+	    <div class="add" ng-show="outeritem.showinnerbrick && !invalidcardopen" ng-click="handleInnerAddClick()" >
+	    	<md-button class="md-fab" aria-label="Comment">
+	            <md-icon md-svg-src="apps/components/images/add_grey.svg"></md-icon>
+	        </md-button>
+	    </div>
+	</md-whiteframe>
+	<div class="add brick" ng-show="outeritem.showouterbrick && !invalidcardopen" ng-click="handleOuterAddClick()">
+		<md-button class="md-fab">
+            <md-icon md-svg-src="apps/components/images/add_grey.svg"></md-icon>
+        </md-button>
+    </div>
+</div>

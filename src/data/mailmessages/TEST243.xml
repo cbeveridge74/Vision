@@ -1,0 +1,1407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<InvestigationReport xmlns:gen="http://www.show.scot.nhs.uk/isd/General" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sci="http://www.show.scot.nhs.uk/isd/SCIStore">
+	<Summary>
+		<Id>TEST283</Id>
+		<SCIDesc>A Test</SCIDesc>
+		<ReportDate>11/08/2011</ReportDate>
+		<msg_version>7.1</msg_version>
+	</Summary>
+	<sci:ReportData>
+		<sci:ReportIdentifier>CHOA012</sci:ReportIdentifier>
+		<sci:ReportDate>2011-08-11</sci:ReportDate>
+		<sci:Discipline>Biochemistry</sci:Discipline>
+		<sci:ServiceProvider>
+			<sci:ProvidingLocation>
+				<gen:OrganisationId>
+					<gen:IdValue>SHA04</gen:IdValue>
+					<gen:IdScheme>Service Provider</gen:IdScheme>
+					<gen:IdType>Organisation</gen:IdType>
+				</gen:OrganisationId>
+				<gen:OrganisationName>(SHA04) NHS ACUTE</gen:OrganisationName>
+				<gen:OrganisationType>Practice</gen:OrganisationType>
+			</sci:ProvidingLocation>
+		</sci:ServiceProvider>
+		<sci:RequestingParty>
+			<gen:EmployingOrganisation>
+				<gen:OrganisationId>
+					<gen:IdValue>62122</gen:IdValue>
+					<gen:IdScheme>RequestingOrganisation</gen:IdScheme>
+					<gen:IdType>Organisation</gen:IdType>
+				</gen:OrganisationId>
+				<gen:OrganisationName>(62122) INPS HEALTH CENTRE</gen:OrganisationName>
+				<gen:OrganisationType>Practice</gen:OrganisationType>
+			</gen:EmployingOrganisation>
+		</sci:RequestingParty>
+		<sci:ServiceRequest/>
+		<sci:ServiceResult>
+			<sci:SampleDetails>
+				<gen:SampleLaboratoryId>HI743043L</gen:SampleLaboratoryId>
+				<gen:DateTimeSampled>2009-07-24T08:45:00</gen:DateTimeSampled>
+				<gen:DateTimeReceived>2009-07-24T09:37:19</gen:DateTimeReceived>
+				<gen:DateTimeTested>2009-07-24T09:37:19</gen:DateTimeTested>
+				<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Biochemical test: COMPLETE</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr style="font-weight:bold;">
+    <td style="width: 40%">Description</td>
+    <td style="width: 15%">Value</td>
+    <td style="width: 18%">Range</td>
+    <td style="width: 17%">Unit</td>
+    <td style="width: 5%">Normalcy</td>
+    <td style="width: 5%">Notes</td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum sodium</td>
+    <td style="width: 15%; vertical-align: top">138</td>
+    <td style="width: 18%; vertical-align: top">136 - 144</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum potassium</td>
+    <td style="width: 15%; vertical-align: top">4.2</td>
+    <td style="width: 18%; vertical-align: top">3.8 - 5.0</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum chloride</td>
+    <td style="width: 15%; vertical-align: top">102</td>
+    <td style="width: 18%; vertical-align: top">95 - 105</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum bicarbonate</td>
+    <td style="width: 15%; vertical-align: top">25</td>
+    <td style="width: 18%; vertical-align: top">24 - 32</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum urea level</td>
+    <td style="width: 15%; vertical-align: top">2.5</td>
+    <td style="width: 18%; vertical-align: top">2.5 - 6.0</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum creatinine</td>
+    <td style="width: 15%; vertical-align: top">113</td>
+    <td style="width: 18%; vertical-align: top">70 - 120</td>
+    <td style="width: 17%; vertical-align: top">umol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">GFR calculated abbreviatd MDRD</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>&gt;60</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>60 - 
+</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>
+</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong></strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum total bilirubin level</td>
+    <td style="width: 15%; vertical-align: top">17</td>
+    <td style="width: 18%; vertical-align: top">
+ - 21</td>
+    <td style="width: 17%; vertical-align: top">umol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum alkaline phosphatase</td>
+    <td style="width: 15%; vertical-align: top">56</td>
+    <td style="width: 18%; vertical-align: top">50 - 115</td>
+    <td style="width: 17%; vertical-align: top">u/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum alkaline phosphatase</td>
+    <td style="width: 15%; vertical-align: top">56</td>
+    <td style="width: 18%; vertical-align: top">50 - 115</td>
+    <td style="width: 17%; vertical-align: top">u/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">ALT/SGPT serum level</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>45</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>5 - 40</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>u/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>H</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">ALT/SGPT serum level</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>45</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>5 - 40</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>u/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>H</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum gamma GT level</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>84</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>7 - 38</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>u/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>H</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum total protein</td>
+    <td style="width: 15%; vertical-align: top">75</td>
+    <td style="width: 18%; vertical-align: top">65 - 82</td>
+    <td style="width: 17%; vertical-align: top">g/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum albumin</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>35</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>36 - 52</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>g/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>L</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum calcium</td>
+    <td style="width: 15%; vertical-align: top">2.42</td>
+    <td style="width: 18%; vertical-align: top">2.1 - 2.6</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Corrected serum calcium level</td>
+    <td style="width: 15%; vertical-align: top">2.48</td>
+    <td style="width: 18%; vertical-align: top">2.1 - 2.6</td>
+    <td style="width: 17%; vertical-align: top">
+</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">HTML Formatted Result</td>
+    <td style="width: 15%; vertical-align: top">
+    </td>
+    <td style="width: 18%; vertical-align: top">
+    </td>
+    <td style="width: 17%; vertical-align: top">
+    </td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+				</DisplayHTML>
+			</sci:SampleDetails>
+			<sci:TestResultSets>
+				<sci:TestResultSet>
+					<gen:TestSetDetails>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>adm2</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>ADMISSION PROFILE ue lft tprot alb ca: COMPLETE</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>44p..</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Biochemical test: COMPLETE</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:OrderNumber>0</gen:OrderNumber>
+						<gen:TestIdentifier>
+							<gen:IdValue>427</gen:IdValue>
+							<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+						</gen:TestIdentifier>
+					</gen:TestSetDetails>
+					<gen:TestResults>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44I5.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum sodium</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>138</gen:QuantityValue>
+										<gen:QuantityUnit>mmol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>144</gen:RangeHighValue>
+										<gen:RangeLowValue>136</gen:RangeLowValue>
+										<gen:RangeUnit>mmol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:0</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44I4.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum potassium</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>4.2</gen:QuantityValue>
+										<gen:QuantityUnit>mmol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>5.0</gen:RangeHighValue>
+										<gen:RangeLowValue>3.8</gen:RangeLowValue>
+										<gen:RangeUnit>mmol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:1</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44I6.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum chloride</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>102</gen:QuantityValue>
+										<gen:QuantityUnit>mmol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>105</gen:RangeHighValue>
+										<gen:RangeLowValue>95</gen:RangeLowValue>
+										<gen:RangeUnit>mmol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:2</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44I7.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum bicarbonate</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>25</gen:QuantityValue>
+										<gen:QuantityUnit>mmol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>32</gen:RangeHighValue>
+										<gen:RangeLowValue>24</gen:RangeLowValue>
+										<gen:RangeUnit>mmol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:3</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44J9.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum urea level</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>2.5</gen:QuantityValue>
+										<gen:QuantityUnit>mmol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>6.0</gen:RangeHighValue>
+										<gen:RangeLowValue>2.5</gen:RangeLowValue>
+										<gen:RangeUnit>mmol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:4</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44J3.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum creatinine</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>113</gen:QuantityValue>
+										<gen:QuantityUnit>umol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>120</gen:RangeHighValue>
+										<gen:RangeLowValue>70</gen:RangeLowValue>
+										<gen:RangeUnit>umol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:5</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>451E.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>GFR calculated abbreviatd MDRD</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>60</gen:QuantityValue>
+										<gen:QuantityUnit></gen:QuantityUnit>
+									</gen:Result>
+									<gen:ArithmeticComparator>&gt;</gen:ArithmeticComparator>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue></gen:RangeHighValue>
+										<gen:RangeLowValue>60</gen:RangeLowValue>
+										<gen:RangeUnit></gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:6</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44EC.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum total bilirubin level</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>17</gen:QuantityValue>
+										<gen:QuantityUnit>umol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>21</gen:RangeHighValue>
+										<gen:RangeLowValue></gen:RangeLowValue>
+										<gen:RangeUnit>umol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:7</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44F..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum alkaline phosphatase</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>56</gen:QuantityValue>
+										<gen:QuantityUnit>u/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>115</gen:RangeHighValue>
+										<gen:RangeLowValue>50</gen:RangeLowValue>
+										<gen:RangeUnit>u/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:8</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44G3.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>ALT/SGPT serum level</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>45</gen:QuantityValue>
+										<gen:QuantityUnit>u/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>40</gen:RangeHighValue>
+										<gen:RangeLowValue>5</gen:RangeLowValue>
+										<gen:RangeUnit>u/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+								<gen:DeviatingResultQuantitativeFlag>H</gen:DeviatingResultQuantitativeFlag>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:9</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44G9.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum gamma GT level</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>84</gen:QuantityValue>
+										<gen:QuantityUnit>u/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>38</gen:RangeHighValue>
+										<gen:RangeLowValue>7</gen:RangeLowValue>
+										<gen:RangeUnit>u/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+								<gen:DeviatingResultQuantitativeFlag>H</gen:DeviatingResultQuantitativeFlag>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:10</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44M3.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum total protein</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>75</gen:QuantityValue>
+										<gen:QuantityUnit>g/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>82</gen:RangeHighValue>
+										<gen:RangeLowValue>65</gen:RangeLowValue>
+										<gen:RangeUnit>g/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:11</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44M4.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum albumin</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>35</gen:QuantityValue>
+										<gen:QuantityUnit>g/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>52</gen:RangeHighValue>
+										<gen:RangeLowValue>36</gen:RangeLowValue>
+										<gen:RangeUnit>g/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+								<gen:DeviatingResultQuantitativeFlag>L</gen:DeviatingResultQuantitativeFlag>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:12</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44I8.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Serum calcium</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>2.42</gen:QuantityValue>
+										<gen:QuantityUnit>mmol/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>2.6</gen:RangeHighValue>
+										<gen:RangeLowValue>2.1</gen:RangeLowValue>
+										<gen:RangeUnit>mmol/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:13</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>44IC.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Corrected serum calcium level</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>2.48</gen:QuantityValue>
+										<gen:QuantityUnit></gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>2.6</gen:RangeHighValue>
+										<gen:RangeLowValue>2.1</gen:RangeLowValue>
+										<gen:RangeUnit></gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:14</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>HTML</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>HTML Formatted Result</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:DisciplineSpecificValues>TestResultOrder:15</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+					</gen:TestResults>
+					<gen:ResultStatus>
+						<gen:StatusType>Final</gen:StatusType>
+					</gen:ResultStatus>
+					<gen:ReportDetails>
+						<gen:ExaminationDetails/>
+						<gen:AuthorisingDetails/>
+						<gen:ReportingDetails/>
+						<gen:DataEntryDetails/>
+					</gen:ReportDetails>
+					<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Biochemical test: COMPLETE</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr style="font-weight:bold;">
+    <td style="width: 40%">Description</td>
+    <td style="width: 15%">Value</td>
+    <td style="width: 18%">Range</td>
+    <td style="width: 17%">Unit</td>
+    <td style="width: 5%">Normalcy</td>
+    <td style="width: 5%">Notes</td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum sodium</td>
+    <td style="width: 15%; vertical-align: top">138</td>
+    <td style="width: 18%; vertical-align: top">136 - 144</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum potassium</td>
+    <td style="width: 15%; vertical-align: top">4.2</td>
+    <td style="width: 18%; vertical-align: top">3.8 - 5.0</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum chloride</td>
+    <td style="width: 15%; vertical-align: top">102</td>
+    <td style="width: 18%; vertical-align: top">95 - 105</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum bicarbonate</td>
+    <td style="width: 15%; vertical-align: top">25</td>
+    <td style="width: 18%; vertical-align: top">24 - 32</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum urea level</td>
+    <td style="width: 15%; vertical-align: top">2.5</td>
+    <td style="width: 18%; vertical-align: top">2.5 - 6.0</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum creatinine</td>
+    <td style="width: 15%; vertical-align: top">113</td>
+    <td style="width: 18%; vertical-align: top">70 - 120</td>
+    <td style="width: 17%; vertical-align: top">umol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">GFR calculated abbreviatd MDRD</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>&gt;60</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>60 - 
+</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>
+</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong></strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum total bilirubin level</td>
+    <td style="width: 15%; vertical-align: top">17</td>
+    <td style="width: 18%; vertical-align: top">
+ - 21</td>
+    <td style="width: 17%; vertical-align: top">umol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum alkaline phosphatase</td>
+    <td style="width: 15%; vertical-align: top">56</td>
+    <td style="width: 18%; vertical-align: top">50 - 115</td>
+    <td style="width: 17%; vertical-align: top">u/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum alkaline phosphatase</td>
+    <td style="width: 15%; vertical-align: top">56</td>
+    <td style="width: 18%; vertical-align: top">50 - 115</td>
+    <td style="width: 17%; vertical-align: top">u/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">ALT/SGPT serum level</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>45</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>5 - 40</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>u/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>H</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">ALT/SGPT serum level</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>45</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>5 - 40</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>u/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>H</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum gamma GT level</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>84</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>7 - 38</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>u/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>H</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum total protein</td>
+    <td style="width: 15%; vertical-align: top">75</td>
+    <td style="width: 18%; vertical-align: top">65 - 82</td>
+    <td style="width: 17%; vertical-align: top">g/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum albumin</td>
+    <td style="width: 15%; vertical-align: top; color: red"><strong>35</strong></td>
+    <td style="width: 18%; vertical-align: top; color: red"><strong>36 - 52</strong></td>
+    <td style="width: 17%; vertical-align: top; color: red"><strong>g/l</strong></td>
+    <td style="width: 5%; vertical-align: top; color: red"><strong>L</strong></td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Serum calcium</td>
+    <td style="width: 15%; vertical-align: top">2.42</td>
+    <td style="width: 18%; vertical-align: top">2.1 - 2.6</td>
+    <td style="width: 17%; vertical-align: top">mmol/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Corrected serum calcium level</td>
+    <td style="width: 15%; vertical-align: top">2.48</td>
+    <td style="width: 18%; vertical-align: top">2.1 - 2.6</td>
+    <td style="width: 17%; vertical-align: top">
+</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">HTML Formatted Result</td>
+    <td style="width: 15%; vertical-align: top">
+    </td>
+    <td style="width: 18%; vertical-align: top">
+    </td>
+    <td style="width: 17%; vertical-align: top">
+    </td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+					</DisplayHTML>
+					<UniqueCarePathwayNumber xmlns="##other"></UniqueCarePathwayNumber>
+					<TestAbnormal xmlns="##other">true</TestAbnormal>
+				</sci:TestResultSet>
+			</sci:TestResultSets>
+		</sci:ServiceResult>
+		<sci:PatientInformation>
+			<sci:BasicDemographics>
+				<gen:PatientId>
+					<gen:IdValue>0811655040</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>0811655040</gen:IdValue>
+					<gen:IdScheme>REQ</gen:IdScheme>
+					<gen:IdType>Requestor</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>0811655040</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>CHI</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>8034870</gen:IdValue>
+					<gen:IdScheme>CRN</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>16255</gen:IdValue>
+					<gen:IdScheme>STORE_KEY</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>7960</gen:IdValue>
+					<gen:IdScheme>STORE_KEY</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientName>
+					<gen:StructuredName>
+						<gen:GivenName>BANANA</gen:GivenName>
+						<gen:FamilyName>SPLITS</gen:FamilyName>
+					</gen:StructuredName>
+					<gen:NameType>Current</gen:NameType>
+				</gen:PatientName>
+				<gen:PatientAddress>
+					<gen:StructuredAddress>
+						<gen:AddressLine>1 ANY ROAD</gen:AddressLine>
+						<gen:AddressLine>ANYPLACE</gen:AddressLine>
+						<gen:AddressLine>GLASGOW</gen:AddressLine>
+					</gen:StructuredAddress>
+					<gen:PostCode>G77 0QE</gen:PostCode>
+					<gen:AddressType>Current</gen:AddressType>
+				</gen:PatientAddress>
+				<gen:DateOfBirth>1965-11-08</gen:DateOfBirth>
+				<gen:Age>48</gen:Age>
+				<gen:Sex>Female</gen:Sex>
+				<gen:MaritalStatus>Unknown</gen:MaritalStatus>
+				<gen:RegisteredGp>
+					<gen:HcpId>
+						<gen:IdValue>1234567</gen:IdValue>
+						<gen:IdScheme>GPCode</gen:IdScheme>
+						<gen:IdType>Person</gen:IdType>
+					</gen:HcpId>
+					<gen:HcpName>
+						<gen:UnstructuredName>D, KEIGHLEY,</gen:UnstructuredName>
+					</gen:HcpName>
+					<gen:EmployingOrganisation>
+						<gen:OrganisationId>
+							<gen:IdValue>30006</gen:IdValue>
+							<gen:IdScheme>Practice</gen:IdScheme>
+							<gen:IdType>Organisation</gen:IdType>
+						</gen:OrganisationId>
+						<gen:OrganisationName>BELMONT  MEDICAL GROUP</gen:OrganisationName>
+						<gen:OrganisationType>Practice</gen:OrganisationType>
+						<gen:OrganisationAddress>
+							<gen:StructuredAddress>
+								<gen:AddressLine>DENBURN HEALTH CENTRE, ROSEMOUNT VI</gen:AddressLine>
+								<gen:AddressLine>ABERDEEN</gen:AddressLine>
+								<gen:AddressLine>ABERDEENSHIRE</gen:AddressLine>
+							</gen:StructuredAddress>
+							<gen:PostCode>AB25 1QB</gen:PostCode>
+							<gen:AddressType>Current</gen:AddressType>
+						</gen:OrganisationAddress>
+						<gen:OrganisationTelecom>
+							<gen:UnstructuredTelecom>01224 642955</gen:UnstructuredTelecom>
+							<gen:TelecomType>Voice</gen:TelecomType>
+						</gen:OrganisationTelecom>
+					</gen:EmployingOrganisation>
+					<gen:Position>GP</gen:Position>
+				</gen:RegisteredGp>
+			</sci:BasicDemographics>
+			<sci:SocialCircumstances/>
+			<sci:ExtendedDemographics>
+				<sci:CurrentUID>
+					<gen:IdValue>0811655040</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</sci:CurrentUID>
+				<sci:Consent>true</sci:Consent>
+				<sci:Consultant>
+					<gen:HcpId>
+						<gen:IdValue>20647</gen:IdValue>
+						<gen:IdType>Consultant</gen:IdType>
+					</gen:HcpId>
+					<gen:HcpId>
+						<gen:IdValue>19850</gen:IdValue>
+						<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+					</gen:HcpId>
+					<gen:HcpName>
+						<gen:UnstructuredName>G, OSBOURNE,</gen:UnstructuredName>
+					</gen:HcpName>
+					<gen:Position>Consultant</gen:Position>
+				</sci:Consultant>
+				<sci:GPpractice>
+					<gen:OrganisationId>
+						<gen:IdValue>30006</gen:IdValue>
+						<gen:IdScheme>Practice</gen:IdScheme>
+						<gen:IdType>Organisation</gen:IdType>
+					</gen:OrganisationId>
+					<gen:OrganisationName>BELMONT  MEDICAL GROUP</gen:OrganisationName>
+					<gen:OrganisationType>Practice</gen:OrganisationType>
+					<gen:OrganisationAddress>
+						<gen:StructuredAddress>
+							<gen:AddressLine>DENBURN HEALTH CENTRE, ROSEMOUNT VI</gen:AddressLine>
+							<gen:AddressLine>ABERDEEN</gen:AddressLine>
+							<gen:AddressLine>ABERDEENSHIRE</gen:AddressLine>
+						</gen:StructuredAddress>
+						<gen:PostCode>AB25 1QB</gen:PostCode>
+						<gen:AddressType>Current</gen:AddressType>
+					</gen:OrganisationAddress>
+				</sci:GPpractice>
+				<sci:PreviousNames/>
+				<sci:CurrentPatientStatus xsi:nil="true"/>
+				<sci:PatientNationality xsi:nil="true"/>
+				<sci:OverseasStatus xsi:nil="true"/>
+				<sci:IsAnomymous>false</sci:IsAnomymous>
+			</sci:ExtendedDemographics>
+		</sci:PatientInformation>
+	</sci:ReportData>
+	<sci:DocumentData>
+		<gen:DocumentCategory>
+			<gen:DocumentType>Labs</gen:DocumentType>
+			<gen:Separator>|</gen:Separator>
+			<gen:DocumentSubType>Biochemistry</gen:DocumentSubType>
+		</gen:DocumentCategory>
+		<gen:DocumentIdentifier>
+			<gen:IdValue>CHOA012</gen:IdValue>
+			<gen:IdScheme>Homer</gen:IdScheme>
+		</gen:DocumentIdentifier>
+		<gen:DocumentIdentifier>
+			<gen:IdValue>283</gen:IdValue>
+			<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+		</gen:DocumentIdentifier>
+		<gen:DocumentRevision>1.00</gen:DocumentRevision>
+		<gen:OriginatingHcp/>
+		<gen:Attesting_Hcp/>
+		<gen:DocumentAttestationDate>2011-08-11</gen:DocumentAttestationDate>
+		<gen:DocumentAttestationTime>00:00:00.0000000+00:00</gen:DocumentAttestationTime>
+		<gen:DocumentCreationDate>2011-10-17</gen:DocumentCreationDate>
+		<gen:DocumentCreationTime>15:12:38.9670000+00:00</gen:DocumentCreationTime>
+	</sci:DocumentData>
+</InvestigationReport>

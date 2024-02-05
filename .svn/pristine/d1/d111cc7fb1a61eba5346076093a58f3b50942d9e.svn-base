@@ -1,0 +1,14 @@
+<vn-css vn-id="vnappmenu" vn-css-file="menus/vnappmenu.css"></vn-css>
+<div ng-controller="vnAppMenuController">
+	<div class="app-menu-icon">
+		<img class="inps-logo" ng-src="{{ currentappicon }}" ng-click="handleAppMenuClick( $event );"/>
+	</div>
+	<div class="app-menu menu">
+		<div class="app" ng-repeat="app in registeredApps"  ng-click="handleItemClick( $event, this );">
+			<div class="icon">
+				<img ng-src="{{ app.icon }}"></img>
+			</div>
+			<div class="name">{{ app.name }}</div>
+	    </div>
+	</div>
+</div>

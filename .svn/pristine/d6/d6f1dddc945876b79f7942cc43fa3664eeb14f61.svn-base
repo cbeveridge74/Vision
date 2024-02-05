@@ -1,0 +1,11 @@
+<vn-css vn-id="vnsnooze" vn-css-file="apps/components/dialog/vnsnooze.css"></vn-css>
+<div class="vision-snooze menu" ng-controller="vnSnoozeController" ng-click="handleGeneralClick( $event )">
+	<div class="title">Snooze until</div>
+	<div class="label">Later today</div>
+	<div class="label">Tomorrow</div>
+	<div class="label">Next week</div>
+	<div class="title">Select date & time</div>
+	<div class="date">
+		<input type="date">
+	</div>
+</div>

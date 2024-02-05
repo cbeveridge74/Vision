@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="98.690002"
+   height="98.690002"
+   id="svg3002"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="clinician_white.svg"
+   inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Appointments\clinician_white_32.png"
+   inkscape:export-xdpi="42.950001"
+   inkscape:export-ydpi="42.950001">
+  <defs
+     id="defs3004" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#646464"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="13.645201"
+     inkscape:cy="102.49662"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="1139"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:showpageshadow="false" />
+  <metadata
+     id="metadata3007">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(12.728413,-967.68153)">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff;fill-opacity:1"
+       d="m 36.899366,979.05629 c -2.17591,0.0886 -4.51264,0.78112 -6.96875,2.15625 -8.50289,4.7608 -10.30789,18.82506 -3.9375,30.71806 4.13523,7.72 4.14613,8.2171 -0.1875,13.0313 -0.65278,0.7252 -1.43743,1.4075 -2.25,2.0312 0.59697,0.3542 1.23891,0.8683 1.84375,1.5625 3.01822,3.4641 11.71875,11.6875 11.71875,11.6875 l 11.375,-11.7187 c 0.52884,-0.4971 1.04874,-0.9069 1.5,-1.2188 -0.84186,-0.617 -1.6251,-1.3022 -2.28125,-2.0312 -3.95527,-4.3942 -3.97242,-5.2345 -0.21875,-13.1875 7.93015,-16.80104 1.15616,-33.509 -10.59375,-33.03061 z m -16.53125,49.87431 c -1.06239,0.013 -2.38313,1.0124 -3.5625,1.0313 -5.39373,0 -14.1874999,8.3345 -14.1874999,13.4375 0,3.081 5.39683,3.6562 33.9999999,3.6562 28.60318,0 34,-0.5752 34,-3.6562 0,-5.103 -8.82502,-13.4375 -14.21875,-13.4375 -1.01458,0 -2.26812,-0.3676 -3.5625,-0.9688 -0.14128,0.2565 -0.32073,0.5094 -0.53125,0.7813 -14.51164,14.851 -12.2085,12.3647 -13.90625,14.0625 -1.69775,1.6977 -3.53125,-0.7813 -3.53125,-0.7813 l -13.25,-13.3437 c -0.34187,-0.5785 -0.76709,-0.7871 -1.25,-0.7813 z m 34.8125,8.0625 c 1.98748,-0.037 3.97361,0.079 4.875,0.3438 1.80279,0.5295 1.7738,2.1726 -0.0312,2.7187 -1.76329,0.5334 -8.25065,0.4803 -9.6875,0.031 -1.43685,-0.4487 -1.57891,-1.9193 0.0625,-2.5625 0.82071,-0.3216 2.79377,-0.494 4.78125,-0.5312 z"
+       id="path3903"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\clinician_white.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       transform="matrix(2.1100945,0,0,1.899085,10.241935,1000.0666)"
+       d="M 35,9 C 35,22.807119 24.926407,34 12.5,34 0.07359313,34 -10,22.807119 -10,9 -10,-4.8071187 0.07359313,-16 12.5,-16 24.926407,-16 35,-4.8071187 35,9 z"
+       sodipodi:ry="25"
+       sodipodi:rx="22.5"
+       sodipodi:cy="9"
+       sodipodi:cx="12.5"
+       id="path4417-4"
+       style="fill:none;stroke:#ffffff;stroke-width:1.25241601;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Appointments\hamburger_32.png"
+       inkscape:export-xdpi="48.740002"
+       inkscape:export-ydpi="48.740002" />
+  </g>
+</svg>

@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<InvestigationReport xmlns:gen="http://www.show.scot.nhs.uk/isd/General" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sci="http://www.show.scot.nhs.uk/isd/SCIStore">
+	<Summary>
+		<Id>TEST238</Id>
+		<SCIDesc>A Test</SCIDesc>
+		<ReportDate>08/06/2010</ReportDate>
+		<msg_version>7.1</msg_version>
+	</Summary>
+	<sci:ReportData>
+		<sci:ReportIdentifier>HR100002T</sci:ReportIdentifier>
+		<sci:ReportDate>2010-06-08</sci:ReportDate>
+		<sci:ReportTime>22:51:00.0000000+00:00</sci:ReportTime>
+		<sci:Discipline>Haematology</sci:Discipline>
+		<sci:ServiceProvider>
+			<sci:ProvidingLocation>
+				<gen:OrganisationId>
+					<gen:IdValue>SRI</gen:IdValue>
+					<gen:IdScheme>Service Provider</gen:IdScheme>
+					<gen:IdType>Organisation</gen:IdType>
+				</gen:OrganisationId>
+				<gen:OrganisationName>(SRI) Clinical Chemistry</gen:OrganisationName>
+				<gen:OrganisationType>Hospital</gen:OrganisationType>
+			</sci:ProvidingLocation>
+		</sci:ServiceProvider>
+		<sci:RequestingParty>
+			<gen:HcpId>
+				<gen:IdValue>1664</gen:IdValue>
+				<gen:IdScheme>Requestor</gen:IdScheme>
+				<gen:IdType>GP</gen:IdType>
+			</gen:HcpId>
+			<!--gen:HcpId><gen:IdValue>19785</gen:IdValue><gen:IdScheme>SCISTOREINPUT</gen:IdScheme></gen:HcpId-->
+			<gen:HcpName>
+				<gen:UnstructuredName>Registrar, G.P.</gen:UnstructuredName>
+			</gen:HcpName>
+			<gen:EmployingOrganisation>
+				<gen:OrganisationId>
+					<gen:IdValue>VISION1</gen:IdValue>
+					<gen:IdScheme>RequestingOrganisation</gen:IdScheme>
+					<gen:IdType>Organisation</gen:IdType>
+				</gen:OrganisationId>
+				<gen:OrganisationName>(VISION1) VISION PRACTICE 1</gen:OrganisationName>
+				<gen:OrganisationType>Practice</gen:OrganisationType>
+			</gen:EmployingOrganisation>
+			<gen:Position>GP</gen:Position>
+		</sci:RequestingParty>
+		<sci:ServiceRequest/>
+		<sci:ServiceResult>
+			<sci:SampleDetails>
+				<gen:SampleName>
+					<gen:ClinicalCircumstanceDescription>Blood</gen:ClinicalCircumstanceDescription>
+				</gen:SampleName>
+				<gen:SampleRequesterId>HR100002T</gen:SampleRequesterId>
+				<gen:SampleLaboratoryId>HR100002T</gen:SampleLaboratoryId>
+				<gen:DateTimeSampled>2010-06-08T11:00:00</gen:DateTimeSampled>
+				<gen:DateTimeReceived>2010-06-08T22:39:00</gen:DateTimeReceived>
+				<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Full Blood Count</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr style="font-weight:bold;">
+    <td style="width: 40%">Description</td>
+    <td style="width: 15%">Value</td>
+    <td style="width: 18%">Range</td>
+    <td style="width: 17%">Unit</td>
+    <td style="width: 5%">Normalcy</td>
+    <td style="width: 5%">Notes</td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Haemoglobin</td>
+    <td style="width: 15%; vertical-align: top">128</td>
+    <td style="width: 18%; vertical-align: top">117 - 157</td>
+    <td style="width: 17%; vertical-align: top">g/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">White Blood Count</td>
+    <td style="width: 15%; vertical-align: top">5.1</td>
+    <td style="width: 18%; vertical-align: top">3.5 - 11</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Platelet Count</td>
+    <td style="width: 15%; vertical-align: top">170</td>
+    <td style="width: 18%; vertical-align: top">150 - 440</td>
+    <td style="width: 17%; vertical-align: top">10^9/L</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Red Blood Count</td>
+    <td style="width: 15%; vertical-align: top">3.99</td>
+    <td style="width: 18%; vertical-align: top">3.8 - 5.2</td>
+    <td style="width: 17%; vertical-align: top">10^12/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Mean Cell Volume</td>
+    <td style="width: 15%; vertical-align: top">99.7</td>
+    <td style="width: 18%; vertical-align: top">81 - 100</td>
+    <td style="width: 17%; vertical-align: top">fl</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Packed Cell Volume</td>
+    <td style="width: 15%; vertical-align: top">0.398</td>
+    <td style="width: 18%; vertical-align: top">0.35 - 0.47</td>
+    <td style="width: 17%; vertical-align: top">
+    </td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Mean Cell Haemoglobin</td>
+    <td style="width: 15%; vertical-align: top">32.1</td>
+    <td style="width: 18%; vertical-align: top">26.4 - 34.0</td>
+    <td style="width: 17%; vertical-align: top">pg</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Mean Cell Haemoglobin Conc.</td>
+    <td style="width: 15%; vertical-align: top">32.2</td>
+    <td style="width: 18%; vertical-align: top">31.4 - 36.3</td>
+    <td style="width: 17%; vertical-align: top">g/dl</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Neutrophil Count</td>
+    <td style="width: 15%; vertical-align: top">3.0</td>
+    <td style="width: 18%; vertical-align: top">1.8 - 7.7</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Lymphocyte Count</td>
+    <td style="width: 15%; vertical-align: top">1.3</td>
+    <td style="width: 18%; vertical-align: top">1.0 - 4.8</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Monocyte Count</td>
+    <td style="width: 15%; vertical-align: top">0.6</td>
+    <td style="width: 18%; vertical-align: top">0.0 - 0.8</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Eosinophil Count</td>
+    <td style="width: 15%; vertical-align: top">0.3</td>
+    <td style="width: 18%; vertical-align: top">0.0 - 0.45</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Basophil Count</td>
+    <td style="width: 15%; vertical-align: top">0.0</td>
+    <td style="width: 18%; vertical-align: top">0.0 - 0.20</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+				</DisplayHTML>
+			</sci:SampleDetails>
+			<sci:TestResultSets>
+				<sci:TestResultSet>
+					<gen:TestSetDetails>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>424..</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Full blood count - FBC</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>HA</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Full Blood Count</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:OrderNumber>0</gen:OrderNumber>
+						<gen:TestIdentifier>
+							<gen:IdValue>339</gen:IdValue>
+							<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+						</gen:TestIdentifier>
+					</gen:TestSetDetails>
+					<gen:TestResults>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>423..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Haemoglobin estimation</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>HB</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Haemoglobin</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>128</gen:QuantityValue>
+										<gen:QuantityUnit>g/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>157</gen:RangeHighValue>
+										<gen:RangeLowValue>117</gen:RangeLowValue>
+										<gen:RangeUnit>g/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:0</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42H..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Total white cell count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>WBC</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>White Blood Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>5.1</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>11</gen:RangeHighValue>
+										<gen:RangeLowValue>3.5</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:1</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42P..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Platelet count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>PLT</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Platelet Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>170</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/L</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>440</gen:RangeHighValue>
+										<gen:RangeLowValue>150</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/L</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:2</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>426..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Red blood cell (RBC) count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>RBC</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Red Blood Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>3.99</gen:QuantityValue>
+										<gen:QuantityUnit>10^12/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>5.2</gen:RangeHighValue>
+										<gen:RangeLowValue>3.8</gen:RangeLowValue>
+										<gen:RangeUnit>10^12/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:3</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42A..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Mean corpuscular volume (MCV)</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>MCV</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Mean Cell Volume</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>99.7</gen:QuantityValue>
+										<gen:QuantityUnit>fl</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>100</gen:RangeHighValue>
+										<gen:RangeLowValue>81</gen:RangeLowValue>
+										<gen:RangeUnit>fl</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:4</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>4257.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Packed cell volume</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>PCV</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Packed Cell Volume</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>0.398</gen:QuantityValue>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>0.47</gen:RangeHighValue>
+										<gen:RangeLowValue>0.35</gen:RangeLowValue>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:5</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>428..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Mean corpusc. haemoglobin(MCH)</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>MCH</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Mean Cell Haemoglobin</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>32.1</gen:QuantityValue>
+										<gen:QuantityUnit>pg</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>34.0</gen:RangeHighValue>
+										<gen:RangeLowValue>26.4</gen:RangeLowValue>
+										<gen:RangeUnit>pg</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:6</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>429..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Mean corpusc. Hb. conc. (MCHC)</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>MCHC</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Mean Cell Haemoglobin Conc.</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>32.2</gen:QuantityValue>
+										<gen:QuantityUnit>g/dl</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>36.3</gen:RangeHighValue>
+										<gen:RangeLowValue>31.4</gen:RangeLowValue>
+										<gen:RangeUnit>g/dl</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:7</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42J..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Neutrophil count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>NEUT</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Neutrophil Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>3.0</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>7.7</gen:RangeHighValue>
+										<gen:RangeLowValue>1.8</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:8</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42M..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Lymphocyte count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>LYMP</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Lymphocyte Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>1.3</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>4.8</gen:RangeHighValue>
+										<gen:RangeLowValue>1.0</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:9</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42N..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Monocyte count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>MONO</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Monocyte Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>0.6</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>0.8</gen:RangeHighValue>
+										<gen:RangeLowValue>0.0</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:10</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42K..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Eosinophil count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>EOS</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Eosinophil Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>0.3</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>0.45</gen:RangeHighValue>
+										<gen:RangeLowValue>0.0</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:11</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>42L..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Read</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Basophil count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>BASO</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>1.0</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Local</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Basophil Count</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementNumeric>
+									<gen:Result>
+										<gen:QuantityValue>0</gen:QuantityValue>
+										<gen:QuantityUnit>10^9/l</gen:QuantityUnit>
+									</gen:Result>
+								</gen:MeasurementNumeric>
+								<gen:ReferenceLimit>
+									<gen:ReferenceLimitNumeric>
+										<gen:RangeHighValue>0.20</gen:RangeHighValue>
+										<gen:RangeLowValue>0.0</gen:RangeLowValue>
+										<gen:RangeUnit>10^9/l</gen:RangeUnit>
+									</gen:ReferenceLimitNumeric>
+								</gen:ReferenceLimit>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:12</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+					</gen:TestResults>
+					<gen:ResultStatus>
+						<gen:StatusType>Final</gen:StatusType>
+					</gen:ResultStatus>
+					<gen:ReportDetails>
+						<gen:ExaminationDetails/>
+						<gen:AuthorisingDetails/>
+						<gen:ReportingDetails/>
+						<gen:DataEntryDetails/>
+					</gen:ReportDetails>
+					<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Full Blood Count</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr style="font-weight:bold;">
+    <td style="width: 40%">Description</td>
+    <td style="width: 15%">Value</td>
+    <td style="width: 18%">Range</td>
+    <td style="width: 17%">Unit</td>
+    <td style="width: 5%">Normalcy</td>
+    <td style="width: 5%">Notes</td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Haemoglobin</td>
+    <td style="width: 15%; vertical-align: top">128</td>
+    <td style="width: 18%; vertical-align: top">117 - 157</td>
+    <td style="width: 17%; vertical-align: top">g/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">White Blood Count</td>
+    <td style="width: 15%; vertical-align: top">5.1</td>
+    <td style="width: 18%; vertical-align: top">3.5 - 11</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Platelet Count</td>
+    <td style="width: 15%; vertical-align: top">170</td>
+    <td style="width: 18%; vertical-align: top">150 - 440</td>
+    <td style="width: 17%; vertical-align: top">10^9/L</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Red Blood Count</td>
+    <td style="width: 15%; vertical-align: top">3.99</td>
+    <td style="width: 18%; vertical-align: top">3.8 - 5.2</td>
+    <td style="width: 17%; vertical-align: top">10^12/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Mean Cell Volume</td>
+    <td style="width: 15%; vertical-align: top">99.7</td>
+    <td style="width: 18%; vertical-align: top">81 - 100</td>
+    <td style="width: 17%; vertical-align: top">fl</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Packed Cell Volume</td>
+    <td style="width: 15%; vertical-align: top">0.398</td>
+    <td style="width: 18%; vertical-align: top">0.35 - 0.47</td>
+    <td style="width: 17%; vertical-align: top">
+    </td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Mean Cell Haemoglobin</td>
+    <td style="width: 15%; vertical-align: top">32.1</td>
+    <td style="width: 18%; vertical-align: top">26.4 - 34.0</td>
+    <td style="width: 17%; vertical-align: top">pg</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Mean Cell Haemoglobin Conc.</td>
+    <td style="width: 15%; vertical-align: top">32.2</td>
+    <td style="width: 18%; vertical-align: top">31.4 - 36.3</td>
+    <td style="width: 17%; vertical-align: top">g/dl</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Neutrophil Count</td>
+    <td style="width: 15%; vertical-align: top">3.0</td>
+    <td style="width: 18%; vertical-align: top">1.8 - 7.7</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Lymphocyte Count</td>
+    <td style="width: 15%; vertical-align: top">1.3</td>
+    <td style="width: 18%; vertical-align: top">1.0 - 4.8</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Monocyte Count</td>
+    <td style="width: 15%; vertical-align: top">0.6</td>
+    <td style="width: 18%; vertical-align: top">0.0 - 0.8</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Eosinophil Count</td>
+    <td style="width: 15%; vertical-align: top">0.3</td>
+    <td style="width: 18%; vertical-align: top">0.0 - 0.45</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Basophil Count</td>
+    <td style="width: 15%; vertical-align: top">0.0</td>
+    <td style="width: 18%; vertical-align: top">0.0 - 0.20</td>
+    <td style="width: 17%; vertical-align: top">10^9/l</td>
+    <td style="width: 5%; vertical-align: top">
+    </td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+					</DisplayHTML>
+					<UniqueCarePathwayNumber xmlns="##other"></UniqueCarePathwayNumber>
+					<TestAbnormal xmlns="##other">false</TestAbnormal>
+				</sci:TestResultSet>
+			</sci:TestResultSets>
+		</sci:ServiceResult>
+		<sci:PatientInformation>
+			<sci:BasicDemographics>
+				<gen:PatientId>
+					<gen:IdValue>1010101010</gen:IdValue>
+					<gen:IdScheme>REQ</gen:IdScheme>
+					<gen:IdType>Requestor</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>1010101010</gen:IdValue>
+					<gen:IdScheme>CRN</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>2911621972</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<!--gen:PatientId><gen:IdValue>2020202020</gen:IdValue><gen:IdScheme>REQ</gen:IdScheme><gen:IdType>Requestor</gen:IdType></gen:PatientId>
+<gen:PatientId><gen:IdValue>2020202020</gen:IdValue><gen:IdScheme>CRN</gen:IdScheme><gen:IdType>Personal</gen:IdType></gen:PatientId>
+<gen:PatientId><gen:IdValue>2020202020</gen:IdValue><gen:IdScheme>CHI</gen:IdScheme><gen:IdType>Personal</gen:IdType></gen:PatientId>
+<gen:PatientId><gen:IdValue>3030303030</gen:IdValue><gen:IdScheme>REQ</gen:IdScheme><gen:IdType>Requestor</gen:IdType></gen:PatientId>
+<gen:PatientId><gen:IdValue>3030303030</gen:IdValue><gen:IdScheme>CRN</gen:IdScheme><gen:IdType>Personal</gen:IdType></gen:PatientId>
+<gen:PatientId><gen:IdValue>3030303030</gen:IdValue><gen:IdScheme>CHI</gen:IdScheme><gen:IdType>Personal</gen:IdType></gen:PatientId>
+<gen:PatientId><gen:IdValue>1801015007</gen:IdValue><gen:IdScheme>CHI</gen:IdScheme><gen:IdType>Personal</gen:IdType></gen:PatientId-->
+				<gen:PatientId>
+					<gen:IdValue>14338</gen:IdValue>
+					<gen:IdScheme>STORE_KEY</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientName>
+					<gen:StructuredName>
+						<gen:GivenName>Bob</gen:GivenName>
+						<gen:MiddleName>NOEL EVANS</gen:MiddleName>
+						<gen:FamilyName>BLOBBY</gen:FamilyName>
+					</gen:StructuredName>
+					<gen:NameType>Current</gen:NameType>
+				</gen:PatientName>
+				<gen:PatientAddress>
+					<gen:UnstructuredAddress>LATE LATE BREAKFAST SHOW</gen:UnstructuredAddress>
+					<gen:AddressType>Current</gen:AddressType>
+				</gen:PatientAddress>
+				<gen:DateOfBirth>1962-11-29</gen:DateOfBirth>
+				<gen:Age>51</gen:Age>
+				<gen:Sex>Male</gen:Sex>
+				<gen:MaritalStatus>Unknown</gen:MaritalStatus>
+				<gen:HealthBoardOfResidence>
+					<gen:HealthBoardCipher>V</gen:HealthBoardCipher>
+				</gen:HealthBoardOfResidence>
+			</sci:BasicDemographics>
+			<sci:SocialCircumstances/>
+			<sci:ExtendedDemographics>
+				<sci:CurrentUID>
+					<gen:IdValue>1801015007</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</sci:CurrentUID>
+				<sci:Consent>true</sci:Consent>
+				<sci:PreviousNames/>
+				<sci:CurrentPatientStatus xsi:nil="true"/>
+				<sci:PatientNationality xsi:nil="true"/>
+				<sci:OverseasStatus xsi:nil="true"/>
+				<sci:IsAnomymous>false</sci:IsAnomymous>
+			</sci:ExtendedDemographics>
+		</sci:PatientInformation>
+	</sci:ReportData>
+	<sci:DocumentData>
+		<gen:DocumentCategory>
+			<gen:DocumentType>Labs</gen:DocumentType>
+			<gen:Separator>|</gen:Separator>
+			<gen:DocumentSubType>Haematology</gen:DocumentSubType>
+		</gen:DocumentCategory>
+		<gen:DocumentIdentifier>
+			<gen:IdValue>HR100002T</gen:IdValue>
+			<gen:IdScheme>MasterLab</gen:IdScheme>
+		</gen:DocumentIdentifier>
+		<gen:DocumentIdentifier>
+			<gen:IdValue>238</gen:IdValue>
+			<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+		</gen:DocumentIdentifier>
+		<gen:DocumentRevision>1.00</gen:DocumentRevision>
+		<gen:OriginatingHcp/>
+		<gen:Attesting_Hcp/>
+		<gen:DocumentAttestationDate>2010-06-08</gen:DocumentAttestationDate>
+		<gen:DocumentAttestationTime>22:51:00.0000000+00:00</gen:DocumentAttestationTime>
+		<gen:DocumentCreationDate>2010-06-22</gen:DocumentCreationDate>
+		<gen:DocumentCreationTime>10:51:02.7900000+00:00</gen:DocumentCreationTime>
+	</sci:DocumentData>
+</InvestigationReport>

@@ -1,0 +1,31 @@
+<vn-css vn-id="vncard" vn-css-file="layout/vncard.css"></vn-css>
+<!--<div ng-controller="vnCardController" 
+     class="card" ng-mousedown="mousedown( $event )" ng-mouseup="mouseup( $event )">
+    <div class="action-content" ng-transclude></div>
+    <div class="actions" ng-click="supress( $event );">
+    	<div class="left"><div class="action">...</div></div>
+    	<div class="right" ><div class="action">RE-ALLOCATE</div></div>
+    </div>
+</div>-->
+
+  <md-content class="card-widget">
+    <md-card>
+      <md-card-content ng-controller="vnCardController" ng-init="init()" class="card" ng-mousedown="mousedown( $event )" ng-mouseup="mouseup( $event )">
+  	    <div class="action-content" ng-transclude></div>
+  	    <div class="actions" ng-click="supress( $event );">
+  	    	<div class="left">
+            <div ng-repeat="cardaction in leftcardactions">
+              <div ng-if="cardaction.defaultshow != 'icon'" class="action" ng-click="handleActionClick(cardaction)">{{ cardaction.label | uppercase}}</div>
+              <div ng-if="cardaction.defaultshow == 'icon'" class="action {{ cardaction.icon }}" ng-click="handleActionClick(cardaction, $event)"></div>
+            </div>
+          </div>
+  	    	<div class="right">
+            <div class="action" ng-repeat="cardaction in rightcardactions" ng-click="handleActionClick(cardaction)">{{ cardaction.label | uppercase}}</div>
+          </div>
+  	    </div>
+      </md-card-content>
+    </md-card>
+  </md-content>
+
+
+<!-- ng-right-click="handleRightClick( $event, this )" -->

@@ -1,0 +1,28 @@
+<div class="docman-filter-menu menu" ng-click="handleGeneralClick( $event )">
+	<div class="clear-button">
+		<md-button class="md-raised md-primary" ng-click="handleClear();">Clear</md-button>
+	</div>
+	<div class="filter-section-title">Show only</div>
+	<div class="filter-section">
+		<md-select ng-model="time">
+			<md-option ng-value="-1">All</md-option>
+            <md-option ng-value="1">1 day</md-option>
+            <md-option ng-value="2">2 days</md-option>
+            <md-option ng-value="7">1 week</md-option>
+            <md-option ng-value="14">2 weeks</md-option>
+            <md-option ng-value="28">1 month</md-option>
+            <md-option ng-value="48">2 months</md-option>
+        </md-select>
+	</div>
+	<div class="filter-section-title">Include</div>
+	<div class="filter-section">
+		<div ng-repeat="includeFilter in includeFilters" class="include-filter">
+            <div class="image">
+                <div class="{{ includeFilter.icon }}"></div>
+            </div>
+            <div class="label">
+                {{ includeFilter.label }}
+            </div>
+        </div>
+	</div>
+</div>

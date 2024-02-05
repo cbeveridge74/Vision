@@ -1,0 +1,17 @@
+<vn-css vn-id="vnnotifications" vn-css-file="notifications/vnnotifications.css"></vn-css>
+<div class="vision-notifications">
+
+	<div class="badge" ng-if="notifications.length > 0">
+		<div class="count">{{notifications.length}}</div>
+	</div>
+	<div class="menu">
+		<div ng-repeat="notification in notifications" 
+			 class="notification-container"
+			 ng-click="handleNotificationClick()">
+			<div ng-if="notification.type == 1">
+				<vn-task-notification model="notification.data"></vn-task-notification>
+			</div>
+		</div>
+	</div>
+</div>
+

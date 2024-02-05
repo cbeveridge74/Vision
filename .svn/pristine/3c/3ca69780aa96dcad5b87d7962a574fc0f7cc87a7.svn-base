@@ -1,0 +1,77 @@
+<vn-css vn-id="vnattachment" vn-css-file="apps/visiontasks/workflow/vnattachment.css"></vn-css>
+<div class="vision-attachment" ng-controller="vnAttachmentController" ng-init="init()">
+		 <md-card>
+		 	<md-card-content ng-show="options[ PATIENT ].selected">
+		 		<div class="patient-search">
+		 			<md-chips collection='patientsCollection' ng-model='selectedPatients' md-title='title'  md-subtitle='subtitle' md-item='patientItems'/>
+		 		</div>
+		 	</md-card-content>
+		 	<md-card-content ng-show="options[ ATTACHMENT ].selected">
+		 		<div class="attachments">
+		 			<div id="holder" class="add">
+		 				<md-whiteframe ng-repeat="attachedDoc in attachedDocs" class="md-whiteframe-z1 name" layout layout-align="center center">
+						    <div class="label">{{attachedDoc.label}}</div>
+						    <img src="apps/components/images/close.svg" ng-click="handleAttachedDocDeleteClick()">
+						  </md-whiteframe>
+						  <div class="dropzone-container" ng-click="handleAddClinicalItem()" ng-show="attachedDocs.length < 1">
+		 					<div class="dropzone">
+			 					<img src="apps/components/images/add_grey.svg"/>
+			 				</div>
+				        	<div class="add-label">Drag item from you desktop or press to add a clinical item</div>
+		 				</div>
+		 			</div>
+		 		</div>
+		 	</md-card-content>
+		 	<md-card-content ng-show="options[ TRACKING ].selected">
+		 		<div class="tracking">
+		 			<div class="add" ng-show="trackingSummary.dueDate != null">
+	 					<md-whiteframe  class="md-whiteframe-z1 name" layout layout-align="center center">
+	 						<div class="label">
+							   	<div class="track" ng-repeat="track in trackingSummary" ng-if="track.selected == true">
+		 							{{track.label}},
+		 						</div>
+		 					</div>
+						    <img src="apps/components/images/close.svg" ng-click="handleTrackingDeleteClick()">
+						</md-whiteframe>
+		 			</div>
+		 			<div class="add" ng-show="trackingSummary.dueDate == null" ng-click="handleTrackingEdit()">
+		 				<md-button class="md-fab">
+				            <md-icon md-svg-src="apps/components/images/add_grey.svg"></md-icon>
+				        </md-button>
+				        <div class="add-label">Add tracking</div>
+		 			</div>
+		 		</div>
+		 	</md-card-content>
+		 	<md-card-content ng-show="options[ RECURRENCE ].selected">
+		 		<div class="recurrence">
+		 			<div class="add" ng-show="recurrenceSummary.repeat != null">
+	 					<md-whiteframe  class="md-whiteframe-z1 name" layout layout-align="center center">
+	 						<div class="label">
+							   	{{recurrenceSummary.summary}}
+		 					</div>
+						    <img src="apps/components/images/close.svg" ng-click="handleRecurrenceDeleteClick()">
+						</md-whiteframe>
+		 			</div>
+		 			<div class="add" ng-show="recurrenceSummary.repeat == null" ng-click="handleRecurrenceEdit()">
+		 				<md-button class="md-fab">
+				            <md-icon md-svg-src="apps/components/images/add_grey.svg"></md-icon>
+				        </md-button>
+				        <div class="add-label">Add recurrence</div>
+		 			</div>
+		 		</div>
+		 	</md-card-content>
+	      	<md-card-content class="options" layout="row" layout-align="center start">
+		      	<div class="triangle-container">
+		      		<div class="triangle-down top" ng-class="selectedOption"></div>
+		      		<div class="triangle-down bottom" ng-class="selectedOption"></div>
+		      	</div>
+			    <div ng-click="handleOptionClick()" ng-class="( option.selected == true ) ? 'option selected' : 'option'" ng-repeat="option in options">
+			    	{{option.label}}
+			    </div>
+			    <div ng-show="selectedPatients.length > 0" class="patient indicator">{{ selectedPatients.length }}</div>
+			    <div ng-show="attachedDocs.length > 0" class="doc indicator">{{ attachedDocs.length }}</div>
+			    <div ng-show="trackingSummary.dueDate != null" class="track indicator">set</div>
+			    <div ng-show="recurrenceSummary.repeat != null" class="recur indicator">set</div>
+			</md-card-content>
+	      </md-card>
+	</div>

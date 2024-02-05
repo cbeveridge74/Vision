@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<InvestigationReport xmlns:gen="http://www.show.scot.nhs.uk/isd/General" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sci="http://www.show.scot.nhs.uk/isd/SCIStore">
+	<Summary>
+		<Id>TEST267</Id>
+		<SCIDesc>A Test</SCIDesc>
+		<ReportDate>11/08/2011</ReportDate>
+		<msg_version>7.1</msg_version>
+	</Summary>
+	<sci:ReportData>
+		<sci:ReportIdentifier>5854321</sci:ReportIdentifier>
+		<sci:ReportDate>2011-08-11</sci:ReportDate>
+		<sci:Discipline>Biochemistry</sci:Discipline>
+		<sci:ServiceProvider>
+			<sci:ProvidingLocation>
+				<gen:OrganisationId>
+					<gen:IdValue>SHA04</gen:IdValue>
+					<gen:IdScheme>Service Provider</gen:IdScheme>
+					<gen:IdType>Organisation</gen:IdType>
+				</gen:OrganisationId>
+				<gen:OrganisationName>(SHA04) NHS ACUTE</gen:OrganisationName>
+				<gen:OrganisationType>Practice</gen:OrganisationType>
+			</sci:ProvidingLocation>
+		</sci:ServiceProvider>
+		<sci:RequestingParty>
+			<gen:EmployingOrganisation>
+				<gen:OrganisationId>
+					<gen:IdValue>62122</gen:IdValue>
+					<gen:IdScheme>RequestingOrganisation</gen:IdScheme>
+					<gen:IdType>Organisation</gen:IdType>
+				</gen:OrganisationId>
+				<gen:OrganisationName>(62122) INPS HEALTH CENTRE</gen:OrganisationName>
+				<gen:OrganisationType>Practice</gen:OrganisationType>
+			</gen:EmployingOrganisation>
+		</sci:RequestingParty>
+		<sci:ServiceRequest/>
+		<sci:ServiceResult>
+			<sci:SampleDetails>
+				<gen:SampleLaboratoryId>HM037770</gen:SampleLaboratoryId>
+				<gen:DateTimeSampled>2008-07-10T12:00:00</gen:DateTimeSampled>
+				<gen:DateTimeReceived>2008-07-11T12:28:00</gen:DateTimeReceived>
+				<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Culture and Sensi</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr>
+    <td style="width: 40%"></td>
+    <td style="width: 15%"></td>
+    <td style="width: 18%"></td>
+    <td style="width: 17%"></td>
+    <td style="width: 5%"></td>
+    <td style="width: 5%"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Pus cells</td>
+    <td colspan="4">Moderate
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Red Blood Cells</td>
+    <td colspan="4">Nil
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">epithelial cells</td>
+    <td colspan="4">Scanty
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div><br /><div class='TestResultsContainerHeader' width='100%' height='25px'>Urine culture</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr>
+    <td style="width: 40%"></td>
+    <td style="width: 15%"></td>
+    <td style="width: 18%"></td>
+    <td style="width: 17%"></td>
+    <td style="width: 5%"></td>
+    <td style="width: 5%"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Urine culture</td>
+    <td colspan="4"> 1) &gt;10^5 orgs/ml of Escherichia coli
+
+
+
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div><br /><div class='TestResultsContainerHeader' width='100%' height='25px'>Sample</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr>
+    <td style="width: 40%"></td>
+    <td style="width: 15%"></td>
+    <td style="width: 18%"></td>
+    <td style="width: 17%"></td>
+    <td style="width: 5%"></td>
+    <td style="width: 5%"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Sample</td>
+    <td colspan="4">                  1
+Ampicillin        R
+Augmentin         S
+Cefalexin         S
+Nitrofurantoin    S
+Trimethoprim      S
+
+
+
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+				</DisplayHTML>
+			</sci:SampleDetails>
+			<sci:TestResultSets>
+				<sci:TestResultSet>
+					<gen:TestSetDetails>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>UM</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Urine M, C and S</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>4I1H.</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Culture and Sensi</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:OrderNumber>0</gen:OrderNumber>
+						<gen:TestIdentifier>
+							<gen:IdValue>401</gen:IdValue>
+							<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+						</gen:TestIdentifier>
+					</gen:TestSetDetails>
+					<gen:TestResults>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>PUS</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Pus cells:</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>4JQ..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Pus cells</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementDescription>Moderate</gen:MeasurementDescription>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:0</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>RBC</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Red blood cells:</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>4JQ..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Red Blood Cells</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementDescription>Nil</gen:MeasurementDescription>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:1</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>EPI</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Epithelial cells:</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>4JQ..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>epithelial cells</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementDescription>Scanty</gen:MeasurementDescription>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:2</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+					</gen:TestResults>
+					<gen:ResultStatus>
+						<gen:StatusType>Final</gen:StatusType>
+					</gen:ResultStatus>
+					<gen:ReportDetails>
+						<gen:ExaminationDetails/>
+						<gen:AuthorisingDetails/>
+						<gen:ReportingDetails/>
+						<gen:DataEntryDetails/>
+					</gen:ReportDetails>
+					<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Culture and Sensi</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr>
+    <td style="width: 40%"></td>
+    <td style="width: 15%"></td>
+    <td style="width: 18%"></td>
+    <td style="width: 17%"></td>
+    <td style="width: 5%"></td>
+    <td style="width: 5%"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Pus cells</td>
+    <td colspan="4">Moderate
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Red Blood Cells</td>
+    <td colspan="4">Nil
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">epithelial cells</td>
+    <td colspan="4">Scanty
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+					</DisplayHTML>
+					<UniqueCarePathwayNumber xmlns="##other"></UniqueCarePathwayNumber>
+					<TestAbnormal xmlns="##other">false</TestAbnormal>
+				</sci:TestResultSet>
+				<sci:TestResultSet>
+					<gen:TestSetDetails>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>UI</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Culture</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>46U..</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Urine culture</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:OrderNumber>1</gen:OrderNumber>
+						<gen:TestIdentifier>
+							<gen:IdValue>402</gen:IdValue>
+							<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+						</gen:TestIdentifier>
+					</gen:TestSetDetails>
+					<gen:TestResults>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>UI</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Culture</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>46U..</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Urine culture</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementDescription>1) &gt;10^5 orgs/ml of Escherichia coli</gen:MeasurementDescription>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:3</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+					</gen:TestResults>
+					<gen:ResultStatus>
+						<gen:StatusType>Final</gen:StatusType>
+					</gen:ResultStatus>
+					<gen:ReportDetails>
+						<gen:ExaminationDetails/>
+						<gen:AuthorisingDetails/>
+						<gen:ReportingDetails/>
+						<gen:DataEntryDetails/>
+					</gen:ReportDetails>
+					<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Urine culture</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr>
+    <td style="width: 40%"></td>
+    <td style="width: 15%"></td>
+    <td style="width: 18%"></td>
+    <td style="width: 17%"></td>
+    <td style="width: 5%"></td>
+    <td style="width: 5%"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Urine culture</td>
+    <td colspan="4"> 1) &gt;10^5 orgs/ml of Escherichia coli
+
+
+
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+					</DisplayHTML>
+					<UniqueCarePathwayNumber xmlns="##other"></UniqueCarePathwayNumber>
+					<TestAbnormal xmlns="##other">false</TestAbnormal>
+				</sci:TestResultSet>
+				<sci:TestResultSet>
+					<gen:TestSetDetails>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>US</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Urine sens.</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:TestName>
+							<gen:ClinicalInformation>
+								<gen:ClinicalCode>
+									<gen:ClinicalCodeValue>4J15.</gen:ClinicalCodeValue>
+									<gen:ClinicalCodeScheme>
+										<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+										<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+									</gen:ClinicalCodeScheme>
+								</gen:ClinicalCode>
+								<gen:ClinicalCodeDescription>Sample</gen:ClinicalCodeDescription>
+							</gen:ClinicalInformation>
+						</gen:TestName>
+						<gen:OrderNumber>2</gen:OrderNumber>
+						<gen:TestIdentifier>
+							<gen:IdValue>403</gen:IdValue>
+							<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+						</gen:TestIdentifier>
+					</gen:TestSetDetails>
+					<gen:TestResults>
+						<gen:TestResult>
+							<gen:TestPerformed>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>US</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Urine sens.</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+								<gen:TestName>
+									<gen:ClinicalInformation>
+										<gen:ClinicalCode>
+											<gen:ClinicalCodeValue>4J15.</gen:ClinicalCodeValue>
+											<gen:ClinicalCodeScheme>
+												<gen:ClinicalCodeSchemeVersion>Undefined</gen:ClinicalCodeSchemeVersion>
+												<gen:ClinicalCodeSchemeId>Undefined</gen:ClinicalCodeSchemeId>
+											</gen:ClinicalCodeScheme>
+										</gen:ClinicalCode>
+										<gen:ClinicalCodeDescription>Sample</gen:ClinicalCodeDescription>
+									</gen:ClinicalInformation>
+								</gen:TestName>
+							</gen:TestPerformed>
+							<gen:TestMeasurement>
+								<gen:MeasurementDescription>1
+Ampicillin        R
+Augmentin         S
+Cefalexin         S
+Nitrofurantoin    S
+Trimethoprim      S</gen:MeasurementDescription>
+							</gen:TestMeasurement>
+							<gen:DisciplineSpecificValues>TestResultOrder:4</gen:DisciplineSpecificValues>
+						</gen:TestResult>
+					</gen:TestResults>
+					<gen:ResultStatus>
+						<gen:StatusType>Final</gen:StatusType>
+					</gen:ResultStatus>
+					<gen:ReportDetails>
+						<gen:ExaminationDetails/>
+						<gen:AuthorisingDetails/>
+						<gen:ReportingDetails/>
+						<gen:DataEntryDetails/>
+					</gen:ReportDetails>
+					<DisplayHTML xmlns="http://www.show.scot.nhs.uk/isd/SCIStore"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Untitled Page</title>
+<style type="text/css">
+
+/********************************************************************
+These styles relate specifically to the display of result information
+********************************************************************/
+
+@media print
+{
+    
+    body
+	{
+		font-size: 8pt;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+    
+    
+      .TestResultsContainerHeader
+    {
+	    font-weight: bold;
+	    font-size: 8pt;
+	    color: #000000;
+	    vertical-align: middle;
+	    padding: 2px 2px 2px 2px;
+	    border-color:#000000;
+	    border-width: 1px;
+	    border-style:solid;
+	    border-bottom:none;
+    }
+
+
+
+    .TestResultsContainer
+    {
+        border-color:#000000;
+        border-width: 1px;
+	    border-style:solid;
+	    padding: 5px 5px 5px 5px;
+    }
+    
+    .TestHeaderCell
+    {
+        font-weight:bold;
+        padding-right: 3px;
+    }
+    .ResultAbnormal
+    {
+	    color: Red;
+	    font-weight:bold;
+    }
+
+.InformationBanner
+{
+	color:#000000;
+	font-weight:bold;
+}
+
+}
+
+@media screen
+{
+
+.ResultsContainer
+{
+    font-family: Verdana, arial, helvetica;
+    font-size: 8pt;
+	margin: 0px 0px 0px 0px;
+	background-color: #F8F8F3;
+}
+
+.ResultsTableHeader
+{
+	color: white;
+	background: #3b5998;
+}
+
+.ResultsTableHeader td
+{
+	font-weight: bold;
+	padding-right:5px;
+	padding-left:5px;
+
+}
+
+
+.TestHeader
+{
+    color:#000000;
+    font-weight:bold;
+    font-size:larger;
+
+}
+
+.TestHeaderCell
+{
+    width:120px;
+    font-weight:bold;
+      
+}
+
+
+.StatusBanner
+{
+	color:Blue;
+	font-weight:bold;
+
+}
+
+.ResultAbnormal
+{
+	color: Red;
+}
+
+.ResultAbnormal a:link
+{
+	color: Red;
+}
+
+.TestResultsContainerHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-color:#0052A5;
+	padding: 2px 2px 2px 2px;
+}
+
+
+.TestResultsContainer
+{
+	border-color:#0052A5;
+	border-width:1px;
+	border-style:solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.InformationBanner
+{
+	color:Blue;
+	font-weight:bold;
+}
+
+}
+
+</style>
+
+</head>
+<body><div class='ResultsContainer'><div class='TestResultsContainerHeader' width='100%' height='25px'>Sample</div><div class='TestResultsContainer'><table style='width:100%'></table><table style="width: 100%">
+  <tr>
+    <td style="width: 40%"></td>
+    <td style="width: 15%"></td>
+    <td style="width: 18%"></td>
+    <td style="width: 17%"></td>
+    <td style="width: 5%"></td>
+    <td style="width: 5%"></td>
+  </tr>
+  <tr Class="">
+    <td style="width: 40%; vertical-align: top">Sample</td>
+    <td colspan="4">                  1
+Ampicillin        R
+Augmentin         S
+Cefalexin         S
+Nitrofurantoin    S
+Trimethoprim      S
+
+
+
+</td>
+    <td style="vertical-align: top"></td>
+  </tr>
+</table></div></div>
+</body>
+</html>]]>
+					</DisplayHTML>
+					<UniqueCarePathwayNumber xmlns="##other"></UniqueCarePathwayNumber>
+					<TestAbnormal xmlns="##other">false</TestAbnormal>
+				</sci:TestResultSet>
+			</sci:TestResultSets>
+		</sci:ServiceResult>
+		<sci:PatientInformation>
+			<sci:BasicDemographics>
+				<gen:PatientId>
+					<gen:IdValue>0409805009</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>0409805009</gen:IdValue>
+					<gen:IdScheme>REQ</gen:IdScheme>
+					<gen:IdType>Requestor</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>0409805009</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>CHI</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>8034870</gen:IdValue>
+					<gen:IdScheme>CRN</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>16255</gen:IdValue>
+					<gen:IdScheme>STORE_KEY</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>1111665044</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>1701725002</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>2111755087</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Personal</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientId>
+					<gen:IdValue>16220</gen:IdValue>
+					<gen:IdScheme>STORE_KEY</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</gen:PatientId>
+				<gen:PatientName>
+					<gen:StructuredName>
+						<gen:GivenName>SCOOBY</gen:GivenName>
+						<gen:FamilyName>DOO</gen:FamilyName>
+					</gen:StructuredName>
+					<gen:NameType>Current</gen:NameType>
+				</gen:PatientName>
+				<gen:PatientAddress>
+					<gen:StructuredAddress>
+						<gen:AddressLine>CARSEVEIW LANE</gen:AddressLine>
+						<gen:AddressLine>DUNDEE</gen:AddressLine>
+					</gen:StructuredAddress>
+					<gen:AddressType>Current</gen:AddressType>
+				</gen:PatientAddress>
+				<gen:DateOfBirth>1975-11-21</gen:DateOfBirth>
+				<gen:Age>38</gen:Age>
+				<gen:Sex>Female</gen:Sex>
+				<gen:MaritalStatus>Unknown</gen:MaritalStatus>
+				<gen:HealthBoardOfResidence>
+					<gen:HealthBoardCipher>Z</gen:HealthBoardCipher>
+				</gen:HealthBoardOfResidence>
+			</sci:BasicDemographics>
+			<sci:SocialCircumstances/>
+			<sci:ExtendedDemographics>
+				<sci:CurrentUID>
+					<gen:IdValue>2111755087</gen:IdValue>
+					<gen:IdScheme>CHI</gen:IdScheme>
+					<gen:IdType>Person</gen:IdType>
+				</sci:CurrentUID>
+				<sci:Consent>true</sci:Consent>
+				<sci:PreviousNames/>
+				<sci:CurrentPatientStatus xsi:nil="true"/>
+				<sci:PatientNationality xsi:nil="true"/>
+				<sci:OverseasStatus xsi:nil="true"/>
+				<sci:IsAnomymous>false</sci:IsAnomymous>
+			</sci:ExtendedDemographics>
+		</sci:PatientInformation>
+	</sci:ReportData>
+	<sci:DocumentData>
+		<gen:DocumentCategory>
+			<gen:DocumentType>Labs</gen:DocumentType>
+			<gen:Separator>|</gen:Separator>
+			<gen:DocumentSubType>Biochemistry</gen:DocumentSubType>
+		</gen:DocumentCategory>
+		<gen:DocumentIdentifier>
+			<gen:IdValue>5854321</gen:IdValue>
+			<gen:IdScheme>Homer</gen:IdScheme>
+		</gen:DocumentIdentifier>
+		<gen:DocumentIdentifier>
+			<gen:IdValue>267</gen:IdValue>
+			<gen:IdScheme>SCISTOREINPUT</gen:IdScheme>
+		</gen:DocumentIdentifier>
+		<gen:DocumentRevision>1.00</gen:DocumentRevision>
+		<gen:OriginatingHcp/>
+		<gen:Attesting_Hcp/>
+		<gen:DocumentAttestationDate>2011-08-11</gen:DocumentAttestationDate>
+		<gen:DocumentAttestationTime>00:00:00.0000000+00:00</gen:DocumentAttestationTime>
+		<gen:DocumentCreationDate>2011-10-14</gen:DocumentCreationDate>
+		<gen:DocumentCreationTime>15:17:33.7430000+00:00</gen:DocumentCreationTime>
+	</sci:DocumentData>
+</InvestigationReport>

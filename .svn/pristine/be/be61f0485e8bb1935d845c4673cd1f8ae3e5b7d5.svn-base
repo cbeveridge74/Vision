@@ -1,0 +1,7 @@
+<div class="vision-appointments"
+	 ng-controller="vnVisionAppointmentsController" ng-show="screens.VN_APP__DAY">
+	<vn-css vn-id="vnvisionappointments" vn-css-file="{{path}}vnvisionappointments.css"></vn-css>
+
+	<div>This is the DAY VIEW </div>
+
+</div>

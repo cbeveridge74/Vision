@@ -1,0 +1,51 @@
+.vision-mail .task-menu.open{
+	display: inline-block;
+}
+
+.vision-mail .task-menu.menu{
+	right: 3em;
+	left: inherit;
+	overflow: hidden;
+	padding: 1em;
+}
+
+.vision-mail .task-menu .preferences,
+.vision-mail .task-menu .menu-container
+{
+	display: inline-block;
+	width: 15em;
+}
+
+.vision-mail .task-menu .menu-container{
+	
+}
+
+.vision-mail md-radio-button.md-default-theme .md-off {
+	border-color: #FFF;
+}
+
+.vision-mail md-radio-button.md-default-theme .md-on{
+	background-color: #FFF;
+}
+.vision-mail md-radio-group {
+	border: none;
+}
+
+.vision-mail .task-menu .preferences {
+	vertical-align: top;
+	height: 14em;
+	padding: 1em;
+	background-color: #3B5588;
+}
+
+.vision-mail .task-menu.one-task-only .preferences{
+	display: none;
+}
+
+.vision-mail .task-menu .preferences .title {
+	font-size: 1.2em;
+}
+
+.vision-mail .task-menu .preferences .preference {
+	
+}

@@ -1,0 +1,137 @@
+/*
+system : The practice
+web_server: the root of the webservices
+socket_server: where the socket hanlder is located
+local_database_version: increment this value when updating any of the values in the config (it rebuilds the local Indexeddb)
+book: I have no idea what this does
+mode: 'webservice' to point to the webservices, 'demo' to run with local demo data (socket dependent functionality won't work e.g. booking)
+*/
+
+
+/*var config = {
+	system: "DEV10",
+	web_server: "http://inpsespc169.is.inps.co.uk:3011",
+	socket_server: "http://inpsespc169.is.inps.co.uk:3011",
+	local_database_version: 124,
+	book: "*GPC",
+	mode: "webservice"
+};*/
+
+var config = {
+	system: "CLOUD_PRACTICE_1",
+	web_server: "https://www.inpsprototypes.co.uk",
+	socket_server: "https://www.inpsprototypes.co.uk",
+	local_database_version: 16,
+	mode: "demoservices",
+	start_date: "2014-07-11",
+	end_date: "2014-07-30"
+};
+
+// Cross app helpers
+var BOOK_SLOT = {
+	name: "BOOK_SLOT",
+	description: "booking a slot"
+};
+
+var TASK 		= 0;
+var THERAPY 	= 1;
+var APPOINTMENT = 2;
+var MAIL 		= 3;
+var REMINDER 	= 4;
+var PERSON 		= 5;
+var DISCUSSION 	= 6;
+var PATIENT 	= 7;
+
+var database = [{
+	name: 'task',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_date",
+		key: "date"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleTasks",
+	data: "demoDataTasks"
+},
+{
+	name: 'therapy',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleTherapies",
+	data: "demoDataTherapies"
+},
+{
+	name: 'appointment',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_date",
+		key: "date"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleAppointments",
+	data: "demoDataAppointments"
+},
+{
+	name: 'mail',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleMail",
+	data: "demoDataMail"
+},
+{
+	name: 'reminder',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleReminders",
+	data: "demoDataReminders"
+},
+{
+	name: 'person',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assemblePersons",
+	data: "demoDataPersons"
+},
+{
+	name: 'discussion',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleDiscussions",
+	data: "demoDataDiscussions"
+},{
+	name: 'patient',
+	index: [{
+		name: "by_id",
+		key: "Id"
+	}],
+	assembler: "assemblePatients",
+	data: "patients"
+}];
+

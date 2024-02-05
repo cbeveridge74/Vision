@@ -1,0 +1,51 @@
+.prescription > div {
+	display: block;
+	margin-left:5px;
+}
+
+.prescription .patient > div{
+	display: inline-block;
+}
+
+.prescription .subject,
+.prescription .drug,
+.prescription .dose{
+	font-size: 0.9em;
+	height: 1em;
+	margin-top: -0.3em;
+	color: #999;
+}
+
+.prescription .subject {
+	font-size: 1.1em;
+	margin-top: 0em;
+	color: #000
+}
+
+.prescription .drug{
+	margin-top: 0.4em;
+	margin-left: 0.5em;
+	font-family: "Courier New";
+}
+
+.prescription .dose{
+	margin-top: 0.2em;
+	margin-left: 0.6em;
+	font-family: "Courier New";
+	color: #000;
+}
+
+.prescription .patient {
+	margin-top: 0.8em;
+	height: 2em;
+	font-size: 0.75em;
+	padding-left: 0.5em;
+	cursor: pointer;
+}
+
+.prescription .patient img {
+	width: 1em;
+	vertical-align: top;
+	padding-top: 0.1em;
+	margin-right: 0.2em;
+}

@@ -1,0 +1,73 @@
+angular.module('vnVisionAppointmentsDayModule', function () {})
+.controller('vnVisionAppointmentsDayController', function( 
+  $scope,
+  $rootScope,
+  visionFactory,
+  vnScrollFactory,
+  vnNavigationFactory,
+  SCREENS ){
+    var previousDate;
+    $( window ).resize(function() {
+        handleResize();
+      });
+
+    var moveZoomButton = function(){
+      var viewportWidth = $(window).width();
+      var viewportHeight = $(window).height();
+      $( ".zoom-button-day" ).css( 'top', viewportHeight - 40  );
+      $( ".zoom-button-day" ).css( 'left', viewportWidth - 40  );
+    };
+
+    $scope.init = function () {
+      $scope.$watch("screens." + SCREENS.DAY, function( value ){
+        if( value ){
+          handleShow();
+        }
+      });
+      handleShow();
+    };
+
+    var handleShow = function(){
+      var fromDate = new Date( moment( '2014-Jul-14' ).format( 'YYYY-MM-DD' ) );
+      var toDate = new Date( moment( '2014-Jul-14' ).format( 'YYYY-MM-DD' ) ); 
+      toDate.setDate(toDate.getDate() + 1);
+      if( $scope.selectedDate == null ){
+        $scope.selectedDate = fromDate;
+      }
+      
+      if( previousDate != fromDate ){
+          visionFactory.retrieveData( database[ APPOINTMENT ].name, function( results ){
+            retrieveSlotsHandler( results );
+          },"by_date", { start: fromDate, end: toDate }, 1000);
+      }else{
+        handleResize();
+      }
+      moveZoomButton();
+      previousDate = fromDate;
+    };
+
+    var results = new Array();
+    var retrieveSlotsHandler = function( results ){
+      $scope.$apply(function(){
+        $scope.slots = results;
+      }); 
+      handleResize();
+    };
+
+    var handleResize = function(){
+      if( $scope.screens[ SCREENS.DAY ] ){
+        moveZoomButton();
+        vnScrollFactory.handleResize( "day-scroller" );
+      }
+    };
+    $scope.semanticZoom = function( $event ){};
+    $scope.handleZoomOutClick = function(date, $event){
+      vnNavigationFactory.switchScreens( SCREENS.CALENDAR );
+    };
+})
+.directive('vnDay', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionappointments/day/vnday.html'
+    };
+});

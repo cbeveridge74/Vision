@@ -1,0 +1,413 @@
+.task-simple {
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+}
+
+.task-simple md-card{
+	width: 45em;
+	margin: 0;
+	box-shadow: 3px 3px 9px #777;
+}
+
+
+.task-simple .task-widgets {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 1.5em;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.task-simple.minimise .urgent-indicator {
+	position: absolute;
+	height: calc( 100% + 6px);
+	width: 0.3em;
+	top: -0.5em;
+	left: 0;
+	background-color: #FF0000;
+	opacity: 0;
+}
+
+.task-simple md-dialog{
+	height: 5em;
+	width: 30em;
+}
+
+.task-simple .md-dialog-container {
+	top: -13em;
+	left: 5em;
+}
+
+.task-simple.minimise .urgent-indicator.urgent {
+	opacity: 1;
+}
+
+.task-simple .task-widgets .left,
+.task-simple .task-widgets .right{
+	display: inline-block;
+}
+
+.task-simple .document-container .close.icon,
+.task-simple .task-widgets .due,
+.task-simple .task-widgets .patient,
+.task-simple .task-widgets .attach,
+.task-simple .task-widgets .track,
+.task-simple .task-widgets .recur
+{
+	color: #999;
+	cursor: pointer;
+	font-size: 1.4em;
+	position: relative
+}
+
+.task-simple .document-container .close.icon:hover,
+.task-simple .task-widgets .due:hover,
+.task-simple .task-widgets .patient:hover,
+.task-simple .task-widgets .attach:hover,
+.task-simple .task-widgets .track:hover,
+.task-simple .task-widgets .track:hover .track-label,
+.task-simple .task-widgets .recur:hover .recur-label,
+.task-simple .task-widgets .recur:hover{
+	color: #777;
+}
+
+.task-simple .document-container .close.icon:active,
+.task-simple .task-widgets .due:active,
+.task-simple .task-widgets .patient:active,
+.task-simple .task-widgets .attach:active,
+.task-simple .task-widgets .track:active,
+.task-simple .task-widgets .track:active .track-label,
+.task-simple .task-widgets .recur:active,
+.task-simple .task-widgets .recur:active .recur-label{
+	color: #333;
+}
+
+.task-simple .document-container .close.icon,
+.task-simple .task-widgets .due .due-label,
+.task-simple .task-widgets .recur-label,
+.task-simple .task-widgets .track-label,
+.task-simple .task-widgets .task-widget .urgency-label{
+	font-size: 0.6em;
+	color: #999;
+}
+
+.task-simple .task-widgets .track.set,
+.task-simple .task-widgets .track.set .track-label {
+	color: green;
+}
+
+.task-simple .task-widgets .recur.set,
+.task-simple .task-widgets .recur.set .recur-label {
+	color: green;
+}
+
+.task-simple .task-widgets .due.set,
+.task-simple .task-widgets .due.set .due-label{
+	color: green;
+}
+
+.task-simple .task-widgets ::-webkit-calendar-picker-indicator{
+  opacity: 0.5;
+  left: -15px;
+  position: absolute;
+  top: 0;
+  padding: 0;
+  width: 40px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.task-simple .task-widgets input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.task-simple .task-widgets .task-widget .hidden-date{
+	//font-size: 0.1em;
+	width: 1.3em;
+	opacity: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+
+.task-simple .task-widgets {
+	width: calc(100% + 32px);
+	background-color: #EEE;
+	margin-left: -16px;
+	margin-top: -16px;
+	padding-left: 16px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.task-simple .task-widgets .left{
+	text-align: left;
+	width: 50%
+}
+
+.task-simple .task-widgets .right{
+	position: relative;
+	text-align: right;
+	width: 50%;
+}
+
+.task-simple .task-widgets .task-widget{
+	display: inline-block;
+	vertical-align: bottom;
+	//cursor: pointer;
+	text-align: center;
+	margin-right: 1.8em;
+	vertical-align: top;
+	width: 3em;
+}
+
+.task-simple .task-widgets .right .task-widget{
+	margin-right: 0.8em;
+}
+
+.task-simple .task-widgets .task-widget .urgency-label{
+	padding-right: 1em;
+	color: #999;
+}
+
+.task-simple .task-widgets .task-widget .urgency-label,
+.task-simple .task-widgets .task-widget .due-label{
+	width: 5em;
+}
+
+.task-simple .task-widgets .task-widget .urgency-label.urgent{
+	color: red;
+}
+
+.task-simple .task-widgets .task-widget md-switch{
+	margin: 0;
+	width: 1em;
+}
+
+.task-simple .task-widgets .task-widget img{
+	width: 24px;
+	height: 24px;
+}
+	
+
+.task-simple .chipsInput {
+	height: inherit;
+	width: inherit;
+}
+
+.task-simple .subject,
+.task-simple .description md-input-container,
+.task-simple .subject md-select.md-default-theme .md-select-label,
+.task-simple .md-chips {
+	width: 500px;
+}
+
+.task-simple .vision-patient-chips{
+	//position: absolute;
+	font-size: 1em;
+	//left: -8em;
+	bottom: 5em;
+	//top: 0;
+	text-align: left
+}
+
+.task-simple .vision-patient-chips .chips-mini-item{
+	//position: absolute;
+}
+
+.task-simple .vision-patient-chips .dcb-chips-container{
+	
+}
+
+.task-simple .vision-patient-chips .chipsInput{
+	line-height: 30px;
+}
+
+
+
+.task-simple .chips-mini-title{
+	height: 24px;
+	padding: 7px;
+	padding-right: 6px;
+	padding-left: 5px;
+	padding-bottom: 0px;
+}
+
+.task-simple .chips-mini {
+	height: 32px;
+}
+
+.task-simple .image-default-mini {
+	height: 32px;
+	width: 32px;
+}
+
+.task-simple .chips-active {
+	width: inherit;
+	background-color: #FFF;
+	z-index: 3;
+}
+
+.task-simple .recipients {
+	border-bottom: solid 1px #DDD;
+}
+
+.task-simple .subject {
+	margin-top: 1em;
+}
+
+.task-simple .subject-label,
+.task-simple .due-label-min,
+.task-simple .recipients-label{
+	display: none;
+}
+
+
+.task-simple .description {
+	margin-top: 1em;
+}
+
+
+
+.task-simple .subject md-select.md-default-theme .md-select-label{
+	font-size: 1.1em;
+	white-space: nowrap;
+	line-height: 1.8;
+}
+
+.task-simple md-input-container.md-default-theme .md-placeholder {
+	top: -1.3em;
+}
+
+.task-simple md-select {
+	display: block;
+}
+
+.task-simple .md-select-label > span{
+	width: 100%;
+
+}
+
+.task-simple .patient .icon,
+.task-simple .patient vn-patient-chips {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.task-simple .patient .icon{
+	color: #999;
+	font-size: 1.5em;
+}
+
+.task-simple .attachment-area {
+	white-space: normal;
+}
+
+.task-simple .document-container {
+	position: relative;
+	box-shadow: 2px 2px 5px #BBB;
+	padding: 0.7em;
+	margin-top: 1em;
+	cursor: pointer;
+	display: inline-block
+}
+
+.task-simple .document-container .file.icon {
+	margin-right: 0.5em;
+	font-size: 2em;
+}
+
+.task-simple .document-container .close.icon{
+	position: absolute;
+	font-size: 1.2em;
+	right: 0.5em;
+	top: 1em;
+}
+
+.task-simple .document-container .icon,
+.task-simple .document-container .name {
+	display: inline-block;
+	font-size: 1.3em;
+}
+
+.task-simple .document-container .name {
+	margin-right: 1em;
+}
+
+.task-simple .document-container .icon {
+	
+}
+
+.task-simple .chips-mini-title,
+.task-simple .md-select-label > span,
+.task-simple md-input-container .md-input {
+	color: #555;
+	font-size: 1.2em;
+}
+
+.task-simple .delete {
+ 	display: none;
+}
+
+.task-simple .md-select-label .md-select-icon {
+	//width: 200px;
+}
+
+.task-simple md-switch .md-bar{
+
+}
+
+.task-simple md-switch:not(.md-dragging) .md-bar, md-switch:not(.md-dragging) .md-thumb-container, md-switch:not(.md-dragging) .md-thumb {
+
+
+}
+
+.task-simple md-switch .md-container{
+
+}
+
+.task-simple md-switch .md-thumb-container {
+
+}
+
+.task-simple md-switch .md-label {
+
+}
+
+.task-simple .subject label,
+.task-simple .recipients label,
+.task-simple .description label {
+	//color: #777;
+	color: rgb(33,150,243);
+}
+
+.task-simple .chips-mini-img {
+	height: 16px;
+}
+
+.task-simple .chips-mini-img img {
+	height: 32px;
+}
+
+.task-simple #chips-list {
+	z-index: 2;
+	max-height: 40em;
+}
+
+.task-simple .command-buttons{
+	width: 100%;
+	margin-top: 2em;
+}
+
+.task-simple .md-button{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+.task-simple .workflow-buttons{
+	display: none;
+}
+
+

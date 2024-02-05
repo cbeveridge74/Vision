@@ -1,0 +1,4 @@
+<vn-css vn-id="vnworkflow" vn-css-file="apps/visiontasks/workflow/vnworkflow.css"></vn-css>
+<div class="vision-workflow">
+	<vn-brick ng-repeat="outeritem in taskoutercreators"></vn-brick>
+</div>

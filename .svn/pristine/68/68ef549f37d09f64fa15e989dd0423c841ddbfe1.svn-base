@@ -1,0 +1,91 @@
+angular.module('vnDetailViewModule', [],function () {})
+.factory('vnDetailViewFactory', function( $rootScope ){
+	var factory = {};
+	var model;
+
+	factory.setModel = function( value ){
+		model = value
+		$rootScope.$broadcast( "DETAIL_VIEW_UPDATED" );
+	};
+
+	factory.getModel = function(){
+		return model;
+	};
+
+	factory.clearModel = function(){
+		factory.setModel({});
+	};
+	factory.clearModel();
+
+	return factory;
+})
+.controller('vnDetailViewController', function ( 
+	$scope,
+	$rootScope,
+	visionFactory,
+	vnActionFactory,
+	vnDetailViewFactory,
+	vnScreenManagementFactory) {
+
+	$rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function( event ){
+		if( $rootScope.screens.VN_REP__HOME == true ){
+			closeDialog();
+		}
+	});
+
+	$rootScope.$on( "DETAIL_VIEW_UPDATED", function(){
+		var model = vnDetailViewFactory.getModel();
+		//Bit of task specific stuff here
+		if( model != null && model.workflowid != null ){
+			visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( workflow ){
+				workflow = workflow[0];
+				
+				var count = 0;
+				angular.forEach( workflow.tasks, function( task, taskIndex ){
+					count += task.length; 
+				});
+				model.taskCount = count;
+				$scope.model = model;
+				$scope.$apply();
+			}, null, { start: model.workflowid, end: model.workflowid });
+		}else{
+			$scope.model = model;
+		}
+
+
+
+		//$scope.model = vnDetailViewFactory.getModel();
+	});
+
+	$scope.init = function () {
+
+		$rootScope.$watch( $scope.screenToWatch, function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      	});
+
+
+	};
+
+	var handleShow = function(){
+		
+	};
+
+	var closeDialog = function(){;
+		$( ".menu.detail-view" ).removeClass( "open" );
+		$( ".menu.detail-view" ).attr( "style", "" );
+	};
+
+	$scope.handleWorkflowClick = function(){
+		vnActionFactory.needHelpWith( vnActionFactory.GENERAL, [ this.model ], function(){});
+		closeDialog();
+	};
+
+	
+}).directive('vnDetailView', function() {
+	return {
+	  restrict: 'E',
+	  templateUrl: 'apps/components/dialog/vndetailview.html'
+	};
+});

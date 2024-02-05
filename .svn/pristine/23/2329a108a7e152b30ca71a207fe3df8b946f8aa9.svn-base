@@ -1,0 +1,7 @@
+require([ 	"apps/visiontasks/vnvisiontasksmodule",
+			"apps/visiontasks/workflow/vnbrickmodule",
+			"apps/visiontasks/workflow/vnworkflowmodule"], function(
+		 	vnvisiontasksmodule,
+		 	vnbrickmodule,
+		 	vnworkflowmodule){
+});

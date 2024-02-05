@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<vn-css vn-id="vnbar" vn-css-file="layout/vnbar.css"></vn-css>
+<div class="bar" ng-controller="vnBarController">
+	<vn-app-menu></vn-app-menu>
+	<!--<img class="inps-logo" ng-src="images/{{applogo}}" ng-click="handleUserClick( $event );">-->
+	<div class="button user" ng-click="handleUserClick( $event );">SHONA DONALDSON</div>
+	<div class="user-menu menu" ng-include="'menus/usermenu.html'"></div>
+	<!--<img class="button hamburger" src="images/hamburger.svg" ng-click="handleHamburgerClick( $event );">-->
+	<div class="right-button-container">
+		<img ng-repeat="appBarIcon in appBarIcons" 
+			 ng-src="images/{{ appBarIcon.icon }}"
+			 ng-click="handleButtonClick( $event );">
+	</div>
+</div>

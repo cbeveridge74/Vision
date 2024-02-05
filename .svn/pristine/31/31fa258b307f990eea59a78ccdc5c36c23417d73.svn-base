@@ -1,0 +1,29 @@
+.banner{
+	color: #FFF;
+	font-weight: normal;
+}
+
+.banner .name {
+	font-size: 2em;
+	background-color:#3B5588;
+	padding-left: 0.2em;
+}
+
+.banner .detail{
+	background-color:#264568;
+}
+
+.banner .detail .value{
+	margin-right: 1em;
+}
+
+.banner .detail .label{
+	font-weight: 100;
+	padding-right: 0.5em;
+	opacity: 0.6;
+}
+
+.banner .detail > div {
+	display: inline-block;
+	
+}

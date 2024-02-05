@@ -1,0 +1,27 @@
+<div class="sent-scroller">
+    <vn-scroll 
+        vn-class-selector="sent-scroller"
+        vn-x-scroll="false"
+        vn-watch="screens.VN_TASK"
+        vn-top-offset="150">
+        <!--<vn-detail-view></vn-detail-view>-->
+        <md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" 
+            ng-repeat="item in taskreminders"
+            ng-click="handleTaskItemClick()">
+            <div class="task-list-item" layout="column">
+                <div class="urgency" ng-show="item.urgency == 'Urgent'"></div>
+		        <div class="topline" layout="row">
+		            <div class="subject" flex>{{item.tasksubjects.label}}</div>
+		            <div class="assigner-container" flex>
+                        <div class="assigner" ng-repeat="assignee in item.assigneefull">
+                            <span ng-if="$index == 0">To: </span>{{assignee.title}}<span ng-if="$index < (item.assigneefull.length - 1)">,&#160;</span>
+                        </div>
+                    </div>
+		            <div class="due" flex><span ng-show="item.due != null" >Due</span>   {{item.due | date:'dd-MMM-yyyy'}}</div>
+		        </div>
+		        <div class="description">{{item.description}}</div>
+		        <div class="patientname" ng-repeat="patient in item.attachments.selectedPatients">{{ patient.title }}</div>
+	        </div>
+	    </md-whiteframe>
+    </vn-scroll>
+</div>

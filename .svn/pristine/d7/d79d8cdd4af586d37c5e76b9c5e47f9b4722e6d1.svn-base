@@ -1,0 +1,51 @@
+angular.module('vnChipsModule', [ ],function () {})
+.controller('vnChipsController', function( $scope, visionFactory, $timeout ){
+	
+	var track = {
+		appointments: {
+			selected: false
+		},
+		clinicalrecordings: {
+			selected: false
+		},
+		documentfiling: {
+			selected: false
+		}
+	};
+
+	$scope.init = function(){
+		// Obviously assuming these are patient chips
+		visionFactory.retrieveData( database[ PATIENT ].name, function( results ){
+			$scope.patient = results[0];
+			if( $scope.patient.track == null ){
+				 $scope.patient.track = track;
+			}
+
+			$scope.$watch( "patient.track", function( newValue, oldValue ){
+				if( newValue == oldValue ){
+					return;
+				}
+				savePatient();
+			}, true );
+
+			$scope.$apply();
+		}, null, {start: parseInt( $scope.patientId ), end: parseInt( $scope.patientId )}, null);
+	};
+
+	var savePatient = function(){
+		visionFactory.updateData( database[ PATIENT ].name, $scope.patient, function( data ){});
+	};
+
+	$scope.handleClick = function( event ){
+		event.stopPropagation();
+	};
+})
+.directive('vnChips', function() {
+    return {
+    	scope: {
+			patientId: '@'
+		},
+	    restrict: 'E',
+	    templateUrl: 'apps/components/chips/vnchips.html'
+    };
+});

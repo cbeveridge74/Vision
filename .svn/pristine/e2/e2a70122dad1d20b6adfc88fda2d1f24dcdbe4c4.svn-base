@@ -1,0 +1,60 @@
+angular.module('vnLoginModule', [],function () {})//'ngTouch'
+.controller('vnLoginController', function(
+  $rootScope,
+  $scope, 
+  $window, 
+  $timeout,
+  visionFactory, 
+  vnNavigationFactory,
+  vnAppManagementFactory){
+  $scope.user = {};
+  $scope.user.username = 'carly.foster@inps.net';
+  $scope.user.password = 'password1';
+  $scope.version = chrome.runtime.getManifest().version;
+  $scope.name = chrome.runtime.getManifest().name;
+  
+  $scope.init = function(){
+    $scope.$watch('screens.VN_LOGIN', function( value ){
+          if( value == true ){
+            setTimeout( function(){
+              handleResize();
+              $( window ).resize(function() {
+                handleResize();
+              });
+            }, 1);
+          }
+        });
+  };
+
+  $scope.handleLoginClick= function(){
+    visionFactory.authenticate( $scope.user.username, $scope.user.password, handleAuthentication );
+  }
+
+  var handleAuthentication = function(){
+    visionFactory.retrieveData( database[ PERSON ].name, function( result ){
+      $scope.showerror = false;
+      if( result == null || result.length < 1 ){
+        $timeout( function(){
+           $scope.showerror = true;
+        }, 1 );
+        return;
+      }
+      $rootScope.user = result[0];
+      vnNavigationFactory.switchScreens( vnAppManagementFactory.getDefaultApp().screens[0] );
+    }, "by_email", {start: "" + $scope.user.username, end: "" + $scope.user.username} );
+    
+  };
+
+  var handleResize = function(){
+      // Set the width of the slider
+      $( ".login" ).width( $window.innerWidth );
+      $( ".login" ).height( $window.innerHeight );
+      $( ".login" ).on("online", function () {});
+    }
+})
+.directive('vnLogin', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'authentication/vnlogin.html'
+    };
+  });

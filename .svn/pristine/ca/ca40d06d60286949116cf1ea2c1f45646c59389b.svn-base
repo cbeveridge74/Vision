@@ -1,0 +1,8 @@
+angular.module('vnCommandMenuModule', [],function () {})//'ngTouch'
+.controller('vnCommandMenuController', function(){})
+.directive('vnCommandMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'menus/vncommandmenu.html'
+    };
+  });

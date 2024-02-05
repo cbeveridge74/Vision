@@ -1,0 +1,9 @@
+<div class="validation-container" ng-controller="vnValidationMessageController" ng-hide="!message.length > 0">
+	<vn-css vn-id="vnvalidationmessage" vn-css-file="validation/vnvalidationmessage.css"></vn-css>
+	<div class="validation-item-container">
+		<div class="validation-arrow"></div>
+		<div class="validation-item">
+			<span>{{ message }}</span>
+		</div>
+	</div>
+</div>

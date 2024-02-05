@@ -1,0 +1,72 @@
+<div class="vision-reception"
+	 ng-controller="vnReceptionController">
+	<vn-css vn-id="vnreception" vn-css-file="apps/visionreception/vnreception.css"></vn-css>
+	<div ng-show="screens.VN_REP__HOME">
+		<vn-title-bar 
+			vn-title="Home"
+			vn-show-back-button="false"></vn-title-bar>
+		<div class="content home">
+			<vn-scroll vn-class-selector="home"  vn-watch="screens.VN_REP__HOME">
+				<vn-hub-category 
+					vn-title="People >"
+					vn-image="apps/components/images/people.svg"
+					vn-on-filter-image="apps/components/images/filter_yellow.svg"
+					vn-off-filter-image="apps/components/images/filter_blue.svg"
+					vn-filter-menu="apps/components/people/filtermenu.html"
+					vn-name="people-cat"
+					vn-show-filter="true">
+					<vn-people></vn-people>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Discussions >"
+					vn-image="apps/components/images/chat_blue.svg"
+					vn-name="discussions-cat"
+					vn-show-filter="false">
+					<vn-discussions></vn-discussions>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Appointments >"
+					vn-image="apps/components/images/appointment_blue.svg"
+					vn-name="appointments-cat"
+					vn-show-filter="false">
+					<vn-appointments></vn-appointments>
+				</vn-hub-category>
+	    	</vn-scroll>
+		</div>
+	</div>
+	<div ng-show="screens.VN_REP__PATIENT">
+		<vn-banner></vn-banner>
+		<vn-title-bar 
+			vn-title="Patient"
+			vn-show-back-button="true"></vn-title-bar>
+		<div class="content patient">
+			<vn-scroll vn-class-selector="patient" vn-watch="screens.VN_REP__PATIENT">
+				<vn-hub-category 
+					vn-title="People >"
+					vn-image="apps/components/images/people.svg"
+					vn-on-filter-image="apps/components/images/filter_yellow.svg"
+					vn-off-filter-image="apps/components/images/filter_blue.svg"
+					vn-filter-menu="apps/components/people/filtermenu.html"
+					vn-name="people-cat"
+					vn-show-filter="true">
+					<vn-people></vn-people>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Discussions >"
+					vn-image="apps/components/images/chat_blue.svg"
+					vn-name="discussions-cat"
+					vn-show-filter="false">
+					<vn-discussions></vn-discussions>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Appointments >"
+					vn-image="apps/components/images/appointment_blue.svg"
+					vn-name="appointments-cat"
+					vn-show-filter="false">
+					<vn-appointments></vn-appointments>
+				</vn-hub-category>
+	    	</vn-scroll>
+		</div>
+	</div>
+</div>
+

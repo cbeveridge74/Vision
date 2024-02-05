@@ -1,0 +1,13 @@
+function DemoServices( vnAssemblerFactory, databaseFactory ){
+	var demoServices = this;
+	
+	demoServices.authenticate = function( username, password, callback ){
+		callback();
+	};
+
+	demoServices.retrieveData = function( item, callback, index, bounds, count ){
+
+		databaseFactory.retrieveData( item, callback, index, bounds, count );
+		
+	};
+}

@@ -1,0 +1,16 @@
+<vn-css vn-id="vnprescribing" vn-css-file="apps/visionanywhere/prescribing/vnprescribing.css"></vn-css>
+<div class="vision-prescribing">
+	<vn-banner 
+	    ng-show="$root.patientid != null || bannerModel.localPatientId != null"
+	    context-button="false"
+	    model="bannerModel"
+	    screen-to-watch="screens.VN_ANY__PRESCRIBING"></vn-banner>
+	<vn-title-bar 
+	    vn-title="Prescribe"
+	    vn-show-back-button="true"
+	    vn-backbutton-handler="handleBackButtonClick()"
+	    vn-show-search="false"></vn-title-bar>
+    <div class="main">
+    	[ Placeholder prescribing screen ]
+    </div>
+</div>

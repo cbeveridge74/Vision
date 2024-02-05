@@ -1,0 +1,26 @@
+angular.module('vnActionModule', [ ],function () {})
+.factory('vnActionFactory',  function(){
+	var factory = {};
+	var canHelpWith = {};
+
+	factory.canHelpWith = function( actionName, callback ){
+		canHelpWith[ actionName ] = callback;
+	};
+
+	factory.needHelpWith = function( action, data, callback ){
+		var helper = canHelpWith[ action.name];
+		if( helper != null ){
+			helper.call( this, data, callback );
+		}else{
+			chrome.notifications.create("NO_HELPER", {
+			  type: "basic",
+			  title: "No Available Apps",
+			  message: "Sorry, we don't yet have an app for " + BOOK_SLOT.description + ", but we're working on it...",
+			  iconUrl: "../images/Vision_128.png",
+			  priority: 2
+			}, function(){});
+		}
+		
+	}
+	return factory;
+});

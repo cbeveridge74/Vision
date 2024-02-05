@@ -1,0 +1,134 @@
+angular.module('vnTaskCardCreateModule', [],function () {})
+.controller('vnTaskCardCreateController', function ( 
+	$scope, 
+	$rootScope,
+	$mdToast,
+	$timeout,
+	visionFactory,
+	vnTaskFactory,
+	vnScreenManagementFactory,
+	vnNavigationFactory,
+	VN_TASK_SCREENS
+	) {
+	
+	$scope.recipientCollection = [];
+
+	$scope.init = function ( callback ) {
+		
+		$rootScope.$watch( "screens." + VN_TASK_SCREENS.TASK_CREATE, function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      	});
+
+
+		$scope.selectedRecipients = [];
+		$scope.selectedSubjects = [];
+		$scope.description = "";
+		$scope.urgency = "Routine";
+
+		visionFactory.retrieveData( database[ PERSON ].name, function( peopleResult ){
+				var recipients = new Array();
+				
+				visionFactory.retrieveData( database[ PERSON_GROUPS ].name, function( groupResult ){
+					angular.forEach( peopleResult, function( value, index ){
+						recipients.push({
+							id: value.id,
+						    thumbnailUrl: '',
+						    title: value.label,
+						    subtitle: value.email
+						});
+					});
+
+					angular.forEach( groupResult, function( value, index ){
+						recipients.push({
+							id: value.id,
+						    thumbnailUrl: '',
+						    title: value.label,
+						    subtitle: value.description
+						});
+					});
+
+				});
+				$scope.recipientCollection = recipients;
+		});
+
+		visionFactory.retrieveData( database[ TASK_SUBJECTS ].name, function( result ){
+			$scope.subjectCollection = result;
+		});
+		
+	};
+
+	$scope.handleDescriptionFocus = function( e ){
+		$( '.task-card-create md-card' ).height( '20em' );
+		$timeout( function(){
+			$( '.task-card-create' ).toggleClass( 'minimised' );
+		}, 2000 );
+		
+		
+		$scope.showtaskcreate = true;
+	};
+
+	$scope.handleGeneralClick = function( event ){
+		if( event != null ){
+	      	event.stopPropagation();
+	    }
+	};
+
+	$scope.handleAdvancedClick = function( event ){
+		//$( ".vision-reception .tasks-cat .task-create" ).attr( "style", "" );
+		var widget = $(".vision-reception .tasks-cat .task-create");
+		vnNavigationFactory.switchScreens( VN_TASK_SCREENS.WORKFLOW );
+	};
+
+	$scope.handleCancelClick = function( event ){
+		//$( ".vision-reception .tasks-cat .task-create" ).attr( "style", "" );
+		vnScreenManagementFactory.closeMenus();
+		$scope.selectedRecipients = [];
+		$scope.selectedSubjects = [];
+		$scope.description = "";
+	};
+
+	$scope.handleSaveClick = function( event ){
+		
+		var assigneeIds = [];
+
+		angular.forEach( $scope.selectedRecipients, function( value, index ){
+			assigneeIds.push( value.id );
+		});
+
+		var task = { 	
+			assignee: assigneeIds,
+			assigner: {id: $rootScope.user.id, displayname: $rootScope.user.shortlabel, displaynamelong: $rootScope.user.label},
+			clinicaldocid: -1,
+			description: $scope.description,
+			due: null,
+			image: "task_pad.svg",
+			overduealert: "false",
+			patientid: 78,
+			priority: "2",
+			private: "false",
+			recurrence: "false",
+			status: "0",
+			statusimage: "Did_not_arrive2.png",
+			subject: null,
+			subjectid: $scope.selectedSubjects 
+		};
+
+		vnTaskFactory.sendTask( task, function( item ){
+			$scope.handleCancelClick();
+			$mdToast.show($mdToast.simple().content('Task sent successfully').position("bottom right"));
+		});
+	};
+
+	var handleShow = function(){
+
+		
+	};
+})
+.directive('vnTaskCardCreate', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/components/tasks/vntaskcardcreate.html'
+    };
+  });

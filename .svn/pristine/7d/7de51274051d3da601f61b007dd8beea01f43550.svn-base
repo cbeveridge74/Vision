@@ -1,0 +1,50 @@
+/* Booking form view */
+.booking-form {
+	/*height: 100%;
+	width: 100%;
+	width: 1024px;
+	height: 768px;*/
+	background-color: #FFF;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.booking-form .glyphicon {
+	color: #FFFFFF;
+	margin: 1em;
+}
+
+.booking-form .back-button {
+	font-size: 3em;
+}
+
+.booking-form .book-button, 
+.booking-form .glyphicon{
+	cursor: pointer;
+}
+
+.booking-form .back-button, 
+.booking-form .book-button,
+.booking-form .typeahead {
+	/*margin: 1em;*/
+}
+
+.booking-form .typeahead{
+	//width: 20em;
+}
+
+.booking-form .top{
+	height: 20%;
+}
+
+.booking-form .middle{
+	margin-left: 10em;
+	height: 70%;
+	width: 40em;
+}
+
+.booking-form .bottom{
+	text-align: center;
+	height: 10%;
+}

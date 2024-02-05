@@ -1,0 +1,169 @@
+<div class="vision-reception" ng-controller="vnReceptionController"
+	 ng-init="init();">
+	<vn-css vn-id="vnreception" vn-css-file="apps/visionreception/vnreception.css"></vn-css>
+	<div ng-show="screens.VN_REP__HOME" class="home" >
+		<vn-title-bar 
+			vn-title="Home"
+			vn-search-handler="handleSearchSelected()"
+			vn-show-back-button="false"
+			vn-show-search="true"></vn-title-bar>
+		<vn-scroll 
+			vn-class-selector="home"  
+			vn-watch="screens.VN_REP__HOME"
+			vn-x-scroll="true"
+			vn-top-offset="122">
+			<div class="content">
+				<!--<vn-hub-category 
+					vn-title="People >"
+					vn-image="apps/components/images/people.svg"
+					vn-on-filter-image="apps/components/images/filter_yellow.svg"
+					vn-off-filter-image="apps/components/images/filter_blue.svg"
+					vn-filter-menu="apps/components/people/filtermenu.html"
+					vn-name="people-cat"
+					vn-show-filter="true">
+					<vn-tour
+						vn-item-top="0.5em"
+						vn-item-left="12.5em"
+						vn-item-height="3.5em"
+						vn-item-width="15em"
+						vn-arrow-top="-0.2em"
+						vn-arrow-left="19em"
+						vn-arrow-direction="up"
+						vn-text="Filter button to filter the category"></vn-tour>
+					<vn-people></vn-people>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Discussions >"
+					vn-image="apps/components/images/chat_blue.svg"
+					vn-name="discussions-cat"
+					vn-show-filter="false">
+					<vn-discussions></vn-discussions>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Appointments >"
+					vn-image="apps/components/images/appointment_blue.svg"
+					vn-name="appointments-cat"
+					vn-show-filter="false">
+					<vn-tour
+						vn-item-top="7em"
+						vn-item-left="1em"
+						vn-item-height="3.5em"
+						vn-item-width="14em"
+						vn-arrow-top="6.3em"
+						vn-arrow-left="6.9em"
+						vn-arrow-direction="up"
+						vn-text="Update appointment status"></vn-tour>
+					<vn-appointments
+					vn-patient-specific="false"
+					vn-watch="screens.VN_REP__HOME"></vn-appointments>
+				</vn-hub-category>-->
+				<vn-hub-category 
+					vn-title="To do >"
+					vn-title-click=""
+					vn-image="apps/components/images/task.svg"
+					vn-name="tasks-cat"
+					vn-show-filter="false"
+					vn-show-add="true"
+					vn-add-image="apps/components/images/add_blue.svg">
+					<vn-tour
+						vn-item-top="8em"
+						vn-item-left="0em"
+						vn-item-height="3.5em"
+						vn-item-width="14em"
+						vn-arrow-top="7.3em"
+						vn-arrow-left="6em"
+						vn-arrow-direction="up"
+						vn-text="Click patient for patient view"></vn-tour>
+
+
+					<vn-task
+						vn-patient-specific="false"
+						vn-watch="screens.VN_REP__HOME"></vn-task>
+				</vn-hub-category>
+				<!--<vn-hub-category 
+					vn-title="Prescriptions >"
+					vn-image="apps/components/images/script_bottle.svg"
+					vn-name="prescriptions-cat"
+					vn-show-filter="false">
+					<vn-tour
+						vn-item-top="7em"
+						vn-item-left="1em"
+						vn-item-height="3.5em"
+						vn-item-width="14em"
+						vn-arrow-top="6.3em"
+						vn-arrow-left="6.9em"
+						vn-arrow-direction="up"
+						vn-text="Right click for commands"></vn-tour>
+					<vn-prescription
+						vn-patient-specific="false"
+						vn-watch="screens.VN_REP__HOME"></vn-prescription>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Correspondence >"
+					vn-image="apps/components/images/mail.svg"
+					vn-name="correspondence-cat"
+					vn-show-filter="false">
+					<vn-correspondence
+						vn-patient-specific="false"
+						vn-watch="screens.VN_REP__HOME"></vn-correspondence>
+				</vn-hub-category>-->
+			</div>
+		</vn-scroll>
+	</div>
+	<div ng-show="screens.VN_REP__PATIENT" class="patient">
+		<vn-banner></vn-banner>
+		<vn-title-bar 
+			vn-title="Patient"
+			vn-backbutton-handler="handleBackButton()"
+			handleSelected=""
+			vn-show-back-button="true"></vn-title-bar>
+			
+			<vn-scroll 
+				vn-class-selector="patient" 
+				vn-watch="screens.VN_REP__PATIENT"
+				vn-x-scroll="true"
+				vn-top-offset="182">
+				<div class="content">
+					<vn-hub-category 
+						vn-title="Appointments >"
+						vn-image="apps/components/images/appointment_blue.svg"
+						vn-name="appointments-cat"
+						vn-show-filter="false">
+						<vn-appointments
+							vn-patient-specific="true"
+							vn-watch="screens.VN_REP__PATIENT">
+						</vn-appointments>
+					</vn-hub-category>
+					<vn-hub-category 
+						vn-title="Tasks >"
+						vn-image="apps/components/images/task.svg"
+						vn-name="tasks-cat"
+						vn-show-filter="false">
+						<vn-task 
+							vn-patient-specific="true"
+							vn-watch="screens.VN_REP__PATIENT"></vn-task>
+					</vn-hub-category>
+					<vn-hub-category 
+						vn-title="Prescriptions >"
+						vn-image="apps/components/images/script_bottle.svg"
+						vn-name="prescriptions-cat"
+						vn-show-filter="false">
+						<vn-prescription
+							vn-patient-specific="true"
+							vn-watch="screens.VN_REP__PATIENT"></vn-prescription>
+					</vn-hub-category>
+					<vn-hub-category 
+						vn-title="Correspondence >"
+						vn-image="apps/components/images/mail.svg"
+						vn-name="correspondence-cat"
+						vn-show-filter="false">
+						<vn-correspondence 
+							vn-patient-specific="true"
+							vn-watch="screens.VN_REP__PATIENT"></vn-correspondence>
+					</vn-hub-category>
+				</div>
+	    	</vn-scroll>
+		
+	</div>
+</div>
+

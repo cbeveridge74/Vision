@@ -1,0 +1,35 @@
+.vision-tracking {
+
+}
+
+.vision-tracking form {
+	margin-left: 5em;
+	margin-top: 2em;
+}
+
+.vision-tracking .md-subheader .md-subheader-content{
+	font-size: 1.5em;
+}
+
+.vision-tracking .noactivity{
+	display: inline-block;
+}
+
+.vision-tracking .general input.noactivity{
+	width: 3em;
+}
+
+.vision-tracking .general md-checkbox,
+.vision-tracking .general input.noactivity {
+	margin-right: 4px;
+}
+
+.vision-tracking md-input-container{
+	width: 15em;
+}
+
+.vision-tracking .content{
+	margin-left: 4em;
+	margin-bottom: 4em;
+}
+

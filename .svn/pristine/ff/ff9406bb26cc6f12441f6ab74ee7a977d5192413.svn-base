@@ -1,0 +1,74 @@
+<div class="vision-reception" ng-controller="vnReceptionController"
+	 ng-init="init();">
+	<vn-css vn-id="vnreception" vn-css-file="apps/visionreception/vnreception.css"></vn-css>
+	<div ng-show="screens.VN_REP__HOME" class="home">
+		<vn-title-bar 
+			vn-title="Home"
+			vn-search-handler="handleSearchSelected()"
+			vn-show-back-button="false"
+			vn-show-search="true"></vn-title-bar>
+		<vn-scroll 
+			vn-class-selector="home"  
+			vn-watch="screens.VN_REP__HOME"
+			vn-x-scroll="true"
+			vn-top-offset="122">
+			<div class="content">
+				<vn-hub-category 
+					vn-title="People >"
+					vn-image="apps/components/images/people.svg"
+					vn-on-filter-image="apps/components/images/filter_yellow.svg"
+					vn-off-filter-image="apps/components/images/filter_blue.svg"
+					vn-filter-menu="apps/components/people/filtermenu.html"
+					vn-name="people-cat"
+					vn-show-filter="true">
+					<vn-people></vn-people>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Discussions >"
+					vn-image="apps/components/images/chat_blue.svg"
+					vn-name="discussions-cat"
+					vn-show-filter="false">
+					<vn-discussions></vn-discussions>
+				</vn-hub-category>
+				<vn-hub-category 
+					vn-title="Appointments >"
+					vn-image="apps/components/images/appointment_blue.svg"
+					vn-name="appointments-cat"
+					vn-show-filter="false">
+					<vn-appointments
+					vn-patient-specific="false"
+					vn-watch="screens.VN_REP__HOME"></vn-appointments>
+				</vn-hub-category>
+			</div>
+		</vn-scroll>
+	</div>
+	<div ng-show="screens.VN_REP__PATIENT" class="patient">
+		<vn-banner></vn-banner>
+		<vn-title-bar 
+			vn-title="Patient"
+			vn-backbutton-handler="handleBackButton()"
+			handleSelected=""
+			vn-show-back-button="true"></vn-title-bar>
+			
+			<vn-scroll 
+				vn-class-selector="patient" 
+				vn-watch="screens.VN_REP__PATIENT"
+				vn-x-scroll="true"
+				vn-top-offset="122">
+				<div class="content">
+					<vn-hub-category 
+						vn-title="Appointments >"
+						vn-image="apps/components/images/appointment_blue.svg"
+						vn-name="appointments-cat"
+						vn-show-filter="false">
+						<vn-appointments
+							vn-patient-specific="true"
+							vn-watch="screens.VN_REP__PATIENT">
+						</vn-appointments>
+					</vn-hub-category>
+				</div>
+	    	</vn-scroll>
+		
+	</div>
+</div>
+

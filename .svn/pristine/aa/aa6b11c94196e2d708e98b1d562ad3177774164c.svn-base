@@ -1,0 +1,46 @@
+.login {
+	height: 100%;
+}
+
+.login .splash {
+	padding: 4em 0 0em 0em;
+	text-align: center;
+}
+
+.login .title {
+	font-family: "Segoe UI", "Arial Rounded MT Bold";
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 6em;
+	margin-top: 0.5em;
+}
+
+.login .well{
+	width: 35em;
+	height: 15em;
+    margin: 5em auto;
+    text-align: right;
+    background-color: #FFF;
+}
+
+.login .well .input-group-addon{
+	background-color: #2A5E8D;
+}
+
+.login .input-group{
+	width: 30em;
+	margin: 1em;
+}
+
+.login .splash img{
+	width: 12em;
+	vertical-align: top;
+}
+
+.login .version {
+	position: absolute;
+	font-size: 0.7em;
+	color: #DDDDDD;
+	bottom: 0.8em;
+	right: 1em;
+}

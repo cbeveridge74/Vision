@@ -1,0 +1,60 @@
+<div>
+	<style>
+		.save-label{
+			font-weight: bold;
+			//margin: 0.5em 0 0.5em 0;
+			font-size: x-large;
+		}
+		
+		.command-button{
+			display: inline-block;
+		}
+		
+		.button-bar{
+			width: 95%;
+			text-align: right;
+		}
+		
+		.save-field-label{
+			font-weight: bold;
+		}
+	
+	</style>
+	<div class="save-label">
+		${ formEntityName } (${ formEntityId })
+	</div>
+	<div class="save-field-label">
+		Save as
+	</div>
+	<div>
+		<input type="text" id="saveas" value="${ formId }"></input>
+	</div>
+	<div class="save-field-label">
+		Triggered by
+	</div>
+	<div>
+		<input type="text" id="triggeredby" value="${ formTriggeredBy }"></input>
+	</div>	
+	<div class="save-field-label">
+		Structure
+	</div>
+	<div>
+		<textarea rows="10" cols="80" id="structure">${ structure }</textarea>
+	</div>
+	<div class="save-field-label">
+		Workflow
+	</div>
+	<div>
+		<textarea rows="10" cols="80" id="workflow">${ workflow }</textarea>
+	</div>
+	
+	<div class="button-bar">
+		<div class="command-button">
+			<input type="button" id="formSaveButton" value="Save"></input>
+		</div>
+		<div class="command-button">
+			<input type="button" value="Cancel"></input>
+		</div>
+	</div>
+
+</div>

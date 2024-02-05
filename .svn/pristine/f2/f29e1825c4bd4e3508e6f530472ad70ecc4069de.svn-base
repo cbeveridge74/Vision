@@ -1,0 +1,68 @@
+angular.module('vnVisionAppointmentsModule', [
+	'vnVisionAppointmentsDayModule',
+	'vnVisionAppointmentsCalendarModule',
+	'vnVisionAppointmentsBookingModule'],function () {})
+.run(function( vnAppManagementFactory ){
+	var APP_ID 			= "VN_APP";
+	var DAY 			= APP_ID + '__DAY';
+	var CALENDAR 		= APP_ID + '__CALENDAR';
+	var BOOKING_FORM 	= APP_ID + '__BOOKING_FORM';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: APP_ID, 
+		name: "Appointments",
+		icon: "apps/visionappointments/images/appointments.png",
+		screens: [
+			DAY,
+			BOOKING_FORM,
+			CALENDAR
+			]
+		});
+})
+.controller('vnVisionAppointmentsController', function( 
+	$scope, 
+	vnActionFactory,
+	vnNavigationFactory,
+	SCREENS ){
+	$scope.backbutton = false;
+	var canHelpWithCallback = null;
+	vnActionFactory.canHelpWith( vnActionFactory.BOOK_SLOT, bookSlot );
+
+	function bookSlot( data, callback ){
+	    vnNavigationFactory.switchScreens( SCREENS.CALENDAR );
+	    canHelpWithCallback = callback;
+	    canHelpWithCallback();
+	    
+	    /*
+
+	    if( action == "REVDOC" ){
+	      vnNavigationFactory.switchScreens( VN_TASK_SCREENS.DOCUMENT_REVIEW);
+	    }else if( action == "BKAPPT" ){
+	      var patientId;
+	      if( args != null && args.length > 0 ){
+	        patientId = args[0];
+	        visionFactory.retrieveData( database[ PATIENT ].name, function( result ){
+	          $rootScope.patientTransient = result[0];
+
+	        }, null, { start: patientId, end: patientId } );
+	        
+	      }
+	      vnNavigationFactory.switchScreens( SCREENS.CALENDAR );
+	    }
+
+	    */
+	}
+})
+.directive('vnVisionAppointments', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionappointments/vnvisionappointments.html'
+    };
+  })
+.value('SCREENS',  { 
+	DAY: "VN_APP__DAY",
+	CALENDAR: "VN_APP__CALENDAR",
+	BOOKING_FORM: "VN_APP__BOOKING_FORM" 
+});
+
+

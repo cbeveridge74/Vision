@@ -1,0 +1,22 @@
+<div class="vision-dynamo-date" 
+        ng-controller="vnDateController"
+        ng-init="init();">
+	<vn-css vn-id="vndynamodate" vn-css-file="apps/visiondynamo/common/component/date/vndate.css"></vn-css>
+	<div class="vn-label">{{ label }}</div>
+        <input id="{{ target }}" 
+        type="date" 
+        ng-blur="handleChange();" 
+        ng-model="value"
+        min="{{ min }}"
+        value="2015-01-04"
+        ng-disabled="{{disabled}}">
+        <vn-validation-message
+                vn-item-top="0.5em"
+                vn-item-left="0em"
+                vn-item-height="3.5em"
+                vn-item-width="12.5em"
+                vn-arrow-top="0em"
+                vn-arrow-left="6em"
+                vn-arrow-direction="up"
+                vn-text="{{message}}"></vn-validation-message>
+</div>

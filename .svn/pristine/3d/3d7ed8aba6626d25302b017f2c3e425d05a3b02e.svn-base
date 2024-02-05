@@ -1,0 +1,219 @@
+angular.module('vnWorkflowBarModule', [],function () {})
+.controller('vnWorkflowBarController', function( 
+	$scope, 
+	$rootScope, 
+	$timeout, 
+	$mdDialog,
+	vnScrollFactory, 
+	vnWorkflowFactory, 
+	vnScreenManagementFactory,
+	vnNavigationFactory,
+	visionFactory,
+	VN_TASK_SCREENS,
+	VN_DOCMAN_SCREENS ){
+
+		$scope.PATIENT 		= 0;
+      	$scope.ATTACHMENT 	= 1;
+      	$scope.TRACKING 	= 2;
+      	$scope.RECURRENCE 	= 3;
+
+		$scope.patientsCollection = [];
+      	
+      	$scope.selectedPatients = [];
+      	$scope.attachedDocs = [];
+      	$scope.trackingSummary = {};
+	    $scope.recurrenceSummary = {};
+	    $rootScope.$on( vnWorkflowFactory.CLEAR_WORKFLOW, function(){
+	    	clearWorkflow();
+	    });
+
+	    var clearWorkflow = function(){
+			$scope.selectedPatients = [];
+	      	$scope.attachedDocs = [];
+	      	$scope.trackingSummary = {};
+		    $scope.recurrenceSummary = {};
+		};
+
+	    if( $scope.model != null ){
+			$scope.model.selectedPatients 					= $scope.selectedPatients;
+			$scope.model.attachedDocs 						= $scope.attachedDocs;
+			$scope.$watch( "trackingSummary", function( value ){ $scope.model.trackingSummary = value } );
+			$scope.$watch( "recurrenceSummary", function( value ){ $scope.model.recurrenceSummary = value } );
+		}
+
+      	/* DRAG DROP FILE */
+
+      	var holder = $('#holder')[0];
+		    //state = document.getElementById('status');
+
+		if (typeof window.FileReader === 'undefined') {
+		  console.log( "Fail" );
+		  //state.className = 'fail';
+		} else {
+			console.log( "Success" );
+		  //state.className = 'success';
+		  //.innerHTML = 'File API & FileReader available';
+		}
+		 
+		holder.ondragover = function () {  
+			$( this ).addClass( 'hover' );
+			return false; };
+		
+		holder.ondragend = function () { 
+			$( this ).removeClass( 'hover' ); 
+			return false; 
+		};
+
+		holder.ondragleave = function () { 
+			$( this ).removeClass( 'hover' ); 
+			return false; 
+		};
+
+		
+		holder.ondrop = function (e) {
+		  
+		  e.preventDefault();
+
+		  var file = e.dataTransfer.files[0],
+		      reader = new FileReader();
+		  reader.onload = function (event) {
+		    //holder.style.background = 'url(' + event.target.result + ') no-repeat center';
+		  };
+		  //console.log(file.name);
+		  $( this ).removeClass( 'hover' ); 
+		  $scope.attachedDocs.push( { label: file.name } );
+		  $scope.$apply();
+		  reader.readAsDataURL(file);
+
+		  return false;
+		};
+
+      	/******************/
+
+
+      	$scope.init = function () {
+      		$scope.$watch( 
+		      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			//handleShow();
+	      		}
+	      	});
+
+	      	$( ".vision-attachment .chipsInput" ).attr("placeholder","Patient search...");
+
+	      	$scope.options = [
+		      	{ label: "Patient", selected: true },
+		      	{ label: "Attach", selected: false},
+		      	{ label: "Track", selected: false },
+		      	{ label: "Recur", selected: false }
+	      	]
+
+
+      	};
+
+      	$scope.handleAttachedDocDeleteClick = function(){
+      		$scope.attachedDocs = [];
+      	};
+
+      	$scope.handleTrackingDeleteClick = function(){
+      		$scope.trackingSummary = {};
+      	};
+
+      	$scope.handleRecurrenceDeleteClick = function(){
+      		$scope.recurrenceSummary = {};
+      	};
+
+      	$scope.addChipsHandler = function(){
+      		//Show screen capture
+      		/*$mdDialog.show({
+				controller: function( $scope ){
+					
+				},
+				targetEvent: e,
+				hasBackdrop: false,
+				templateUrl: 'apps/visiontasks/workflow/dialog/workflowname.html'
+		    });*/
+      	};
+
+
+  		visionFactory.retrieveData( database[ PATIENT ].name, function( patientsResult ){
+			var patients = new Array();
+			
+			angular.forEach( patientsResult, function( value, index ){
+				patients.push({
+					id: value.Id,
+				    thumbnailUrl: '',
+				    title: value.Surname.toUpperCase() + ", " + value.Forename,
+				    subtitle: value.DOB
+				});
+			});
+			$scope.patientsCollection = patients;
+		}, null, null, 100);
+
+
+		$scope.handleTrackingEdit = function(){
+			vnNavigationFactory.switchScreens( VN_TASK_SCREENS.TRACKING );
+		};
+
+		$scope.handleRecurrenceEdit = function(){
+			vnNavigationFactory.switchScreens( VN_TASK_SCREENS.RECURRENCE );
+		};
+
+      	$scope.handlePatientClick = function( e ){
+      		console.log( "Patient Clicked" );
+      	};
+
+      	$scope.handleAddClinicalItem = function( e ){
+      		vnNavigationFactory.switchScreens( VN_DOCMAN_SCREENS.DOCUMENT_INBOX );
+      	};
+      	
+
+      	$scope.handleAttachmentDeleteClick = function( e ){
+      		$scope.attacheddocument = null;
+      	};
+
+      	$rootScope.$on( "TRACKING_UPDATED", function( scope, tracking ){
+      		isTrackingSet( tracking );
+      	});
+
+      	var isTrackingSet = function( tracking ){
+      		$scope.hasTracking = false;
+	        angular.forEach( tracking, function( trackValue, trackIndex ){
+	          if( trackValue.selected != null && trackValue.selected == true ){
+	            $scope.hasTracking = true;
+	          }
+	        });
+	        if( tracking.dueDate.selected != null ){
+	          $scope.hasTracking = true;
+	        }
+	      	$scope.trackingSummary = tracking;
+      	};
+
+      	$rootScope.$on( "RECURRENCE_UPDATED", function( scope, value ){
+      		$scope.recurrenceSummary = value;
+      	});
+
+      	vnScreenManagementFactory.initialiseMenuOptions( correspondenceLeftCommands, workflowRightCommands );
+      	$rootScope.$on( "DOCUMENT_ATTACHMENT", function( scope, value ){
+			//$scope.attacheddocument = value;
+			$scope.attachedDocs.push( { label: value.name } );
+			if( value.patient != null ){
+				$scope.selectedPatients.push( { 
+					active: false, 
+					id: value.patient.Id,
+					subtitle: value.patient.DOB,
+					thumbnailUrl: "",
+					title: value.patient.Surname.toUpperCase() + ", " + value.patient.Forename } );
+			}
+		});
+})
+.directive('vnWorkflowBar', function() {
+    return {
+      scope: {
+      	model: "=",
+      	reinitialise: "="
+      },
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vnworkflowbar.html'
+    };
+});

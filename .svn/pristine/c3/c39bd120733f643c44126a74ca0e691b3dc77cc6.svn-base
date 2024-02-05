@@ -1,0 +1,21 @@
+<vn-css vn-id="vntasknotification" vn-css-file="apps/components/tasks/notification/vntasknotification.css"></vn-css>
+<div class="task-notification">
+	
+	<div>
+		<div class="sent">{{ model[0].sent | date:"dd-MMM-yyyy @ HH:mm" }}</div>
+	</div>
+	<div>
+		<div class="image">
+			<img ng-src="{{model[0].assigner.image}}">
+			<div class="assigner">{{ model[0].assigner.shortlabel }}</div>
+		</div>
+		<div class="info-container">
+			<div class="title">{{ model[0].tasksubjects.label }}</div>
+			<div class="text">{{ model[0].description }}</div>
+			<div ng-show="model[1] > 0" class="comment-count fa fa-comment-o">&#160;&#160;{{ model[1] }} new comment<span ng-if="model[1] > 1">s</span></div>
+
+		</div>
+	</div>
+	
+
+</div>

@@ -1,0 +1,234 @@
+angular.module('vnDatabaseModule', [],function () {})
+.factory('vnDatabaseFactory', function( 
+  $filter,
+  $rootScope,
+  DATE_FORMAT, 
+  vnAssemblerFactory ){
+  
+  var factory = {};
+  factory.db = null;
+
+  $rootScope.$watch( "dbloaded", function( value ){
+    if( value ){
+      angular.forEach( queue, function( value, index ){
+        factory.retrieveData( value.item, value.callback, value.index, value.bounds, value.count );
+      });
+
+      angular.forEach( calendarQueue, function( value, index ){
+        factory.retrievevSlotDataForCalendar( value.callback );
+      });
+
+      
+    }
+  });
+
+  var queue = new Array();
+  var calendarQueue = new Array();
+  
+  factory.doesDatabaseExist = function( callback ){
+    if( factory.db == null ){
+      callback( false );
+      return;
+    }
+    var store = factory.db.transaction([database[0].name], "readwrite").objectStore(database[0].name);
+    var count = store.count();
+    count.onsuccess = function() {
+      if( callback != null ){
+        callback.call( this, count.result > 0 );
+      }
+    }
+  };
+
+  factory.open = function( successHandler ) {
+    factory.doesDatabaseExist( function( exists ){
+      if( exists ){
+        successHandler();
+      }else{
+        var version = config.local_database_version;
+        var request = indexedDB.open("patientmanagementdatabase", version);
+
+        // We can only create Object stores in a versionchange transaction.
+        request.onupgradeneeded = function(e) {
+          var db = e.target.result;
+          e.target.transaction.onerror = factory.onerror;
+
+          if(db.objectStoreNames.contains(database[0].name)) {
+            angular.forEach( database, function( value, key ){
+              db.deleteObjectStore( value.name );
+            });
+          }
+          angular.forEach( database, function( value, key ){
+            var store = db.createObjectStore(value.name,{keyPath: value.index[0].key});
+            angular.forEach( value.index, function( indexValue, indexKey ){
+              store.createIndex( indexValue.name, indexValue.key );
+            });
+          });
+         
+        };
+
+        request.onsuccess = function(e) {
+          factory.db = e.target.result;
+          bulkLoadData( successHandler );
+        };
+
+        request.onerror = factory.onerror;
+      }
+    });
+
+    
+  };
+
+  factory.onerror = function(a, b, c){
+    console.log( a );
+  };
+
+  factory.loadData = function( callback ){
+    if( callback ){
+      callback.apply( this );
+    }
+  };
+
+  factory.bulkLoadData = function( data, item, callback ){
+    var db = factory.db;
+    var trans = db.transaction([item], "readwrite");
+    var store = trans.objectStore(item);
+    
+    angular.forEach(data, function(value, key) {
+        store.put(value);
+    });
+
+    if( callback ){
+      callback();
+    }
+  };
+
+  factory.retrievevSlotDataForCalendar = function( callback){
+    if( $rootScope.dbloaded != true ){
+        calendarQueue.push({
+          callback: callback
+        });
+        return;
+      }
+      
+      var db = factory.db;
+      var trans = db.transaction(["appointment"], "readwrite");
+      var store = trans.objectStore("appointment");
+      // Get everything in the store;
+      var cursorRequest = store.index('by_date').openCursor();
+      var calendarStruct = {};
+      
+      cursorRequest.onsuccess = function(e) {
+        var result = e.target.result;
+        if(result && result.value){ 
+
+          if( calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ] == null ){
+            calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ] = {};
+          }
+          if( calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ][result.value.owner] == null ){
+            calendarStruct[ $filter('date')(result.value.date,DATE_FORMAT) ][result.value.owner] = {};
+          }
+          var date = $filter('date')(result.value.date,DATE_FORMAT);
+          var time = {};
+          time.label = $filter('date')(result.value.date,'HH:mm');
+          time.color = result.value.slotcolor;
+          time.status = result.value.status;
+          time.id = result.value.id;
+
+          if( calendarStruct[ date ][result.value.owner]["09"] == null ){
+            calendarStruct[ date ][result.value.owner]["09"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["10"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["11"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["12"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["13"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["14"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["15"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["16"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["17"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["18"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["19"] = [{label: "00:00", color: "#FFFFFF"}];
+            calendarStruct[ date ][result.value.owner]["20"] = [{label: "00:00", color: "#FFFFFF"}];
+          }
+          
+          if( calendarStruct[ date ][result.value.owner][time.label.split(":")[0]][0].label == "00:00" ){
+            calendarStruct[ date ][result.value.owner][time.label.split(":")[0]] = new Array();
+          }
+          calendarStruct[ date ][result.value.owner][time.label.split(":")[0]].push( time);
+          result.continue();
+       }else{
+        if( callback ){
+          callback.call( this, calendarStruct );
+        }
+       }
+      };
+      cursorRequest.onerror = factory.onerror;
+  };
+
+
+
+  factory.retrieveData = function( item, callback, index, bounds, count ) {
+      if( $rootScope.dbloaded != true ){
+        queue.push({
+          item: item,
+          callback: callback,
+          index: index,
+          bounds: bounds,
+          count: count
+        });
+        return;
+      }
+
+      var numResults = 10;
+      var db = factory.db;
+      var trans = db.transaction([item], "readwrite");
+      var store = trans.objectStore(item);
+      var results = new Array();
+      var counter = 0;
+      var _index = "by_id";
+      var cursorRequest;
+      if( index != null ){
+        _index = index;
+      }
+
+      if( count != null ){
+        numResults = count;
+      }
+
+      if( bounds != null ){
+        cursorRequest = store.index(_index).openCursor( IDBKeyRange.bound( bounds.start, bounds.end ) );
+      }else{
+        cursorRequest = store.index(_index).openCursor();
+      }
+      cursorRequest.onsuccess = function(e) {
+        
+        var result = e.target.result;
+        if(result && result.value && counter < numResults ){             
+            results.push( result.value );   
+            counter++;      
+            result.continue();
+        }else{
+          if( callback ){
+            callback.call( this, results );
+          }
+        }
+      };
+      cursorRequest.onerror = factory.onerror;
+  };
+  var dataStore = new DataStore();
+
+  var bulkLoadData = function( callback, index ){
+    if( index == null ){
+      index = 0;
+    }
+    var table = database[index];
+    if( table == null ){
+      callback();
+      return;
+    }
+    var data = vnAssemblerFactory[ table.assembler ].call( this, dataStore[ table.data ] );
+    factory.bulkLoadData( data, table.name, function(){
+      bulkLoadData( callback, ++index );
+    });
+  };
+
+  return factory;
+});

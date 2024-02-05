@@ -1,0 +1,223 @@
+.tasks-cat .list-group{
+	//position: fixed;
+	//-webkit-column-count: 2;
+	//-webkit-column-gap: 10px;
+	//min-height: 40.9em; 
+}
+
+
+.category .tasks.list-group-item{
+	margin-bottom: 2em;
+	width: 25em;
+	vertical-align: bottom;
+	box-shadow: 3px 3px 5px #888888;
+	margin-right: 1em;
+	border-radius: 3px;
+}
+
+.taskreminders > div {
+	vertical-align: top;
+	display: inline-block;
+	height: 6em;
+}
+
+.taskreminders .actions {
+	display: block;
+	height: 1.8em;
+	background-color: #2F4B9B;
+	color: white;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.taskreminders .action {
+	padding-top: 0.2em;
+	text-align: right;
+	padding-right: 1em;
+	font-weight: light;
+}
+
+.taskreminders > div > div {
+	margin: auto 0;
+	display: block;
+	margin-left:5px;
+}
+
+.tasks .status{
+	width: 2em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+.tasks .status img{
+	width: 2em;
+	height: 2em;
+}
+
+.taskreminders .patient > div{
+	display: inline-block;
+}
+
+.taskreminders .subject{
+	font-size: 0.9em;
+	height: 1em;
+	margin-top: -0.3em;
+	color: #999;
+}
+
+.taskreminders .workflow {
+	font-size: 1.1em;
+	margin-top: 0em;
+	color: #000
+}
+
+.taskreminders .patient {
+	margin-top: 0.8em;
+	height: 2em;
+	font-size: 0.75em;
+	padding-left: 0.5em;
+	cursor: pointer;
+}
+
+.taskreminders .patient img {
+	width: 1em;
+	vertical-align: top;
+	padding-top: 0.1em;
+	margin-right: 0.2em;
+}
+
+.taskreminders .image {
+	padding-top: 0.2em;
+}
+
+.taskreminders .image img{
+	width: 2.1em;
+}
+
+.tasks{
+	color: #20335E;
+	height: 80vh;
+}
+
+/*@media(min-height: 768px) {
+
+	.tasks .width-maker:nth-child(8),
+	.tasks .width-maker:nth-child(9),
+	.tasks .width-maker:nth-child(10),
+	.tasks .width-maker:nth-child(11){
+		width: 55em; 
+	}
+}
+
+@media(min-height: 921px) {
+	.tasks .width-maker:nth-child(8){
+		width: 0em;
+	}
+	.tasks .width-maker:nth-child(9),
+	.tasks .width-maker:nth-child(10),
+	.tasks .width-maker:nth-child(11){
+		width: 55em; 
+	}
+}*/
+
+
+
+
+
+.tasks vn-card {
+	width: 26.4em;
+	position: relative;
+}
+
+.tasks .assigner,
+.tasks .subject{
+	display: inline-block;
+	width: 50%;
+}
+
+.tasks .status {
+	padding-left: 0.5em;
+}
+
+.tasks .decline{ 
+	font-size: 0.8em;
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	color: #FF0000;
+}
+
+.tasks .topline {
+	
+}
+
+.tasks .bottomline {
+	
+}
+
+.tasks .bottomline .left {
+	
+}
+
+.tasks .bottomline .right {
+	
+}
+
+.tasks .bottomline .right .comment-count,
+.tasks .bottomline .right .attachment-count {
+	font-size: 1.1em;
+}
+
+.tasks .bottomline .right .comment-count{
+	margin-left: 0.7em;
+}
+
+.tasks .subject {
+	font-size: 1.5em;
+}
+
+.tasks .assigner {
+	text-align: right;
+}
+
+.tasks .assignee {
+	display: inline-block;
+	margin-right: 0.5em;
+	margin-top: 1em;
+}
+
+
+.tasks .description {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+
+.tasks .patientname {
+	vertical-align: bottom;
+}
+
+.tasks .patientname .name,
+.tasks .patientname .count,
+.tasks .patientname .icon {
+	display: inline-block;
+}
+
+
+.tasks .urgency {
+	height: 5px;
+	width: 25.15em;
+	background-color: #FF0000;
+	margin-left: -1.4em;
+	margin-top: 0.2em
+}
+
+
+
+.tasks .documentname {
+	
+}

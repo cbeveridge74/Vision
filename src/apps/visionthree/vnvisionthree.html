@@ -1,0 +1,193 @@
+<div class="vision-three" ng-controller="vnVisionThreeController" ng-init="init()">
+	<vn-css vn-id="vnthree" vn-css-file="apps/visionthree/vnvisionthree.css"></vn-css>
+	<div class="loader" ng-show="$root.loaded == false">
+		<div class="message-container">
+			<div class="message">Loading dictionaries...</div>
+			<i class="fa fa-cog fa-spin"></i>
+		</div>
+	</div>
+	<div class="title-bar">
+		<div class="icon">
+			<img src="images/inps_logo_blue_32.png">
+		</div>
+		<div class="label">Mary E HADDOCK 62Y - 03/05/1953 (F) (NHS No: 4111 117 0544) 19 Oatland Green, Leeds, LS7 1SN</div>
+	</div>
+	<div class="menu-bar">
+		<div ng-repeat="menuitem in menuItems" class="menu-bar-item">{{menuitem.name}}</div>
+	</div>
+	<div class="icon-bar">
+		<div ng-repeat="icon in icons" class="icon-bar-item" ng-class="( $index == 4 ) ? 'icon-bar-item selected' : 'icon-bar-item'">
+			<img ng-src="{{icon.icon}}">
+		</div>
+	</div>
+	<div class="main-container">
+		<div class="title-bar">
+			<div class="icon">
+				<img src="images/inps_logo_blue_32.png">
+			</div>
+			<div class="label">View 7 with Problems on RHS 20140324</div>
+		</div>
+		<div class="left-container">
+			<div class="search-container">
+				<input type="text">
+				<div class="search-icon">
+					<i class="fa fa-search"></i>
+				</div>
+			</div>
+			<div class="filters">
+				<div class="filter-item">
+					<div class="icon"></div>
+					<div class="name">Initial Filter</div>
+				</div>
+				<div ng-repeat="filter in filterItems" class="filter-item">
+					<div class="icon">
+						<img ng-src="{{filter.icon}}">
+					</div>
+					<div ng-if="filter.count > 0" class="count">{{filter.count}}</div>
+					<div class="name">{{filter.name}}</div>
+				</div>
+			</div>
+			<div class="bottom">
+				<div class="health">
+					<div class="header">
+						<div class="icon">
+							<img src="images/V3/HEAL.png">
+						</div>
+						<div class="icon">
+							<img src="images/V3/IMVAC.png">
+						</div>
+					</div>
+					<div class="title">
+						<div class="icon">
+							<img src="images/V3/HEAL.png">
+						</div>
+						<div class="label">
+							Health promotion
+						</div>
+					</div>
+					<div class="content">
+						Interventions not recorded
+					</div>
+					<div class="title">
+						<div class="icon">
+							<img src="images/V3/IMVAC.png">
+						</div>
+						<div class="label">
+							Immunisations Due in Next
+						</div>
+					</div>
+					<div class="content">
+						Poliomyelitis 1st 03/07/1953 o/d
+					</div>
+					<div class="content">
+						Tentanus 1st 03/07/1953 o/d
+					</div>
+				</div>
+				<div class="info">
+					<div class="info-row">
+						<div class="icon">
+							<img src="images/inps_logo_blue_32.png">
+						</div>
+						<div class="label">Diabetes Quality Indicators v28.0.00</div>
+					</div>
+					<div class="info-row">
+						<div class="icon">
+							<img src="images/inps_logo_blue_32.png">
+						</div>
+						<div class="label">Hypertension Quality Indicators v2...</div>
+					</div>
+					<div class="info-row">
+						<div class="icon">
+							<img src="images/inps_logo_blue_32.png">
+						</div>
+						<div class="label">CVD Primary Prevention Quality In...</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="middle-container">
+			<div class="journal">
+				<div id="journal-tabs">
+					<ul>
+						<li ng-repeat="tab in tabs">
+							
+							<a href="#journal-tabs-{{$index}}"><i ng-if="$index == JOURNAL_TAB" class="fa fa-caret-right">&#160;</i>{{tab.name}}</a>
+						</li>
+					</ul>
+					<div class="tab-content" ng-repeat="tab in tabs" id="journal-tabs-{{$index}}">
+						<div class="journal-tab" ng-if="$index == JOURNAL_TAB">
+							<div class="journal-header">
+								<div class="date">Date</div>
+								<div class="description">Description</div>
+								<div class="priority">Priority</div>
+								<div class="clinician">Clinician</div>
+								<div class="user">User</div>
+							</div>
+							<div ng-repeat="journal in journalData" ng-class="( journal.status == 'new' ) ? 'journal-row new':'journal-row'">
+								<div class="date">{{ journal.date | date:'dd/MM/yyyy' }}</div>
+								<div class="data-container">
+									<div class="data" ng-repeat="journalrow in journal.data">
+										<div class="icon"><img ng-src="{{journalrow.icon}}"></div>
+										<div class="description">{{journalrow.description}}</div>
+									</div>
+								</div>
+								<div class="priority">{{ journal.priority }}</div>
+								<div class="clinician">{{ journal.clinician }}</div>
+								<div class="user">{{ journal.user }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="data-entry">
+					<div class="top">
+						<div class="left">
+							<div class="icon">
+								<img src="images/inps_logo_blue_32.png">
+							</div>
+							<div class="label">{{ dataInputView.label }}</div>
+						</div>
+						<div class="right">
+							<button ng-repeat="button in dataInputView.buttons" ng-click="handleClick()">{{button}}</button>
+						</div>
+					</div>
+					<div class="input-container">
+						<vn-read-search model="model" ng-if="dataInputView.id == dataInputViews.DEFAULT.id"></vn-read-search>
+						<vn-temperature ng-if="dataInputView.id == dataInputViews.TEMPERATURE.id"></vn-temperature>
+						<vn-drug ng-if="dataInputView.id == dataInputViews.DRUG.id"></vn-drug>
+						<vn-read ng-if="dataInputView.id == dataInputViews.READ.id"></vn-read>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right-container">
+			<div class="problems">
+				<div id="problems-tabs">
+					<ul>
+						<li ng-repeat="tab in problemsTabs"><a href="#problems-tabs-{{$index}}">{{tab.name}}</a></li>
+					</ul>
+					<div class="tab-content" ng-repeat="tab in problemsTabs" id="problems-tabs-{{$index}}">
+						Tab {{$index}}
+					</div>
+				</div>
+			</div>
+			<div class="reference">
+				<img src="apps/visionthree/images/dosing.png">
+			</div>
+		</div>
+	</div>
+	<div class="status-bar">
+		<div class="left">
+			<div>Ready</div>
+		</div>
+		<div class="right">
+			<div class="indications">Indications container 1</div>
+			<div class="indications">Indications container 2</div>
+			<div class="name">Dr Fiona Ash</div>
+			<div class="consultation-type">Surgery</div>
+			<div class="date">06/07/15</div>
+			<div class="start-time">08:20</div>
+			<div class="end-time">08:28</div>
+		</div>
+		
+	</div>
+</div>

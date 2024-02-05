@@ -1,0 +1,51 @@
+.vision-stats{
+	width: 100%;
+	height: 100%;
+}
+
+
+.vision-stats .chart{
+	margin: 2em;
+	margin-top: 1em
+}
+
+.vision-stats .chart-title{
+	font-size: 2em;
+	color: #20335E;
+	width: 20em;
+	margin: 0 auto;
+	margin-top: 2em;
+	white-space: nowrap;
+}
+
+.vision-stats svg text,
+.vision-stats svg rect{
+	cursor: pointer;
+}
+
+
+.vision-stats .vision-stats-menu {
+	width: 15em;
+	display: none;
+	position: absolute;
+	box-shadow: 2px 2px 5px #BBB;
+	font-size: 1.3em;
+	color: #264586;
+}
+
+.vision-stats .vision-stats-menu.open {
+	display: inline-block;
+}
+
+.vision-stats .vision-stats-menu .option {
+	padding: 1em;
+	cursor: pointer;
+}
+
+.vision-stats .vision-stats-menu .option:hover {
+	background-color: #DDD;
+}
+
+.overdue-notification {
+	height: 5em;
+}

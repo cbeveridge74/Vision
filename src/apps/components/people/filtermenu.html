@@ -1,0 +1,15 @@
+<div ng-controller="vnPeopleController">
+	<vn-css vn-id="filtermenu" vn-css-file="apps/components/people/filtermenu.css"></vn-css>
+	<div class="section-header">Location</div>
+	<div class="section">
+		<div class="location brn" tags="brn" ng-click="handleFilterOptionClick( $event, '.location.ppt' );">BRN</div>
+		<div class="location ppt" tags="crt" ng-click="handleFilterOptionClick( $event, '.location.brn' );">CRT</div>
+	</div>
+	<div class="section-header">Skills</div>
+	<div class="section">
+		<div class="skill" tags="depo" ng-click="handleFilterOptionClick( $event );">Depo</div>
+		<div class="skill" tags="ecg" tags="brn" ng-click="handleFilterOptionClick( $event );">ECG</div>
+		<div class="skill" tags="diab" ng-click="handleFilterOptionClick( $event );">Diabetes</div>
+		<div class="skill" tags="mi" ng-click="handleFilterOptionClick( $event );">Minor Inj</div>
+	</div>
+</div>

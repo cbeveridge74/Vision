@@ -1,0 +1,24 @@
+angular.module('vnReceptionModule', [ 
+	'vnPeopleModule', 
+	'vnDiscussionsModule',
+	'vnAppointmentsModule'],function () {})
+.controller('vnReceptionController', function( $scope, vnAppManagementFactory ){
+	$scope.backbutton = false;
+	//$scope.screens.VN_REP__HOME = true;
+
+	vnAppManagementFactory.registerApp( 
+		{ id: "VN_REP", 
+		name: "Vision Reception",
+		defaultapp: true,
+		icon: "images/reception_bell.svg",
+		screens: [
+			'VN_REP__HOME',
+			'VN_REP__PATIENT'
+			]});
+})
+.directive('vnReception', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionreception/vnreception.html'
+    };
+  });

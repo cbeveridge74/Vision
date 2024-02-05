@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<vn-css vn-id="vnbar" vn-css-file="layout/vnbar.css"></vn-css>
+<div class="bar" ng-controller="vnBarController">
+	<vn-app-menu></vn-app-menu>
+	<!--<img class="inps-logo" ng-src="images/{{applogo}}" ng-click="handleUserClick( $event );">-->
+
+	<div class="button user" ng-click="handleUserClick( $event );">{{user.label | uppercase }} </div>
+	 <vn-tour
+	 	vn-first-time="true"
+		vn-item-top="0.5em"
+		vn-item-left="17em"
+		vn-item-height="5em"
+		vn-item-width="15em"
+		vn-arrow-top="0.6em"
+		vn-arrow-left="16.4em"
+		vn-arrow-direction="left"
+		vn-text="Helpful hints can be activated from the user menu">
+	</vn-tour>
+	<vn-user-menu></vn-user-menu>
+	<div class="right-button-container">
+		<!--<img ng-repeat="appBarIcon in appBarIcons" 
+			 ng-src="images/{{ appBarIcon.icon }}"
+			 ng-click="handleButtonClick( $event );">-->
+			 
+	</div>
+</div>

@@ -1,0 +1,38 @@
+<vn-css vn-id="vntitlebar" vn-css-file="layout/vntitlebar.css"></vn-css>
+<div class="title-bar" 
+	ng-controller="vnTitleBarController"
+	ng-init="init();">
+	<div class="left">
+		<div class="width-spacer" ng-show="!backbutton"></div>
+		<div class="backbutton" ng-show="backbutton">
+			<img ng-src="{{backbuttonimg}}" ng-click="handleBackButtonClick();" >
+		</div>
+	    <div class="title">{{title}}</div>
+	</div>
+	<div class="right">
+		<div class="inform-command-buttons" ng-show="showcommands">
+	    	<div class="inform-command-button" tag="{{ command.id }}" ng-repeat="informCommand in commands track by $index" ng-click="handleInformCommandClick( $event );">
+				<img ng-if="informCommand.icon.indexOf( 'fa ' ) < 0" ng-src="{{ informCommand.icon }}">
+				<div ng-if="informCommand.icon.indexOf( 'fa ' ) > -1" class="awesome-icon">
+					<div class="{{ informCommand.icon }}" ></div>
+				</div>
+			</div>
+	    </div>
+	    <div class="search" ng-show="showsearch">
+	        <input class="typeahead" type="text" placeholder="Patient Search...">
+	        <vn-tour
+				vn-item-top="-2.5em"
+				vn-item-left="-9.5em"
+				vn-item-height="3.5em"
+				vn-item-width="8.5em"
+				vn-arrow-top="-1.5em"
+				vn-arrow-left="-1em"
+				vn-arrow-direction="right"
+				vn-text="Choose patient"></vn-tour>
+
+	    </div>
+	</div>
+	
+    
+</div>
+

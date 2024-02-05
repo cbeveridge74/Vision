@@ -1,0 +1,76 @@
+.screenbreakcomponent, .mainsection .components .screenbreakcomponent{
+	background: url(MacroFormBuilderWidgets.png) top center;
+	background-repeat: no-repeat;
+	background-position: 10px -0px;
+	height: 30px;
+	width: 190px;
+}
+
+.screensectioncomponent, .mainsection .components .screensectioncomponent{
+	background: url(MacroFormBuilderWidgets.png) top center;
+	background-repeat: no-repeat;
+	background-position: 0px -50px;
+	height: 80px;
+	width: 225px;
+}
+
+.formfragmentcomponent, .mainsection .components .formfragmentcomponent{
+	background: url(MacroFormBuilderWidgets.png) top center;
+	background-repeat: no-repeat;
+	background-position: 0px -145px;
+	height: 25px;
+	width: 225px;
+}
+
+.questionnairecomponent, .mainsection .components .questionnairecomponent{
+	background: url(MacroFormBuilderWidgets.png) top center;
+	background-repeat: no-repeat;
+	background-position: 0px -183px;
+	height: 25px;
+	width: 225px;
+}
+
+.mainsection .components .section-container {
+	margin: 1em 0 1em 2em;
+	padding: 0.5em 0 0.5em 0;
+	border: medium solid #04859D;
+	background-color: #37B6CE;
+	width: 100%;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	-khtml-border-radius: 1em;
+	white-space: nowrap;
+}
+
+.mainsection .components .section-spacer{
+	width: 90%;
+	display: inline-block;
+	background-color: inherit;
+	text-indent: 2em;
+	color: #015666;
+	font-size: x-large;
+	font-weight: bold;
+	font-family: "Arial Rounded MT", Arial, Helvetica, sans-serif;
+	
+}
+
+.mainsection .components .section-container .component-buttons {
+	width: 10%;
+}
+
+.mainsection .components .section-container .section-buttons {
+	vertical-align: top;	
+}
+
+.mainsection .components .section-container .componentwrapper{
+	width: 95%;
+	background-color: #FFFFFF;
+}
+
+.section-buttons{
+	
+}
+
+#feedback { font-size: 1.4em; }
+.components .ui-selecting, .mainsection .components .section-container .componentwrapper.ui-selecting { background: #FECA40; }
+.components .ui-selected, .mainsection .components .section-container .componentwrapper.ui-selected { background: #F39814; color: white; }

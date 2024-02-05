@@ -1,0 +1,227 @@
+angular.module('vnAnnouncementsModule', [],function () {})
+.controller('vnAnnouncementsController', function ( 
+	$scope, 
+	$rootScope,
+	visionFactory,
+	vnScrollFactory,
+	vnDetailViewFactory,
+	vnAnnouncementsFactory,
+	vnScreenManagementFactory ) {
+
+	$scope.init = function ( callback ) {
+		$rootScope.$watch( $scope.screenToWatch, function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      	});
+	};
+
+	vnAnnouncementsFactory.registerAnnouncementEventListener( vnAnnouncementsFactory.ANNOUNCEMENTS_UPDATED, function( event, announcement ){
+		handleAnnouncementsUpdated( announcement );
+ 	});
+
+ 	$rootScope.$on( "COMMENTS_UPDATED", function( event, data ){
+		vnAnnouncementsFactory.retrieveAnnouncementsFor( $rootScope.user.id, false, handleAnnouncementsRetrieved );
+	});
+
+	$scope.handleActionClick = function( action ){
+		var assigneestatus;
+		angular.forEach( this.announcement.assigneestatus, function( vAssigneeStatus, iAssigneeStatus ){
+			if( vAssigneeStatus.assigneeid == $rootScope.user.id ){
+				assigneestatus = vAssigneeStatus;
+			}
+		});
+		if( action.id == CRDMAR ){
+			assigneestatus.status = vnAnnouncementsFactory.READ;
+		}else if( action.id == CRDMAU ){
+			assigneestatus.status = vnAnnouncementsFactory.UNREAD;
+		}
+
+		
+		vnAnnouncementsFactory.updateAnnouncement( this.announcement, function( returnedAnnouncement ){
+		});
+	}
+
+	var handleShow = function(){
+		vnAnnouncementsFactory.retrieveAnnouncementsFor( $rootScope.user.id, false, handleAnnouncementsRetrieved );
+	};
+
+	var handleAnnouncementsUpdated = function( task ){
+
+		if( $rootScope.user != null ){
+			vnAnnouncementsFactory.retrieveAnnouncementsFor( $rootScope.user.id, false, handleAnnouncementsRetrieved );
+		}
+
+	};
+
+	var handleAnnouncementsRetrieved = function( announcements ){
+		
+        if( announcements != null ){
+       		if( announcements.length > 8 ){
+	   			announcements = announcements.slice( 0, 8 );
+	   		}
+
+			$scope.$apply( function(){
+				$scope.announcements = announcements;
+			});
+			//handleResize();
+        }
+      };
+
+	$scope.handleCardClick = function(){
+		vnDetailViewFactory.setModel( this.announcement );
+		vnScreenManagementFactory.openMenu( ".detail-view" );
+		vnScrollFactory.disableScrolling();
+		
+	};
+
+	$scope.initCardActions = function( callback ){
+		callback( null, [ markAsRead ] );
+	};
+
+	
+	
+})
+.factory( "vnAnnouncementsFactory", function(
+	$rootScope, 
+	$mdToast,
+	visionFactory,
+	vnActionFactory,
+	vnNotificationsFactory ){
+	var factory = {};
+	factory.ANNOUNCEMENTS_UPDATED = "ANNOUNCEMENTS_UPDATED";
+	factory.UNREAD = 0;
+	factory.READ = 1;
+	factory.actions = {};
+	factory.announcementStatus = {};
+	factory.announcementStatus[ factory.UNREAD ] = "UNREAD";
+	factory.announcementStatus[ factory.READ ] = "READ";
+
+	factory.actions[ factory.UNREAD ] = [ markAsRead ];
+	factory.actions[ factory.READ ] = [ markAsUnread ];
+
+	chrome.runtime.onMessage.addListener(
+	  function(response, sender, sendResponse) {
+	  	if( response.announcement != null ){
+		    announcementEventBroadcast( factory.ANNOUNCEMENTS_UPDATED, response.announcement );
+		    angular.forEach( response.announcement.assignee, function( value, index ){
+	 			if( $rootScope.user.id == value ){
+	 				$mdToast.show($mdToast.simple().content('New announcement posted').position("bottom right"));
+	 			}
+	 		});
+		}
+	});
+
+	var announcementEventBroadcast = function( eventName, announcement ){
+		$rootScope.$broadcast( eventName, announcement );
+	};
+
+	factory.registerAnnouncementEventListener = function( eventName, callback ){
+		$rootScope.$on( eventName, callback )
+	};
+
+	factory.updateAnnouncement = function( announcement, callback, sendUpdate ){
+		
+		visionFactory.updateData( database[ ANNOUNCEMENTS ].name, announcement, function( returnedAnnouncement ){
+			if( returnedAnnouncement ){
+				announcementEventBroadcast( factory.ANNOUNCEMENTS_UPDATED, returnedAnnouncement );
+				if( sendUpdate ){
+					chrome.runtime.sendMessage( { announcement: returnedAnnouncement }, function() {});
+				}
+				
+				if( callback != null ){
+					callback( returnedAnnouncement );
+				}
+			}
+		});
+	};
+
+	factory.retrieveAnnouncement = function( id, callback ){
+		visionFactory.retrieveData( database[ ANNOUNCEMENTS ].name, function( announcement ){
+			if( callback != null ){
+				callback( announcement[0] );
+			}
+		},"by_id", {start: id, end: id } );
+	};
+
+	factory.retrieveAnnouncementsFor = function( assigneeId, all, callback ){
+		if( all == null ){
+			all = false;
+		}
+		visionFactory.retrieveData( database[ ANNOUNCEMENTS ].name, function( announcements ){
+			angular.forEach( announcements, function( vAnnouncement, iAnnouncement ){
+				visionFactory.retrieveData( database[ COMMENTS ].name, function( comments, item, announcement ){
+					comments = comments[0];
+					announcement.commentscount = 0;
+					if( comments != null ){
+						announcement.commentscount = comments.comments.length;
+					}
+					
+
+				}, null, { start: vAnnouncement.commentsid, end: vAnnouncement.commentsid }, null, null, vAnnouncement );
+			});
+			
+			if( callback != null ){
+				if( !all ){
+					var unreadAnnouncements = new Array();
+					angular.forEach( announcements, function( vAnnouncement, iAnnouncement ){
+						angular.forEach( vAnnouncement.assigneestatus, function( vAssigneeStatus, iAssigneeStatus ){
+							if( ( vAssigneeStatus.assigneeid == $rootScope.user.id ) && vAssigneeStatus.status == factory.UNREAD ){
+								unreadAnnouncements.push( vAnnouncement );
+							}
+						});
+					});
+					callback( unreadAnnouncements );
+				} else {
+					callback( announcements );
+				}
+			}
+		}, "by_assignee", {start: assigneeId, end: assigneeId }, 100);
+	};
+
+	factory.sendAnnouncement = function( announcement, callback, onSuccessShowToast, customMessage ){
+		
+		visionFactory.retrieveData( database[ ANNOUNCEMENTS ].name, function( announcements ){ 
+			announcement.id = ( announcements == null ) ? 0 : announcements.length;
+			announcement.assigneestatus = new Array();
+			angular.forEach( announcement.assignee, function( vAssignee, iAssignee ){
+				announcement.assigneestatus.push( { assigneeid: vAssignee, status: factory.UNREAD  } );
+			});
+			factory.updateAnnouncement( announcement, function( returnedAnnouncement ){
+				if( callback != null ){
+					callback( returnedAnnouncement );
+				}
+				
+				if( onSuccessShowToast == null || onSuccessShowToast == true ){
+					if( customMessage == null ){
+						customMessage = 'Announcement posted successfully';
+					}
+					$mdToast.show( $mdToast.simple().content( customMessage ).position("bottom right") );
+				}
+				// Creating a notification for the other users
+				//returnedTask.tasksubjects = new DataStore().demoDataTaskSubjects[ returnedTask.subjectid - 1 ];
+				if( $rootScope.user != null ){
+					vnNotificationsFactory.addNotification( 
+					{ label: "New announcement received", 
+					status: 0, 
+					relevantto: returnedAnnouncement.assignee,
+					action: vnActionFactory.TASK_DETAIL,
+					data: [ returnedAnnouncement ],
+					sender: $rootScope.user.id,
+					type: vnNotificationsFactory.TASK_TYPE } );
+				}
+			}, true);
+		});
+	};
+	return factory;
+})
+.directive('vnAnnouncements', function() {
+    return {
+      restrict: 'E',
+      scope: {
+      	patientspecific: '@vnPatientSpecific',
+      	screenToWatch: '@vnWatch'
+      },
+      templateUrl: 'apps/components/announcements/vnannouncements.html'
+    };
+  });

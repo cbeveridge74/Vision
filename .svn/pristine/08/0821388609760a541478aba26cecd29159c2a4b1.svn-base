@@ -1,0 +1,65 @@
+angular.module('vnTaskModule', [],function () {})
+.controller('vnTaskController', function ( 
+	$scope, 
+	$rootScope,
+	visionFactory, 
+	vnScreenManagementFactory,
+	vnNavigationFactory) {
+	$scope.init = function ( callback ) {
+		$rootScope.$watch( $scope.screenToWatch, function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      });
+	    
+	};
+
+	var handleShow = function(){
+		var index = 'by_id';
+		var bounds = null;
+
+		if( $scope.patientspecific == "true" ){
+			index = 'by_patient';
+			bounds = { start: $rootScope.patientid,
+			          end: $rootScope.patientid
+			        };
+		}
+        visionFactory.retrieveData( database[ TASK ].name, handleTasksRetrieved,
+			index,
+			bounds
+		);
+	};
+
+	$scope.handleRightClick = function( event, element ){
+		vnScreenManagementFactory.handleItemClick( event, element, {}, taskRightCommands, true );
+	};
+
+	$scope.handlePatientClick = function( event ){
+        visionFactory.handlePatientClick( this.item.patient.id );
+        event.stopPropagation();
+	};
+
+	$scope.handleAddClick = function( event ){
+		if( !vnScreenManagementFactory.isDoubleClick() ){
+			//vnNavigationFactory.switchScreens( 'home', 'taskform' );
+		}
+	};
+
+	var handleTasksRetrieved = function( tasks ){
+        if( tasks != null ){
+          $scope.$apply(function(){
+            $scope.taskreminders = tasks;
+            $scope.patientcentric = false;
+          });
+        }
+      };
+}).directive('vnTask', function() {
+    return {
+      restrict: 'E',
+      scope: {
+      	patientspecific: '@vnPatientSpecific',
+      	screenToWatch: '@vnWatch'
+      },
+      templateUrl: 'apps/components/tasks/vntask.html'
+    };
+  });

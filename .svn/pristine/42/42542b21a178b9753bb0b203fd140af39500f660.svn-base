@@ -1,0 +1,9 @@
+<div class="vision-appointments"
+	 ng-controller="vnVisionAppointmentsController" 
+	 ng-show="screens.VN_APP">
+	<vn-css vn-id="vnvisionappointments" 
+	vn-css-file="apps/visionappointments/vnvisionappointments.css"></vn-css>
+	<vn-booking ng-show="screens.VN_APP__BOOKING_FORM"></vn-booking>
+	<vn-day ng-show="screens.VN_APP__DAY"></vn-day>
+	<vn-calendar ng-show="screens.VN_APP__CALENDAR"></vn-calendar>
+</div>

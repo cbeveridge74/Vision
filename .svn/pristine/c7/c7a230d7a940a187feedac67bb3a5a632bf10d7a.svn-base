@@ -1,0 +1,6 @@
+require([ 	"apps/visiondocumentmanagement/vndocumentmanagementmodule"
+			], function(
+				vndocumentmanagementmodule
+		 	){
+
+});

@@ -1,0 +1,125 @@
+angular.module('vnRecurrenceModule', [],function () {})
+.controller('vnRecurrenceController', function( 
+	$scope, 
+	$rootScope, 
+	$filter, 
+	vnNavigationFactory,
+	vnWorkflowFactory ){
+	
+	/* Reference data */
+	var repeatUnits = new Array(5);
+	repeatUnits[1] = "day(s)";
+	repeatUnits[2] = "week(s)"; 
+	repeatUnits[3] = "month(s)"; 
+	repeatUnits[4] = "year(s)"; 
+	var repeatFrequency = new Array(6);
+	repeatFrequency[1] = "first";
+	repeatFrequency[2] = "second";
+	repeatFrequency[3] = "third";
+	repeatFrequency[4] = "fourth";
+	repeatFrequency[5] = "last";
+	var repeatFrequencyUnit = new Array( 11 );
+	repeatFrequencyUnit[ 1 ] = "day";
+	repeatFrequencyUnit[ 2 ] = "weekday";
+	repeatFrequencyUnit[ 3 ] = "weekend day";
+	repeatFrequencyUnit[ 4 ] = "Monday";
+	repeatFrequencyUnit[ 5 ] = "Tuesday";
+	repeatFrequencyUnit[ 6 ] = "Wednesday";
+	repeatFrequencyUnit[ 7 ] = "Thursday";
+	repeatFrequencyUnit[ 8 ] = "Friday";
+	repeatFrequencyUnit[ 9 ] = "Saturday";
+	repeatFrequencyUnit[ 10 ] = "Sunday";
+
+
+	$scope.informCommands = recurrenceInformCommands;
+
+	var initData = function(){
+		$scope.recurrence = {};
+		$scope.recurrence.day = {
+			monday: { 		selected: false, label: "Monday" },
+			tuesday: { 		selected: false, label: "Tuesday" },
+			wednesday: { 	selected: false, label: "Wednesday" },
+			thursday: { 	selected: false, label: "Thursday" },
+			friday: { 		selected: false, label: "Friday" },
+			saturday: { 	selected: false, label: "Saturday" },
+			sunday: { 		selected: false, label: "Sunday" }
+		};
+		$scope.recurrence.repeats = [
+			{ selected: false, value: 0, label: "Never" },
+			{ selected: false, value: 1, label: "Daily" },
+			{ selected: false, value: 2, label: "Weekly" },
+			{ selected: false, value: 3, label: "Monthly" },
+			{ selected: false, value: 4, label: "Yearly" }
+		];
+		$scope.recurrence.enddatechoice = 1;
+		$scope.recurrence.repeat = 0;
+		$scope.recurrence.frequency = 1;
+		$scope.recurrence.frequencycount = "";
+		$scope.recurrence.frequencyday = "";
+		$scope.recurrence.startdatechoice = null;
+		$scope.recurrence.occurences = "";
+		$scope.recurrence.enddate = null;
+	};
+
+	initData();
+	
+
+	$rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value ){
+  		if( value == RECSVE ){
+  			$scope.recurrence.summary = buildSummary();
+  			$rootScope.$broadcast( "RECURRENCE_UPDATED", $scope.recurrence );
+  			vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory ( vnNavigationFactory.SCREEN_PREVIOUS ) );
+  		}else if( value == RECCNL ){
+  			initData();
+  			vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory ( vnNavigationFactory.SCREEN_PREVIOUS ) );
+  		}
+  	});
+
+  	$rootScope.$on( vnWorkflowFactory.CLEAR_WORKFLOW, function(){
+        clearWorkflow();
+    });
+
+	var clearWorkflow = function(){
+	    initData();
+	    $rootScope.$broadcast( "RECURRENCE_UPDATED", $scope.recurrence );
+	};
+
+  	var buildSummary = function(){
+  		var summary = "";
+  		$scope.recurrence.repeats[ $scope.recurrence.repeat ].label;
+  		summary += "Repeat every " + $scope.recurrence.frequency + " " + repeatUnits[ $scope.recurrence.repeat ];
+  		if( $scope.recurrence.startdatechoice != null ){
+  			summary += " starting on " + $filter('date')( $scope.recurrence.startdatechoice, 'dd-MMM-yyyy');
+  		}
+
+  		if( $scope.recurrence.repeat == 2 ){
+  			summary += " every ";
+  			angular.forEach( $scope.recurrence.day, function( day, index ){
+  				if( day.selected ){
+  					summary += day.label + ", ";
+  				}
+  			} );
+  			summary = summary.substring( 0, summary.length - 2 );
+  		}
+
+  		if( $scope.recurrence.repeat == 3 ){
+  			summary += " on every " + repeatFrequency[ $scope.recurrence.frequencycount ] + " " + repeatFrequencyUnit[ $scope.recurrence.frequencyday ];
+  		}
+
+  		if( $scope.recurrence.enddatechoice == 2 ){
+  			summary += " ending after " + $scope.recurrence.occurences + " occurence(s)";
+  		}
+
+  		if( $scope.recurrence.enddatechoice == 3 ){
+  			summary += " ending on " + $filter('date')( $scope.recurrence.enddate, 'dd-MMM-yyyy');
+  		}
+  		
+  		return summary;
+  	};
+})
+.directive('vnRecurrence', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vnrecurrence.html'
+    };
+});

@@ -1,0 +1,116 @@
+.command {
+	background-color: #60636A;
+}
+
+.command, 
+.command > div {
+	height: 6em;
+	vertical-align: middle;
+}
+
+
+.command .awesome-icon {
+	color: #FFF;
+	vertical-align: middle;
+	border: solid 1px #FFF;
+	padding-top: 0.4em;
+	height: 3em;
+	width: 3em;
+	text-align: center;
+	border-radius: 1.5em;
+	margin: 0 auto;
+}
+
+.command .awesome-icon:hover {
+	color: #333;
+	background-color: #FFF;
+}
+
+.command .awesome-icon .fa{
+	font-size: 2em;
+}
+
+.command{
+	position: absolute;
+	bottom: -6em;
+	width: 100%;
+	z-index: 3;
+}
+
+.command.open{
+	bottom: 0em;
+}
+
+.command > div {
+	display: inline-block;
+	text-align: center;
+}
+
+.command .button img{
+	padding-bottom: 0.5em;
+	width: 3em;
+}
+
+.command .button {
+	margin-top: 0.5em;
+	cursor: pointer;
+	text-align: center;
+	margin: 1em 1.5em
+}
+
+.command .right .button{
+	float:right;
+
+}
+
+
+.command .button{
+	opacity: 0.9;
+}
+
+
+.command .button:hover
+{
+	opacity: 1;
+}
+
+
+.command .button .description
+{
+	color: white;
+	font-size: 0.8em
+}
+
+
+
+/*
+
+<div class="command open">
+			<div class="left">
+				<div class="button">
+					<img src="images/hamburger_32.png">
+					<div class="description"></div>
+				</div>
+			</div>
+			<div class="right">
+			</div>
+		</div>
+*/
+
+.command .left .button{
+	float: left;
+}
+
+.command .left {
+	width: 20%;
+}
+
+.command .right{
+	width: 80%;
+	margin-left: -4px;
+	white-space: nowrap;
+}
+
+.command .description{
+	white-space: normal;
+}

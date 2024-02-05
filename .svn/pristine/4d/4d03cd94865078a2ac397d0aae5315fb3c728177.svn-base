@@ -1,0 +1,152 @@
+/*************************** FOOT BAR ********************************/
+var ORD = 0;
+var COM = 4;
+
+var defaultLeftCommands = [
+		{ id: ORD, label: "Order by", icon: "hamburger.svg" }];
+
+var CRT = 0;
+var ARC = 1;
+var RDS = 2;
+
+var defaultRightCommands = [
+		{ id: CRT, label: "Item 1", icon: "hamburger.svg" },
+		{ id: ARC, label: "Item 2", icon: "hamburger.svg" },
+		{ id: RDS, label: "Item 3", icon: "hamburger.svg" }
+	];
+
+/* Generic Selection */
+var DOCTSK = 0;
+
+
+var selectRightCommands = [
+	{ id: DOCTSK, label: "Attach", 	icon: "paperclip_white_circle.svg" }
+];
+
+
+/* People */
+var CRT = 0;
+var MSG = 1;
+
+var peopleRightCommands = [
+		{ id: CRT, label: "Create task", 	icon: "edit.svg" },
+		{ id: MSG, label: "Send message", 	icon: "accept.svg" }
+];
+
+/* Dicussions  */
+var CRT = 0;
+var MSG = 1;
+
+var discussionsRightCommands = [
+		{ id: CRT, label: "Create task", 	icon: "edit.svg" },
+		{ id: MSG, label: "Send message", 	icon: "accept.svg" }
+];
+
+
+/* Task clicked on */
+var EDT = 0;
+var ACC = 1;
+var DEC = 2;
+var REJ = 3;
+
+var taskRightCommands = [
+		{ id: EDT, label: "Edit", 		icon: "edit.svg" },
+		{ id: ACC, label: "Accept", 	icon: "accept.svg" },
+		{ id: DEC, label: "Decline", 	icon: "decline.svg" },
+		{ id: REJ, label: "Reject", 	icon: "reject.svg" },
+		{ id: COM, label: "Complete", 	icon: "complete.svg" }
+	];
+
+var CLM = 0;
+var DCN = 1;
+
+var taskUnclaimedRightCommands = [
+		{ id: CLM, label: "Claim", 	icon: "accept.svg" },
+		{ id: DCN, label: "Decline", icon: "decline.svg" }
+	];
+
+var RECSVE = "RECSVE";
+var RECCNL = "RECCNL";
+
+var recurrenceInformCommands = [
+	{ id: RECSVE, label: "Save", icon: "images/disk_blue.svg" },
+	{ id: RECCNL, label: "Cancel", icon: "apps/components/images/close.svg" }
+	//{ id: REC, label: "Recurrence", icon: "complete.svg" }
+];
+
+var TRKSVE = "TRKSVE";
+var TRKCNL = "TRKCNL";
+
+var trackingInformCommands = [
+	{ id: TRKSVE, label: "Save", icon: "images/disk_blue.svg" },
+	{ id: TRKCNL, label: "Cancel", icon: "apps/components/images/close.svg" }
+];
+
+var TRK = 0;
+var ATT = 1;
+var REC = 2;
+var WRKSND = 3;
+var WRKSVE = 4;
+
+/* Workflow screen */
+var workflowRightCommands = [
+	{ id: TRK, label: "Track", 	icon: "tracking.svg" }
+	//{ id: SND, label: "Send", 		icon: "complete.svg" },
+	//{ id: REC, label: "Recurrence", icon: "complete.svg" }
+];
+
+var workflowInformCommands = [
+	{ id: WRKSVE, label: "Save", icon: "images/disk_white.svg" },
+	{ id: WRKSND, label: "Send", icon: "images/paper_plane.svg" }
+	
+];
+
+
+/* Prescription clicked on */
+var prescriptionRightCommands = [
+	{ id: COM, label: "Complete", icon: "complete.svg" }
+];
+
+var ASN = 0;
+var ALL = 1;
+
+/* Corresondence clicked on */
+var correspondenceRightCommands = [
+	{ id: ASN, label: "Assign patient", icon: "patient_white.svg" },
+	{ id: ALL, label: "Allocate to staff", icon: "clinician_white.svg" }
+];
+
+var correspondenceLeftCommands = [];
+
+var CNL = 0;
+var SND = 1;
+
+/* Appointments clicked on */
+var appointmentsRightCommands = [
+		{ id: CNL, label: "Cancel appointment", icon: "reject.svg" },
+		{ id: SND, label: "Send message to ", icon: "reject.svg" }
+	];
+
+/*************************** BLUE APP BAR ********************************/
+var HMB = 0;
+var defaultAppBar = [
+	{ id: HMB, 	icon: "hamburger.svg" }
+];
+
+/***************************** CARDS *************************************/
+var CRDACN = 0;
+var CRDCLM = 1;
+var CRDARV = 2;
+var CRDCPT = 3;
+
+var defaultCard = [
+	{ id: CRDACN, 	label: "ACTION" },
+	{ id: CRDCPT, 	label: "COMPLETE" }
+];
+var claimAction = { id: CRDCLM, label: "CLAIM" };
+var archiveAction = { id: CRDARV, label: "ARCHIVE" };
+/* announcments */
+var CRDMAR = 2
+var CRDMAU = 3
+var markAsRead = { id: CRDMAR, 	label: "MARK AS READ" };
+var markAsUnread = { id: CRDMAU, label: "MARK AS UNREAD" };

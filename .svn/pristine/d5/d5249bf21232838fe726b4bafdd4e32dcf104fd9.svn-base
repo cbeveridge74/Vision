@@ -1,0 +1,45 @@
+angular.module('vnTaskModule', [],function () {})
+.controller('vnTaskController', function ( 
+	$scope, 
+	visionFactory, 
+	vnScreenManagementFactory,
+	vnNavigationFactory) {
+	$scope.init = function ( callback ) {
+
+	    visionFactory.retrieveData( database[ TASK ].name, function( results ){
+			handleTasksRetrieved( results );
+			if( callback ){
+            	callback();
+            }
+		});
+	};
+
+	$scope.handleRightClick = function( event, element ){
+		vnScreenManagementFactory.handleItemClick( event, element, {}, taskRightCommands, true );
+	};
+
+	$scope.handlePatientClick = function( event ){
+        visionFactory.handlePatientClick( this.item.patient.id );
+        event.stopPropagation();
+	};
+
+	$scope.handleAddClick = function( event ){
+		if( !vnScreenManagementFactory.isDoubleClick() ){
+			//vnNavigationFactory.switchScreens( 'home', 'taskform' );
+		}
+	};
+
+	var handleTasksRetrieved = function( tasks ){
+        if( tasks != null ){
+          $scope.$apply(function(){
+            $scope.taskreminders = tasks;
+            $scope.patientcentric = false;
+          });
+        }
+      };
+}).directive('vnTask', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/components/tasks/vntask.html'
+    };
+  });

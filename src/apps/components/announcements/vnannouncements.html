@@ -1,0 +1,37 @@
+<vn-css vn-id="vnannouncements" vn-css-file="apps/components/announcements/vnannouncements.css"></vn-css>
+<div class="announcements" 
+     ng-controller="vnAnnouncementsController"
+     ng-init="init();" layout="column" layout-wrap>
+    
+    <div class="no-data" ng-show="announcements.length < 1">
+        No unread announcements
+    </div>
+
+    <vn-card 
+        ng-repeat="announcement in announcements track by $index"
+        ng-click="handleCardClick()"
+        vn-card-action-click="handleActionClick( action )"
+        vn-card-actions-init="initCardActions( callback )"
+        vn-card-entity="announcement">
+
+
+        <div class="title">
+            {{ announcement.tasksubjects.label }}
+        </div>
+        <div class="description">
+            {{ announcement.description }}
+        </div>
+        <div class="bottomline">
+            <div class="left">
+                <div class="assignee">
+                    @{{ announcement.assigneefull[0].title }} <span ng-if="announcement.assigneefull.length > 1">+ {{ announcement.assigneefull.length - 1 }} more</span>
+                </div>
+            </div>
+            <div class="right">
+                <div class="attachment-count fa fa-paperclip">{{ announcement.attachments.attachedDocs.length}}</div>
+                <div class="comment-count fa fa-comment-o"> {{announcement.commentscount}}</div>
+            </div>
+        </div>
+        <div class="urgency" ng-show="announcement.urgency == 'Urgent'"></div>
+    </vn-card>
+</div>

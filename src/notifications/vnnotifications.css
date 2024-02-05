@@ -1,0 +1,89 @@
+.vision-notifications{
+	color: white;
+}
+
+.vision-notifications .menu.open {
+	display: inline-block;
+	right: 5em;
+	background-color: #2B2B2B;
+}
+
+.vision-notifications .menu{
+	right: 4em;
+}
+
+.vision-notifications .badge {
+	position: absolute;
+	width: 1.2em;
+	height: 1.2em;
+	right: 3em;
+	top: 1.3em;
+	color: #FFF;
+	z-index: 1;
+	border: solid 1px #FFF;
+	border-radius: 0.6em;
+	text-align: center;
+	background-color: red;
+	vertical-align: top;
+}
+
+.vision-notifications .badge .count{
+	margin-top: -0.2em;
+	font-weight: bold;
+}
+
+.vision-notifications .notification-container{
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 0.5em 1.5em;
+	border-top: solid 1px #444;
+	min-width: 25em;
+}
+
+.vision-notifications .notification-container:hover{
+	background-color:  #2F2F2F;
+}
+
+.vision-notifications .sent{
+	text-align: right;
+	font-size: 0.8em;
+	margin-bottom: -0.5em;
+	opacity: 0.3;
+}
+
+.vision-notifications .title{
+	font-size: 1.2em;
+}
+
+.vision-notifications .info-container{
+	white-space: nowrap;
+}
+
+.task-notification .info-container .text{
+	overflow: hidden;
+	max-width: 20em;
+	text-overflow:ellipsis;
+	opacity: 0.6;
+}
+
+.vision-notifications .info-container,
+.vision-notifications .image{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.vision-notifications .image{
+	margin-right: 1em;
+	text-align: center;
+	
+}
+
+.vision-notifications .image .assigner {
+	opacity: 0.6;
+}
+
+.vision-notifications .image img {
+	border-radius: 18px;
+	width: 36px;
+	height: 36px;
+}

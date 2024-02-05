@@ -1,0 +1,4 @@
+require([ "apps/visionappointments/vnvisionappointmentsmodule"], function(
+		 	vnvisionappointmentsmodule){
+
+});

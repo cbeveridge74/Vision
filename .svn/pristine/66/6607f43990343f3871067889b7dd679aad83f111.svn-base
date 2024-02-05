@@ -1,0 +1,12 @@
+<vn-css vn-id="vncard" vn-css-file="layout/vncard.css"></vn-css>
+<div ng-controller="vnCardController" 
+     class="card" ng-mousedown="mousedown( $event )" ng-mouseup="mouseup( $event )">
+    <div class="action-content" ng-transclude></div>
+    <div class="actions" ng-click="supress( $event );">
+    	<div class="left"><div class="action">...</div></div>
+    	<div class="right" ><div class="action">RE-ALLOCATE</div></div>
+    </div>
+</div>
+
+
+<!-- ng-right-click="handleRightClick( $event, this )" -->

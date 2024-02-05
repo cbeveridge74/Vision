@@ -1,0 +1,122 @@
+<vn-css vn-id="vndocmanscan" vn-css-file="apps/visiondocumentmanagement/scan/vnscan.css"></vn-css>
+<div class="vision-scan" ng-controller="vnScanController">
+	<vn-title-bar 
+        vn-title="Scan Processor"
+        vn-show-back-button="true"
+        vn-backbutton-handler="handleBackButton()"
+        vn-show-search="false"
+        vn-show-commands="true"
+        vn-commands="docScanCommands"></vn-title-bar>
+    <div ng-if="imageVersion" ng-repeat="wordToHighlight in wordsToHighlight track by $index">
+	 	<div ng-repeat="letterCollection in wordToHighlight">
+	 		<div ng-repeat="letter in letterCollection">
+	 			<div class="highlight" 
+		 			ng-style="{ 
+		 			left:letter.x * screenRatio, 
+		 			top: ( letter.y * screenRatio ) + 137,
+		 			height: letter.height * screenRatio,
+		 			width: letter.width * screenRatio }">
+		 			
+		 		</div>
+		 		<div ng-if="$index == 0" class="highlight-row" 
+		 			ng-style="{ 
+		 			right:'50%', 
+		 			top: ( letter.y * screenRatio ) + 137,
+		 			height: letter.height * screenRatio,
+		 			width: '1em' }">
+		 		</div>
+	 		</div>
+	 	</div>
+	 </div>
+	 <div class="button-area">
+	 	<div class="left">
+	 		<div ng-class="previousDocAvailable ? 'button prev fa fa-chevron-up':'button prev disabled fa fa-chevron-up'" ng-click="handleButtonClick( NAV_UP  );"></div>
+		 	<div ng-class="nextDocAvailable ? 'button next fa fa-chevron-down':'button next disabled fa fa-chevron-down'" ng-click="handleButtonClick( NAV_DOWN  );"></div>
+	 	</div>
+	 	<div class="right">
+	 		<div ng-show="processingComplete == true" class="button fa fa-font" ng-class="imageVersion ? 'button fa fa-font':'button fa fa-picture-o'" ng-click="handleButtonClick( SCANTEXT  );"></div>
+		 </div>
+	 </div>
+     <div class="content">
+     	<div class="scan-image">
+	     	<img id="display-version" ng-src="{{ scan }}" ng-if="imageVersion">
+	     	<md-content class="text-version" ng-if="!imageVersion" id="display-version-text" ng-bind-html="text"></md-content>
+	     </div>
+	     <div class="tools">
+	     	<div class="generate-tags" ng-hide="processingComplete">
+	     		<div class="generate-container" ng-click="handleGenerateClick();">
+	     			<div ng-class="processingComplete == false ? 'icon fa fa-cog fa-spin' : 'icon fa fa-cog'"></div>
+	     			<div class="message">{{ generateMessage }}</div>
+	     		</div>
+	     		<div class="skip">Skip</div>
+	     	</div>
+	     	<div class="section" ng-repeat="section in sections">
+	     		<div class="title">{{section.title}}</div>
+	     		<div>
+	     			<div class="results" ng-repeat="item in section.data track by $index">
+		     			<div ng-mouseenter="handleTagEnter();"
+		     				ng-mouseleave="handleTagLeave();"
+		     				ng-click="handleItemClick();"
+		     				ng-class="( item.selected ) ? 'tag selected':'tag'">
+		     				<div class="patient" ng-if="section.id == PATIENT">
+		     					<div>
+			     					<div ng-class="( item.match.indexOf( SN ) > -1 ) ? 'surname matched': 'surname unmatched'">
+			     					{{ item.Surname }},
+				     				</div>
+				     				<div ng-class="( item.match.indexOf( FN ) > -1 ) ? 'forename matched': 'forename unmatched'">
+				     					{{ item.Forename }} 
+				     				</div>
+			     				</div>
+			     				<div ng-class="( item.match.indexOf( DOB ) > -1 ) ? 'dob matched': 'dob unmatched'">
+			     					<div class="label">DOB</div> 
+			     					<div class="value">{{ item.DOB }}</div>
+			     				</div>
+			     				<div ng-class="( item.match.indexOf( PN ) > -1 ) ? 'patnum matched': 'patnum unmatched'">
+			     					<div class="label">NHS</div> 
+			     					<div class="value">{{ item.PatientNumber }}</div>
+			     				</div>
+		     				</div>
+		     				<div class="date" ng-if="section.id == DATE">
+		     					{{ item | date:'dd-MMM-yyyy' }}
+		     				</div>
+		     				
+		     				<div class="clinician" ng-if="section.id == CLINICIAN">
+		     					<div>
+			     					<div class="image">
+			     						<img ng-src="{{item.image}}">
+			     					</div>
+			     					<div class="name">
+			     						{{ item.title }} {{item.forename}} {{ item.surname }}
+				     				</div>
+			     				</div>
+		     				</div>
+		     				<div class="organisation" ng-if="section.id == ORG">
+		     					<div>
+			     					{{item.name}}
+			     				</div>
+		     				</div>
+		     				<div class="department" ng-if="section.id == DEPT">
+		     					<div>
+			     					{{item.name}}
+			     				</div>
+		     				</div>
+		     				<div class="read" ng-if="section.id == READ">
+		     					<div>
+			     					{{item.read}}
+			     				</div>
+		     				</div>
+		     				<div class="folder" ng-if="section.id == FOLDER">
+		     					<div>
+			     					{{item.folder}}
+			     				</div>
+		     				</div>
+		     			</div>
+		     		</div>
+	     		</div>
+	     	</div>
+	     </div>
+	     <img id="processing-version" ng-src="{{ scan }}">
+	     <canvas id="myCanvas"></canvas>
+	     <iframe id="theFrame" src="apps/visiontasks/ocr.html"></iframe>
+     </div>
+</div>

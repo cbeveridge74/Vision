@@ -1,0 +1,66 @@
+<vn-css vn-id="vntaskcreate" vn-css-file="apps/components/tasks/vntaskcreate.css"></vn-css>
+<div 
+    ng-click="handleGeneralClick( $event )" 
+    ng-init="init()"
+    ng-class="( minimise == true ) ? 'task-create menu minimise' : 'task-create menu'">
+
+    <md-card>
+      <div class="workflow-buttons" >
+        <div class="ok" ng-click="handleAddClick()" ng-show="mincriteriaachieved">
+          <img src="apps/components/images/check.svg">
+        </div>
+        <div class="delete" ng-click="handleDeleteClick( $parent.$index, $parent.$parent.$index )">
+          <img src="apps/components/images/close.svg">
+        </div>
+        
+      </div>
+      <md-card-content layout="column" layout-align="center start">
+        <div class="task-widgets">
+          <div class="task-widget">
+            <img src="apps/components/images/pin.svg"/>
+          </div>
+          <div class="task-widget">
+            <div ng-class="( urgency == 'Routine' ) ? 'urgency-label' : 'urgency-label urgent'">
+              {{ urgency }}
+
+            </div>
+            <md-switch ng-model="urgency" aria-label="Urgency" ng-true-value="'Urgent'" ng-false-value="'Routine'" class="md-warn">
+            </md-switch>
+            
+          </div>
+        </div>
+        <div class="recipients">
+
+          <label class="label">To</label>
+          <md-chips collection='recipientCollection' ng-model='selectedRecipients' md-title='title'  md-subtitle='subtitle' md-item='recipientItems'/>
+
+        </div>
+        <div class="subject">
+          <label class="label">Subject</label>
+          <md-select ng-model="selectedSubjects">
+            <md-option ng-value="item.id" ng-repeat="item in subjectCollection">{{ item.label }}</md-option>
+          </md-select>
+        </div>
+        <div class="description">
+          <label>Description</label>
+          <md-input-container flex>
+            <textarea ng-model="description" columns="1"></textarea>
+          </md-input-container>
+        </div>
+        
+        <div class="command-buttons">
+          <md-content>
+            <section layout="row" layout-sm="column" layout-align="center center">
+              <md-button ng-click="handleAdvancedClick( $event )">Advanced...</md-button>
+              <md-button class="md-primary" ng-click="handleSaveClick( $event )" >Send</md-button>
+            </section>
+          </md-content>
+        </div>
+      </md-card-content>
+
+    </md-card>
+    <!--<div class="task-widget">
+    <div class="patient">PARSONS, Nicholas (10-Oct-1923)</div>
+    <div class="button">Send</div>
+    </div>-->
+</div>

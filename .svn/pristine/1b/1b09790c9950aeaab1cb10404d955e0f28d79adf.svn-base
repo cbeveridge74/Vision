@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<vn-css vn-id="vnlogin" vn-css-file="authentication/vnlogin.css"></vn-css>
+<div class="login" ng-controller="vnLoginController" onload="init()">
+
+	<div class="splash">
+		<img src="../images/INPS_Logo.svg">
+	</div>
+	<div class="title" >{{name}}</div>
+	<md-whiteframe class="md-whiteframe-z2 content" layout layout-align="left center">
+		<form novalidate class="simple-form">
+	        <md-input-container>
+	          <label>Username</label>
+	          <input ng-model="user.username" ng-enter="handleLoginClick();$event.stopPropagation();">
+	        </md-input-container>
+	        <md-input-container>
+	          <label>Password</label>
+	          <input ng-model="user.password" type="password" ng-enter="handleLoginClick();$event.stopPropagation();">
+	        </md-input-container>
+			<div class="error" ng-show="showerror">There was a problem with the login</div>
+		</form>
+		</md-whiteframe>
+	<div class="button-area" >
+		<div layout="row" layout-align="end center">
+			<!--  -->
+	      	<md-button class="md-raised" ng-disabled="!appointmentsLoaded" ng-click="handleLoginClick();$event.stopPropagation();">
+	      		<div ng-show="!appointmentsLoaded">Loading</div>
+	      		<div ng-show="appointmentsLoaded == true">Sign in</div>
+
+	  		</md-button>
+	    </div>
+	</div>
+	<div class="version">Version {{version}}</div>
+</div>

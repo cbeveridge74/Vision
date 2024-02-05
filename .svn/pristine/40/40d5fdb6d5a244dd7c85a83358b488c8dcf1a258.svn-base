@@ -1,0 +1,48 @@
+.discussion .status {
+	width: 1em;
+	height: 1em;
+	border-radius : 0.5em;
+	margin-left: 1em;
+	margin-right: 0.5em;
+}
+
+.discussion .status.free {
+	background-color: green;
+}
+
+.discussion .status.busy {
+	background-color: orange;
+}
+
+.discussion .status.incon {
+	width: 1em;
+	height: 1em;
+	background-color: red;
+	border-radius : 0.5em;
+}
+
+.discussion img,
+.discussion > div{
+	display: inline-block; 
+}
+
+.discussion img{
+	width: 4em;
+}
+
+.discussion .subject,
+.discussion .time {
+	display: inline-block;
+}
+
+.discussion .subject {
+	min-width: 17em;
+}
+
+.discussion .time {
+	color: #1E81E7;
+}
+
+.discussion .subtitle {
+	color: #BBB;
+}

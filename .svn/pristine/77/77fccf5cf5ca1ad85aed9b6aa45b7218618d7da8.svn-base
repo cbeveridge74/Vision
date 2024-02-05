@@ -1,0 +1,19 @@
+{
+  "name": "Vision Reception Manager",
+  "short_name": "Vision Reception Manager",
+  "description": "Vision Chrome App",
+  "version": "0.0.0.6",
+  "manifest_version": 2,
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "http://*/*", "https://*/*",
+    "notifications"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "images/Vision_32.png", "128": "images/Vision_128.png" }
+}

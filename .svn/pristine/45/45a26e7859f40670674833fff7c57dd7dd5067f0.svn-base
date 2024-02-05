@@ -1,0 +1,7 @@
+html, body{
+	font-family: "Segoe UI", "Open sans", "Arial";
+	font-weight: lighter;
+	height: 100%;
+	width: 100%;
+	background-color: #1E81E7;
+}

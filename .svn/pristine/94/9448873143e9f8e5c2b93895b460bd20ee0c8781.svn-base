@@ -1,0 +1,153 @@
+angular.module('vnWorkflowBarModule', [],function () {})
+.controller('vnWorkflowBarController', function( 
+	$scope, 
+	$rootScope, 
+	$timeout, 
+	$mdDialog,
+	vnScrollFactory, 
+	vnWorkflowFactory, 
+	vnScreenManagementFactory,
+	vnNavigationFactory,
+	vnTrackingFactory,
+	vnRecurrenceFactory,
+	visionFactory,
+	VN_TASK_SCREENS,
+	VN_DOCMAN_SCREENS ){
+
+      	
+	    $rootScope.$on( vnWorkflowFactory.CLEAR_WORKFLOW, function(){
+	    	initWorkflow();
+	    });
+
+	    var initWorkflow = function(){
+	      	$scope.model.trackingSummary = {};
+		    $scope.model.recurrenceSummary = {};
+		    $scope.model.selectedPatients = [];
+	      	$scope.model.attachedDocs = [];
+		};
+		initWorkflow();
+
+      	/* DRAG DROP FILE */
+      	var holder = $('#holder')[0];
+		    //state = document.getElementById('status');
+
+		if (typeof window.FileReader === 'undefined') {
+		  
+		  //state.className = 'fail';
+		} else {
+			
+		  //state.className = 'success';
+		  //.innerHTML = 'File API & FileReader available';
+		}
+		 
+		holder.ondragover = function () {  
+			$( this ).addClass( 'hover' );
+			return false; };
+		
+		holder.ondragend = function () { 
+			$( this ).removeClass( 'hover' ); 
+			return false; 
+		};
+
+		holder.ondragleave = function () { 
+			$( this ).removeClass( 'hover' ); 
+			return false; 
+		};
+
+		
+		holder.ondrop = function (e) {
+		  
+		  e.preventDefault();
+
+		  var file = e.dataTransfer.files[0],
+		      reader = new FileReader();
+		  reader.onload = function (event) {
+		    //holder.style.background = 'url(' + event.target.result + ') no-repeat center';
+		  };
+		  //console.log(file.name);
+		  $( this ).removeClass( 'hover' ); 
+		  $scope.model.attachedDocs.push( { label: file.name } );
+		  $scope.$apply();
+		  reader.readAsDataURL(file);
+
+		  return false;
+		};
+
+      	/******************/
+      	$scope.initWorkflowBar = function () {
+      		$rootScope.$watch( 
+		      	"screens.VN_TASK__WORKFLOW", function( value ){
+	      		if( value ){
+	      			vnTrackingFactory.setTracking( $scope.model.trackingSummary );
+	      			vnRecurrenceFactory.setRecurrence( $scope.model.recurrenceSummary );
+	      		}
+	      	});
+      	};
+
+      	$scope.handleAttachedDocDeleteClick = function(){
+      		$scope.model.attachedDocs = [];
+      	};
+
+      	$scope.handleTrackingDeleteClick = function(){
+      		$scope.model.trackingSummary = {};
+      	};
+
+      	$scope.handleRecurrenceDeleteClick = function(){
+      		$scope.model.recurrenceSummary = {};
+      	};
+
+		$scope.handleTrackingEdit = function(){
+			vnNavigationFactory.switchScreens( VN_TASK_SCREENS.TRACKING );
+		};
+
+		$scope.handleRecurrenceEdit = function(){
+			vnNavigationFactory.switchScreens( VN_TASK_SCREENS.RECURRENCE );
+		};
+
+      	$scope.handlePatientClick = function( e ){
+      		console.log( "Patient Clicked" );
+      	};
+
+      	$scope.handleAddClinicalItem = function( e ){
+      		vnNavigationFactory.switchScreens( VN_DOCMAN_SCREENS.DOCUMENT_INBOX );
+      	};
+      	
+
+      	$scope.handleAttachmentDeleteClick = function( e ){
+      		$scope.attacheddocument = null;
+      	};
+
+      	$rootScope.$on( vnTrackingFactory.TRACKING_UPDATED, function( scope ){
+      		$scope.hasTracking = vnTrackingFactory.hasTracking();
+      		$scope.model.trackingSummary = vnTrackingFactory.getTracking();
+      	});
+
+      	$rootScope.$on( vnRecurrenceFactory.RECURRENCE_UPDATED, function( scope, value ){
+      		$scope.hasRecurrence = vnRecurrenceFactory.hasRecurrence();
+      		$scope.model.recurrenceSummary = vnRecurrenceFactory.getRecurrence();
+      	});
+
+      	vnScreenManagementFactory.initialiseMenuOptions( correspondenceLeftCommands, workflowRightCommands );
+      	$rootScope.$on( "DOCUMENT_ATTACHMENT", function( scope, value ){
+			//$scope.attacheddocument = value;
+			$scope.model.attachedDocs.push( { label: value.name } );
+			if( value.patient != null ){
+				$scope.model.selectedPatients.push( { 
+					active: false, 
+					id: value.patient.Id,
+					subtitle: value.patient.DOB,
+					thumbnailUrl: "",
+					title: value.patient.Surname.toUpperCase() + ", " + value.patient.Forename } );
+			}
+		});
+})
+.directive('vnWorkflowBar', function() {
+    return {
+      scope: {
+      	model: "=",
+      	reinitialise: "="
+      },
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vnworkflowbar.html'
+    };
+});

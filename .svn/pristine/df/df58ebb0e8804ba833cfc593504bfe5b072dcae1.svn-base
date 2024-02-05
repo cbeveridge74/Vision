@@ -1,0 +1,4 @@
+<vn-css vn-id="vntaskcreate" vn-css-file="apps/components/tasks/vntaskcreate.css"></vn-css>
+<div class="task-create">
+    This is the create task screen
+</div>

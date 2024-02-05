@@ -1,0 +1,118 @@
+<vn-css vn-id="vnmail" vn-css-file="apps/visionmail/vnvisionmail.css"></vn-css>
+<vn-scan ng-show="screens.VN_MAIL__SCAN"></vn-scan>
+<div class="vision-mail" ng-show="screens.VN_MAIL__MAIL_HOME" ng-controller="vnVisionMailController as mailController">
+	
+	<div class="function-bar-container">
+		<div class="absolute-tether">
+			<div class="top-container">
+				<div class="title-container">
+					<!--<div class="back-button fa fa-arrow-left"></div>-->
+					<div class="title">Vision Mail</div>
+				</div>
+				<div class="search">
+			        <input type="search" 
+			        ng-model="search" 
+			        placeholder="Filter by patient..." 
+			        ng-focus="handleSearchFocus( $event )"
+			        ng-click="$event.stopPropagation()">
+			        <div class="search-icon fa fa-filter"></div>
+			        <div class="search-results menu">
+			        	<div class="search-result" ng-repeat="name in names | filter:{ Surname:search }" ng-click="handlePatientClick()">
+				            {{ name.Surname | uppercase }}, {{ name.Forename }} ({{ name.DOB }})
+				        </div>
+			        </div>
+			    </div>
+				<div class="user-container">
+					<div class="users">
+						<md-select ng-model="usermodel" >
+				          	<md-option ng-repeat="user in users track by $index" value="{{user}}" class="user-selector-option">
+					          	<div>
+						          	<div class="image">
+						          		<img ng-if="user.image != null" ng-src="{{user.image}}">
+						          		<div class="dummyimage" ng-if="user.image == null"></div>
+						          	</div>
+						          	<div class="name">
+						          		{{user.label}}
+						          	</div>
+						     	</div>
+						  </md-option>
+						  <md-select-label>
+						  	<div class="selected">
+					        	<div>
+						          	<div class="image">
+						          		<img ng-src="{{currentUser.image}}">
+						          	</div>
+						          	<div class="name">
+						          		{{currentUser.label}}
+						          	</div>
+							      </div>
+					        </div>
+						  </md-select-label>
+				        </md-select>
+					</div>
+				</div>
+			</div>
+			<!-- Function bar plugin-->
+			<div class="plugin">
+				<div ng-repeat="item in filterData.filters" class="option-container"  ng-class="{ 'indent' : item.id != INBOX && item.id != FOLDER }">
+					<div class="option" ng-class="{ 'highlighted' : item.highlighted }" ng-click="handlePluginOptionClick( $event );">
+						<div class="fa {{item.icon}}" ></div>
+						<div class="label">{{ item.label }}</div>
+					</div>
+					<div ng-repeat="filter in item.filters"><!-- ng-if="( item.id == CLINICIAN_RQD && usermodel == 'all')" -->
+						<div ng-repeat="item in filter.filter" class="selected-items">
+							<div ng-if="item.favourite" ng-class="( item.highlighted ) ? 'selected-item highlighted' : 'selected-item'" ng-click="handlePluginOptionClick( $event );">{{item.label}}</div>
+							<div ng-if="$parent.item.moreoption && isFiltersSelected( $parent.item.id ) && $parent.$last && $last" 
+								class="selected-item"
+							 	ng-click="handleMoreClick( $event );">More...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content" ng-class="( $root.patientid != null ) ? 'patient-banner-showing':''">
+		<vn-banner 
+		    ng-show="$root.patientid != null"
+		    context-button="true"></vn-banner>
+		<bg-splitter orientation="vertical" ng-if="viewLandscape == true">
+		    <bg-pane min-size="masterAreaHeight">
+		    	<ng-include src="'apps/visionmail/parts/masterpart.html'"></ng-include>
+			</bg-pane>
+		    <bg-pane min-size="0">
+		    	<ng-include src="'apps/visionmail/parts/detailpart.html'"></ng-include>
+			</bg-pane>
+		</bg-splitter>
+
+		<ng-include ng-if="viewLandscape != true" src="'apps/visionmail/parts/masterpart.html'" ></ng-include>
+		<ng-include ng-if="viewLandscape != true" src="'apps/visionmail/parts/detailpart.html'"></ng-include>
+	</div>
+	<div class="command-menus">
+		<div class="sort-menu menu">
+			<div class="option">Date</div>
+			<div class="option">Clinician</div>
+			<div class="option">Patient</div>
+		</div>
+		<vn-vision-mail-task-menu></vn-vision-mail-task-menu>
+	</div>
+	
+	<div class="applied-filters">
+		<div class="applied-filter" ng-repeat="filter in currentFilter track by $index">
+			<div>{{ filter.label }}</div>
+		</div>
+	</div>
+	<div class="flyout" ng-class="( $root.patientid != null ) ? 'patient-banner-showing':''" >
+		<div ng-repeat="item in chosenFilters" class="section" ng-if="hasRole( item ) == true">
+			<div class="title">{{ item.title }}</div>
+			<div ng-repeat="item in item.filter" class="option-container" ><!-- ng-if="!( item.id == CLINICIAN_RQD && currentUser.id != -2)" -->
+				<div class="option" ng-click="handlePluginOptionClick( $event );">{{item.label}}</div>
+				<div ng-class="( item.favourite ) ? 'fav fa fa-star':'fav fa fa-star-o'" ng-click="handleFilterClick( $event );"></div>
+			</div>
+		</div>
+	</div>
+	
+	<vn-create-view 
+		class-identifier="vision-tasks-create" 
+		vn-is-task="true"
+		html-snippets="{{template}}"></vn-create-view>
+</div>

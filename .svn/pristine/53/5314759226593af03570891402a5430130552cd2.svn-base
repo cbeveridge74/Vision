@@ -1,0 +1,55 @@
+angular.module('vnAppointmentsModule', [],function () {})//'ngRoute', 'ngTouch', 'ngAnimate'
+.controller('vnAppointmentsController', function($scope, visionFactory, vnScreenManagementFactory, vnAssemblerFactory){
+
+	$scope.init = function ( callback ) {
+		var forSelectedPatient = false;
+        visionFactory.retrieveData( database[ APPOINTMENT ].name, function( results ){
+			retrieveAppointmentsHandler( results );
+			if( callback ){
+            	callback();
+            }
+		}, 
+        'by_date',
+        { start: new Date( moment( '2014-Jul-11' ).format( 'YYYY-MM-DD' ) ),
+          end: new Date( moment( '2014-Jul-12' ).format( 'YYYY-MM-DD' ) )
+        });
+	};
+
+	$scope.handleItemClick = function( event, element ){
+		vnScreenManagementFactory.handleItemClick( event, element, {}, appointmentRightCommands, true );
+	};
+
+	$scope.handleStatusClick = function( event, element){
+		if( element.appointment != null && !vnScreenManagementFactory.isDoubleClick() ){
+			var index = -1;
+			angular.forEach(status, function(value, key) {
+				
+		       	if( element.appointment.status == value ){
+			       	if( key > 3 ){
+			       		index = 0
+			       	}else{
+			       		index = key + 1;
+			       	}
+		        }
+		    });
+		    element.appointment.status = status[ index ];
+		    element.appointment.statusimage = vnAssemblerFactory.status[ element.appointment.status ];
+		    
+		}
+		event.stopPropagation();
+	};
+
+	var retrieveAppointmentsHandler = function( results ){
+	    $scope.$apply(function(){
+	      $scope.appointments = results;
+	    });
+	};
+
+	var status = [ "AVAILABLE", "BOOKED", "ARRIVED", "INCONSULTATION", "COMPLETED" ];
+	
+}).directive('vnAppointments', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/components/appointments/vnappointments.html'
+    };
+  });

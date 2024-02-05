@@ -1,0 +1,160 @@
+.day .list-group-item {
+	box-shadow: 2px 2px 1px #AAA;
+}
+
+.day .list-group-item .owner, 
+.day .list-group-item .time,
+.day .list-group-item .status,
+.day .list-group-item .subject,
+.day .list-group-item .detail, 
+.day .list-group-item .type{
+	white-space: nowrap;
+	display: inline-block;
+	margin-right: 0.5em;
+	vertical-align: middle;
+}
+
+.day .list-group-item .time{
+	margin-right: 0;
+}
+
+.day .list-group-item .type{
+    vertical-align: top;
+	height: 5.2em;
+	margin-left: -0.3em;
+	padding: 1.8em 0.2em 0 0.2em;
+}
+
+
+.day .list-group-item .time{
+	background-color: #085394;
+	color: #FFFFFF;
+	height: 4em;
+	width: 4em;
+	text-align: center;
+	padding-top: 1.3em;
+	font-size: 1.3em;
+}
+
+.day .list-group-item.active.slot, .day .list-group-item.active:hover.slot, .day .list-group-item.active:focus.slot{
+	color: #085394;
+	padding: 0;
+	background-color: #FFFFFF;
+	border: none;
+	margin: 0.2em;
+	margin-top: 0.7em;
+	width: 100%;
+	
+}
+
+.day .owner, .owner img, .owner.alias.showme, .status, .status img {
+	width: 4em;
+}
+
+.day .owner.alias.showme, .day .owner img.showme{
+	display: inline-block;
+}
+
+.day .owner.alias, .owner img{
+	display:  none;
+}
+
+.day .owner.alias{
+	text-align: left;
+	font-size: 2em;
+	position: absolute;
+	top: 0.7em;
+}
+
+.day .subject, .detail{
+	vertical-align: middle;
+}
+
+.day .subject{
+	width:20em;
+	overflow: hidden;
+}
+
+.day .subject .title{
+	font-size: 1.5em;
+}
+
+.day .subject .sub-title{
+	font-size: 1em;
+}
+
+.day .detail{
+	width: auto;
+}
+
+.day-scroller{
+	//position: relative;
+}
+
+.day-scroller .content{
+	//position: relative;
+	margin: 0 0em 0 0em;
+	//white-space: nowrap;
+	 width: 100%;
+}
+
+.day-scroller .iScrollIndicator {
+	//top: 7.8em;
+}
+
+.day-title{
+	height: 5em;
+	width: 100%;
+	text-align: center;
+	color: #FFFFFF;
+	padding-top: 0.8em;
+	background-color: #20335E;
+}
+
+.day-title .day-label{
+	font-size: 2em;
+	width: 10em;
+}
+
+.day-title .day-inline{
+	display: inline-block;
+}
+
+.day-title .day-inline.arrow-container{
+	vertical-align: top;
+	cursor: pointer;
+}
+
+@media(max-width: 500px) {
+
+  .day .list-group-item .time, .day .list-group-item .type{
+	height: 3.5em;
+	width: 3.5em;
+	padding-top: 1em;
+	font-size: 0.9em;
+  }
+
+  .day .owner, .owner img, .owner.alias.showme, .status, .status img {
+	width: 3em;
+	vertical-align: top;
+  }
+
+
+
+  .day .list-group-item .detail{
+	display: none;
+  }
+
+  .day .subject{
+	width:9em;
+  }
+  .day .subject .title{
+	font-size: 0.9em;
+  }
+
+  .day .subject .sub-title{
+	font-size: 0.8em;
+  }
+   
+}
+

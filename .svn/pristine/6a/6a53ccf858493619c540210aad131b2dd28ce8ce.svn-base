@@ -1,0 +1,1074 @@
+angular.module('vnVisionTasksModule', [
+	'vnDocumentReviewModule',
+	'vnWorkflowModule',
+	'vnBrickModule',
+	'vnWorkflowTrackingModule',
+	'vnTaskCreateModule',
+	'vnRecurrenceModule',
+	'vnWorkflowBarModule'],function () {})
+.run(function( vnAppManagementFactory ){
+	var APP_ID 			= "VN_TASK";
+	var HOME 			= APP_ID + '__HOME';
+	var DOCUMENT_REVIEW = APP_ID + '__DOCUMENT_REVIEW';
+	var TASK_CREATE 	= APP_ID + '__TASK_CREATE';
+	var WORKFLOW 		= APP_ID + '__WORKFLOW';
+	var TRACKING 		= APP_ID + '__TRACKING';
+	var RECURRENCE 		= APP_ID + '__RECURRENCE';
+	var STATS 			= APP_ID + '__STATS';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: APP_ID, 
+		name: "Tasks",
+		icon: "images/task_plain_white_left.svg",
+		screens: [
+			HOME,
+			STATS,
+			WORKFLOW,
+			RECURRENCE,
+			TRACKING,
+			TASK_CREATE,
+			DOCUMENT_REVIEW
+			]
+		});
+
+	
+})
+.controller('vnVisionTasksController', function( 
+	vnCreateViewFactory,
+	vnActivitiServiceFactory,
+	vnDatabaseFactory,
+	visionFactory,
+	vnTaskFactory,
+	vnScrollFactory,
+	vnNavigationFactory,
+	vnScreenManagementFactory,
+	vnActionFactory,
+	vnWorkflowFactory,
+	vnTrackingManagerFactory,
+	vnVisionTaskTabViewFactory,
+	$rootScope,
+	$scope,
+	$timeout,
+	$log,
+	VN_TASK_SCREENS,
+	gaTracker
+ ){
+	
+    $scope.selectedIndex = 0;
+    $scope.$watch('selectedIndex', function(current, old){
+    	if( current != old ){
+    		$rootScope.$broadcast( "TASK_TABS_INDEX_UPDATED", current );
+    	}
+    });
+    $scope.$watch( 'selectedUserId', function( nValue, oValue ){
+    	if( nValue != null && ( nValue != oValue ) ){
+    		gaTracker.sendEvent('Task View As', "New user selected in admin view", 'Tasks');
+    	}
+    } );
+    $scope.counts = {};
+    $scope.counts.taskcount = 0;
+    $scope.counts.donetaskcount = 0;
+    $scope.counts.trackingcount = 0;
+    $scope.counts.workflowcount = 0;
+
+
+	vnActionFactory.canHelpWith( vnActionFactory.OVERDUE_TASK, navigateToOverdueTasks );
+
+	function navigateToOverdueTasks( data, callback ){
+	    vnNavigationFactory.switchScreens( VN_TASK_SCREENS.HOME );
+	     $scope.selectedIndex = 0;
+	     if( callback != null ){
+	     	callback();
+	     }
+	};
+
+	visionFactory.retrieveData( database[ PERSON ].name, function( results ){
+		$timeout( function(){
+			$scope.users = results;
+		} );
+	});
+
+    $scope.informCommands = taskInformCommands.slice(0);
+
+	$rootScope.$watch( 'user', function( vNew, vOld ){
+		if( vNew != null ){
+			if( vNew.id == 4 ){
+		    	$scope.informCommands.unshift( taskStatsInformCommands );
+		    }else{
+		    	$scope.informCommands = taskInformCommands.slice(0);
+		    }
+		}
+	});
+
+    
+    $rootScope.taskfilter = "";
+    
+
+    $rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value, event ){
+  		if( value.id == TASKFIL ){
+        	vnScreenManagementFactory.openMenu( ".task-filter-menu" );
+
+  		}else if( value.id == TASKADD ){
+  			vnCreateViewFactory.clearModel();
+			vnScreenManagementFactory.openMenu( ".vision-tasks .vision-tasks-create" );
+  		}else if( value.id == TASKSTATS ){
+  			vnNavigationFactory.switchScreens( VN_TASK_SCREENS.STATS );
+  		}
+  	});
+
+    
+	$scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+    	vnScreenManagementFactory.overrideGeneralClick = false;
+     };
+
+     $scope.handleDocumentFile = function(){
+     	vnActionFactory.needHelpWith( vnActionFactory.FILE_DOCUMENTS, null, function(){});
+     };
+     
+     $scope.handleViewByClick = function(){
+     	vnScreenManagementFactory.openMenu( ".view-by .menu" );
+     };
+
+     $scope.handleTaskOptionClick = function(){
+     	vnVisionTaskTabViewFactory.setViewState( vnVisionTaskTabViewFactory.TASK_VIEW_STATE );
+
+     };
+
+     $scope.handleWorkflowOptionClick = function(){
+     	vnVisionTaskTabViewFactory.setViewState( vnVisionTaskTabViewFactory.WORKFLOW_VIEW_STATE );
+     };
+    
+	
+	 //vnActivitiServiceFactory.createUsers( function( data ){} );
+
+	 // Select the file
+	 /*var load_file = function () {
+		var reader = new FileReader();
+		reader.onload = function(){
+			var iframe = $("#theFrame");
+			var canvas = $( '#myCanvas' );
+			//var img = $( "#scream" );
+			var img = new Image();
+			img.src = reader.result;
+			img.onload = function(){
+				var context = canvas[0].getContext('2d');
+				context.drawImage(img, 0, 0);
+			    var data = context.getImageData(0, 0, 1800, 1400);
+				iframe[0].contentWindow.postMessage({ sResponseText: data}, '*');
+				window.addEventListener("message", function (event) {
+				   var text = event.data.data;
+				   if( text.indexOf( "repayment" ) > -1 ){
+				   		console.log( "The scan mentions 'repayment'" );
+				   		console.log( text );
+				   }
+				});
+			}
+		}
+		reader.readAsDataURL(document.getElementById('picker').files[0])
+	}*/
+
+	 $scope.init = function () {
+	 	
+	 // This is for selecting the file
+	 //$( "#picker" ).change( load_file );
+
+	 	
+
+	 	
+      
+      $scope.$watch( 
+      	"screens.VN_TASK", function( value ){
+      		if( value ){
+      			visionFactory.retrieveData( database[ CLINICAL_DOCS ].name, function( result ){
+					$scope.fileCount = result.length;
+				}, null, null, 1000);
+
+				$scope.selectedUserId = $rootScope.user.id;
+
+      			// Hard coded to the Scan image
+  				/*var iframe = $("#theFrame");
+  				var canvas = $( '#myCanvas' );
+  				var img = $( "#scream" );
+  				var context = canvas[0].getContext('2d');
+				context.drawImage(img[0], 0, 0);
+			    var data = context.getImageData(0, 0, 1800, 1400);
+				iframe[0].contentWindow.postMessage({ sResponseText: data}, '*');
+				window.addEventListener("message", function (event) {
+				   var text = event.data.data;
+				   //if( text.indexOf( "repayment" ) > -1 ){
+				   		console.log( "The scan mentions 'repayment'" );
+				   		console.log( JSON.parse( text ));
+				   //}
+				});*/
+
+				/*vnActivitiServiceFactory.startProcess(null, null, function( data ){
+					console.log( data );
+				});*/
+
+
+      			/*var iframe = $("#theFrame");
+  				var canvas = $( '#myCanvas' );
+  				var img = $( "#scream" );
+
+  				var wheel_of_fortune = /[changing]/i;
+				var image_offset = img[0].getBoundingClientRect();
+  				var context = canvas[0].getContext('2d');
+				context.drawImage(img[0], 0, 0);
+			    var data = context.getImageData(0, 0, 1800, 1400);
+				iframe[0].contentWindow.postMessage({ sResponseText: data}, '*');
+				window.addEventListener("message", function (event) {
+				   var text = event.data.data;
+				   //if( text.indexOf( "repayment" ) > -1 ){
+			   		var letters =  JSON.parse( text );
+			   		letters.filter(function(letter){
+						// select the letters which have vanna white's approval
+						return letter.matches.some(function(match){
+							return wheel_of_fortune.test(match.letter)
+						})
+					}).forEach(function(letter){
+						// draw a little yellow box over their faces
+						var highlight = document.createElement('div');
+						highlight.className = 'highlight';
+						highlight.style.top = (letter.y + image_offset.top + 63) + 'px';
+						highlight.style.left = (letter.x + image_offset.left) + 'px';
+						highlight.style.width = letter.width + 'px';
+						highlight.style.height = letter.height + 'px';
+						document.body.appendChild(highlight);
+					})
+				   //}
+				});
+      			
+      			
+      			vnActivitiServiceFactory.retrieveTasksForAssignee( 
+			  	"shona.donaldson@inps.net",
+			  	function( assigneeTask ){
+			  		$scope.tasks = assigneeTask.data;
+			  	});*/
+      		}
+      });
+  	};
+
+	 $scope.handleAddTask = function(){
+	 	/*vnActivitiServiceFactory.addTask(
+		  "shona.donaldson@inps.net",
+		  "resolved",
+		  "Shona Task",
+		  "2015-04-17T13:06:02.438+02:00",
+		  "New Shona Task",
+		  "shona.donaldson@inps.net",
+		  null,
+		  20,
+		  function( data ){
+		  	console.log( data );
+		  	vnActivitiServiceFactory.retrieveTasksForAssignee( 
+		  	"shona.donaldson@inps.net",
+		  	function( assigneeTask ){
+		  		$scope.tasks = assigneeTask.data;
+		  	});
+		  }
+		);*/
+	 };
+
+	 
+})
+.factory( "vnVisionTaskTabViewFactory", function( $rootScope ){
+  	var factory = {};
+
+  	factory.TASK_VIEW_STATE 		= "TASK_VIEW_STATE";
+  	factory.WORKFLOW_VIEW_STATE 	= "WORKFLOW_VIEW_STATE";
+  	factory.VIEW_STATE_UPDATED 		= "VIEW_STATE_UPDATED";
+  	
+  	var viewState = factory.TASK_VIEW;
+  	factory.retrieveViewState = function(){
+  		return viewState;
+  	};
+
+  	factory.setViewState = function( state ){
+  		viewState = state;
+  		$rootScope.$broadcast( factory.VIEW_STATE_UPDATED );
+  	};
+
+  	return factory;
+ })
+.directive('vnVisionTrackingList', function() {
+	return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontrackinglist.html',
+      scope: {
+      	scroller: "@"
+      },
+      controller: function( 
+			$scope,
+			$rootScope,
+			$timeout,
+			vnTaskFactory,
+			vnTrackingManagerFactory,
+			vnScrollFactory ){
+			
+			var trackingScroller;
+			var TAB_INDEX = 4;
+
+			$( window ).resize(function() {
+		        handleResize();
+		      });
+
+			$rootScope.$watch( 
+	      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+
+	      	$rootScope.$on( "TASK_TABS_INDEX_UPDATED", function( event, tabIndex ){
+				if( tabIndex == TAB_INDEX ){
+					$timeout( function(){
+						handleResize();
+					});
+				}
+			} );
+
+			$scope.taskStatus = vnTaskFactory.taskStatus;
+		    $rootScope.$on( vnTrackingManagerFactory.PATIENT_STATUS_TRACKING, function(){
+		    	retrieveTrackingData();
+		    });
+
+		    $rootScope.$on( vnTrackingManagerFactory.TASK_STATUS_TRACKING, function(){
+		    	retrieveTrackingData();
+		    });
+
+		    var retrieveTrackingData = function(){
+		    	vnTrackingManagerFactory.retrieveTrackingDataForUser( function( patientList ){
+		    		vnTrackingManagerFactory.retrieveTaskTrackingData( function( taskList ){
+		    			angular.forEach( taskList, function( vTaskList, iTaskList ){
+		    				angular.forEach( vTaskList.eventdata.assignee, function( vAssignee, iAssignee ){
+		    					// Yup, doing it straight from the demodata file.
+		    					vTaskList.eventdata.assigeelabel = new DataStore().demoDataPersons[ vAssignee ].label;
+		    				});
+		    			});
+
+
+	    				$scope.trackingData = patientList.concat( taskList );
+	    				// Couldn't get this to bind as the directive not being compiled
+	    				//until the tab is selcted.  $scope.counts is in the parent scope
+	    				$scope.$parent.$parent.counts.trackingcount = $scope.trackingData.length;
+
+		    			handleResize();
+		    		});
+		    	});
+		    };
+
+		    var handleShow = function(){
+				retrieveTrackingData();
+			};
+
+			var handleResize = function(){
+		      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+		        vnScrollFactory.handleResize( "tracking-scroller" );
+		        getTrackingScroller().css( "height", "100vh" );
+		        
+		      //}
+		    };
+
+		    
+
+		    var getTrackingScroller = function(){
+		    	if( trackingScroller == null || trackingScroller.length < 1 ){
+		    		trackingScroller = $( ".tracking-scroller" );
+		    	}
+		    	return trackingScroller;
+		    }
+		}
+    };
+})
+.directive('vnVisionTasksToDo', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontaskslist.html',
+      scope: {
+      	scroller: "@"
+      },
+      controller: function( 
+			$scope,
+			$rootScope,
+			$timeout,
+			vnActionFactory,
+			vnTaskActionFactory,
+			vnTaskFactory,
+			vnScrollFactory,
+			vnDetailViewFactory,
+			vnScreenManagementFactory,
+			gaTracker ){
+			var inboxScroller;
+			var TAB_INDEX = 0;
+
+			$rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function(){
+				deselectAll();
+			});
+
+			var deselectAll = function(){
+				angular.forEach( $scope.taskreminders, function( vTask, iTask ){
+					if( vTask.selected == true ){
+						$timeout( function(){ delete vTask.selected; });
+					}
+				});
+				
+			};
+
+			$scope.handleTaskItemRightClick = function(){
+				gaTracker.sendEvent('Task List To Do', "Right click", 'Tasks');
+				var leftActionsArray = new Array();
+				var rightActionsArray = new Array();
+				var clickedTask = this.item;
+
+				angular.forEach( $scope.taskreminders, function( vTask, iTask ){
+					if( vTask.selected == true && ( ( "" + vTask.id + vTask.workflowid ) != ( "" + clickedTask.id + clickedTask.workflowid ) ) ){
+						populateItemActions( leftActionsArray, rightActionsArray, vTask );
+					}
+				});
+
+				if( clickedTask.selected == null || clickedTask.selected != true ){
+					populateItemActions( leftActionsArray, rightActionsArray, clickedTask );
+				}
+
+				if( rightActionsArray.length > 1 ){
+					rightActionsArray = [ reduceActions( rightActionsArray ) ];
+				}
+
+				vnScreenManagementFactory.handleListItemRightClick( 
+					clickedTask, 
+					$scope.taskreminders, 
+					leftActionsArray[0], 
+					rightActionsArray[0] );
+			};
+
+			var populateItemActions = function( leftActionsArray, rightActionsArray, vTask ){
+				vnTaskActionFactory.initialiseActions( vTask, function( leftActions, rightActions ){
+					leftActionsArray.push( leftActions );
+					rightActionsArray.push( rightActions );
+				});
+			};
+
+			var reduceActions = function( actionArrays ){
+				var result = actionArrays.shift().filter(function(v) {
+				    return actionArrays.every(function(a) {
+				    	for( var i = 0;i < a.length;i++ ){
+				    		 if( a[i].id == v.id ){
+				    		 	return true;
+				    		 }
+				    	}
+				    	return false;
+				    });
+				});
+				return result;
+			};
+
+			$rootScope.$on( "COMMAND_SELECTED", function( name, command ){
+
+				angular.forEach( $scope.taskreminders, function( vTask, iTask ){
+					if( vTask.selected == true ){
+						delete vTask.selected;
+						vnTaskActionFactory.handleAction( command, vTask );
+					}
+				});
+
+				if( command.id == CRDSNZ ){
+					//vnScreenManagementFactory.overrideGeneralClick = true;
+					vnTaskActionFactory.openSnooze( );
+					vnScreenManagementFactory.overrideGeneralClick = false;
+					return;
+				}else if( command.id.indexOf( "CRD" ) > -1 ){ //DCB Added as part of Vision Mail dev
+					vnScreenManagementFactory.overrideGeneralClick = false;
+					vnScreenManagementFactory.toggleBars( true );
+				}
+
+				
+		    } );
+
+			$( window ).resize(function() {
+		        handleResize();
+		      });
+
+			$rootScope.$watch( 
+	      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+
+	      	$scope.$parent.$parent.$watch( 'selectedUserId', function( nValue, oValue ){
+	      		if( nValue != null && ( nValue != oValue ) ){
+	      			retrieveTasks();
+	      		}
+	      	});
+
+	      	$rootScope.$on( "TASK_TABS_INDEX_UPDATED", function( event, tabIndex ){
+				if( tabIndex == TAB_INDEX ){
+					$timeout( function(){
+						handleResize();
+					});
+				}
+			} );
+
+			var handleShow = function(){
+				//retrieveTasks();
+			};
+
+
+			var retrieveTasks = function(){
+				if( $scope.$parent.$parent.selectedUserId != null ){
+					vnTaskFactory.retrieveTasksFor( $scope.$parent.$parent.selectedUserId, handleTasksRetrieved );
+				}
+			};
+
+			var handleResize = function(){
+		      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+		      	vnScrollFactory.handleResize( $scope.scroller );
+		        getInboxScroller().css( "height", "100vh" );
+		      //}
+		    };
+
+		    var getInboxScroller = function(){
+		    	if( inboxScroller == null || inboxScroller.length < 1 ){
+		    		inboxScroller = $( "." + $scope.scroller );
+		    	}
+		    	return inboxScroller;
+		    };
+
+
+
+		    var handleTasksRetrieved = function( tasks ){
+		        if( tasks != null ){
+		          vnTaskFactory.assembleTasks( tasks );
+		          $scope.$apply( function(){
+		            $scope.taskreminders = tasks;
+		            $scope.patientcentric = false;
+		           	$scope.$parent.$parent.counts.taskcount = $scope.taskreminders.length;
+		          });
+		        }else{
+		        	$scope.taskreminders = null;
+		        }
+		        
+				handleResize();
+		    };
+
+		  	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+		 		retrieveTasks();
+		 				
+		 	});
+
+		 	$rootScope.$on( "COMMENTS_UPDATED", function( event, data ){
+				retrieveTasks();
+			});
+
+		 	$scope.handleTaskItemClick = function( ){
+			 	if( vnScrollFactory.isScrolling() ){
+	           		return;
+	          	}
+				var task = this.item;
+		 		vnDetailViewFactory.setModel( task );
+				vnScreenManagementFactory.openMenu( ".detail-view" );
+				vnScrollFactory.disableScrolling();
+
+			};
+		}
+    };
+})
+.directive('vnVisionTasksDone', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontaskslist.html',
+      scope: {
+      	scroller: "@"
+      },
+      controller: function( 
+			$scope,
+			$rootScope,
+			$timeout,
+			vnActionFactory,
+			vnTaskFactory,
+			vnScrollFactory,
+			vnDetailViewFactory,
+			vnScreenManagementFactory ){
+			var inboxScroller;
+			var TAB_INDEX = 1;
+
+			$( window ).resize(function() {
+		        handleResize();
+		      });
+
+			$rootScope.$watch( 
+	      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+
+			var handleShow = function(){
+				//retrieveTasks();
+			};
+
+			$scope.$parent.$parent.$watch( 'selectedUserId', function( nValue, oValue ){
+	      		if( nValue != null && ( nValue != oValue ) ){
+	      			retrieveTasks();
+	      		}
+	      	});
+
+			$rootScope.$on( "TASK_TABS_INDEX_UPDATED", function( event, tabIndex ){
+				if( tabIndex == TAB_INDEX ){
+					$timeout( function(){
+						handleResize();
+					});
+				}
+			} );
+
+
+			var retrieveTasks = function(){
+				vnTaskFactory.retrieveTasksFor( $scope.$parent.$parent.selectedUserId, handleTasksRetrieved, vnTaskFactory.DONE );
+			};
+
+			var handleResize = function(){
+		      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+		        vnScrollFactory.handleResize( $scope.scroller );
+		        getInboxScroller().css( "height", "100vh" );
+		        
+		      //}
+		    };
+
+		    var getInboxScroller = function(){
+		    	if( inboxScroller == null || inboxScroller.length < 1 ){
+		    		inboxScroller = $( "." + $scope.scroller );
+		    	}
+		    	return inboxScroller;
+		    };
+
+		    var handleTasksRetrieved = function( tasks ){
+		        if( tasks != null ){
+		          vnTaskFactory.assembleTasks( tasks );
+		          $scope.$apply( function(){
+		            $scope.taskreminders = tasks;
+		            $scope.$parent.$parent.counts.donetaskcount = $scope.taskreminders.length;
+		          });
+		        }else{
+		        	$scope.taskreminders = null;
+		        }
+		        
+				handleResize();
+		    };
+
+		  	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+		 		angular.forEach( task.assignee, function( value, index ){
+		 			if( $scope.$parent.$parent.selectedUserId != null && $scope.$parent.$parent.selectedUserId == value ){
+		 				retrieveTasks();
+		 			}
+		 		});	
+		 	});
+
+		 	$rootScope.$on( "COMMENTS_UPDATED", function( event, data ){
+				retrieveTasks();
+			});
+
+
+
+		 	$scope.handleTaskItemClick = function( ){
+			 	if( vnScrollFactory.isScrolling() ){
+	           		return;
+	          	}
+				var task = this.item;
+		 		vnDetailViewFactory.setModel( task );
+				vnScreenManagementFactory.openMenu( ".detail-view" );
+				vnScrollFactory.disableScrolling();
+			};
+		}
+    };
+})
+.directive('vnVisionTasksSent', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontaskslist.html',
+      scope: {
+      	scroller: "@"
+      },
+      controller: function( 
+			$scope,
+			$rootScope,
+			$timeout,
+			vnActionFactory,
+			vnTaskFactory,
+			vnScrollFactory,
+			visionFactory,
+			vnDetailViewFactory,
+			vnScreenManagementFactory ){
+			var sentScroller;
+			var TAB_INDEX = 2;
+			
+
+			$( window ).resize(function() {
+		        handleResize();
+		      });
+
+			$rootScope.$watch( 
+	      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+
+	      	$scope.$parent.$parent.$watch( 'selectedUserId', function( nValue, oValue ){
+	      		if( nValue != null && ( nValue != oValue ) ){
+	      			retrieveSentTasks();
+	      		}
+	      	});
+
+			var handleShow = function(){
+				//retrieveSentTasks();
+			};
+
+			$rootScope.$on( "TASK_TABS_INDEX_UPDATED", function( event, tabIndex ){
+				if( tabIndex == TAB_INDEX ){
+					$timeout( function(){
+						handleResize();
+					});
+				}
+			} );
+
+			var retrieveSentTasks = function(){
+				vnTaskFactory.retrieveTasksFor( $scope.$parent.$parent.selectedUserId, handleTasksRetrieved, vnTaskFactory.SENT );
+			};
+
+			var handleResize = function(){
+		        vnScrollFactory.handleResize( $scope.scroller );
+		        getSentScroller().css( "height", "100vh" );
+		    };
+
+		    var getSentScroller = function(){
+		    	if( sentScroller == null || sentScroller.length < 1 ){
+		    		sentScroller = $( "." + $scope.scroller );
+		    	}
+		    	return sentScroller;
+		    };
+
+		    var handleTasksRetrieved = function( tasks ){
+		        if( tasks != null ){
+		          vnTaskFactory.assembleTasks( tasks );
+		          $scope.$apply( function(){
+		            $scope.taskreminders = tasks;
+		            $scope.$parent.$parent.counts.senttaskscount = $scope.taskreminders.length;
+		          });
+		        }else{
+		        	$scope.taskreminders = null;
+		        }
+		        
+				handleResize();
+		    };
+
+		  	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+
+	 			if( $scope.$parent.$parent.selectedUserId != null && $scope.$parent.$parent.selectedUserId == task.assigner.id ){
+	 				retrieveSentTasks();
+	 			}
+		 		
+		 	});
+
+		 	$rootScope.$on( "COMMENTS_UPDATED", function( event, data ){
+				retrieveSentTasks();
+			});
+
+		 	$scope.handleTaskItemClick = function( ){
+		 		if( vnScrollFactory.isScrolling() ){
+	           		return;
+	          	}
+			 	var task = this.item;
+		 		vnDetailViewFactory.setModel( task );
+				vnScreenManagementFactory.openMenu( ".detail-view" );
+				vnScrollFactory.disableScrolling();
+		 		
+			};
+		}
+    };
+})
+.directive('vnVisionWorkflowsSent', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisionworkflowssent.html',
+      scope: { //DCB if you remove this scope there's a $parent.$parent below that should then be just $scope
+      	allUsers: "=",
+      	scroller: "@"
+      },
+      controller: function( 
+			$scope,
+			$rootScope,
+			$timeout,
+			vnActionFactory,
+			vnTaskFactory,
+			vnScrollFactory,
+			visionFactory,
+			vnWorkflowFactory,
+			vnDetailViewFactory,
+			vnScreenManagementFactory ){
+			var workflowsSentScroller;
+
+			$( window ).resize(function() {
+		        handleResize();
+		      });
+			var TAB_INDEX = 3;
+
+			$rootScope.$watch( 
+	      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+
+			var handleShow = function(){
+				//retrieveSentWorkflows();
+			};
+
+			$scope.$parent.$parent.$watch( 'selectedUserId', function( nValue, oValue ){
+	      		if( nValue != null && ( nValue != oValue ) ){
+	      			retrieveSentWorkflows();
+	      		}
+	      	});
+
+			$rootScope.$on( "TASK_TABS_INDEX_UPDATED", function( event, tabIndex ){
+				if( tabIndex == TAB_INDEX ){
+					$timeout( function(){
+						handleResize();
+					});
+				}
+			} );
+
+			var retrieveSentWorkflows = function(){
+				var user = null;
+				if( $scope.allUsers == null || $scope.allUsers == false ){
+					user = $scope.$parent.$parent.selectedUserId;
+				}
+				vnWorkflowFactory.retrieveWorkflowsFor( user, handleWorkflowsRetrieved );
+			};
+
+			var handleResize = function(){
+		      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+		        vnScrollFactory.handleResize( $scope.scroller );
+		        getWorkflowsSentScroller().css( "height", "100vh" );
+		        
+		      //}
+		    };
+
+		    var getWorkflowsSentScroller = function(){
+		    	if( workflowsSentScroller == null || workflowsSentScroller.length < 1 ){
+		    		workflowsSentScroller = $( "." + $scope.scroller );
+		    	}
+		    	return workflowsSentScroller;
+		    };
+
+		    var handleWorkflowsRetrieved = function( workflows ){
+		        if( workflows != null ){
+		          
+		          angular.forEach( workflows, function( vWorkflow, iWorkflow ){
+		          	  
+		          	  /* Check if tracking set */
+		          	  var hasTracking = false;
+			          angular.forEach( vWorkflow.attachments.trackingSummary, function( trackValue, trackIndex ){
+					      if( trackValue.selected != null && trackValue.selected == true ){
+					        hasTracking = true;
+					      }
+					    });
+			          vWorkflow.hasTracking = hasTracking;
+
+			          var tasksCount = 0;
+			          var tasksComplete = 0;
+			          /* How many tasks and how many completed */
+			          angular.forEach( vWorkflow.tasks, function( vOuter, iOuter ){
+			          	angular.forEach( vOuter, function( vInner, iInner ){
+			          		if( vInner.status == vnTaskFactory.COMPLETE ){
+			          			tasksComplete++;
+			          		}
+			          		tasksCount++;
+			          	});
+			          });
+			          vWorkflow.taskCount 		= tasksCount;
+			          vWorkflow.tasksComplete 	= tasksComplete;
+		      		});
+		          $scope.$apply( function(){
+		            $scope.workflows = workflows;
+		            $scope.$parent.$parent.counts.workflowcount = workflows.length;
+		          });
+		        }
+		        handleResize();
+		    };
+
+		  	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+
+	 			retrieveSentWorkflows();
+		 		
+		 	});
+
+		 	$scope.handleTaskItemClick = function( ){
+		 		if( vnScrollFactory.isScrolling() ){
+	           		return;
+	          	}
+		 		vnActionFactory.needHelpWith( vnActionFactory.GENERAL, [{ workflowid: this.item.name}], function(){
+		 			
+		 		});
+			};
+		}
+    };
+})
+.directive('vnVisionWorkflowList', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisionworkflowlist.html',
+      scope: {
+      	scroller: "@"
+      },
+      controller: function( 
+			$scope,
+			$rootScope,
+			vnActionFactory,
+			vnTaskFactory,
+			vnScrollFactory,
+			vnWorkflowFactory,
+			vnScreenManagementFactory ){
+			var workflowScroller;
+
+			$( window ).resize(function() {
+		        handleResize();
+		      });
+
+			$rootScope.$watch( 
+	      	"screens.VN_TASK", function( value ){
+	      		if( value ){
+	      			handleShow();
+	      		}
+	      	});
+
+	      	$scope.$parent.$parent.$watch( 'selectedUserId', function( nValue, oValue ){
+	      		if( nValue != null && ( nValue != oValue ) ){
+	      			//retrieveSentWorkflows();
+	      			vnWorkflowFactory.retrieveWorkflow( null, handleWorkflowsRetrieved );
+	      		}
+	      	});
+
+			var handleShow = function(){
+				vnWorkflowFactory.retrieveWorkflow( null, handleWorkflowsRetrieved );
+			};
+
+			var handleResize = function(){
+		      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+		        vnScrollFactory.handleResize( $scope.scroller );
+		        getWorkflowScroller().css( "height", "100vh" );
+		        
+		      //}
+		    };
+
+		    var getWorkflowScroller = function(){
+		    	if( workflowScroller == null || workflowScroller.length < 1 ){
+		    		workflowScroller = $( "." + $scope.scroller );
+		    	}
+		    	return workflowScroller;
+		    };
+
+		    var handleWorkflowsRetrieved = function( workflows ){
+		        if( workflows != null ){
+		          $scope.$apply( function(){
+		            $scope.workflows = workflows;
+		            $scope.$parent.$parent.counts.workflowcount = $scope.workflows.length;
+		          });
+		        }else{
+		        	$scope.workflows = null;
+		        }
+		        
+				handleResize();
+		    };
+
+		  	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+		 		vnWorkflowFactory.retrieveWorkflow( null, handleWorkflowsRetrieved );
+		 	});
+
+		 	$scope.handleTaskItemClick = function( ){
+		 		if( vnScrollFactory.isScrolling() ){
+	           		return;
+	          	}
+		 		//vnActionFactory.needHelpWith( vnActionFactory.GENERAL, [this.item.patient.Id], function(){
+		 		//	console.log( "Calling callback for " );
+		 		//});
+			};
+		}
+    };
+})
+.directive('vnVisionTasksFilterMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontasksfiltermenu.html',
+      controller: function( 
+      	$scope,
+      	$rootScope,
+      	visionFactory ){
+		
+		
+      	visionFactory.retrieveData( database[ PERSON ].name, function( people ){
+      		$scope.people = people;
+      	});
+
+      	$scope.handleClear = function(){
+      		$rootScope.taskfilter = "";
+      	};
+
+      	$scope.handlePersonClick = function(){
+      		var stringTag = "__" + this.person.shortlabel + "__";
+      		if( $rootScope.taskfilter.indexOf( stringTag ) > -1 ){
+      			$rootScope.taskfilter = $rootScope.taskfilter.replace( stringTag, "" );
+      			return;
+      		}
+      		$rootScope.taskfilter += stringTag; 
+      	};
+
+      	$scope.handleUrgencyClick = function( urgency ){
+      		var stringTag = "__" + urgency + "__";
+      		if( $rootScope.taskfilter.indexOf( stringTag ) > -1 ){
+      			$rootScope.taskfilter = $rootScope.taskfilter.replace( stringTag, "" );
+      			return;
+      		}
+      		if( urgency == 'Routine' ){
+      			$rootScope.taskfilter = $rootScope.taskfilter.replace( '__Urgent__', "" );
+      		}else if( urgency == 'Urgent' ){
+      			$rootScope.taskfilter = $rootScope.taskfilter.replace( '__Routine__', "" );
+      		}
+      		$rootScope.taskfilter += stringTag; 
+      	};
+
+      	$rootScope.$watch( 'taskfilter', function( newValue ){
+      		if( newValue == null || newValue.length < 1 ){
+      			$( 'body' ).removeClass( 'taskfilter-on' );
+      		}else{
+      			$( 'body' ).addClass( 'taskfilter-on' );
+      		}
+      		
+      	});
+
+      	
+
+      	$scope.handleGeneralClick = function( e ){
+      		e.stopPropagation();
+      	};
+      }
+    };
+  })
+.directive('vnVisionTasks', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontasks.html'
+    };
+  })
+.value('VN_TASK_SCREENS',  { 
+	HOME: "VN_TASK__HOME",
+	DOCUMENT_REVIEW: "VN_TASK__DOCUMENT_REVIEW",
+	TASK_CREATE: "VN_TASK__TASK_CREATE",
+	TASK_SIMPLE: "VN_TASK__SIMPLE",
+	WORKFLOW: "VN_TASK__WORKFLOW",
+	TRACKING: "VN_TASK__TRACKING",
+	RECURRENCE: "VN_TASK__RECURRENCE",
+	STATS: "VN_TASK__STATS"
+});
+
+

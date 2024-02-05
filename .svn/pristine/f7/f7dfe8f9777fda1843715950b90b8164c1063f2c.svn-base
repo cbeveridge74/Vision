@@ -1,0 +1,157 @@
+.task-detail{
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+	height: 45em;
+	width: 60em;
+	box-shadow: 10px 10px 30px #CCC;
+	color: #20335E;
+}
+
+.task-detail .left,
+.task-detail .right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.task-detail .left {
+	vertical-align: top;
+	width: 15em;
+	margin-left: 1em;
+	margin-right: 3em;
+}
+
+.task-detail .left .sender-container .sender,
+.task-detail .left .sender-container .task-info{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.task-detail .left .sender-container .sender {
+	margin: 2em 1em;
+	margin-left: 0;
+}
+
+.task-detail .left .sender-container .sender .icon {
+	padding: 1em;
+	padding-bottom: 0.3em;
+	padding-left: 0;
+}
+
+.task-detail .left .sender-container .sender .icon img{
+	width: 5em;
+}
+
+.task-detail .left .sender-container .sender .name {
+	text-align: center;
+}
+
+.task-detail .left .sender-container .task-info{
+	margin-left: -1em;
+	padding-top: 3em;
+	line-height: 2em;
+}
+
+.task-detail .left .sender-container .task-info .sent {
+	
+}
+
+.task-detail .left .sender-container .task-info .due {
+
+}
+
+.task-detail .left .sender-container .task-info .urgency-container {
+	
+}
+
+.task-detail .left .sender-container .task-info .urgency-container .icon,
+.task-detail .left .sender-container .task-info .urgency-container .urgency{
+	display: inline-block;
+}
+
+.task-detail .left .sender-container .task-info .urgency-container .icon.urgent,
+.task-detail .left .sender-container .task-info .urgency-container .urgency.urgent {
+	color: #FF0000;
+}
+
+.task-detail .left .attachments .patient-container,
+.task-detail .left .attachments .document-container,
+.task-detail .left .attachments .comment-container,
+.task-detail .left .attachments .workflow-container {
+	height: 5em;
+	border-top: solid 1px #DDD;
+	padding-top: 1.5em;
+}
+
+.task-detail .left .attachments .icon,
+.task-detail .left .attachments .none-label,
+.task-detail .left .attachments .patient-container .patient,
+.task-detail .left .attachments .document-container .document,
+.task-detail .left .attachments .comment-container .comment{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.task-detail .left .attachments .icon{
+	color: #20335E;
+	font-size: 2em;
+	width: 2em;
+}
+
+.task-detail .left .attachments .none-label{
+	text-align: left;
+	color: #BBB;
+}
+
+.task-detail .left .attachments .document-container {
+	
+}
+
+.task-detail .left .attachments .comment-container {
+	
+}
+
+.task-detail .left .attachments .workflow-container {
+	color: #1E81E7;
+	padding-top: 2.5em;
+	text-indent: 2em;
+	cursor: pointer;
+}
+
+.task-detail .right {
+	vertical-align: top;
+	width: 45em;
+	text-align: left;
+	margin-top: 2.5em;
+}
+
+.task-detail .right .subject {
+	font-size: 2em;
+	
+}
+
+.task-detail .right .recipients-container {
+	
+}
+
+.task-detail .right .recipients-container .label,
+.task-detail .right .recipients-container .recipients {
+	display: inline-block;
+}
+
+.task-detail .right .content {
+	height: 30em;
+}
+
+.task-detail .right .comments {
+	
+}
+
+.task-detail .right .comments .new {
+
+}
+
+.task-detail .right .comments .old {
+
+}
+

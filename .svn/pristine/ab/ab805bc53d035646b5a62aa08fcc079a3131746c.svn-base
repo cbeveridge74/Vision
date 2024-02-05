@@ -1,0 +1,20 @@
+<div ng-controller="vnUnprocessedScansController" ng-right-click="handleRightClick( $event, this )">
+	<div class="document-scroller">
+        <vn-scroll 
+            vn-class-selector="document-scroller"
+            vn-x-scroll="false"
+            vn-watch="screens.VN_DOCMAN"
+            vn-top-offset="150">
+            <md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" 
+                ng-repeat="item in unfiledDocuments"  
+                ng-right-click="handleDocumentClicked()" 
+                ng-click="handleClick()"
+                ng-class="( item.selected == true ) ? 'selected' : ''">
+                <div class="document-item" layout="column">
+                    <div class="name">{{item.name}}</div>
+                    <div class="patient"></div>
+                </div>
+            </md-whiteframe>
+        </vn-scroll>
+    </div>
+</div>

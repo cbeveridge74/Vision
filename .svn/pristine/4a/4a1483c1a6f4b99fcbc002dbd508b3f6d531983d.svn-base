@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="98.690002"
+   height="98.690002"
+   id="svg3888"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="patient_red.svg"
+   inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Appointments\patient_48.png"
+   inkscape:export-xdpi="29.700001"
+   inkscape:export-ydpi="29.700001">
+  <defs
+     id="defs3890" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#737373"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.319853"
+     inkscape:cx="-11.921125"
+     inkscape:cy="-2.6893154"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="1139"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3893">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-953.67218)">
+    <path
+       inkscape:export-ydpi="42.349998"
+       inkscape:export-xdpi="42.349998"
+       inkscape:export-filename="C:\_KatyAWebster\Inkscape\Icons\Patient Services\patient_white_32.png"
+       inkscape:connector-curvature="0"
+       id="path2983"
+       d="m 1.1556625,1046.3954 c 0,-7.2506 12.5050155,-19.0804 20.1685335,-19.0804 3.501482,0 9.24727,-3.2009 12.768416,-7.1129 6.157307,-6.84 6.168503,-7.5483 0.293101,-18.517 -9.051183,-16.8978 -6.492342,-36.88089 5.588723,-43.64513 22.334019,-12.5042 38.309203,15.58256 24.95536,43.87563 -5.333288,11.2995 -5.313865,12.4892 0.30586,18.7327 3.300436,3.6667 8.865658,6.6667 12.36714,6.6667 7.663518,0 20.168577,11.8298 20.168577,19.0804 0,4.3774 -7.667922,5.2036 -48.30788,5.2036 -40.6399543,0 -48.3078305,-0.8262 -48.3078305,-5.2036 z"
+       style="fill:#ff0000;fill-opacity:1" />
+  </g>
+</svg>

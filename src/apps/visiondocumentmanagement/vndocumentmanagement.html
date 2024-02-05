@@ -1,0 +1,40 @@
+<div class="vision-docman" ng-controller="vnVisionDocumentManagementController" ng-init="init();">
+	<vn-css vn-id="vndocmanmodule" vn-css-file="apps/visiondocumentmanagement/vndocumentmanagement.css"></vn-css>
+    <div class="vision-inbox" ng-show="screens.VN_DOCMAN__DOCUMENT_INBOX">
+        <vn-banner 
+            ng-show="$root.patientid != null"
+            context-button="true"></vn-banner>
+        <vn-title-bar 
+                vn-title="Vision Inbox"
+                vn-show-back-button="true"
+                vn-backbutton-handler="handleBackButton()"
+                vn-show-search="false"
+                vn-show-commands="true"
+                vn-commands="informCommands">
+
+        </vn-title-bar>
+        <div class="absolute-tether">
+            <vn-patient-chips ng-model='selectedPatients'></vn-patient-chips>
+            <div class="frequent-filters">
+                <div ng-repeat="fastFilter in fastFilters" class="frequent-filter">
+                    <div class="image">
+                        <div class="{{ fastFilter.icon }}"></div>
+                    </div>
+                    <div class="label">
+                        {{ fastFilter.label }}
+                    </div>
+                    <div class="count">2</div>
+                </div>
+            </div>
+            <vn-vision-docman-filter-menu></vn-vision-docman-filter-menu>
+            <vn-vision-docman-sort-menu></vn-vision-docman-sort-menu>
+        </div>
+        <md-tabs md-selected="selectedIndex"> <!-- md-stretch-tabs -->
+            <md-tab label="{{ tab.label }}" ng-repeat="tab in tabs">
+                <div ng-include="tab.content"></div>
+                
+            </md-tab>
+        <md-tabs>
+    </div>
+    <vn-scan ng-show="screens.VN_DOCMAN__DOCUMENT_SCAN" ></vn-scan>
+</div>

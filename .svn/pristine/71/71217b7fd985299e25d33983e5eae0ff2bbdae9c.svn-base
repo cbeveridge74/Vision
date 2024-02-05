@@ -1,0 +1,16 @@
+<div class="overdue-notification">
+	<div>
+		<div class="sent">{{ model[0].sent | date:"dd-MMM-yyyy @ HH:mm" }}</div>
+	</div>
+	<div>
+		<div class="image">
+			<img ng-src="{{model[0].image}}">
+			<div class="assigner">{{ model[0].shortlabel }}</div>
+		</div>
+		<div class="info-container">
+			<div class="title">Nudge - Overdue Tasks</div>
+			<div class="text">Please complete your overdue tasks</div>
+		</div>
+	</div>
+</div>
+

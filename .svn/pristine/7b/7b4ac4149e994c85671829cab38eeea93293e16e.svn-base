@@ -1,0 +1,43 @@
+angular.module('vnTrackingModule', [],function () {})
+.controller('vnTrackingController', function( $scope, $rootScope, vnNavigationFactory, vnWorkflowFactory ){
+	
+	$scope.track = buildTracking();
+	$scope.informCommands = trackingInformCommands;
+
+  $rootScope.$on( vnWorkflowFactory.CLEAR_WORKFLOW, function(){
+    clearWorkflow();
+  });
+
+  var clearWorkflow = function(){
+    $scope.track = buildTracking();
+    $rootScope.$broadcast( "TRACKING_UPDATED", $scope.track );
+  };
+
+	$rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value ){
+  		if( value == TRKSVE ){
+  			$rootScope.$broadcast( "TRACKING_UPDATED", $scope.track );
+  			vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory ( vnNavigationFactory.SCREEN_PREVIOUS ) );
+  		}else if( value == TRKCNL ){
+  			$scope.track = buildTracking();
+  			vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory ( vnNavigationFactory.SCREEN_PREVIOUS ) );
+  		}
+  	});
+
+  function buildTracking(){
+  		return {
+  			dueDate: "",
+  			assigneeChange: { selected: false, label: "assignees", type: "t" },
+  			commentChange: { selected: false, label: "comments", type: "t" },
+  			idle: { selected: false, label: "idle time", type: "p" },
+  			idleTime: { selected: false, label: "", type: "p" },
+  		};
+  	};
+})
+.directive('vnTracking', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vntracking.html'
+    };
+});
+
+

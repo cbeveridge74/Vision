@@ -1,0 +1,243 @@
+.detail-view{
+	position: absolute;
+	z-index: 20;
+	background-color: #FFF;
+	height: 47em;
+	width: 60em;
+	box-shadow: 10px 10px 30px #CCC;
+	color: #20335E;
+	top: 10em;
+	left: 10em;
+}
+
+.detail-view .left,
+.detail-view .right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.detail-view .left {
+	vertical-align: top;
+	width: 15em;
+	margin-left: 1em;
+	margin-right: 3em;
+}
+
+.detail-view .left .sender-container .sender,
+.detail-view .left .sender-container .task-info{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.detail-view .left .sender-container .sender {
+	margin: 2em 1em;
+	margin-left: 0;
+}
+
+.detail-view .left .sender-container .sender .icon {
+	padding: 1em;
+	padding-bottom: 0.3em;
+	padding-left: 0;
+}
+
+.detail-view .left .sender-container .sender .icon img{
+	width: 5em;
+}
+
+.detail-view .left .sender-container .sender .name {
+	text-align: center;
+}
+
+.detail-view .left .sender-container .task-info{
+	margin-left: -1em;
+	padding-top: 3em;
+	line-height: 2em;
+}
+
+.detail-view .left .sender-container .task-info .sent {
+	
+}
+
+.detail-view .left .sender-container .task-info .due {
+
+}
+
+.detail-view .left .sender-container .task-info .urgency-container {
+	
+}
+
+.detail-view .left .sender-container .task-info .urgency-container .icon,
+.detail-view .left .sender-container .task-info .urgency-container .urgency{
+	display: inline-block;
+}
+
+.detail-view .left .sender-container .task-info .urgency-container .icon.urgent,
+.detail-view .left .sender-container .task-info .urgency-container .urgency.urgent {
+	color: #FF0000;
+}
+
+.detail-view .left .attachments .patient-container,
+.detail-view .left .attachments .document-container,
+.detail-view .left .attachments .comment-container,
+.detail-view .left .attachments .workflow-container {
+	min-height: 5em;
+	border-top: solid 1px #DDD;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+}
+
+.detail-view .left .attachments .icon,
+.detail-view .left .attachments .none-label,
+.detail-view .left .attachments .patient-container .patient,
+.detail-view .left .attachments .document-container .document,
+.detail-view .left .attachments .comment-container .comments-count{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.detail-view .left .attachments .icon{
+	color: #20335E;
+	font-size: 2em;
+	width: 1.5em;
+}
+
+.detail-view .left .attachments .none-label{
+	text-align: left;
+	color: #BBB;
+}
+
+.detail-view .left .attachments .document-container {
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.detail-view .left .attachments .document {
+	box-shadow: 2px 2px 4px #BBB;
+	max-width: 11em;
+	padding: 0.5em;
+}
+
+.detail-view .left .attachments .document .title {
+	color: #1E81E7;
+	font-size: 1.2em;
+}
+
+.detail-view .left .attachments .document .subtitle {
+	font-size: 0.9em;
+}
+
+.detail-view .left .attachments .document .title,
+.detail-view .left .attachments .document .subtitle{
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.detail-view .left .attachments .comment-container {
+	
+}
+
+.detail-view .left .attachments .workflow-container {
+	color: #1E81E7;
+	padding-top: 2.5em;
+	text-indent: 2em;
+	cursor: pointer;
+}
+
+.detail-view .right {
+	vertical-align: top;
+	width: 38em;
+	text-align: left;
+	margin-top: 2.5em;
+}
+
+.detail-view .right .decline{
+	position: absolute;
+	color: #FF0000;
+	top: 1em;
+	right: 1em;
+}
+
+.detail-view .right .content{
+	height: 11em;
+	margin: 0;
+	margin-left: 1em;
+	margin-top: 1.9em;
+	font-size: 1.2em;
+	white-space: normal;
+}
+
+.detail-view .right .subject {
+	font-size: 2em;
+	white-space: normal;
+	
+}
+
+.detail-view .right .recipients-container {
+	opacity: 0.5;
+}
+
+.detail-view .right .recipients-container .label,
+.detail-view .right .recipients-container .recipients {
+	display: inline-block;
+}
+
+.detail-view .right .recipients-container .recipients{
+		
+}
+
+.detail-view .right .content {
+	//height: 30em;
+}
+
+.detail-view .right .comments {
+	
+}
+
+.detail-view .right .comments .new {
+
+}
+
+.detail-view .right .comments .old {
+
+}
+
+.detail-view .actions{
+	position: absolute;
+	height: 3em;
+	width: 100%;
+	white-space: nowrap;
+	border-top: solid 1px #CCC;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+	margin-top: 1em;
+	padding-top: 0.7em;
+	background-color: #2F4B9B;
+	color: #FFF;
+	bottom: 0;
+}
+.detail-view .actions .left-actions,
+.detail-view .actions .right-actions {
+	display: inline-block;
+}
+
+.detail-view .actions .right-actions {
+	width: 70%;
+	text-align: right;
+}
+
+.detail-view .actions .left-actions {
+	width: 30%;
+	text-align: left;
+}
+
+.detail-view .actions .right-actions .action,
+.detail-view .actions .left-actions .action {
+	padding: 0 2em;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.detail-view .actions .action:hover{
+	opacity: 0.8;
+}
+

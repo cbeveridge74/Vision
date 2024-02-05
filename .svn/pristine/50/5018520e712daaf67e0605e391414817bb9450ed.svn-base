@@ -1,0 +1,94 @@
+<vn-css vn-id="vncreateview" vn-css-file="apps/components/dialog/vncreateview.css"></vn-css>
+<div ng-click="handleGeneralClick( $event );" 
+    ng-init="init()"
+    class="create-view menu">
+    <md-card ng-click="handleEditClick( $parent.$index, $parent.$parent.$index, $event )">
+      <div ng-class="( model.urgency == 'Routine' ) ? 'urgent-indicator' : 'urgent-indicator urgent'"></div>
+      <md-card-content layout="column" layout-align="center start">
+        <div class="task-widgets">
+          <div class="left">
+          	<div class="task-widget">
+              <md-switch ng-model="model.urgency" aria-label="Urgency" ng-true-value="'Urgent'" ng-false-value="'Routine'" class="md-warn">
+              </md-switch>
+              <div ng-class="( model.urgency == 'Routine' ) ? 'urgency-label' : 'urgency-label urgent'">
+                {{ model.urgency }}
+              </div>
+            </div>
+            <div ng-class="( model.due == null ) ? 'task-widget due' : 'task-widget due set'" ng-click="handleCalendarClick( $event )">
+              <input type="date" ng-model="model.due" class="hidden-date">
+              <div class="fa fa-calendar"></div>
+              <div class="due-label">
+                {{ model.due | date:'dd-MMM-yyyy' }}
+                <div ng-show="model.due == null">No due date</div>
+              </div>
+            </div>
+            <div ng-if="isTask" ng-class="( hasRecurrence ) ? 'task-widget recur set' : 'task-widget recur'" ng-click="handleRecurrenceClick()">
+            	<div class="fa fa-repeat"></div>
+            	<div class="recur-label">
+                	Recurrence
+              	</div>
+            </div>
+            <div ng-if="isTask" ng-class="( hasTracking ) ? 'task-widget track set' : 'task-widget track'" ng-click="handleTrackingClick()">
+            	<div class="fa fa-dot-circle-o"></div>
+            	<div class="track-label">
+                	Tracking
+              	</div>
+            </div>
+          </div>
+          <div class="right">
+          	<div class="task-widget patient">
+            	<!--<div class="fa fa-user"></div>-->
+            </div>
+            <div class="task-widget attach" ng-click="handleAttachClick( $event )">
+            	<div class="fa fa-paperclip"></div>
+            </div>
+          </div>
+        </div>
+        <div class="recipients">
+          <label class="label">To</label>
+          <vn-user-chips ng-model='model.selectedRecipients'></vn-user-chips>
+        </div>
+        <div class="subject">
+          <label class="label">Subject</label>
+          <md-select ng-if="isTask" ng-model="model.selectedSubjects">
+            <md-option ng-value="item.id" ng-repeat="item in subjectCollection">{{ item.label }}</md-option>
+            <md-select-label><div class="subject-label-hack">{{ subjectCollection[ model.selectedSubjects - 1 ].label }}</div></md-select-label>
+          </md-select>
+          <md-input-container ng-if="!isTask" flex>
+            <textarea ng-model="model.title" columns="1"></textarea>
+          </md-input-container>
+        </div>
+        <div class="description">
+          <label>Comments</label>
+          <md-input-container flex>
+            <textarea ng-model="model.description" columns="1" placeholder="@mention others in your comment"></textarea>
+          </md-input-container>
+        </div>
+        <div class="task-widget patient">
+          <div class="icon fa fa-user"></div>
+          <vn-patient-chips ng-model="model.patientCollection" primary-placeholder="Attach patient..."></vn-patient-chips>
+        </div>
+        <div class="attachment-area">
+          <div class="document-container" ng-repeat="doc in model.documentCollection">
+            <div class="file icon fa fa-file-text-o"></div>
+            <div class="name">{{ doc.label }}</div>
+            <div class="close icon fa fa-times" ng-click="handleDocDelete( $index )"></div>
+          </div>
+        </div>
+        <div class="command-buttons">
+          <md-content>
+            <section layout="row" layout-sm="column" layout-align="center center">
+              <md-button ng-show="isTask" ng-click="handleAdvancedClick( $event )">Create workflow...</md-button>
+              <!-- Only show this if it's not an existing task -->
+              <md-button class="md-primary" ng-show="mincriteriaachieved && model.task == null" ng-click="handleSaveClick( $event )" >Send</md-button>
+            </section>
+          </md-content>
+        </div>
+      </md-card-content>
+    </md-card>
+    <!--<div class="task-widget">
+    <div class="patient">PARSONS, Nicholas (10-Oct-1923)</div>
+    <div class="button">Send</div>
+    </div>-->
+    <input type="file" id="fileElem" multiple style="display:none">
+</div>

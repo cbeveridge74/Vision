@@ -1,0 +1,137 @@
+angular.module('vnNotificationsModule', [],function () {})
+.factory('vnNotificationsFactory', function( 
+	$rootScope,
+	visionFactory ){
+	var factory = {};
+	var notifications = [];
+	factory.NOTIFICATIONS_UPDATED = "NOTIFICATIONS_UPDATED";
+	factory.GENERIC_TYPE = 0;
+	factory.TASK_TYPE = 1;
+	factory.OVERDUE_TASKS_TYPE = 2;
+	var notificationIdCount = -1;
+
+	
+
+	factory.addNotification = function( notification, callback ){
+
+		//factory.retrieveNotifications( null, function( allNotifications, notification ){
+		notification.dateAdded = new Date(); 
+		notification.id = notificationIdCount++;
+		var senderIndex = $.inArray(notification.sender, notification.relevantto);
+		if( senderIndex > -1 ){
+			notification.relevantto.splice( senderIndex, 1 );
+		}
+		visionFactory.updateData( database[ NOTIFICATIONS ].name, notification, function(){
+			$rootScope.$broadcast( "NOTIFICATIONS_UPDATED" );
+			chrome.runtime.sendMessage( { notifications: true }, function() {});
+		});
+		//}, notificationValue);
+	};
+
+	factory.updateNotification = function( notification, callback ){
+		visionFactory.updateData( database[ NOTIFICATIONS ].name, notification, function(){
+			$rootScope.$broadcast( "NOTIFICATIONS_UPDATED" );
+			chrome.runtime.sendMessage( { notifications: true }, function() {});
+		});
+	};
+
+	/*factory.removeNotification = function( value ){
+		angular.forEach( notifications, function( vNotification, iNotification ){
+			if( vNotification == value ){
+				notifications.splice( iNotification, 1 );
+			}
+		});
+		$rootScope.$broadcast( "NOTIFICATIONS_UPDATED" );
+	};*/
+
+	factory.markAsRead = function( notification ){
+		notification.status = 1;
+		visionFactory.updateData( database[ NOTIFICATIONS ].name, notification, function(){
+			$rootScope.$broadcast( "NOTIFICATIONS_UPDATED" );
+			chrome.runtime.sendMessage( { notifications: true }, function() {});
+		} );
+	};
+
+	factory.retrieveNotifications = function( relevantTo, callback, notification ){
+		visionFactory.retrieveData( database[ NOTIFICATIONS ].name, function( notificationsResults ){
+			if( relevantTo == null ){
+				callback( notificationsResults, notification );
+				return;
+			}
+			var notificationsRelevantTo = [];
+			angular.forEach( notificationsResults, function( vNotification, iNotification ){
+				angular.forEach( relevantTo, function( vRelevantTo, iRelevantTo ){
+					if( $.inArray(vRelevantTo, vNotification.relevantto) > -1  ){
+						notificationsRelevantTo.push( vNotification );
+					}
+				});
+			});
+			callback( notificationsRelevantTo );
+		}, "by_status", { start: 0, end:0 });
+	};
+
+	var initNotificationCount = function(){
+		factory.retrieveNotifications( null, function( allNotifications ){
+			notificationIdCount = allNotifications.length;
+		});
+	};
+	initNotificationCount();
+
+	factory.clearNotifications = function(){
+		notifications = [];
+	};
+
+	chrome.runtime.onMessage.addListener(
+
+	  function(response, sender, sendResponse) {
+	  	if( response.notifications == null ){
+	  		return;
+	  	}
+	  	$rootScope.$broadcast( "NOTIFICATIONS_UPDATED" );
+	  }
+	);
+
+	return factory;
+}).directive('vnNotifications', function() {
+	return {
+	  restrict: 'E',
+	  templateUrl: 'notifications/vnnotifications.html',
+	  controller: function ( 
+	  	$scope,
+	  	$rootScope,
+	  	$timeout,
+	  	vnNotificationsFactory,
+	  	vnActionFactory,
+	  	gaTracker ){
+
+	  	$scope.handleNotificationClick = function(){
+	  		var notification = this.notification;
+			if( notification.action != null ){
+				vnActionFactory.needHelpWith( notification.action, notification.data, function(){
+					vnNotificationsFactory.markAsRead( notification );
+				});
+			}
+			gaTracker.sendEvent('Notification', 'Notifications clicked', 'Notifications');
+		};
+
+	  	var retrieveNotifications = function(){
+			vnNotificationsFactory.retrieveNotifications( [ $rootScope.user.id ], function( results ){
+				$timeout( function(){ 
+					$scope.notifications = results;
+				});
+			});
+		};
+
+		$scope.$watch('screens.VN_LOGIN', function( value ){
+			if( value == false ){
+				retrieveNotifications();
+			}
+		});
+
+	  	
+		$rootScope.$on( vnNotificationsFactory.NOTIFICATIONS_UPDATED, function(){
+			retrieveNotifications();
+		});
+	  }
+	};
+});

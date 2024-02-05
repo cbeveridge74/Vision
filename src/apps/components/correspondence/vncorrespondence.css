@@ -1,0 +1,138 @@
+.mail > div {
+	display: inline-flex;
+	height: 50px;
+	vertical-align: top;
+}
+
+.mail > div{
+	height: 55px;
+}
+
+.mail .patient > div{
+	display: inline-block;
+}
+
+.mail .patient {
+	margin-top: 0.8em;
+	height: 2em;
+	font-size: 0.75em;
+	padding-left: 0.5em;
+	cursor: pointer;
+}
+
+.mail .patient{
+	margin-top: 0.4em;
+}
+
+.mail .patient.unassigned{
+	color: red;
+	pointer-events: none;
+}
+
+.mail .patient img {
+	width: 1em;
+	vertical-align: top;
+	padding-top: 0.1em;
+	margin-right: 0.2em;
+}
+
+.mail {
+}
+
+.mail .time,
+.mail .date {
+	display: block;
+	text-align: center;
+}
+
+.mail .when{
+	padding: 0.2em; 
+	background-color: #264568;
+	color: #FFF;
+}
+
+.mail .time{
+	font-size: 1.2em;
+	margin-top: 0.2em;
+}
+
+.mail .date {
+	font-size: 0.7em;
+	margin-top: 0.2em;
+}
+
+.mail > div > div {
+	//width: 8em;
+}
+
+.mail .subtitle {
+	font-size: 0.8em;
+	margin-top: -0.2em;
+	color: #999;
+}
+
+.mail .filed {
+	position: absolute;
+	right : 0.3em;
+	bottom: 0.2em;
+}
+
+.mail .filed img {
+	width: 1.5em;
+}
+
+.mail .info{
+	position: relative;
+	margin-left: 2em;
+	text-align: right;
+	width: 10em;
+}
+
+.mail .warnings {
+	margin-left: -0.3em
+}
+
+.mail .actions > div,
+.mail .warnings > div{
+	padding-left:0.3em;
+	padding-right: 0.3em;
+	position: relative;
+}
+
+.mail .actions,
+.mail .warnings {
+	background-color: #3B5588;
+}
+
+.mail .actions > div,
+.mail .warnings > div {
+	padding-top: 1.4em;
+}
+
+.mail .actions img,
+.mail .warnings img{
+	width: 2em;
+}
+
+.mail .title{
+	font-size: 1.2em;
+	cursor: default;
+}
+
+.mail .badge{
+	position: absolute;
+	display: block;
+	width: 1.3em;
+	height: 1.3em;
+	background-color: red;
+	top: 1em;
+	right: -0.2em;
+	padding: 0;
+	padding-top: 0.1em;
+	border: solid 1px;
+}
+
+.category .mail .title {
+	margin: 0;
+	min-width: 14em;
+}

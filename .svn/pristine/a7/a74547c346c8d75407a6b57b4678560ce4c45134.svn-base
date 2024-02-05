@@ -1,0 +1,91 @@
+<vn-css vn-id="vnrecurrence" vn-css-file="apps/visiontasks/workflow/vnrecurrence.css"></vn-css>
+<div class="vision-recurrence" ng-controller="vnRecurrenceController">
+	<vn-title-bar 
+		vn-title="Recurrence"
+		vn-show-back-button="true"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false"
+		vn-show-commands="false"></vn-title-bar>
+		<md-content class="md-padding" layout="row">
+			<label>Repeats</label>
+			<md-select ng-model="repeats">
+			    <md-option value="1">Daily</md-option>
+			    <md-option value="2">Weekly</md-option>
+			    <md-option value="3">Monthly</md-option>
+			    <md-option value="4">Yearly</md-option>
+			</md-select>
+		</md-content>
+		
+		<md-content class="md-padding frequency" layout="row">
+	      <label>Every</label>
+	      <input ng-model="frequency" ng-show="repeats != 4">
+	      <div ng-show="repeats == 3">month(s)</div>
+	      <div ng-show="repeats == 2">week(s)</div>
+	      <div ng-show="repeats == 1">day(s)</div>
+	    </md-content>
+
+	    <md-content class="md-padding frequency" layout="row">
+	    	<label ng-show="repeats == 3">On</label>
+			<md-select ng-model="frequencycount" ng-show="repeats == 3">
+			    <md-option value="1">First</md-option>
+			    <md-option value="2">Second</md-option>
+			    <md-option value="3">Third</md-option>
+			    <md-option value="4">Fourth</md-option>
+			    <md-option value="5">Last</md-option>
+			</md-select>
+
+			<md-select ng-model="frequencyday" ng-show="repeats == 3">
+				<md-option value="1">Day</md-option>
+			    <md-option value="2">Weekday</md-option>
+			    <md-option value="3">Weekend Day</md-option>
+			    <md-option value="4">Monday</md-option>
+			    <md-option value="5">Tuesday</md-option>
+			    <md-option value="6">Wednesday</md-option>
+			    <md-option value="7">Thursday</md-option>
+			    <md-option value="8">Friday</md-option>
+			    <md-option value="9">Saturday</md-option>
+			    <md-option value="10">Sunday</md-option>
+			</md-select>
+		</md-content>	
+		<md-content class="md-padding" layout="row" ng-show="repeats == 2">
+			<md-checkbox layout="center center" aria-label="Monday" ng-model="monday" class="md-primary">
+		    Monday
+			</md-checkbox>
+			<md-checkbox layout="center center" aria-label="Tuesday" ng-model="tuesday" class="md-primary">
+			Tuesday
+			</md-checkbox>
+			<md-checkbox layout="center center" aria-label="Wednesday" ng-model="wednesday" class="md-primary">
+			Wednesday
+			</md-checkbox>	
+			<md-checkbox layout="center center" aria-label="Thursday" ng-model="thursday" class="md-primary">
+			Thursday
+			</md-checkbox>	
+			<md-checkbox layout="center center" aria-label="Friday" ng-model="friday" class="md-primary">
+			Friday
+			</md-checkbox>	
+			<md-checkbox layout="center center" aria-label="Saturday" ng-model="saturday" class="md-primary">
+			Saturday
+			</md-checkbox>	
+			<md-checkbox layout="center center" aria-label="Sunday" ng-model="sunday" class="md-primary">
+			Sunday
+			</md-checkbox>	
+		</md-content>
+		<md-content class="md-padding startdate" layout="row">
+			<label>Start date</label>
+			<input type="date" ng-model="user.submissionDate">
+		</md-content>	
+		<md-content class="md-padding" layout="row">
+			<label>End date</label>
+			<md-select ng-model="enddatechoice">
+			    <md-option value="1">None</md-option>
+			    <md-option value="2">After</md-option>
+			    <md-option value="3">By</md-option>
+			</md-select>
+			
+			<input type="number" class="inline" ng-model="occurences" ng-show="enddatechoice == 2"> 
+			<div class="inline" ng-show="enddatechoice == 2">occurences</div>
+			
+			<input type="date" ng-model="enddate" ng-show="enddatechoice == 3">
+		</md-content>
+		
+</div>

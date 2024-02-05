@@ -1,0 +1,30 @@
+<vn-css vn-id="vnvisionannouncements" vn-css-file="apps/visionannouncements/vnvisionannouncements.css"></vn-css>
+<div class="vision-announcements" ng-if="user != null" ng-controller="vnVisionTasksController as tabController" ng-init="init();">
+	<div ng-show="screens.VN_ANNOUNCEMENTS__HOME">
+		<vn-title-bar 
+			vn-title="Announcements"
+			vn-search-handler="handleSearchSelected()"
+			vn-show-back-button="true"
+			vn-backbutton-handler="handleBackButton()"
+			vn-show-search="false"></vn-title-bar>
+
+		<md-tabs md-selected="selectedIndex" md-stretch-tabs>
+			<md-tab label="All ({{ counts.announcementscount }})">
+				<vn-vision-announcements-list count="counts.announcementscount"></vn-vision-announcements-list>
+			</md-tab>
+			<!--<md-tab label="Filing" ng-show="user.id == 5">
+				<vn-vision-filing></vn-vision-filing>
+			</md-tab>-->
+			<md-tab label="Sent ({{ counts.sentcount }})">
+				<vn-vision-announcements-sent count="counts.announcementscount"></vn-vision-announcements-sent>
+			</md-tab>
+			<md-tab label="Placeholder">
+				
+			</md-tab>
+		</md-tabs>
+
+		<div class="no-data" ng-show="announcements.length < 1">
+	        No tasks
+	    </div>
+	</div>
+</div>

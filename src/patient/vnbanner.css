@@ -1,0 +1,46 @@
+.banner{
+	color: #FFF;
+	font-weight: normal;
+	position: relative;
+}
+
+.banner .name {
+	font-size: 2em;
+	background-color:#3B5588;
+	padding-left: 0.2em;
+	height: 2em;
+
+}
+
+.banner .remove {
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	background-color: #000;
+	padding: 0.5em;
+	cursor: pointer;
+	background-color: #20335E;
+}
+
+.banner .remove:hover {
+	background-color: #264586;
+}
+
+.banner .detail{
+	background-color:#264568;
+}
+
+.banner .detail .value{
+	margin-right: 1em;
+}
+
+.banner .detail .label{
+	font-weight: 100;
+	padding-right: 0.5em;
+	opacity: 0.6;
+}
+
+.banner .detail > div {
+	display: inline-block;
+	
+}

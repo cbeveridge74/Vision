@@ -1,0 +1,128 @@
+angular.module('vnVisionAppointmentsBookingModule', function () {})
+.factory('vnVisionAppointmentsBookingFactory', function( 
+  $rootScope,
+  visionFactory,
+  vnTrackingManagerFactory
+   ){
+  var factory = {};
+
+  factory.bookAppointment = function( slotId, patient, callback ){
+    visionFactory.retrieveData( database[ APPOINTMENT ].name, function( slot ){
+      slot = slot[0];
+      slot.patient = { 
+        id: patient.id,
+        displayname: patient.title + " (" + patient.subtitle + ")",
+        dob: patient.subtitle
+      };
+      slot.status = "BOOKED";
+      slot.statusimage = "Booked2.png";
+      slot.bookedby = {
+        name: $rootScope.user.shortlabel,
+        time: new Date()
+      };
+      visionFactory.updateData( database[ APPOINTMENT ].name, slot, function( data ){
+        vnTrackingManagerFactory.notifyTrackingEvent( vnTrackingManagerFactory.PATIENT_APPOINTMENT_STATUS_TRACKING, [ patient.id, data ] );
+        if( callback != null ){
+          callback();
+        }
+      })
+    },null, { start: slotId, end: slotId });
+  };
+  return factory;
+})
+.controller('vnVisionAppointmentsBookingController', function( 
+  $scope,
+  $rootScope,
+  visionFactory,
+  vnNavigationFactory,
+  vnVisionAppointmentsBookingFactory,
+  SCREENS ){
+
+  var hasBeenShown = false;
+  
+  $scope.selectedPatients = [];
+  $scope.init = function () {
+        $scope.$watch( "screens." + SCREENS.BOOKING_FORM, function( value ){
+          if( value ){
+            setTimeout( function(){
+              handleShow();
+            }, 1);
+          }
+        });
+        handleShow();
+    };
+
+  $scope.handleBackClick = function(){
+        vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+    };
+
+  var substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substrRegex;
+     
+        // an array that will be populated with substring matches
+        matches = [];
+     
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+     
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          if (substrRegex.test(str.name)) {
+            // the typeahead jQuery plugin expects suggestions to a
+            // JavaScript object, refer to typeahead docs for more info
+            matches.push({ id: str.id, name: str.name });
+          }
+        });
+     
+        cb(matches);
+      };
+    };
+
+    var patients = [{ id: 408, name: "GAJENDRA, ALOK" },
+                    { id: 115, name: "JINGGUO XUE, GAO" },
+                    { id: 177, name: "MAHATI, GARIKAPATY" },
+                    { id: 112, name: "SINJIN MARLY, GARRAH" },
+                    { id: 441, name: "ABERTHA ARIAN, GAVIN" },
+                    { id: 43, name: "BLODEUYN, GAVIN" }];
+
+
+    var handleShow = function(){
+        if( !hasBeenShown ){
+            $('.middle .booking.typeahead').typeahead({
+              hint: true,
+              highlight: true,
+              minLength: 1
+            },
+            {
+              name: 'patients',
+              displayKey: 'name',
+              source: substringMatcher(patients)
+            });
+
+            $('.middle .booking.typeahead').on( 'typeahead:selected', handleSelected );
+            hasBeenShown = true;
+        };
+    };
+    
+
+    var handleSelected = function( event, selected, dataset ){
+        selectedPatient = selected;
+    }
+
+    $scope.handleBookClick = function(){
+      vnVisionAppointmentsBookingFactory.bookAppointment( $rootScope.selectedSlot, $scope.selectedPatients[0], function(){
+        vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+        $scope.selectedPatients = [];
+      } );
+    };
+      
+
+})
+.directive('vnBooking', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionappointments/booking/vnbooking.html'
+    };
+});

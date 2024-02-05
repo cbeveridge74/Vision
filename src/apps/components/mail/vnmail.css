@@ -1,0 +1,70 @@
+.vision-mail-hub{
+	color: #264586;
+	margin-top: 0.6em;
+}
+
+.vision-mail-hub .mail-item {
+	padding: 1em;
+	margin-bottom: 0.3em;
+	box-shadow: 1px 1px 3px #BBB;
+	border: solid 2px #FFF;
+}
+
+.vision-mail-hub .mail-item:hover {
+	cursor: pointer;
+	background-color: #FAFAFA;
+	border-color: #EEEEEE;
+}
+
+.vision-mail-hub .mail-item .title{
+	color: #1E81E7;
+	width: 6em;
+}
+
+.vision-mail-hub .mail-item .statuses{
+	width: 13em;
+	
+}
+
+.vision-mail-hub .mail-item .no-patient,
+.vision-mail-hub .mail-item .no-user,
+.vision-mail-hub .mail-item .status:not(.flagged){
+	color: orangered;
+}
+
+.vision-mail-hub .mail-item .statuses,
+.vision-mail-hub .mail-item .right-container{
+	text-align: right;
+}
+
+.vision-mail-hub .mail-item .right-container{
+	width: 8em
+}
+
+.vision-mail-hub .category .list-group-item {
+
+}
+
+
+.vision-mail-hub .mail-item .title,
+.vision-mail-hub .mail-item .statuses,
+.vision-mail-hub .mail-item .number-container .label,
+.vision-mail-hub .mail-item .number-container .value,
+.vision-mail-hub .mail-item .patient,
+.vision-mail-hub .mail-item .right-container  {
+	display: inline-block;
+	vertical-align: top;
+}
+.vision-mail-hub .mail-item .no-patient,
+.vision-mail-hub .mail-item .content {
+	margin: 0;
+	margin-left: 1em;
+} 
+
+.vision-mail-hub .mail-item .content .patient{
+	width: 15em;
+} 
+
+.vision-mail-hub .mail-item .no-patient{
+	margin-top: -2em;
+} 

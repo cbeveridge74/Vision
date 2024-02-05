@@ -1,0 +1,13 @@
+<vn-css vn-id="vnpatientchips" vn-css-file="apps/components/chips/patient/vnpatientchips.css"></vn-css>
+<div class="vision-patient-chips">
+	<vn-chips
+		vn-placeholder="Patient search..." 
+		vn-secondary-placeholder='' 
+		vn-template='vn-patient-chips-detail'
+		collection='patientsCollection' 
+		ng-model='ngModel' 
+		add-chips-handler="addChipsHandler( $event )" 
+		md-title='title'  
+		md-subtitle='subtitle' 
+		md-item='patientItems'></vn-chips>
+</div>

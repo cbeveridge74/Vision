@@ -1,0 +1,27 @@
+<vn-css vn-id="vnbrick" vn-css-file="apps/visiontasks/workflow/vnbrick.css"></vn-css>
+<div ng-init="init()" class="brick-widget">
+	<md-whiteframe class="md-whiteframe-z1 brick" layout layout-align="start start">
+		<div class="task-create-container">
+			<vn-task-create 
+			minimum-fields-satisfied-handler="minFieldsSatisfiedHandler( isSatisfied )"
+			minimise="inneritem.minimise  && outeritem.minimise"
+			ng-repeat="(innerindex, inneritem) in outeritem.taskinnercreators"
+			model="inneritem.model">
+		</vn-task-create>
+		</div>
+	    <div class="add para" ng-show="outeritem.showinnerbrick && !invalidcardopen" ng-click="handleInnerAddClick()" >
+	    	<div class="arrow">&#8627;</div>
+	    	<md-button class="md-fab" aria-label="parallel task">
+	    		<div class="fa fa-plus"></div>
+	            <!--<md-icon md-svg-src="apps/components/images/add_grey.svg"></md-icon>-->
+	        </md-button>
+	    </div>
+	</md-whiteframe>
+	<div class="add brick" ng-show="outeritem.showouterbrick && !invalidcardopen" ng-click="handleOuterAddClick()">
+		<div class="arrow fa fa-long-arrow-right"></div>
+		<md-button class="md-fab" aria-label="Create new">
+			<div class="fa fa-plus"></div>
+            <!--<md-icon md-svg-src="apps/components/images/add_grey.svg"></md-icon>-->
+        </md-button>
+    </div>
+</div>

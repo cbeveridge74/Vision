@@ -1,0 +1,85 @@
+angular.module('vnReceptionModule', [ 
+	'vnPeopleModule', 
+	'vnDiscussionsModule',
+	'vnAppointmentsModule',
+	'vnTaskModule',
+	'vnTaskCreateModule',
+	'vnPrescriptionModule',
+	'vnCorrespondenceModule'],function () {})
+.run(function( vnAppManagementFactory ){
+	var APP_ID 	= "VN_REP";
+	var HOME 	= APP_ID + '__HOME';
+	var PATIENT = APP_ID + '__PATIENT';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: "VN_REP", 
+		name: "Vision Reception",
+		icon: "images/reception_bell.svg",
+		defaultapp: true,
+		screens: [
+			HOME,
+			PATIENT
+		]});
+})
+.controller('vnReceptionController', function( 
+	$scope, 
+	$timeout, 
+	vnNavigationFactory,
+	vnScreenManagementFactory,
+	vnScrollFactory,
+	VN_REP_SCREENS ){
+	
+	$scope.backbutton = false;
+	$scope.createtask = false;
+
+	$scope.init = function () {
+      $scope.$watchGroup( [
+      	"screens." + VN_REP_SCREENS.HOME, 
+      	"screens." + VN_REP_SCREENS.PATIENT], function( newValues, oldValues, scope ){
+        if( newValues[0] || newValues[1] ){
+          handleResize();
+        }
+      });
+      handleResize();
+      
+  	};
+
+	$( window ).resize(function() {
+        handleResize();
+      });
+
+	$scope.handleSearchSelected = function(){
+        vnNavigationFactory.switchScreens( VN_REP_SCREENS.PATIENT );
+    };
+
+    $scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( VN_REP_SCREENS.HOME);
+    };
+
+    $scope.taskAddClickHandler = function( ){
+    	
+		
+    	//$scope.createtask = true;
+
+    	vnScreenManagementFactory.openMenu( ".vision-reception .tasks-cat .task-create" );
+    	
+    };
+
+    var handleResize = function(){
+    	$timeout( function(){
+    		vnScrollFactory.handleResize( "home" );
+    		vnScrollFactory.handleResize( "patient" );
+    	}, 1);
+    	
+    };
+})
+.directive('vnReception', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionreception/vnreception.html'
+    };
+})
+.value('VN_REP_SCREENS',  { 
+	HOME: "VN_REP__HOME",
+	PATIENT: "VN_REP__PATIENT" 
+});

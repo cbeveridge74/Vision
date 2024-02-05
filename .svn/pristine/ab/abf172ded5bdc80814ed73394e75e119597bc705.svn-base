@@ -1,0 +1,26 @@
+<vn-css vn-id="vnworkflow" vn-css-file="apps/visiontasks/workflow/vnworkflow.css"></vn-css>
+<div class="vision-workflow" ng-init="initWorkflow()">
+	<vn-title-bar 
+		vn-title="Task Advanced"
+		vn-show-back-button="true"
+		vn-back-button-img="images/left_arrow_white_circle.svg"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false"
+		vn-show-commands="showCommandButtons"
+		vn-commands="workflowInformCommands"></vn-title-bar>
+	<vn-workflow-bar model="attachmentModel" reinitialise="reinitialise"></vn-workflow-bar>
+	<vn-scroll 
+		vn-class-selector="vision-workflow"  
+		vn-watch="screens.VN_TASK__WORKFLOW"
+		vn-x-scroll="true"
+		vn-top-offset="197">
+		<div class="start">
+			<div class="circle"><span>{{ workflowOwner }}</span></div>
+		</div>
+		<div class="brick" ng-repeat="outeritem in taskoutercreators">
+			<div class="arrow fa fa-long-arrow-right"></div>
+			<vn-brick></vn-brick>
+		</div>
+		
+	</vn-scroll>
+</div>

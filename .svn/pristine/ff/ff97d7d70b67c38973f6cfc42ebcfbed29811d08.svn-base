@@ -1,0 +1,13 @@
+<vn-css vn-id="vnuserchips" vn-css-file="apps/components/chips/user/vnuserchips.css"></vn-css>
+<div class="vision-user-chips">
+	<vn-chips
+		vn-placeholder='' 
+		vn-secondary-placeholder='' 
+		vn-template='vn-user-chips-detail'
+		collection='usersCollection' 
+		ng-model='ngModel' 
+		add-chips-handler="addChipsHandler( $event )" 
+		md-title='title'  
+		md-subtitle='subtitle' 
+		md-item='userItems'></vn-chips>
+</div>

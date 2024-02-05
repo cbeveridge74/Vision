@@ -1,0 +1,11 @@
+.announcements{
+	
+}
+
+.announcements .title {
+	
+}
+
+.announcements .description {
+	color: #20335E;
+}

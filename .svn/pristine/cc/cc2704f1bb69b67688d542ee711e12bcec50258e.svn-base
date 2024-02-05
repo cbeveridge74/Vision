@@ -1,0 +1,4 @@
+<vn-css vn-id="vnnotifications" vn-css-file="notifications/vnnotifications.css"></vn-css>
+<div class="vision-notifications">
+	THIS IS NOTIFICATIONS
+</div>

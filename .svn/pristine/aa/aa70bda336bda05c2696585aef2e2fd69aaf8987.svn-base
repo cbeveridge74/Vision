@@ -1,0 +1,120 @@
+angular.module('vnScreenManagementModule', [],function () {})//'ngRoute', 'ngTouch', 'ngAnimate'
+.factory('vnScreenManagementFactory',  function( $rootScope, $timeout ){
+	var factory = {};
+	var timeMilliseconds = new Date();
+	$rootScope.screens = {};
+	$rootScope.screens.VN_LOGIN = true;
+
+  	/*factory.switchScreens = function( from, to ){
+  		angular.forEach( $rootScope.screens, function( value, index ){
+			$rootScope.screens[ index ] = false;
+		});
+		$timeout( function(){
+			$rootScope.screens[to] = true;
+			var app = to.split( '__' );
+			if( app != null ){
+				$rootScope.screens[app[0]] = true;
+			}
+		}, 1, true );
+	 }; */
+
+  	factory.checkIfScrolling = function(){
+	    return false;//$rootScope.homeScroll.moved || $rootScope.scrolling;
+	};
+
+	factory.openMenu = function( selector ){ 
+		factory.handleGeneralClick();
+		$( selector ).effect("fade", { duration: 50, queue: false }, "easeOutCirc");
+		$( selector ).addClass( "open", 500, "easeOutCirc" );
+		event.stopPropagation();
+	};
+
+	factory.toggleBars = function( commandOnly ){
+		$( ".command" ).toggleClass( "open", 300, "easeOutCirc" );
+		if( !commandOnly || commandOnly == null ){
+			$( ".navigation" ).toggleClass( "open", 300, "easeOutCirc" );
+		}
+	};
+
+	factory.closeBars = function(){
+		$( ".command" ).removeClass( "open", 300, "easeOutCirc" );
+		$( ".navigation" ).removeClass( "open", 300, "easeOutCirc" );
+		$( ".category .list-group-item.selected" ).removeClass( "selected" );
+
+	};
+
+	factory.closeMenus = function(){
+		$( ".menu" ).removeClass( "open" );
+		$( ".menu" ).attr( "style", "" );
+	};
+
+	factory.initialiseMenuOptions = function( leftCommandValues, rightCommandsValues ){
+		$rootScope.leftCommands = leftCommandValues;
+  		$rootScope.rightCommands = rightCommandsValues;
+	};	
+
+	factory.handleGeneralClick = function( event ){
+		if( factory.isMenusOpen() ){
+			factory.closeBars();
+		    factory.closeMenus();
+		    if( event != null ){
+		      event.stopPropagation();
+		    }
+		}
+		
+	  };
+
+	factory.isDoubleClick = function(){
+		var timeMillisecondsClick = new Date(); 
+		if(timeMillisecondsClick.getTime() > timeMilliseconds.getTime() + 500 ) { 
+			timeMilliseconds = new Date();
+			return false;
+		}else{
+			return true;
+		}
+	};
+
+	factory.isMenusOpen = function(){
+		return $( ".navigation, .command, .menu" ).hasClass( "open" );
+	};
+
+	factory.handleItemClick = function( event, element, leftCommands, rightCommands, commandOnly ){
+        if( factory.checkIfScrolling() ){
+	      return;
+	    }
+        if( !factory.isDoubleClick() ){
+            if( !factory.isMenusOpen() ) {
+              factory.initialiseMenuOptions(leftCommands, rightCommands);
+              factory.toggleBars( commandOnly );
+              $( event.currentTarget ).addClass( "selected" );
+            }else{
+              $( ".category .list-group-item.selected" ).removeClass( "selected" );
+            }
+        }
+      };
+
+    factory.initialiseAppBarIcons = function( topBarIcons ){
+    	$rootScope.appBarIcons = topBarIcons;
+    };
+	
+
+
+	$( "body" ).click( function( event ){
+		factory.handleGeneralClick( event );
+	});
+	return factory;
+})
+.directive('vnCss', function( ) {
+	var styleSheets = {};
+    return {
+      restrict: 'E',
+      template: function(elem, attr){
+
+      	if( styleSheets[ attr.vnId ] == null ){
+      		styleSheets[ attr.vnId ] = true
+      		return "<link id='" + attr.vnId + "' href='" + attr.vnCssFile + "' type='text/css' rel='stylesheet' />";
+      	}
+      	return "";
+      }
+    }
+});

@@ -1,0 +1,49 @@
+angular.module('vnVisionAppointmentsModule', [
+	'vnVisionAppointmentsDayModule',
+	'vnVisionAppointmentsCalendarModule',
+	'vnVisionAppointmentsBookingModule'],function () {})
+.controller('vnVisionAppointmentsController', function( 
+		$scope, 
+		vnAppManagementFactory,
+		vnNavigationFactory,
+		vnActionFactory){
+	var APP_ID 			= "VN_APP";
+	var DAY 			= APP_ID + '__DAY';
+	var CALENDAR 		= APP_ID + '__CALENDAR';
+	var BOOKING_FORM 	= APP_ID + '__BOOKING_FORM';
+
+	$scope.backbutton = false;
+
+	vnAppManagementFactory.registerApp( 
+		{ id: APP_ID, 
+		name: "Appointments",
+		icon: "apps/visionappointments/images/appointments.png",
+		screens: [
+			DAY,
+			CALENDAR,
+			BOOKING_FORM
+			]
+		});
+
+	vnActionFactory.canHelpWith( "BOOK_SLOT", bookSlot );
+
+	function bookSlot( data, callback ){
+		vnNavigationFactory.switchScreens( BOOKING_FORM );
+		setTimeout( function(){
+			callback();
+		}, 2000 );
+	}
+})
+.directive('vnVisionAppointments', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionappointments/vnvisionappointments.html'
+    };
+  })
+.value('SCREENS',  { 
+	DAY: "VN_APP__DAY",
+	CALENDAR: "VN_APP__CALENDAR",
+	BOOKING_FORM: "VN_APP__BOOKING_FORM" 
+});
+
+

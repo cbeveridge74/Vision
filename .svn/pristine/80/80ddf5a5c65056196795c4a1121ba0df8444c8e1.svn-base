@@ -1,0 +1,10 @@
+var snomedData = [{id: 1, indexTerm: "% Ercs ### % red blood cells ### percent erythrocytes ### percent red blood cells ### % Ercs (qualifier value)", matchResult: {conceptid:"258759006", preferredTerm:"% Ercs", order:1 }},
+{id: 2, indexTerm: "% abnormal forms ### percent abnormal forms ### % abnormal forms (qualifier value)", matchResult: {conceptid:"258750005", preferredTerm:"% abnormal forms", order:2 }},
+{id: 3, indexTerm: "% activity ### percent activity ### % activity (qualifier value)", matchResult: {conceptid:"258745004", preferredTerm:"% activity", order:3 }},
+{id: 4, indexTerm: "% aggregation ### percent aggregation ### % aggregation (qualifier value)", matchResult: {conceptid:"258746003", preferredTerm:"% aggregation", order:4 }},
+{id: 5, indexTerm: "% aggregation/s ### percent aggregation per second ### % aggregation/s (qualifier value)", matchResult: {conceptid:"258747007", preferredTerm:"% aggregation/s", order:5 }},
+{id: 6, indexTerm: "% area reduction ### Percent area reduction ### % area reduction (qualifier value)", matchResult: {conceptid:"397441001", preferredTerm:"% area reduction", order:6 }},
+{id: 7, indexTerm: "% bound ### Percent bound ### % bound (qualifier value)", matchResult: {conceptid:"418131003", preferredTerm:"% bound", order:7 }},
+{id: 8, indexTerm: "% daily total food energy intake ### percent daily total food energy intake ### % daily total food energy intake (qualifier value)", matchResult: {conceptid:"286580004", preferredTerm:"% daily total food energy intake", order:8 }},
+{id: 9, indexTerm: "% deficient ### Percent deficient ### % deficient (qualifier value)", matchResult: {conceptid:"418446003", preferredTerm:"% deficient", order:9 }},
+{id: 10, indexTerm: "% diameter reduction ### Percent diameter reduction ### % diameter reduction (qualifier value)", matchResult: {conceptid:"397442008", preferredTerm:"% diameter reduction", order:10 }}];

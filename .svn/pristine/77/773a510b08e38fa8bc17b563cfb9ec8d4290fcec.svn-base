@@ -1,0 +1,54 @@
+<div class="{{scroller}}" ng-if="scroller != null">
+    <vn-scroll 
+        vn-class-selector="{{scroller}}"
+        vn-x-scroll="false"
+        vn-watch="screens.VN_TASK"
+        vn-top-offset="150">
+        <md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" 
+            ng-repeat="item in workflows"
+            ng-click="handleTaskItemClick()">
+            <div class="task-list-item workflow" layout="column">
+                <div class="urgency" ng-show="item.urgency == 'Urgent'"></div>
+                <div class="topline">
+                    <div class="left">
+                        <div class="image">
+                            <img ng-src="{{item.assigner.image}}">
+                            <div class="assigner">
+                                {{item.assigner.shortlabel}}
+                            </div>
+                        </div>
+                        <div class="content-container">
+                            <div class="subject" flex>{{ item.tasksComplete }} of {{ item.taskCount }} tasks complete</div>
+                            <div class="description">{{item.description}}</div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="sent">
+                            <span ng-if="item.started">Started:</span>  {{item.started | date:'HH:mm dd-MMM-yyyy'}}
+                        </div>
+                        <div class="due" ng-show="item.due != null" flex><span>Due:</span>  {{item.due | date:'dd-MMM-yyyy'}}</div>
+                        <div class="assignees">
+                            <div class="assignee" ng-repeat="assignee in item.assigneefull">
+                                <span ng-if="$index < 2">@{{ assignee.title }}</span>
+                            </div>
+                            <div ng-if="item.assigneefull.length > 2" class="more-label">
+                                + {{ item.assigneefull.length - 2 }} more
+                            </div>
+                        </div>
+                        <div class="attachments">
+                            <div class="patients">
+                                <div class="icon fa fa-user"></div> 
+                                {{ item.attachments.selectedPatients.length }}
+                            </div>
+                            <div class="documents">
+                                <div class="icon attachment-count fa fa-paperclip"></div> 
+                                {{ item.attachments.attachedDocs.length }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="patientname" ng-repeat="patient in item.attachments.selectedPatients">{{ patient.title }}</div>-->
+            </div>
+        </md-whiteframe>
+    </vn-scroll>
+</div>

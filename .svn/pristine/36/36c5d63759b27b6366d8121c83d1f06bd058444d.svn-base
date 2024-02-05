@@ -1,0 +1,432 @@
+.create-view {
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+
+}
+
+.tasks-create.create-view{
+	top: 3em;
+	left: 30em;
+}
+
+.announcements-create.create-view{
+	top: 3em;
+	left: 20em;
+}
+
+.tasks-create.create-view.open{
+	left: 31em;
+}
+
+.announcements-create.create-view.open{
+	left: 21em;
+}
+
+.create-view md-card{
+	width: 45em;
+	margin: 0;
+	box-shadow: 3px 3px 9px #777;
+}
+
+
+.create-view .task-widgets {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 1.5em;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.create-view.minimise .urgent-indicator {
+	position: absolute;
+	height: calc( 100% + 6px);
+	width: 0.3em;
+	top: -0.5em;
+	left: 0;
+	background-color: #FF0000;
+	opacity: 0;
+}
+
+.create-view md-dialog{
+	height: 5em;
+	width: 30em;
+}
+
+.create-view .md-dialog-container {
+	top: -13em;
+	left: 5em;
+}
+
+.create-view.minimise .urgent-indicator.urgent {
+	opacity: 1;
+}
+
+.create-view .task-widgets .left,
+.create-view .task-widgets .right{
+	display: inline-block;
+}
+
+.create-view .document-container .close.icon,
+.create-view .task-widgets .due,
+.create-view .task-widgets .patient,
+.create-view .task-widgets .attach,
+.create-view .task-widgets .track,
+.create-view .task-widgets .recur
+{
+	color: #999;
+	cursor: pointer;
+	font-size: 1.4em;
+	position: relative
+}
+
+.create-view .document-container .close.icon:hover,
+.create-view .task-widgets .due:hover,
+.create-view .task-widgets .patient:hover,
+.create-view .task-widgets .attach:hover,
+.create-view .task-widgets .track:hover,
+.create-view .task-widgets .track:hover .track-label,
+.create-view .task-widgets .recur:hover .recur-label,
+.create-view .task-widgets .recur:hover{
+	color: #777;
+}
+
+.create-view .document-container .close.icon:active,
+.create-view .task-widgets .due:active,
+.create-view .task-widgets .patient:active,
+.create-view .task-widgets .attach:active,
+.create-view .task-widgets .track:active,
+.create-view .task-widgets .track:active .track-label,
+.create-view .task-widgets .recur:active,
+.create-view .task-widgets .recur:active .recur-label{
+	color: #333;
+}
+
+.create-view .document-container .close.icon,
+.create-view .task-widgets .due .due-label,
+.create-view .task-widgets .recur-label,
+.create-view .task-widgets .track-label,
+.create-view .task-widgets .task-widget .urgency-label{
+	font-size: 0.6em;
+	color: #999;
+}
+
+.create-view .task-widgets .track.set,
+.create-view .task-widgets .track.set .track-label {
+	color: green;
+}
+
+.create-view .task-widgets .recur.set,
+.create-view .task-widgets .recur.set .recur-label {
+	color: green;
+}
+
+.create-view .task-widgets .due.set,
+.create-view .task-widgets .due.set .due-label{
+	color: green;
+}
+
+.create-view .task-widgets ::-webkit-calendar-picker-indicator{
+  opacity: 0.5;
+  left: -15px;
+  position: absolute;
+  top: 0;
+  padding: 0;
+  width: 40px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.create-view .task-widgets input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.create-view .task-widgets .task-widget .hidden-date{
+	//font-size: 0.1em;
+	width: 1.3em;
+	opacity: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+
+.create-view .task-widgets {
+	width: calc(100% + 32px);
+	background-color: #EEE;
+	margin-left: -16px;
+	margin-top: -16px;
+	padding-left: 16px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.create-view .task-widgets .left{
+	text-align: left;
+	width: 50%
+}
+
+.create-view .task-widgets .right{
+	position: relative;
+	text-align: right;
+	width: 50%;
+}
+
+.create-view .task-widgets .task-widget{
+	display: inline-block;
+	vertical-align: bottom;
+	//cursor: pointer;
+	text-align: center;
+	margin-right: 1.8em;
+	vertical-align: top;
+	width: 3em;
+}
+
+.create-view .task-widgets .right .task-widget{
+	margin-right: 0.8em;
+}
+
+.create-view .task-widgets .task-widget .urgency-label{
+	padding-right: 1em;
+	color: #999;
+}
+
+.create-view .task-widgets .task-widget .urgency-label,
+.create-view .task-widgets .task-widget .due-label{
+	width: 5em;
+}
+
+.create-view .task-widgets .task-widget .urgency-label.urgent{
+	color: red;
+}
+
+.create-view .task-widgets .task-widget md-switch{
+	margin: 0;
+	width: 1em;
+}
+
+.create-view .task-widgets .task-widget img{
+	width: 24px;
+	height: 24px;
+}
+	
+
+.create-view .chipsInput {
+	height: inherit;
+	width: inherit;
+}
+
+.create-view .subject,
+.create-view .description md-input-container,
+.create-view .subject md-select.md-default-theme .md-select-label,
+.create-view .md-chips {
+	width: 500px;
+}
+
+.create-view .vision-patient-chips{
+	//position: absolute;
+	font-size: 1em;
+	//left: -8em;
+	bottom: 5em;
+	//top: 0;
+	text-align: left
+}
+
+.create-view .vision-patient-chips .chips-mini-item{
+	//position: absolute;
+}
+
+.create-view .vision-patient-chips .dcb-chips-container{
+	
+}
+
+.create-view .vision-patient-chips .chipsInput{
+	line-height: 30px;
+}
+
+
+
+.create-view .chips-mini-title{
+	height: 24px;
+	padding: 7px;
+	padding-right: 6px;
+	padding-left: 5px;
+	padding-bottom: 0px;
+}
+
+.create-view .chips-mini {
+	height: 32px;
+}
+
+.create-view .image-default-mini {
+	height: 32px;
+	width: 32px;
+}
+
+.create-view .chips-active {
+	width: inherit;
+	background-color: #FFF;
+	z-index: 3;
+}
+
+.create-view .recipients {
+	border-bottom: solid 1px #DDD;
+}
+
+.create-view .subject {
+	margin-top: 1em;
+}
+
+.create-view .subject-label,
+.create-view .due-label-min,
+.create-view .recipients-label{
+	display: none;
+}
+
+
+.create-view .description {
+	margin-top: 1em;
+}
+
+
+
+.create-view .subject md-select.md-default-theme .md-select-label{
+	font-size: 1.1em;
+	white-space: nowrap;
+	line-height: 1.8;
+}
+
+.create-view md-input-container.md-default-theme .md-placeholder {
+	top: -1.3em;
+}
+
+.create-view md-select {
+	display: block;
+}
+
+.create-view .md-select-label > span{
+	width: 100%;
+
+}
+
+.create-view .patient .icon,
+.create-view .patient vn-patient-chips {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.create-view .patient .icon{
+	color: #999;
+	font-size: 1.5em;
+}
+
+.create-view .attachment-area {
+	white-space: normal;
+}
+
+.create-view .document-container {
+	position: relative;
+	box-shadow: 2px 2px 5px #BBB;
+	padding: 0.7em;
+	margin-top: 1em;
+	cursor: pointer;
+	display: inline-block
+}
+
+.create-view .document-container .file.icon {
+	margin-right: 0.5em;
+	font-size: 2em;
+}
+
+.create-view .document-container .close.icon{
+	position: absolute;
+	font-size: 1.2em;
+	right: 0.5em;
+	top: 1em;
+}
+
+.create-view .document-container .icon,
+.create-view .document-container .name {
+	display: inline-block;
+	font-size: 1.3em;
+}
+
+.create-view .document-container .name {
+	margin-right: 1em;
+}
+
+.create-view .document-container .icon {
+	
+}
+
+.create-view .chips-mini-title,
+.create-view .md-select-label > span,
+.create-view md-input-container .md-input {
+	color: #555;
+	font-size: 1.2em;
+}
+
+.create-view .delete {
+ 	display: none;
+}
+
+.create-view .md-select-label .md-select-icon {
+	//width: 200px;
+}
+
+.create-view md-switch .md-bar{
+
+}
+
+.create-view md-switch:not(.md-dragging) .md-bar, md-switch:not(.md-dragging) .md-thumb-container, md-switch:not(.md-dragging) .md-thumb {
+
+
+}
+
+.create-view md-switch .md-container{
+
+}
+
+.create-view md-switch .md-thumb-container {
+
+}
+
+.create-view md-switch .md-label {
+
+}
+
+.create-view .subject label,
+.create-view .recipients label,
+.create-view .description label {
+	//color: #777;
+	color: rgb(33,150,243);
+}
+
+.create-view .chips-mini-img {
+	height: 16px;
+}
+
+.create-view .chips-mini-img img {
+	height: 32px;
+}
+
+.create-view #chips-list {
+	z-index: 2;
+	max-height: 40em;
+}
+
+.create-view .command-buttons{
+	width: 100%;
+	margin-top: 2em;
+}
+
+.create-view .md-button{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+.create-view .workflow-buttons{
+	display: none;
+}
+
+

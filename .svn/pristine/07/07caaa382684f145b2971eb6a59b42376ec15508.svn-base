@@ -1,0 +1,162 @@
+
+	
+	
+	<form id="workflowDesigner">
+	
+		<div class="configuration-screen">
+			<div class="workflow-component">
+				<div id="initialComponentContainer" class="workflow-query-part">
+					<select id="fields"></select>
+				</div>
+				<div id="conditionContainer" class="workflow-query-part" style="display:none;">
+					<select id="condition"></select>
+				</div>
+				<div id="valueContainer" class="workflow-query-part" style="display:none;">
+					<select id="value"></select>
+				</div>
+				<div id="attributeContainer" class="workflow-query-part" style="display:none;">
+					<select id="constant"></select>
+				</div>
+				<div id="picklistContainer" class="workflow-query-part" style="display:none;">
+					<inps-form-field:select
+						items="${referenceDataMap[pickListName]}"
+						label="sscd"
+						value=""
+						name="dcsdd"
+						labelName="READ_TERM"
+						valueField="id"
+						labelField="name"
+						id="picklist"
+						hideLabelArea="true"
+						/>
+				</div>
+				<div id="buttonContainer" class="workflow-query-part" style="display:none;">
+					<input id="done" type="button" value="Done" />
+				</div>
+			</div>
+			<div class="lozengePark">
+			
+			</div>
+		</div>
+	</form>
+	<div class="actions-container">
+		<div id="runOnParamters" class="run-on-parameters">
+			<input type="checkbox" id="runoninitialise"/>Run on initialise
+			<input type="checkbox" id="runonsave"/>Run on save
+			<input type="checkbox" id="runoninitialiseonly"/>Run on initialise only
+			<input type="checkbox" id="runonsaveonly"/>Run on save only
+		</div>
+		
+			<div class="title-text">TRUE</div>
+			
+		
+		<div class="actions-wrapper tru" >
+			<div class="action-component">
+				<div class="actions">
+					<select>
+						<option id="show">show</option>
+						<option id="hide">hide</option>
+						<option id="disable">disable</option>
+						<option id="enable">enable</option>
+						<option id="reset">reset</option>
+						<option id="showValidationMessage">display validation message</option>
+						<option id="clearValidationMessage">hide validation message</option>
+						<option id="setField">set field</option>
+						<option id="setFocus">set focus</option>
+					</select>
+				</div>
+				<div class="actions-target">
+					<select id="tru" class="action-target">
+					
+					</select>
+				</div>
+				<div class="validation-message">
+					<input type="text"></input>
+				</div>
+				<div class="set-value-options">
+					<select>
+						<option id="NONE_MARKER">Choose...</option>
+						<option id="withValue">with value</option>
+						<option id="withField">with field</option>
+					</select>
+				</div>
+				<div class="field-to-set-with">
+					<select id="truFieldToSetWith">
+						
+					</select>
+				</div>
+				<div class="dropdown-value-option">
+					<input type="checkbox" name="useid" value="true" checked="checked"/>use id
+				</div>
+				<div class="date-value-option">
+					<input type="text" name="dateformat" value="d-M-yy"/>
+				</div>
+				<div class="set-value">
+					<input type="text"></input>
+				</div>
+				<input type="button" class="action-component-button" value="Done"></input>
+			</div>
+		</div>
+		<div class="title-text">FALSE</div>
+		<div class="actions-wrapper fal" >
+			<div class="action-component">
+				<div class="actions">
+					<select>
+						<option id="show">show</option>
+						<option id="hide">hide</option>
+						<option id="disable">disable</option>
+						<option id="enable">enable</option>
+						<option id="reset">reset</option>
+						<option id="showValidationMessage">display validation message</option>
+						<option id="clearValidationMessage">hide validation message</option>
+						<option id="setField">set field</option>
+						<option id="setFocus">set focus</option>
+					</select>
+				</div>
+				<div class="actions-target">
+					<select id="fal" class="action-target">
+					
+					</select>
+				</div>
+				<div class="validation-message">
+					<input type="text"></input>
+				</div>
+				<div class="set-value-options">
+					<select>
+						<option id="NONE_MARKER">Choose...</option>
+						<option id="withValue">with value</option>
+						<option id="withField">with field</option>
+					</select>
+				</div>
+				<div class="field-to-set-with">
+					<select id="falFieldToSetWith">
+						
+					</select>
+				</div>
+				<div class="dropdown-value-option">
+					<input type="checkbox" name="useid" value="true" checked="checked"/>use id
+				</div>
+				<div class="date-value-option">
+					<input type="text" name="dateformat" value="d-M-yy"/>
+				</div>
+				<div class="set-value">
+					<input type="text"></input>
+				</div>
+				<input type="button" class="action-component-button" value="Done"></input>
+			</div>
+		</div>
+	</div>
+	<div class="button-bar">
+		<div class="action-save-button">
+			<input type="button" value="Save"></input>
+		</div>
+		<div class="conditions-save-button">
+			<div class="button-section">
+				<div class="formcomponent rubbish"><!-- REQUIRED --></div>
+			</div>
+			<div class="button-section">
+				<input type="button" value="Save"></input>
+			</div>
+		</div>
+	</div>
+

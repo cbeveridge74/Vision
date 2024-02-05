@@ -1,0 +1,117 @@
+﻿angular.element($( ".vision-parent-module" )).ready(function() {
+    // Manually setting up angular as need to load the DB first
+    angular.bootstrap($( ".vision-parent-module" ), [
+        
+        'vnScrollModule',
+        'vnAssemblerModule',
+        'vnSearchModule',
+        'vnBannerModule',
+        'vnNavigationMenuModule',
+        'vnBarModule',
+        'vnTitleBarModule',
+        'vnCommandMenuModule',
+        'vnLoginModule',
+        'vnReceptionModule',
+        'vnVisionAppointmentsModule',
+        'vnHubCategoryModule',
+        'vnVisionModule',
+        'vnScreenManagementModule',
+        'vnNavigationModule',
+        'vnAppMenuModule',
+        'vnAppManagementModule',
+        'vnDatabaseModule'
+        ]);
+    
+  });
+
+angular.module('vnVisionModule', [],function ($httpProvider ) {
+  }).config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {   
+        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+        var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+        + '|chrome-extension:'
+        +currentImgSrcSanitizationWhitelist.toString().slice(-1);
+        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+    }
+])//'ngRoute', 'ngTouch', 'ngAnimate'
+
+.controller('VisionController', function ( $scope, $window ) {
+  $window.addEventListener("online", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Online' );
+      indicator.removeClass( 'offline' );
+      indicator.addClass( 'online' );
+      indicator.fadeTo( 1000, 0, function(){ 
+        indicator.removeClass( 'online' );
+        indicator.attr( 'style', '' );
+        indicator.text( '' );
+         } );
+    }, true);
+
+    $window.addEventListener("offline", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Offline' );
+      indicator.addClass( 'offline' );
+      indicator.removeClass( 'online' );
+    }, true);
+    
+})
+
+.factory('visionFactory',  function( $rootScope, token, vnAssemblerFactory, vnDatabaseFactory, vnScreenManagementFactory ){
+  var factory = {};
+  var service;
+  
+
+  factory.TASK = vnDatabaseFactory.TASK;
+  
+
+  if( config.mode === "webservice" ){
+    //service = new WebServices( $http, token, vnAssemblerFactory, databaseFactory );
+  }else{
+    service = new DemoServices( vnAssemblerFactory, vnDatabaseFactory );
+  }
+
+  var dataServices = new DataServices( service );
+
+  
+  factory.retrieveData = function( item, callback, index, bounds, count ){
+    return dataServices.retrieveData( item, callback, index, bounds, count );
+  };
+
+  factory.authenticate = function( username, password, callback ){
+    return dataServices.authenticate( username, password, callback );
+  };
+
+  factory.handlePatientClick = function( patientid ){
+      if( vnScreenManagementFactory.checkIfScrolling() ){
+        return;
+      }
+      $rootScope.patientid = patientid;
+      vnScreenManagementFactory.switchScreens( 'home', 'patient' );
+  };
+
+  return factory;
+})
+
+.run(function(
+  $rootScope, 
+  $window, 
+  vnDatabaseFactory, 
+  vnScreenManagementFactory,
+  vnNavigationFactory){
+  
+  vnDatabaseFactory.open( function(){
+    $rootScope.dbloaded = true;
+  });
+  $rootScope.extensionUrl = "chrome-extension://"+chrome.runtime.id; 
+
+  vnNavigationFactory.switchScreens( 'VN_LOGIN' ); 
+  vnScreenManagementFactory.initialiseAppBarIcons( defaultAppBar );
+})
+.value('DATE_FORMAT', 'yyyy-MM-dd')
+.value('token', '')
+.value( "patientid", null )
+
+

@@ -1,0 +1,51 @@
+.title-bar,
+.title-bar .backbutton{
+	height: 6em;
+	display: flex;
+	background-color: #FFFFFF;
+}
+
+.title-bar .title,
+.title-bar .typeahead{
+	display: inline-block;
+	font-size: 2em;
+	margin: auto 0;
+	color: #20335E;
+} 
+
+.title-bar .search{
+	position: absolute;
+	right: 1em;
+}
+
+.title-bar .typeahead {
+	width: 25em;
+	height: 2em; 
+	font-size: 0.9em;
+	padding-left: 0.5em;
+	margin-top: 2em;
+}
+
+.title-bar .backbutton{
+	margin-left: -1em;
+	padding-right: 2em;
+}
+
+.title-bar .backbutton.ng-hide{
+	opacity: 0;
+	display: block !important;
+}
+
+.title-bar .width-spacer{
+	width: 2em;
+}
+
+.title-bar .width-spacer.ng-hide{
+	opacity: 0;
+	display: block !important;
+}
+
+.title-bar img{
+	cursor: pointer;
+	width: 3em;
+}

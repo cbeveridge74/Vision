@@ -1,0 +1,49 @@
+<vn-css vn-id="vnworkflowbar" vn-css-file="apps/visiontasks/workflow/vnworkflowbar.css"></vn-css>
+<div class="vision-workflow-bar" ng-controller="vnWorkflowBarController" ng-init="initWorkflowBar()">
+	<div class="left">
+		<div class="patient-search-container">
+			<div>Patient(s)</div>
+			<div class="patient-search">
+				<vn-patient-chips ng-model='model.selectedPatients'/>
+			</div>
+		</div>
+		<div class="attachments-container">
+			<div>Attachment(s)</div>
+			<div class="attachments">
+				<div id="holder" class="add">
+					<md-whiteframe ng-repeat="attachedDoc in model.attachedDocs" class="md-whiteframe-z1 name" layout layout-align="center center">
+				    <div class="label">{{attachedDoc.label}}</div>
+				    <img src="apps/components/images/close.svg" ng-click="handleAttachedDocDeleteClick()">
+				  </md-whiteframe>
+				  	<div class="dropzone-container" ng-click="handleAddClinicalItem()" ng-show="model.attachedDocs.length < 1">
+						<div class="dropzone">
+							<img src="apps/components/images/add_grey.svg"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="right">
+		<div class="tracking">
+			<md-button ng-class="( hasTracking ) ? 'md-fab has-tracking' : 'md-fab'" aria-label="Track" ng-click="handleTrackingEdit()">
+				<div>
+					Track
+				</div>
+	            <div class="indicator" ng-show="hasTracking">
+					Set
+				</div>
+	        </md-button>
+		</div>
+		<div class="recurrence">
+			<md-button ng-class="( hasRecurrence ) ? 'md-fab has-recurrence' : 'md-fab'" aria-label="Recurrence" ng-click="handleRecurrenceEdit()">
+	            <div>
+					Recur
+				</div>
+	            <div class="indicator" ng-show="hasRecurrence">
+					Set
+				</div>
+	        </md-button>
+		</div>
+	</div>
+</div>

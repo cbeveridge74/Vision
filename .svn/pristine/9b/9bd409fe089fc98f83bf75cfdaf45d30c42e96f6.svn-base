@@ -1,0 +1,207 @@
+.filter-menu .section .location,
+.filter-menu .section .skill {
+	display: inline-block;
+	background-color: #FFF;
+	color: #1E81E7;
+	padding-top: 1.3em;
+	text-align: center;
+}
+
+.filter-menu .section .location.selected,
+.filter-menu .section .skill.selected {
+	border: solid 3px orange;
+}
+
+
+.filter-menu .location,
+.filter-menu .skill {
+	width: 4.5em;
+	height: 4.5em;
+	margin: 0.5em;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.grid .context{
+	position: absolute;
+	background-color:#264568;
+	color: #FFF;
+	border-radius: 0em;
+	display: none;
+	z-index: 1;
+	padding: 0.5em;
+	white-space: nowrap;
+}
+
+.grid .card{
+	position: absolute;
+	background-color:#264568;
+	color: #FFF;
+	border-radius: 0.5em;
+	display: none;
+	z-index: 1;
+	white-space: nowrap;
+}
+
+.grid .card.open{
+	display: block;
+}
+
+.grid .card > div{
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.grid .card .namearea > div,
+.grid .card .namearea > img {
+	display:inline-block;
+	white-space: nowrap;
+}
+
+.grid .card .namearea > img {
+	width: 3em;
+}
+
+.grid .card .info{
+	width: 16.2em;
+	padding: 1em;
+	padding-bottom: 0;
+	vertical-align: top;
+}
+
+.grid .card .info .name{
+	font-size: 1.5em;
+}
+
+
+
+.grid .card .info .availability{
+	opacity: 0.8;
+	font-size: 0.9em;
+	vertical-align: top;
+}
+
+.grid .card .info .role {
+	margin-top: 1em;
+	font-size: 1.2em;
+}
+
+.grid .card .info .role,
+.grid .card .info .location {
+	font-size: 1em;
+}
+
+.grid .card .info .statusarea > div{
+	display: inline-block;
+}
+
+.grid .card .action{
+	//font-size: 0.8em;
+	//float: right;
+}
+
+.grid .card .action > div{
+	text-align: center;
+	border-left: solid 1px #FFF;
+	height: 3em;
+	padding: 0.5em;
+	padding-top: 0.5em;
+}
+
+.grid .card .action .centre{
+	border-top: solid 1px #FFF;
+	border-bottom: solid 1px #FFF;
+}
+
+.grid .card .action img{
+	width: 2em;
+	margin-bottom: 0.2em;
+}
+
+.person > div {
+	display: inline-flex;
+	height: 50px;
+	vertical-align: top;
+}
+
+.person > div > div {
+	margin: auto 0;
+}
+
+.person  {
+	font-size:0.8em
+}
+
+.person.selected img{
+	border: solid orange 3px;
+}
+
+.person.unallocated{
+	color: red;
+}
+
+.person .status {
+	width: 1em;
+	height: 1em;
+	border-radius : 0.5em;
+	margin-left: 1em;
+	margin-right: 0.5em;
+}
+
+.card .status {
+	margin-left: 0em;
+	margin-right: 0em;
+	width: 0em;
+	height: 0em;
+}
+
+.person .status.free,
+.card .status.free {
+	background-color: green;
+}
+
+.person .status.busy,
+.card .status.busy {
+	background-color: orange;
+}
+
+.person .status.incon,
+.card .status.incon {
+	width: 1em;
+	height: 1em;
+	background-color: red;
+	border-radius : 0.5em;
+}
+
+.person .subject {
+	font-size: 1.2em;
+}
+
+.grid{
+	max-width: 22em;
+	white-space: normal;
+}
+
+.grid .person img{
+	width: 5em;
+}
+
+.grid .person {
+	position: relative;
+	display: inline-block;
+	margin: 0.2em;
+	cursor: pointer;
+}
+
+.grid .person.hide {
+	display: none;
+}
+
+.grid .person .status{
+	position: absolute;
+	bottom: 0.5em;
+	right: 0em;
+	width: 1em;
+	height: 1em;
+	border-radius : 0.6em;
+}

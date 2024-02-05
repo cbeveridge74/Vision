@@ -1,0 +1,200 @@
+
+.draggable{
+
+}
+
+.droppable{
+
+}
+
+.condition {
+	background-color: #015666 !important;	
+	border-color: #5FBDCE !important;
+	padding: 0 2em 1em 1em !important;
+}
+
+.condition.condition-background-image{
+	background-position: right;
+	background-image: url("CBEV_OR_grey.png");
+	background-repeat: no-repeat;
+}
+
+.condition.condition-background-image.and {
+	background-image: url("CBEV_AND_grey.png");
+}
+
+.condition.condition-background-image.or {
+	background-image: url("CBEV_OR_grey.png");
+}
+
+.query{
+
+}
+
+.droppable-area-hover {
+	background-color: orange !important;
+}
+
+.configuration-screen{
+	padding: 2em;
+}
+
+.workflow-component, .action-component{
+	border-bottom: medium solid #BBBBBB;
+	display: inline-block;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	-khtml-border-radius: 1em;
+	padding: 0.5em 3em 0.5em 3em;
+	margin: 1em 3em 0 0;
+	background-color: #DDDDDD;
+	position: relative;
+}
+
+.actions-wrapper .action-component{
+	padding: 0.5em 1em 0.5em 1em;
+	margin: 1em 1em 0 0;
+	display: block;
+	width: 90%;
+}
+
+.moveable {
+	display: block;
+	background-color: #5FBDCE;
+	border: medium solid #04859D;
+}
+
+.emphasise {
+	font-size: 16pt;
+	font-family: Tahoma;
+	font-weight: bold;
+}
+
+.non-emphasise {
+	font-size: 12pt;
+	font-family: Tahoma;
+}
+
+.workflow-condition{
+	width: 90%;
+	border: medium solid #BBBBBB;
+	display: inline-block;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	-khtml-border-radius: 1em;
+	padding: 0.5em 0em 0.5em 3em;
+	background: #5FBDCE;
+}
+
+.workflow-query-part{
+	display: inline-block;
+}
+
+.field{
+	text-align: right;
+	width: 30%;
+}
+
+.value{
+	text-align: left;
+	width: 30%;	
+}
+
+.lozengePark{
+	width: 70%;
+	height: 90%
+}
+
+.message{
+	text-align: right;
+	color: white;
+	font-size: 10pt;
+	font-family: Tahoma;
+	padding: 0 1.7em 1em 0;
+	height: 1.2em;
+	background: url("action.png") no-repeat;
+	right: 0.5em;
+	top: 0.5em;
+	position: absolute;
+	cursor: pointer;
+}
+
+.actions-wrapper{
+	height: 45%;
+	width: 50%;
+	position: relative;
+	overflow: visible;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.title-text {
+	text-align: center;
+	font-size: large;
+	width: 50%;
+	display: inline-block;
+	font-weight: bold;
+	color: #555555;
+	margin: 1em 0 0 0;
+}
+
+.actions-container{
+	display: none;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	overflow: visible;
+}
+
+.actions{
+	height: 100%;
+	display: inline-block;
+	position: relative;
+}
+
+.rubbish{
+	height: 50px;
+	width: 80px;
+	background-position: 30px -410px;
+}
+
+.actions-target, .set-value, .set-value-options, .field-to-set-with, .dropdown-value-option{
+	height: 100%;
+	display: inline-block;
+	position: relative;
+}
+
+.action-save-button{
+	display: none;	
+	text-align: center;
+}
+
+.conditions-save-button{
+	text-align: left;
+}
+
+.button-section{
+	width: 50%;
+	display: inline-block;
+}
+
+.button-bar{
+	position: absolute;
+	bottom: 2em;	
+	width: 90%;
+}
+
+.validation-message{
+	width: 13em;
+	display: inline-block;
+}
+
+.validation-message input{
+	width: 12em;	
+}
+
+.run-on-parameters {
+	text-align: center;	
+}
+
+

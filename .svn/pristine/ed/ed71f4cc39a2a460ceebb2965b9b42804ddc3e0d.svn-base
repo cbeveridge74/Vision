@@ -1,0 +1,51 @@
+<div class="vision-docman" ng-controller="vnVisionDocumentManagementController" ng-init="init();">
+	<vn-css vn-id="vndocmanmodule" vn-css-file="apps/visiondocumentmanagement/vndocumentmanagement.css"></vn-css>
+    <vn-title-bar 
+            vn-title="Documents"
+            vn-show-back-button="true"
+            vn-backbutton-handler="handleBackButton()"
+            vn-show-search="false"></vn-title-bar>
+	
+    <md-tabs md-selected="selectedIndex" md-stretch-tabs>
+        <md-tab label="Active">
+            <div class="document-scroller">
+                <vn-scroll 
+                    vn-class-selector="document-scroller"
+                    vn-x-scroll="false"
+                    vn-watch="screens.VN_DOCMAN"
+                    vn-top-offset="150">
+                    <md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" 
+                        ng-repeat="item in filedDocuments"  ng-right-click="handleDocumentClicked()" ng-class="( item.selected == true ) ? 'selected' : ''">
+                        <div class="document-item" layout="column">
+                            <div class="name">{{item.name}}</div>
+                            <div class="patient">{{item.patient.Surname | uppercase }}, {{ item.patient.Forename }} ({{ item.patient.DOB | date:'dd-MMM-yyyy' }})</div>
+                        </div>
+                    </md-whiteframe>
+                </vn-scroll>
+            </div>
+        </md-tab>
+        <md-tab label="Unfiled">
+            <div class="unfiled-scroller">
+                <vn-scroll 
+                    vn-class-selector="unfiled-scroller"
+                    vn-x-scroll="false"
+                    vn-watch="screens.VN_DOCMAN"
+                    vn-top-offset="150">
+                    <md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" 
+                        ng-repeat="item in unfiledDocuments"  ng-right-click="handleDocumentClicked()" ng-class="( item.selected == true ) ? 'selected' : ''">
+                        <div class="document-item" layout="column">
+                            <div class="name">{{item.name}}</div>
+                        </div>
+                    </md-whiteframe>
+                </vn-scroll>
+            </div>
+        </md-tab>
+        <md-tab label="placeholder3">
+            
+        </md-tab>
+        <md-tab label="placeholder4">
+            
+        </md-tab>
+    <md-tabs>
+    
+</div>

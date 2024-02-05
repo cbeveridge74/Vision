@@ -1,0 +1,15 @@
+<vn-css vn-id="vncommandmenu" vn-css-file="menus/vncommandmenu.css"></vn-css>
+<div class="command">
+	<div class="left">
+		<div class="button" ng-repeat="command in leftCommands">
+			<img ng-src="images/{{ command.icon }}">
+			<div class="description">{{ command.label }}</div>
+		</div>
+	</div>
+	<div class="right">
+		<div class="button" ng-repeat="command in rightCommands">
+			<img ng-src="images/{{ command.icon }}">
+			<div class="description">{{ command.label }}</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,256 @@
+angular.module('vnVisionTasksModule', [
+	'vnDocumentReviewModule',
+	'vnWorkflowModule',
+	'vnBrickModule',
+	'vnTrackingModule',
+	'vnTaskCreateModule',
+	'vnRecurrenceModule',
+	'vnWorkflowBarModule'],function () {})
+.run(function( vnAppManagementFactory ){
+	var APP_ID 			= "VN_TASK";
+	var HOME 			= APP_ID + '__HOME';
+	var DOCUMENT_REVIEW = APP_ID + '__DOCUMENT_REVIEW';
+	var TASK_CREATE 	= APP_ID + '__TASK_CREATE';
+	var WORKFLOW 		= APP_ID + '__WORKFLOW';
+	var TRACKING 		= APP_ID + '__TRACKING';
+	var RECURRENCE 		= APP_ID + '__RECURRENCE';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: APP_ID, 
+		name: "Tasks",
+		icon: "images/task_plain_white_left.svg",
+		screens: [
+			HOME,
+			WORKFLOW,
+			RECURRENCE,
+			TRACKING,
+			TASK_CREATE,
+			DOCUMENT_REVIEW
+			]
+		});
+
+	
+})
+.controller('vnVisionTasksController', function( 
+	vnActivitiServiceFactory,
+	vnDatabaseFactory,
+	visionFactory,
+	vnTaskFactory,
+	vnScrollFactory,
+	vnNavigationFactory,
+	vnScreenManagementFactory,
+	vnActionFactory,
+	vnWorkflowFactory,
+	$rootScope,
+	$scope,
+	$timeout,
+	$log,
+	VN_TASK_SCREENS
+ ){
+
+	var inboxScroller;
+    $scope.selectedIndex = 0;
+    $scope.$watch('selectedIndex', function(current, old){
+     
+    });
+    
+	$( window ).resize(function() {
+        handleResize();
+      });
+
+	$scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+     };
+ 	
+	var handleShow = function(){
+		vnTaskFactory.retrieveTasksFor( $rootScope.user.id, handleTasksRetrieved );
+	};
+
+	var handleResize = function(){
+      //if( $scope.screens[ VN_TASK_SCREENS.HOME ] ){
+        vnScrollFactory.handleResize( "inbox-scroller" );
+        getInboxScroller().css( "height", "100vh" );
+      //}
+    };
+
+    var getInboxScroller = function(){
+    	if( inboxScroller == null ){
+    		inboxScroller = $( ".inbox-scroller" );
+    	}
+    	return inboxScroller;
+    }
+
+	var handleTasksRetrieved = function( tasks ){
+        if( tasks != null ){
+          vnTaskFactory.assembleTasks( tasks );
+          $scope.$apply( function(){
+            $scope.taskreminders = tasks;
+            $scope.patientcentric = false;
+          } );
+        }else{
+        	$scope.taskreminders = null;
+        }
+		handleResize();
+      };
+	 //vnActivitiServiceFactory.createUsers( function( data ){} );
+
+	 // Select the file
+	 /*var load_file = function () {
+		var reader = new FileReader();
+		reader.onload = function(){
+			var iframe = $("#theFrame");
+			var canvas = $( '#myCanvas' );
+			//var img = $( "#scream" );
+			var img = new Image();
+			img.src = reader.result;
+			img.onload = function(){
+				var context = canvas[0].getContext('2d');
+				context.drawImage(img, 0, 0);
+			    var data = context.getImageData(0, 0, 1800, 1400);
+				iframe[0].contentWindow.postMessage({ sResponseText: data}, '*');
+				window.addEventListener("message", function (event) {
+				   var text = event.data.data;
+				   if( text.indexOf( "repayment" ) > -1 ){
+				   		console.log( "The scan mentions 'repayment'" );
+				   		console.log( text );
+				   }
+				});
+			}
+		}
+		reader.readAsDataURL(document.getElementById('picker').files[0])
+	}*/
+
+	 $scope.init = function () {
+	 // This is for selecting the file
+	 //$( "#picker" ).change( load_file );
+
+	 	
+
+	 	vnTaskFactory.registerTaskEventListener( vnTaskFactory.TASK_UPDATED, function( event, task ){
+	 		angular.forEach( task.assignee, function( value, index ){
+	 			if( $rootScope.user != null && $rootScope.user.id == value ){
+	 				vnTaskFactory.retrieveTasksFor( $rootScope.user.id, handleTasksRetrieved );
+	 			}
+	 		} );	
+	 	});
+      
+      $scope.$watch( 
+      	"screens.VN_TASK", function( value ){
+      		if( value ){
+      			handleShow();
+
+      			// Hard coded to the Scan image
+  				/*var iframe = $("#theFrame");
+  				var canvas = $( '#myCanvas' );
+  				var img = $( "#scream" );
+  				var context = canvas[0].getContext('2d');
+				context.drawImage(img[0], 0, 0);
+			    var data = context.getImageData(0, 0, 1800, 1400);
+				iframe[0].contentWindow.postMessage({ sResponseText: data}, '*');
+				window.addEventListener("message", function (event) {
+				   var text = event.data.data;
+				   //if( text.indexOf( "repayment" ) > -1 ){
+				   		console.log( "The scan mentions 'repayment'" );
+				   		console.log( JSON.parse( text ));
+				   //}
+				});*/
+
+				/*vnActivitiServiceFactory.startProcess(null, null, function( data ){
+					console.log( data );
+				});*/
+
+
+      			/*var iframe = $("#theFrame");
+  				var canvas = $( '#myCanvas' );
+  				var img = $( "#scream" );
+
+  				var wheel_of_fortune = /[changing]/i;
+				var image_offset = img[0].getBoundingClientRect();
+  				var context = canvas[0].getContext('2d');
+				context.drawImage(img[0], 0, 0);
+			    var data = context.getImageData(0, 0, 1800, 1400);
+				iframe[0].contentWindow.postMessage({ sResponseText: data}, '*');
+				window.addEventListener("message", function (event) {
+				   var text = event.data.data;
+				   //if( text.indexOf( "repayment" ) > -1 ){
+			   		var letters =  JSON.parse( text );
+			   		letters.filter(function(letter){
+						// select the letters which have vanna white's approval
+						return letter.matches.some(function(match){
+							return wheel_of_fortune.test(match.letter)
+						})
+					}).forEach(function(letter){
+						// draw a little yellow box over their faces
+						var highlight = document.createElement('div');
+						highlight.className = 'highlight';
+						highlight.style.top = (letter.y + image_offset.top + 63) + 'px';
+						highlight.style.left = (letter.x + image_offset.left) + 'px';
+						highlight.style.width = letter.width + 'px';
+						highlight.style.height = letter.height + 'px';
+						document.body.appendChild(highlight);
+					})
+				   //}
+				});
+      			
+      			
+      			vnActivitiServiceFactory.retrieveTasksForAssignee( 
+			  	"shona.donaldson@inps.net",
+			  	function( assigneeTask ){
+			  		$scope.tasks = assigneeTask.data;
+			  	});*/
+      		}
+      });
+  	};
+
+	 $scope.handleAddTask = function(){
+	 	/*vnActivitiServiceFactory.addTask(
+		  "shona.donaldson@inps.net",
+		  "resolved",
+		  "Shona Task",
+		  "2015-04-17T13:06:02.438+02:00",
+		  "New Shona Task",
+		  "shona.donaldson@inps.net",
+		  null,
+		  20,
+		  function( data ){
+		  	console.log( data );
+		  	vnActivitiServiceFactory.retrieveTasksForAssignee( 
+		  	"shona.donaldson@inps.net",
+		  	function( assigneeTask ){
+		  		$scope.tasks = assigneeTask.data;
+		  	});
+		  }
+		);*/
+	 };
+
+	 $scope.handleTaskItemClick = function( ){
+	 	//vnNavigationFactory.switchScreens( VN_TASK_SCREENS.DOCUMENT_REVIEW);
+
+	 	if( !vnScreenManagementFactory.isDoubleClick() ){
+	 		vnActionFactory.needHelpWith( this.item.subject.actiontypeid, [this.item.patient.Id], function(){
+	 			console.log( "Calling callback for " );
+	 		});
+		}
+	 	
+	 };
+
+	 
+
+
+})
+.directive('vnVisionTasks', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/vnvisiontasks.html'
+    };
+  })
+.value('VN_TASK_SCREENS',  { 
+	HOME: "VN_TASK__HOME",
+	DOCUMENT_REVIEW: "VN_TASK__DOCUMENT_REVIEW",
+	TASK_CREATE: "VN_TASK__TASK_CREATE",
+	WORKFLOW: "VN_TASK__WORKFLOW",
+	TRACKING: "VN_TASK__TRACKING",
+	RECURRENCE: "VN_TASK__RECURRENCE"
+});
+
+

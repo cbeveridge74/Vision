@@ -1,0 +1,322 @@
+.task-create {
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+}
+
+.task-create md-card{
+	width: 330px;
+	margin: 0;
+	box-shadow: 3px 3px 9px #777;
+}
+
+.task-create .complete {
+	position: absolute;
+	right: 0.1em;
+	color: green;
+	z-index: 2;
+	font-size: 2em;
+}
+
+.task-create.minimise .complete {
+	top: -0.2em;
+	right: -0.2em;
+	background-color: #FFF;
+	border-radius: 0.9em;
+	
+}
+
+
+.task-create .task-widgets {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 1.5em;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.task-create.minimise .urgent-indicator {
+	position: absolute;
+	height: calc( 100% + 6px);
+	width: 0.3em;
+	top: -0.5em;
+	left: 0;
+	background-color: #FF0000;
+	opacity: 0;
+}
+
+.task-create.minimise .urgent-indicator.urgent {
+	opacity: 1;
+}
+
+.task-create .task-widgets .left,
+.task-create .task-widgets .right{
+	display: inline-block;
+}
+
+.task-create .task-widgets .due,
+.task-create .task-widgets .announcement{
+	color: #999;
+	cursor: pointer;
+}
+
+.task-create .task-widgets .due:hover,
+.task-create .task-widgets .announcement:hover{
+	color: #777;
+}
+
+.task-create .task-widgets .due:active,
+.task-create .task-widgets .announcement:active{
+	color: #333;
+}
+
+.task-create .task-widgets .due,
+.task-create .task-widgets .announcement{
+	font-size: 1.4em;
+	position: relative
+}
+
+.task-create .task-widgets .announcement{
+	font-size: 1.4em;
+}
+
+.task-create .task-widgets .fa.fa-thumb-tack.fa-rotate-45 {
+	color: green;
+}
+
+.task-create .task-widgets .due .due-label{
+	font-size: 0.3em;
+	color: #999;
+}
+
+.task-create .task-widgets .due.set,
+.task-create .task-widgets .due.set .due-label{
+	color: green;
+}
+
+.task-create .task-widgets ::-webkit-calendar-picker-indicator{
+  opacity: 0.5;
+  left: -15px;
+  position: absolute;
+  top: 0;
+  padding: 0;
+  width: 40px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.task-create .task-widgets input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.task-create .task-widgets .task-widget .hidden-date{
+	//font-size: 0.1em;
+	width: 1.3em;
+	opacity: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+
+.task-create .task-widgets {
+	width: calc(100% + 32px);
+	background-color: #EEE;
+	margin-left: -16px;
+	margin-top: -16px;
+	padding-left: 16px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.task-create .task-widgets .left{
+	text-align: left;
+	width: 50%
+}
+
+.task-create .task-widgets .right{
+	text-align: right;
+	width: 50%
+}
+
+
+
+
+.task-create .task-widgets .task-widget{
+	display: inline-block;
+	vertical-align: bottom;
+	//cursor: pointer;
+	text-align: center;
+	margin-right: 1em;
+}
+
+.task-create .task-widgets .task-widget {
+	vertical-align: top;
+}
+
+
+
+.task-create .task-widgets .task-widget .urgency-label{
+	font-size: 0.9em;
+	padding-right: 1em;
+	color: #999;
+}
+
+.task-create .task-widgets .task-widget .urgency-label,
+.task-create .task-widgets .task-widget .due-label{
+	width: 5em;
+}
+
+.task-create .task-widgets .task-widget .urgency-label.urgent{
+	color: red;
+}
+
+.task-create .task-widgets .task-widget md-switch{
+	margin: 0;
+	width: 1em;
+}
+
+.task-create .task-widgets .task-widget img{
+	width: 24px;
+	height: 24px;
+}
+	
+
+.task-create .chipsInput {
+	height: inherit;
+	width: inherit;
+}
+
+.task-create .chips-mini-title{
+	height: 20px;
+	padding: 3px;
+	padding-right: 6px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+}
+
+.task-create .chips-mini {
+	height: 24px;
+}
+
+.task-create .image-default-mini {
+	height: 24px;
+	width: 24px;
+}
+
+.task-create .chips-active {
+	width: inherit;
+}
+
+.task-create .recipients {
+	border-bottom: solid 1px #DDD;
+}
+
+.task-create .subject {
+	margin-top: 1em;
+}
+
+.task-create .subject-label,
+.task-create .due-label-min,
+.task-create .recipients-label{
+	display: none;
+}
+
+
+.task-create .description {
+	margin-top: 1em;
+}
+
+.task-create .subject,
+.task-create .description md-input-container,
+.task-create .subject md-select.md-default-theme .md-select-label {
+	width: 300px;
+}
+
+.task-create .subject md-select.md-default-theme .md-select-label{
+	font-size: 1.1em;
+	white-space: nowrap;
+	line-height: 1.8;
+}
+
+.task-create md-select {
+	display: block;
+}
+
+.task-create .md-select-label > span{
+	width: 100%;
+
+}
+
+
+.task-create .chips-mini-title,
+.task-create .md-select-label > span,
+.task-create md-input-container .md-input {
+	color: #555;
+	font-size: 1.2em;
+}
+
+.task-create .delete {
+ 	display: none;
+}
+
+.task-create .md-select-label .md-select-icon {
+	//width: 200px;
+}
+
+.task-create md-switch .md-bar{
+
+}
+
+.task-create md-switch:not(.md-dragging) .md-bar, md-switch:not(.md-dragging) .md-thumb-container, md-switch:not(.md-dragging) .md-thumb {
+
+
+}
+
+.task-create md-switch .md-container{
+
+}
+
+.task-create md-switch .md-thumb-container {
+
+}
+
+.task-create md-switch .md-label {
+
+}
+
+.task-create .subject label,
+.task-create .recipients label,
+.task-create .description label {
+	//color: #777;
+	color: rgb(33,150,243);
+}
+
+.task-create .chips-mini-img {
+	height: 16px;
+}
+
+.task-create .chips-mini-img img {
+	height: 24px;
+}
+
+.task-create #chips-list {
+	z-index: 2;
+	max-height: 40em;
+}
+
+.task-create .command-buttons{
+	width: 100%;
+	margin-top: 2em;
+}
+
+.task-create .md-button{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+.task-create .workflow-buttons{
+	display: none;
+}
+
+

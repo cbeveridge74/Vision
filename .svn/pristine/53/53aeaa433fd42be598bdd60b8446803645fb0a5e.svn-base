@@ -1,0 +1,13 @@
+<md-dialog >
+  <div class="md-actions" layout="row">
+    <div class="md-actions">
+      <md-button ng-click="handleComputer()">
+       Local drive
+      </md-button>
+      <md-button class="md-primary" ng-click="handleDocuments()">
+       Clinical Documents
+      </md-button>
+    </div>
+    
+  </div>
+</md-dialog>

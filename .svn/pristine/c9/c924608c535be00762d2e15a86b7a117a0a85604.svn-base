@@ -1,0 +1,149 @@
+angular.module('vnStatsModule', [],function () {})
+.factory('vnStatsFactory', function( $rootScope ){
+	
+})
+.directive('vnStats', function() {
+    return {
+      restrict: 'E',
+      controller:  function ( 
+			$scope, 
+			$rootScope,
+			$timeout,
+			visionFactory,
+			vnTaskFactory,
+			vnActionFactory,
+			vnNavigationFactory,
+			vnNotificationsFactory,
+			vnScreenManagementFactory){
+
+      	$scope.showCharts = false;
+      	$scope.personData = [];
+      	var clinicianShortLabel;
+      	var barCounter = 0;
+      	var userBars;
+      	var data = [];
+      	$rootScope.$watch( 'screens.VN_TASK__STATS', function( nValue, oValue ){
+      		if( nValue == true ){
+      			createChart();
+      		}
+      	});
+
+
+      	$( window ).resize(function() {
+	        handleResize();
+	      });
+
+		var handleResize = function(){
+			if( data.length > 0 ){
+				//$scope.personData = data;
+				$timeout( function(){
+					$scope.showCharts = false;
+					
+				} );
+
+				$timeout( function(){
+					$scope.showCharts = true;
+					initialiseClick();
+				}, 1 );
+				
+			}
+	    };
+
+		var createChart = function(){
+			$timeout( function(){
+  				
+  				visionFactory.retrieveData( database[ PERSON ].name, function( results ){
+  					results.forEach( function( vPerson, iPerson ){ 
+  						var person = { 
+  							id: vPerson.id, 
+  							name: vPerson.shortlabel,
+  							overdue: 0,
+  							complete: 0 };
+  						data.push( person );
+  					});
+  					vnTaskFactory.retrieveTasksFor( null, function( tasks ){
+						tasks.forEach( function( vTask, iTask ){
+							
+							data.forEach( function( vData, iData ){ 
+								if( vTask.status == vnTaskFactory.ASSIGNED ){
+	      							if( $.inArray( vData.id, vTask.assignee ) > -1 ){
+	      								vData.overdue++;
+	      							}
+      							}else if( vTask.status == vnTaskFactory.COMPLETE ){
+      								if( $.inArray( vData.id, vTask.assignee ) > -1 ){
+	      								vData.complete++;
+	      							}
+      							}
+      						});
+							
+						} );
+						$scope.personData = data;
+						$scope.showCharts = true;
+						$scope.$apply();
+						initialiseClick();
+						
+					}, vnTaskFactory.ALL);
+  				});
+  			});
+		};
+
+		var initialiseClick = function(){
+			/* Because this is svg, having to
+			Use jquery selector as class doesn't working inline with SVG
+			Put a timeout as the SVG needs to render first */
+			$timeout( function(){
+				var svgText = $( "div[class~='vision-stats'] svg text" );
+				svgText.off( "click" );
+				svgText.on( "click", function( e ){
+					clinicianShortLabel = $( e.currentTarget ).find( ':first-child' )[0].textContent;
+					vnScreenManagementFactory.openMenu( '.vision-stats-menu' );
+					$( '.vision-stats-menu' ).css( 'left', e.clientX );
+					$( '.vision-stats-menu' ).css( 'top', e.clientY -20 );
+				});
+			});
+		};
+
+		$scope.handleNudgeClick = function(){
+			$scope.personData.forEach( function( vPerson, iPerson ){
+				if( vPerson.name == clinicianShortLabel ){
+					vnNotificationsFactory.addNotification( {  
+					status: 0, 
+					relevantto: [ vPerson.id ],
+					action: vnActionFactory.OVERDUE_TASK,
+					data: [ $rootScope.user ],
+					sender: $rootScope.user.id,
+					type: vnNotificationsFactory.OVERDUE_TASKS_TYPE } );
+				}
+			});
+
+
+			
+		};
+
+		$scope.handleMessageClick = function(){
+			vnActionFactory.needHelpWith( vnActionFactory.SEND_MESSAGE, null, function(){} );
+		};
+
+		
+
+      	$scope.handleBackButton = function(){
+	    	vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+	    };
+      		
+	  },
+      templateUrl: 'apps/visiontasks/stats/vnstats.html'
+    };
+ }).directive('vnStatsMenu', function(){
+ 	return {
+ 		restrict: 'E',
+ 		templateUrl: 'apps/visiontasks/stats/vnstatsmenu.html'
+ 	};
+ }).directive('vnOverdueTaskNotification', function(){
+ 	return {
+ 		scope: {
+ 			model: "="
+ 		},
+ 		restrict: 'E',
+ 		templateUrl: 'apps/visiontasks/stats/notifications/vnoverduetasknotification.html'
+ 	};
+ });

@@ -1,0 +1,16 @@
+<vn-css vn-id="vndiscussions" vn-css-file="apps/components/discussions/vndiscussions.css"></vn-css>
+<div ng-controller="vnDiscussionsController" ng-init="init();">
+	<div class="task discussions list-group-item discussion" 
+		ng-repeat="discussion in discussions"  
+		ng-click="handleItemClick( $event, this );">
+		<img ng-src="apps/components{{discussion.image}}">
+		<div class="status {{ discussion.status }}"></div>
+		<div>
+			<div>
+				<div class="subject"><div>{{ discussion.shortdescription }}</div></div>
+				<div class="time">{{ discussion.time }}</div>
+			</div>	        
+			<div class="subtitle"><div>{{ discussion.subtitle }}</div></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+/* Action Toast */
+md-toast.md-left.md-bottom.action-toast  {
+  max-width: initial;
+  min-width: initial;
+  font-size: 1em;
+}
+
+md-toast.md-left.md-bottom.action-toast {
+  height: 2.5em;
+  background-color: #3B5588;
+}
+
+md-toast.action-toast {
+  min-height: 24px;
+}
+
+md-toast.action-toast .message,
+md-toast.action-toast .pusle_ring,
+md-toast.action-toast .button  {
+   display: inline-block;
+   vertical-align: middle;
+}
+
+md-toast.action-toast .pusle_ring {
+    border: 3px solid #1E81E7;
+    -webkit-border-radius: 30px;
+    height: 18px;
+    width: 18px;
+    margin-left: -1.5em;
+    margin-right: 0.8em;
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+
+md-toast.action-toast .button{
+   margin-left: 4em;
+}
+
+md-toast.action-toast button {
+	background-color: #20335E;
+	padding: 3px;
+}

@@ -1,0 +1,9 @@
+<vn-css vn-id="vnloader" vn-css-file="layout/vnloader.css"></vn-css>
+<div class="vision-loader">
+	<div class="loader" ng-show="vnLoaded == false">
+		<div class="message-container">
+			<div class="message">{{vnMessage}}</div>
+			<i class="fa fa-cog fa-spin"></i>
+		</div>
+	</div>
+</div>

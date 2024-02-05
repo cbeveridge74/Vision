@@ -1,0 +1,129 @@
+angular.module('vnDatabaseModule', [],function () {})
+.factory('vnDatabaseFactory', function( $filter, DATE_FORMAT, vnAssemblerFactory ){
+  var factory = {};
+  var db = {};
+  factory = {};
+  factory.db = null;
+  
+  factory.doesDatabaseExist = function( callback ){
+    var store = factory.db.transaction([database[0].name], "readwrite").objectStore(database[0].name);
+    var count = store.count();
+    count.onsuccess = function() {
+      if( callback != null ){
+        callback.call( this, count.result > 0 );
+      }
+    }
+  };
+
+  factory.open = function( successHandler ) {
+    var version = config.local_database_version;
+    var request = indexedDB.open("patientmanagementdatabase", version);
+
+    // We can only create Object stores in a versionchange transaction.
+    request.onupgradeneeded = function(e) {
+      var db = e.target.result;
+      e.target.transaction.onerror = factory.onerror;
+
+      if(db.objectStoreNames.contains(database[0].name)) {
+        angular.forEach( database, function( value, key ){
+          db.deleteObjectStore( value.name );
+        });
+      }
+      angular.forEach( database, function( value, key ){
+        var store = db.createObjectStore(value.name,{keyPath: value.index[0].key});
+        angular.forEach( value.index, function( indexValue, indexKey ){
+          store.createIndex( indexValue.name, indexValue.key );
+        });
+      });
+     
+    };
+
+    request.onsuccess = function(e) {
+      factory.db = e.target.result;
+      bulkLoadData( successHandler );
+    };
+
+    request.onerror = factory.onerror;
+  };
+
+  factory.onerror = function(a, b, c){
+    console.log( a );
+  };
+
+  factory.loadData = function( callback ){
+    if( callback ){
+      callback.apply( this );
+    }
+  };
+
+  factory.bulkLoadData = function( data, item, callback ){
+    var db = factory.db;
+    var trans = db.transaction([item], "readwrite");
+    var store = trans.objectStore(item);
+    
+    angular.forEach(data, function(value, key) {
+        store.put(value);
+    });
+
+    if( callback ){
+      callback();
+    }
+  };
+
+  factory.retrieveData = function( item, callback, index, bounds, count ) {
+
+    var numResults = 10;
+    var db = factory.db;
+    var trans = db.transaction([item], "readwrite");
+    var store = trans.objectStore(item);
+    var results = new Array();
+    var counter = 0;
+    var _index = "by_id";
+    var cursorRequest;
+    if( index != null ){
+      _index = index;
+    }
+
+    if( count != null ){
+      numResults = count;
+    }
+
+    if( bounds != null ){
+      cursorRequest = store.index(_index).openCursor( IDBKeyRange.bound( bounds.start, bounds.end ) );
+    }else{
+      cursorRequest = store.index(_index).openCursor();
+    }
+    cursorRequest.onsuccess = function(e) {
+      
+      var result = e.target.result;
+      if(result && result.value && counter < numResults ){             
+          results.push( result.value );   
+          counter++;      
+          result.continue();
+      }else{
+        if( callback ){
+          callback.call( this, results );
+        }
+      }
+    };
+    cursorRequest.onerror = factory.onerror;
+  };
+  var dataStore = new DataStore();
+
+  var bulkLoadData = function( callback, index ){
+    if( index == null ){
+      index = 0;
+    }
+    var table = database[index];
+    if( table == null ){
+      callback();
+      return;
+    }
+    var data = vnAssemblerFactory[ table.assembler ].call( this, dataStore[ table.data ] );
+    factory.bulkLoadData( data, table.name, function(){
+      bulkLoadData( callback, ++index );
+    });
+  };
+
+  return factory;
+});

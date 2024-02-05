@@ -1,0 +1,33 @@
+angular.module('vnDocumentReviewModule', [],function () {})//'ngRoute', 'ngTouch', 'ngAnimate'
+.controller('vnDocumentReviewController', function( 
+  $scope, 
+  vnNavigationFactory, 
+  vnActionFactory,
+  VN_TASK_SCREENS ){
+	
+  var canHelpWithCallback;
+
+  $scope.init = function ( callback ) {
+    vnActionFactory.canHelpWith( vnActionFactory.REVIEW_DOC, reviewDoc );
+
+    function reviewDoc( data, callback ){
+      vnNavigationFactory.switchScreens( VN_TASK_SCREENS.DOCUMENT_REVIEW );
+      console.log( data );
+      $scope.documents = data[0];
+      canHelpWithCallback = callback;
+      canHelpWithCallback();
+    };
+
+  };
+
+	$scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory( vnNavigationFactory.SCREEN_PREVIOUS ) );
+     };
+
+	
+}).directive('vnDocumentReview', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/components/document/vndocumentreview.html'
+    };
+  });

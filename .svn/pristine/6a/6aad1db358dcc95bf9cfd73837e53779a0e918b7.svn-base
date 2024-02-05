@@ -1,0 +1,411 @@
+angular.module('vnCreateViewModule', [],function () {})
+.factory('vnCreateViewFactory', function( 
+	$rootScope, 
+	$timeout, 
+	vnTaskCreateFactory,
+	vnWorkflowFactory,
+	vnAnnouncementsFactory,
+	vnTaskFactory ){
+	var factory = {};
+	var model;
+
+	factory.setModel = function( value ){
+		model = value
+		$rootScope.$broadcast( "CREATE_VIEW_UPDATED" );
+	};
+
+	factory.getModel = function(){
+		return model;
+	};
+
+	factory.clearModel = function(){
+		factory.setModel({ 
+			selectedRecipients: [],
+			patientCollection: [],
+			documentCollection: [],
+			selectedSubjects: -1,
+			description: "",
+			urgency: "Routine",
+			due: null,
+			isAnnouncement: false
+		});
+	};
+
+	factory.sendTask = function( isTask, callback, suppressToasts ){
+		var model = factory.getModel();
+		var attachments = {};
+		attachments.attachedDocs = model.documentCollection;
+		attachments.selectedPatients = model.patientCollection;
+		var task = vnTaskFactory.buildTask( 
+				model.selectedRecipients, 
+				model.selectedSubjects, 
+				model.description, 
+				-1, 
+				-1,
+				null,
+				model.urgency,
+				false,
+				model.due,
+				null );
+		if( isTask ){
+			
+			attachments.trackingSummary = model.trackingSummary;
+			attachments.recurrenceSummary = model.recurrenceSummary;
+			vnWorkflowFactory.convertTaskToWorkflow( task, attachments, function( workflowedTask ){
+				vnWorkflowFactory.saveWorkflow ( workflowedTask, function(){
+					vnWorkflowFactory.beginWorkflow( workflowedTask.name, suppressToasts );
+					if( callback != null ){
+						callback();
+					}
+				});
+			});
+		}else{
+			task.tasksubjects = {
+				label: model.title
+			};
+			task.status = 0;
+			task.comment = [];
+			delete task.image;
+			delete task.announcement;
+			delete task.priority;
+			delete task.recurrence;
+			delete task.statusimage;
+			delete task.subject;
+			delete task.subjectid;
+			delete task.id;
+			vnAnnouncementsFactory.sendAnnouncement( task );
+			if( callback != null ){
+				callback();
+			}
+		}
+	};
+
+	$rootScope.$on( vnTaskCreateFactory.TASK_CREATE_UPDATED, function( event ){
+		var model = factory.getModel();
+		model.documentCollection = vnTaskCreateFactory.getModel().documentCollection;
+		model.selectedSubjects = vnTaskCreateFactory.getModel().selectedSubjects;
+		model.selectedRecipients = vnTaskCreateFactory.getModel().selectedRecipients;
+		model.description = vnTaskCreateFactory.getModel().description;
+		$timeout( function(){
+			factory.setModel( model );
+		} );
+		
+	});
+	
+	
+	factory.clearModel();
+
+	return factory;
+})
+.directive('vnCreateView', function() {
+    return {
+      restrict: 'E',
+      controller:  function ( 
+			$scope, 
+			$rootScope,
+			$mdToast,
+			$mdDialog,
+			$timeout,
+			vnActionFactory,
+			visionFactory,
+			vnTaskFactory,
+			vnScreenManagementFactory,
+			vnAnnouncementsFactory,
+			vnNavigationFactory,
+			vnWorkflowFactory,
+			vnWorkflowBarFactory,
+			vnTrackingFactory,
+			vnTaskCreateFactory,
+			vnRecurrenceFactory,
+			vnCreateViewFactory,
+			VN_TASK_SCREENS,
+			VN_REP_SCREENS,
+			VN_MAIL_SCREENS
+			){
+      		
+      		$rootScope.$on( "CREATE_VIEW_UPDATED", function(){ 
+      			initModel(); 
+      		});
+
+      		$rootScope.$on( vnTrackingFactory.TRACKING_UPDATED, function( scope ){
+		  		$scope.hasTracking = vnTrackingFactory.hasTracking();
+		  		$scope.model.trackingSummary = vnTrackingFactory.getTracking();
+		  	});
+
+		  	$rootScope.$on( vnRecurrenceFactory.RECURRENCE_UPDATED, function( scope, value ){
+		  		$scope.hasRecurrence = vnRecurrenceFactory.hasRecurrence();
+		  		$scope.model.recurrenceSummary = vnRecurrenceFactory.getRecurrence();
+		  	});
+
+		  	$rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function( event ){
+	  			if( ( $rootScope.screens.VN_REP__HOME == true 
+	  				|| $rootScope.screens.VN_TASK == true
+	  				|| $rootScope.screens.VN_MAIL == true) && $( "." + $scope.classIdentifier + '.create-view .md-dialog-container' ).length < 1 ){
+
+	  				// Okay GLOBAL_COUNT_FOR_SHOWING_VN_CREATE_VIEW_CONFIRMATION_DIALOG is a big hack.  There a multiple instances of this directive dotted around the place
+	  				// and I only want to show this confirmation dialog once.
+	  				if( $( "." + $scope.classIdentifier + ".menu.create-view" ).is(':visible') && ++GLOBAL_COUNT_FOR_SHOWING_VN_CREATE_VIEW_CONFIRMATION_DIALOG == 1 ){
+	  					var confirm = $mdDialog.confirm()
+				          
+				          .content('This will close the task without sending it.')
+				          .ariaLabel('Warning')
+				          //.targetEvent(ev)
+				          .ok('Close without sending')
+				          .cancel("Don't close");
+
+				        $mdDialog.show(confirm).then(function() {
+					      closeDialog();
+					      
+					    }, function() {
+					      GLOBAL_COUNT_FOR_SHOWING_VN_CREATE_VIEW_CONFIRMATION_DIALOG = 0;
+					    });
+	  				}
+		  		}
+
+		  	});
+
+			$scope.recipientCollection = [];
+			
+
+			var closeDialog = function(){
+				$( "." + $scope.classIdentifier + ".menu.create-view" ).removeClass( "open" );
+				$( "." + $scope.classIdentifier + ".menu.create-view" ).attr( "style", "" );
+				vnCreateViewFactory.clearModel();
+				vnTrackingFactory.clearTracking();
+				vnRecurrenceFactory.clearRecurrence();
+				vnScreenManagementFactory.overrideGeneralClick = false;
+				GLOBAL_COUNT_FOR_SHOWING_VN_CREATE_VIEW_CONFIRMATION_DIALOG = 0;
+			};
+
+			var initModel = function(){
+				$scope.model = vnCreateViewFactory.getModel();
+			};
+
+			if( $scope.model == null ){
+				initModel();
+			}
+
+			$scope.handleTrackingClick = function(){
+				vnScreenManagementFactory.overrideGeneralClick = true;
+		  		vnNavigationFactory.switchScreens( VN_TASK_SCREENS.TRACKING );
+		  	};
+
+		  	$scope.handleRecurrenceClick = function(){
+				vnScreenManagementFactory.overrideGeneralClick = true;
+		  		vnNavigationFactory.switchScreens( VN_TASK_SCREENS.RECURRENCE );
+		  	};
+
+		  	$scope.handleAttachClick = function( e ){
+		  		var classIdentifier = $scope.classIdentifier;
+		  		$mdDialog.show({
+					controller: function( $scope ){
+						$scope.handleComputer = function(){
+							angular.element( '#fileElem' ).click();
+							$mdDialog.cancel();
+							// Having to use Jquery to get rid of a residual container
+							$( "." + classIdentifier + '.create-view .md-dialog-container' ).remove();
+						};
+
+						$scope.handleDocuments = function(){
+							vnNavigationFactory.switchScreens( VN_MAIL_SCREENS.DOCUMENT_INBOX );
+							$mdDialog.cancel();
+							// Having to use Jquery to get rid of a residual container
+							$( "." + classIdentifier + '.create-view .md-dialog-container' ).remove();
+						};
+					},
+					targetEvent: e,
+					hasBackdrop: false,
+					parent: $( "." + classIdentifier + ".create-view" ),
+					templateUrl: 'apps/visiontasks/dialog/vnattachdialog.html'
+			    });
+		  	};
+
+		  	var addDocument = function( docName ){
+		  		$scope.model.documentCollection.push( { label: docName } );
+		  	};
+
+			var isDocAlreadyAdded = function( docName ){
+				var isAlreadyAdded = false;
+				angular.forEach( $scope.model.documentCollection, function( vDoc, iDoc ){
+		  			if( vDoc.label == docName ){
+		  				isAlreadyAdded = true;
+		  			}
+		  		});
+		  		return isAlreadyAdded;
+			};
+
+			$scope.handleDocDelete = function( index ){
+				$scope.model.documentCollection.splice( index, 1 );
+			};
+
+			$scope.fileNameChanged = function( docName ){
+				if( !isDocAlreadyAdded( docName ) ){
+					$timeout( function(){ addDocument( docName ); } );
+				}
+				
+				
+			};
+			$( '#fileElem' ).change( function( e ){ 
+				if( !vnScreenManagementFactory.isDoubleClick() ){
+					$scope.fileNameChanged( this.value.replace("C:\\fakepath\\", "") );
+				}
+				
+			 } );
+
+		  	
+
+
+			$scope.init = function ( callback ) {
+				
+				$rootScope.$watch( "screens." + VN_REP_SCREENS.HOME, function( value ){
+					if( value ){
+						handleShow();
+			    	}
+		      	});
+
+				$scope.dueDateLabel = "No due date";
+		      	
+				$scope.$watch( 'model.selectedRecipients', function(){
+					handleMinFieldsChange();
+				}, true );
+
+				$scope.$watch( 'model.selectedSubjects', function(){
+					handleMinFieldsChange();
+				}, true );
+
+				$scope.$watch( 'model.title', function(){
+					handleMinFieldsChange();
+				}, true );
+
+				var handleMinFieldsChange = function(){
+					$scope.mincriteriaachieved = minCriteria();
+					if( $scope.minimumFieldsSatisfiedCallback != null ){
+						$scope.minimumFieldsSatisfiedCallback( {isSatisfied: minCriteria()} );
+						$rootScope.$broadcast( "TASK_MIN_FIELDS_SATISFIED", $scope.mincriteriaachieved );
+					}
+				};
+
+				var minCriteria = function(){
+					if( $scope.model == null 
+						|| $scope.model.selectedRecipients == null 
+						|| ( $scope.model.selectedSubjects == null && $scope.model.title == null ) 
+						|| ( $scope.model.title != null && $scope.model.title.length < 1)){
+						return false;
+					}
+					return $scope.model.selectedRecipients.length > 0 && ( $scope.model.selectedSubjects > 0 || $scope.model.title != null);
+				};
+
+				$scope.mincriteriaachieved = minCriteria();
+
+				visionFactory.retrieveData( database[ TASK_SUBJECTS ].name, function( result ){
+					$scope.subjectCollection = result;
+				});
+				
+			};
+
+			$scope.handleCalendarClick = function( event ){
+				
+			};
+
+			$scope.handleGeneralClick = function( event ){
+				if( event != null ){
+			      	event.stopPropagation();
+			      	$rootScope.$broadcast( "CLOSE_CHIPS" );
+			      	
+			    }
+			};
+
+			$scope.handleSaveClick = function( event ){
+
+				/*
+				var attachments = {};
+				attachments.documentCollection = $scope.model.documentCollection;
+				attachments.selectedPatients = $scope.model.patientCollection;
+				var task = vnTaskFactory.buildTask( 
+						$scope.model.selectedRecipients, 
+						$scope.model.selectedSubjects, 
+						$scope.model.description, 
+						-1, 
+						-1,
+						null,
+						$scope.model.urgency,
+						false,
+						$scope.model.due,
+						null );
+				if( $scope.isTask ){
+					
+					attachments.trackingSummary = $scope.model.trackingSummary;
+					attachments.recurrenceSummary = $scope.model.recurrenceSummary;
+					vnWorkflowFactory.convertTaskToWorkflow( task, attachments, function( workflowedTask ){
+						vnWorkflowFactory.saveWorkflow ( workflowedTask, function(){
+							vnWorkflowFactory.beginWorkflow( workflowedTask.name );
+							closeDialog();
+						});
+					});
+				}else{
+					task.tasksubjects = {
+						label: $scope.model.title
+					};
+					task.status = 0;
+					task.comment = [];
+					delete task.image;
+					delete task.announcement;
+					delete task.priority;
+					delete task.recurrence;
+					delete task.statusimage;
+					delete task.subject;
+					delete task.subjectid;
+					delete task.id;
+					vnAnnouncementsFactory.sendAnnouncement( task );
+					closeDialog();
+				}
+				*/
+				vnCreateViewFactory.sendTask( $scope.isTask, function(){
+					closeDialog();
+				});
+			};
+
+
+			/* NOTE: this is only used on the workflow screen  */
+			$scope.handleAdvancedClick = function( event ){
+				//Take local copied before clearing the workflow
+				var tracking = $scope.model.trackingSummary;
+				var recurrence = $scope.model.recurrenceSummary;
+				vnWorkflowFactory.clearWorkflow();
+				
+				//if( $scope.model.task == null ){
+					
+					vnWorkflowFactory.initialiseWorkflowWithModel({ 
+						selectedRecipients: $scope.model.selectedRecipients,
+						selectedSubjects: $scope.model.selectedSubjects,
+						description: $scope.model.description,
+						urgency: $scope.model.urgency,
+						due: $scope.model.due,
+						isAnnouncement: $scope.model.isAnnouncement
+					}, false);//Don't minimise it. model.selectedPatients
+					vnWorkflowBarFactory.setPatients( $scope.model.patientCollection );
+					vnWorkflowBarFactory.setDocuments( $scope.model.documentCollection );
+					vnWorkflowBarFactory.setTracking( tracking );
+					vnWorkflowBarFactory.setRecurrence( recurrence );
+					vnNavigationFactory.switchScreens( VN_TASK_SCREENS.WORKFLOW );
+					
+				//}else{
+					//vnActionFactory.needHelpWith( vnActionFactory.GENERAL, [ $scope.model.task ], function(){
+				
+					//});
+				//}
+				closeDialog();
+			};
+			var handleShow = function(){
+				vnScreenManagementFactory.overrideGeneralClick = false;
+			};
+	  },
+      scope: {
+      	minimumFieldsSatisfiedCallback: "&minimumFieldsSatisfiedHandler",
+      	isTask: "=vnIsTask",
+      	classIdentifier: "@",
+      	htmlSnippets: "@"
+      },
+      templateUrl: 'apps/components/dialog/vncreateview.html'
+    };
+  });

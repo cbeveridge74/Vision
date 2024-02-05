@@ -1,0 +1,34 @@
+angular.module('vnAppMenuModule', [],function () {})
+.controller('vnAppMenuController', function( 
+    $scope, 
+    $rootScope, 
+    vnScreenManagementFactory, 
+    vnNavigationFactory,
+    vnAppManagementFactory
+     ){
+
+  $rootScope.$watch('currentapp', function( app ){
+    if( app != null ){
+      $scope.currentappicon = app.icon;
+    }
+  });
+
+	$scope.handleAppMenuClick = function( event ){
+      if( $( ".app-menu" ).hasClass( "open" ) ){
+        vnScreenManagementFactory.closeMenus();
+      }else{
+        $scope.registeredApps = vnAppManagementFactory.getApps();
+        vnScreenManagementFactory.openMenu( ".app-menu" );  
+      }
+  };
+
+  $scope.handleItemClick = function(){
+    vnNavigationFactory.switchScreens( this.app.screens[0] );
+  };
+})
+.directive('vnAppMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'menus/vnAppmenu.html'
+    };
+  });

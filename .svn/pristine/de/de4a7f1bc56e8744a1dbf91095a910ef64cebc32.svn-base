@@ -1,0 +1,26 @@
+angular.module('vnNotificationsModule', [],function () {})
+.factory('vnNotificationsFactory', function( $rootScope ){
+	var factory = {};
+	var model;
+
+	factory.setModel = function( value ){
+		model = value
+		$rootScope.$broadcast( "NOTIFICATIONS_UPDATED" );
+	};
+
+	factory.getModel = function(){
+		return model;
+	};
+
+	factory.clearModel = function(){
+		factory.setModel({});
+	};
+	factory.clearModel();
+
+	return factory;
+}).directive('vnNotifications', function() {
+	return {
+	  restrict: 'E',
+	  templateUrl: 'notifications/vnnotifications.html'
+	};
+});;

@@ -1,0 +1,13 @@
+<vn-css vn-id="vnchips" vn-css-file="apps/components/chips/vnchips.css"></vn-css>
+<div class="vision-chips" ng-controller="vnChipsController" ng-init="initChips()"> 
+	<md-chips 
+		vn-placeholder="{{vnPlaceholder}}" 
+		vn-secondary-placeholder='{{vnSecondaryPlaceholder}}' 
+		vn-template='{{vnTemplate}}'
+		collection='collection' 
+		ng-model='ngModel' 
+		add-chips-handler="addChipsHandler" 
+		md-title='{{mdTitle}}'  
+		md-subtitle='{{mdSubtitle}}' 
+		md-item='{{mdItem}}'/>
+</div>

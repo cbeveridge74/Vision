@@ -1,0 +1,408 @@
+/* html { */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* 	border: 0; */
+/* 	overflow: hidden; */
+/* 	height: 100%; */
+/* 	width: 100%; */
+/* 	background-color: #e8f3f6; */
+/* } */
+
+/* body { */
+/* 	padding: 1em 0 0em 0em; */
+/* 	border: none; */
+/* 	margin: 0; */
+/* 	height: 98%; */
+/* 	width: 100%; */
+/* 	overflow: auto; */
+/* 	font-family:  Arial, Helvetica, sans-serif; */
+/* 	font-size: 11pt; */
+/* 	voice-family: inherit; */
+/* 	font-weight: normal; */
+/* 	background-color: #e8f3f6 */
+/* 	color: black; */
+/* } */
+
+div.column{
+	display: inline-block;
+	width: 22%;
+	padding: 0.5em;
+	margin: 0;
+/* 	border: thin solid red;   */
+	vertical-align: middle;
+}
+
+.inps_dataentry_class_block_activity_dialog{
+	display: none !important;	
+}
+
+div.column-vertical{
+	display: block;
+}
+
+div.column-zero-width{
+	width: 0;
+}
+
+div.column-double-width{
+	width: 45%;
+}
+
+div.column-triple-width{
+	width: 70%;
+}
+
+div.column-full-width{
+	width: 100%;
+}
+
+div.section{
+	padding: 0 0 0 0;
+	text-align: left;
+	white-space: nowrap;
+	border: none;
+	border-bottom: none;
+	border-top: none;
+	margin: 1em 0 1em 0;
+}
+
+div.choice{
+	text-align: center;
+	display: inline-block;
+	white-space: normal;
+}
+
+div.section .section{
+	
+}
+
+div.content-right{
+	text-align: right;
+}
+
+div.content-left{
+	text-align: left;
+}
+
+div.text-units{
+	display: inline-block;
+	font-size: small;
+	vertical-align: bottom;
+}
+
+div.allow-wrap{
+	white-space: normal;
+}
+
+div.bold-text {
+	font-weight: bold;
+}
+
+div.score{
+	width: 5em;
+	text-align: center;
+}
+
+div.section.initially-hidden {
+	display: none;
+}
+
+div.title.initially-hidden {
+	display: none;
+}
+
+div.container {
+/* 	width: 1024px; */
+/* 	max-width: 1024px; */
+	min-width:500px;
+	margin: 0 auto;
+	padding: 0em;
+	border-bottom: solid 1px #166778;
+}
+
+div.button-container{
+	border-bottom: none;
+	text-align: right;
+	padding: 2em;
+}
+
+input.radio{
+	width: 1em;
+}
+
+input.medium-width{
+	width: 10em;
+}
+
+input.wide-width{
+	width: 15em;
+}
+
+.block_heading {
+	padding: 0.4em;
+	margin: 0;
+	font-size: x-small;
+}
+
+.formTitle{
+	color: #FFFFFF;	
+	font-size: 20pt;
+	font-weight: bold;
+	padding: 0.5em 0 0.5em 0;
+	font-style: normal;
+}
+
+.section .title{
+	background-color: #03ACE4;
+	text-align: left;
+	width: 400px;
+	height: 1.5em;
+	vertical-align: middle;
+	padding: 0.2em 0 0 1em;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	-moz-box-shadow: 3px 3px 8px 1px #B8B8B8;
+	-webkit-box-shadow: 3px 3px 8px 1px #B8B8B8;
+	margin: 0.8em 0 1 0.5em;
+	font-family:  Arial, Helvetica, sans-serif;
+	font-size: large;
+	color: #FFFFE9;
+}
+
+form{
+	padding: 0 0 0 1em;	
+}
+
+.section-body{
+	background-color: #bbbbbb;
+	padding: 0.5em 0 0.5em 0;	
+	width: 95%;
+	border-top-right-radius: 15px;
+}
+
+.section .section .title{
+	background-color: #7FDFFF;
+	-webkit-box-shadow: 1px 2px 8px 1px #DDDDDD;
+	-webkit-box-shadow: 1px 2px 8px 1px #DDDDDD;
+	color: #FFFFE9;
+	margin-left: 2em;
+}
+
+.section {
+	padding: 0 0 0 0;
+	background-color: #e8f3f6;
+	border: none;	
+}
+
+.section .section {
+	background-color: #FCFFFF;	
+	margin: 0em 0.5em 0 0em;
+	padding: 0.5em 0 2em 1em;
+	-moz-box-shadow: 3px 3px 8px 1px #B8B8B8;
+	-webkit-box-shadow: 3px 3px 8px 1px #B8B8B8;
+}
+
+.section .section .section {
+	background-color: #FEFFFF;	
+	-webkit-box-shadow: 1px 2px 8px 1px #DDDDDD;
+	-webkit-box-shadow: 1px 2px 8px 1px #DDDDDD;
+	margin: 0em 1em 0 2.5em;
+}
+
+.section h2 {
+/* 	background-color: #007585; */
+/* 	color: #FFF; */
+	text-align: left;
+/* 	font-size: xx-large; */
+/* 	height: 2em; */
+	vertical-align: middle;
+	width: 20%;
+	margin-left: 5px;
+/* 	display: none; */
+}
+
+.section .section h2 {
+	background-color: #03ACE4;
+	color: #FFFFFF;
+	text-indent: 2em;
+	font-size: small;
+	height: 1.5em;
+}
+
+.section .section .section h2 {
+	background-color: #7FDFFF;
+	color: #FFFFFF;
+	text-indent: 4em;
+	font-size: small;
+	height: 1em;
+}
+
+#buttonBar{
+	text-align: right;
+	background-color: #e8f3f6;
+	padding: 0.5em 4em 0.5em 0;
+	border-bottom: solid 1px #BBBBBB;
+	border-left: solid 1px #BBBBBB;
+	border-right: solid 1px #BBBBBB;
+}
+
+#buttonSection{
+		
+}
+
+.imageStyle { 
+	margin: 0; 
+	padding: 1em 0 0 0; 
+	width: 100%; 
+	text-align: center;
+	cursor: pointer;
+	background-position: center !important;
+	border-radius: 15px;
+}
+
+#MySplitter {
+	height: 90%;
+	width: 99%;
+	border: 1px solid #aaa;
+}
+
+#rightPane {
+	overflow: auto;
+	margin: 0 0em 0 1em;
+}
+
+#leftPane{
+	margin: 0 0 0 0em;
+	padding: 0 0 0 0em;
+	background-color: #03ACE4;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.vsplitbar {
+	width: 1px;
+	background: #aaa;
+	cursor: true;
+}
+
+
+#navigation{
+	margin:0;
+	padding:1em 0 0 15px;
+	border-top:none;
+	text-align: right;
+}
+
+#navigation .sup{
+	margin:0;
+	padding:0;
+	border-top:2px solid #F5F5F5;
+	list-style-type:none;
+	display:block;
+	font:normal 12px Helvetica, Verdana, Arial, sans-serif;
+	line-height:165%;
+	width:200px;text-align: right;
+}
+
+#navigation .sup a{
+	display:block;
+	text-decoration:none;
+	color:#333333;
+	background:#FFFFF9;
+	padding:0.25em 0 0.25em 20px;
+	width:180px;
+	font:normal 13px Helvetica, Verdana, Arial, sans-serif;
+}
+
+#navigation .sup a:hover{
+	background:#7FDFFF url("img/vert-one_arrow.gif") no-repeat 0 5px;
+}
+
+#navigation .sup a.current,ul.sup li a.current:hover{
+	background:#2693B7 url("img/vert-one_arrow.gif") no-repeat 0 5px;
+	color: #E2F8FF;
+	font-weight: bold;
+}
+
+/* #navigation { */
+/* 	background-color: #B8DBEF; */
+/* } */
+
+/* #navigation .sup { */
+/* 	font-size: 13px; */
+/* 	margin: 10px 10px; */
+/* 	text-align: right; */
+/* } */
+
+#navigation .home {
+	font-size: 16px;
+	text-align: right;
+	font-weight: bold;
+}
+
+#testMenu{
+	display: none;
+	position: absolute;
+}
+
+#testMenu a{
+	color: #000000 !important;
+}
+
+.lozengeLabel{
+	text-align: left;
+	position: absolute;
+	width: 120px;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	color: #555555
+}
+
+a:link {text-decoration: none;color: black;} 
+a:visited {text-decoration: none;color: black;} 
+a:active {text-decoration: none;color: black;} 
+a:hover {text-decoration: none; color: black;}
+
+li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.inps_class_nurse_64_icon{
+	background:no-repeat url('img/nurse_icon_64.png') !important;
+}
+
+.inps_class_community_64_icon{
+	background:no-repeat url('../images/community.png') !important;
+}
+
+.inps_class_blood_48_icon{
+	background:no-repeat url('img/blood_icon_48.png') !important;
+}
+
+.inps_class_new_64_icon{
+	background:no-repeat url('../formbuilder/new-icon.png') !important;
+}
+
+.inps_class_existing_64_icon{
+	background:no-repeat url('../formbuilder/existing-icon.png') !important;
+}
+
+/* 	Full width and Triple width values are making the screen size slightly
+	larger than what is available to the ipad.  Buttons are slightly offscreen
+	and a border is only being displayed on the right side.
+	These hacks are put in just now for wales and NVUG demos, but this should
+	be addressed properly.  Will not work where there are more than
+	three buttons within the frame at once.
+*/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	div.section {
+		border: none;
+	}
+	
+	div.row div.entity input[type=button]:nth-child(3){
+		margin-right: 3em;
+	}
+}

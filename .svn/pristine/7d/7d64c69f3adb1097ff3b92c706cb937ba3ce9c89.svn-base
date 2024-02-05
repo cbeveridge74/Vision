@@ -1,0 +1,30 @@
+angular.module('vnBarModule', [],function () {})//'ngRoute', 'ngTouch', 'ngAnimate'
+
+.controller('vnBarController', function($scope,  vnScreenManagementFactory){
+
+  $scope.applogo = "INPS_logo.svg";
+
+  $scope.handleUserClick = function( event ){
+      if( $( ".bar .user-menu" ).hasClass( "open" ) ){
+        vnScreenManagementFactory.closeMenus();
+      }else{
+        vnScreenManagementFactory.openMenu( ".bar .user-menu" );
+      }
+  };
+
+  $scope.handleButtonClick = function( event ){
+      if( this.appBarIcon.id == HMB ){
+        //vnScreenManagementFactory.initialiseMenuOptions( defaultLeftCommands, defaultRightCommands );
+        vnScreenManagementFactory.toggleBars();
+        vnScreenManagementFactory.closeMenus();
+      }
+      event.stopPropagation();
+  };
+})
+
+.directive('vnBar', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'layout/vnbar.html'
+    };
+  });

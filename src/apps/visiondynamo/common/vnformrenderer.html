@@ -1,0 +1,46 @@
+<div class="vision-dynamo-form-renderer" ng-controller="vnFormLifecycleController"
+	 ng-init="init();">
+	<vn-css vn-id="vndynamoformrenderer" vn-css-file="apps/visiondynamo/common/vnformrenderer.css"></vn-css>
+	<div class="form-list">
+		<div class="list-group">
+		  <a href="#" ng-repeat="form in forms" ng-click="handleFormClick( form.name );" class="list-group-item">{{ form.name }}</a>
+		</div>
+	</div>
+	<div class="form-renderer">
+		<div ng-repeat="field in formDefinition.fields">
+			<div ng-switch on="field.type">
+				<vn-text-input ng-switch-when="TEXT"
+					vn-label="{{ field.label }}"
+					vn-target="{{ field.target }}">
+				</vn-text-input>
+
+				<vn-numeric-input ng-switch-when="NUMERIC"
+					vn-label="{{ field.label }}"
+					vn-target="{{ field.target }}">
+				</vn-numeric-input>
+
+				<vn-date ng-switch-when="DATE"
+					vn-label="{{ field.label }}"
+					vn-target="{{ field.target }}"
+					vn-min="{{ field.minValue }}">
+				</vn-date>
+
+				<vn-text-area ng-switch-when="TEXTAREA"
+					vn-label="{{ field.label }}"
+					vn-target="{{ field.target }}"
+					vn-max="{{ field.maxLength }}">
+				</vn-text-area>
+
+				<vn-combo ng-switch-when="COMBOBOX"
+					vn-label="{{ field.label }}"
+					vn-target="{{ field.target }}"
+					vn-data-source="{{ field.dataSource }}"
+					vn-selected="{{ field.displayValue }}">
+				</vn-combo>
+
+				<div class="units">{{field.unit}}</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

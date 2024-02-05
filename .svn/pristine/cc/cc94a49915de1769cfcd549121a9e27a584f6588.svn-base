@@ -1,0 +1,594 @@
+angular.module('vnSearchModule', [],function () {})//'ngTouch'
+.factory('vnSearchFactory',  function(){
+	var factory = {};
+	factory.substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substrRegex;
+        q = q.trim();
+        q = q.replace( /\s+/g, ' ' );//Replace multiple spaces
+        var splitQuery = q.split( ' ' );
+     
+        // an array that will be populated with substring matches
+        matches = [];
+
+        var myRe = "";
+        splitQuery.forEach( function( value, index ){
+          myRe += "(" + value + ")|";
+        });
+
+        myRe = myRe.substring( 0, myRe.length - 1 );
+        substrRegex = new RegExp(myRe, 'gi');
+     
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          var matchArr = new String( str.Surname + ' ' + str.Forename ).match( substrRegex );
+          if( matchArr != null && ( matchArr.length == splitQuery.length )){
+            // the typeahead jQuery plugin expects suggestions to a
+            // JavaScript object, refer to typeahead docs for more info
+            var stringMatch = str.Surname.toUpperCase() + ", " + str.Forename + " (" + str.DOB + ")"
+            stringMatch = stringMatch.replace( substrRegex, "<span class='highlight'>$1$2$3$4$5$6</span>" );
+            stringMatch = stringMatch.replace( /(\$2)|(\$3)|(\$4)|(\$5)|(\$6)/g, '' );
+            matches.push({ id: str.Id, name: stringMatch });
+          }
+        });
+        cb(matches);
+      };
+    };
+
+	return factory;
+})
+.directive('vnSearch', function () {
+    return {
+      scope: {
+        query: '@',
+        model: '='
+      },
+      restrict: 'E',
+      controller: function(
+        $scope,
+        $rootScope,
+        $timeout,
+        vnSearchFactory ) {
+
+        var ARROW_UP = 38;
+        var ARROW_RIGHT = 39;
+        var ARROW_DOWN = 40;
+        var RETURN = 13;
+        var ESC = 27;
+        $scope.results = [];
+        $scope.suggestions = [];
+        var resultsContainer = $( ".results-container" );
+        var suggestionsContainer = $( ".suggestions-container" );
+        
+        if( $rootScope.loaded == null ){
+          $rootScope.loaded = false;
+          Search.initialise(function(){
+            $timeout( function(){ 
+              $rootScope.loaded = true;
+            });
+          });
+        }
+
+        $( ".vision-search input" ).focus();
+        
+
+        $( 'body' ).click( function(){
+          $timeout( function(){
+            closeOverlays();
+          } );
+          
+        });
+
+        var closeOverlays = function(){
+          $scope.results = [];  
+          $scope.suggestions = []; 
+          $scope.ghostText = "";
+        };
+
+
+        var aliases = {
+          t: {
+            entity: "TEMPERATURE",
+            labeltemplate: "%V% - O/E Temperature",
+            range: [{
+              start: 33,
+              end: 45,
+              displayunits: '\u00B0C',
+              units: 'c'
+            },
+            {
+              start: 90,
+              end: 110,
+              displayunits: '\u00B0F',
+              units: 'f'
+            }],
+            image: "images/inps_logo_blue_32.png"
+          },
+          w: {
+            entity: "WEIGHT",
+            labeltemplate: "%V% - O/E Weight",
+            range: [
+            {
+              start: 1,
+              end: 400,
+              units: 'lbs'
+            },
+            {
+              start: 0.5,
+              end: 180,
+              units: 'kg'
+            }],
+            image: "images/V3/WEIGHT.png"
+          },
+          h: {
+            entity: "HEIGHT",
+            labeltemplate: "%V% - O/E Height",
+            range: [
+            {
+              start: 0.4,
+              end: 2.3,
+              units: 'm'
+            },{
+              start: 40,
+              end: 230,
+              units: 'cm'
+            }],
+            image: "images/V3/HEIGHT.png"
+          },
+          bp: {
+            entity: "BLOOD_PRESSURE",
+            labeltemplate: "BP %V% at 15:59:00 taken  Sitting Cuff: Standard  O/E Blood Pressure",
+            range: [{
+              units: 'mmHg'
+            }],
+            image: "images/V3/BP.png"
+          },
+          pf: {
+            entity: "PEAK_FLOW",
+            labeltemplate: "%V% - O/E Peak Flow",
+            range: [
+            {
+              start: 1,
+              end: 9999.99,
+              units: 'L/min'
+            }],
+            image: "images/inps_logo_blue_32.png"
+          },
+          count: 5,
+          init: function(){
+            // Temperature
+            this.T = this.t;
+            this.temp = this.t;
+            this.temperature = this.t;
+
+            //Weight
+            this.W = this.w;
+            this.weight = this.w;
+
+            //Height
+            this.H = this.h;
+            this.height = this.h;
+
+            //Blood Pressure
+            this.BP = this.bp;
+            this[ "blood pressure" ] = this.bp;
+
+            //PEAK FLOW
+            this.PF = this.pf;
+            this[ "peak flow" ] = this.pf;
+
+            this.bp.specialcasehandler = function( value, aliasinfo, callback ){
+                handleBloodPressure( value, aliasinfo, callback );
+            };
+
+            return this;
+          }
+        }.init();
+
+        var getAliases = function(){
+          //JSON.parse( JSON.stringify( 
+          return aliases;
+        };
+
+        var createDisplayString = function( value, aliasinfo, callback ){
+          if( aliasinfo.specialcasehandler != null ){
+            aliasinfo.specialcasehandler( value, aliasinfo, callback );
+            return;
+          }
+          angular.forEach( aliasinfo.range, function( vRange, iRange ){
+            var displayValue;
+            var number = value.replace(/[A-Za-z/]/gi,'').trim();
+            var letter = value.replace(/[\d.]/g,'').trim();
+
+            if( vRange.start == null || ( number >= vRange.start && number <= vRange.end ) ){
+              var units = vRange.displayunits || vRange.units;  
+              displayValue = number + " " + units;
+            }
+
+            if( displayValue != null && ( letter.length < 1 || vRange.units.toLowerCase().indexOf( letter.toLowerCase() ) > -1 ) ){
+              var aliasInfo = JSON.parse( JSON.stringify( aliasinfo ) );
+              aliasInfo.labeltemplate = aliasInfo.labeltemplate.replace( '%V%', displayValue );
+              callback( aliasInfo );
+            }
+          });
+        };
+
+        var handleBloodPressure = function( value, vAlias, callback ){
+          var bloodPressureReadings = value.split( '/' );
+          if( bloodPressureReadings.length <= 1 ){
+            bloodPressureReadings = value.split( '\\' );
+          }
+
+          if( bloodPressureReadings.length > 1 ){
+            if( ( bloodPressureReadings[0] >= 80 && bloodPressureReadings[0] <= 240 ) &&
+                ( bloodPressureReadings[1] >= 50 && bloodPressureReadings[1] <= 130 )){
+              var aliasInfo = JSON.parse( JSON.stringify( vAlias ) );
+              aliasInfo.labeltemplate = aliasInfo.labeltemplate.replace( '%V%', bloodPressureReadings[0] + "/" + bloodPressureReadings[1] );
+              callback( aliasInfo );
+            }
+          }
+        };
+
+        var updateResults = function( result ){
+          $scope.results.push(result);
+        };
+
+        var convertToArray = function( data ){
+         
+          var keys = Object.keys( data );
+          var array = [];
+
+          keys.forEach( function( vKey, iKey ){
+            var temp = [];
+            data[ vKey ].forEach( function( vData ){
+              temp.push( vData );
+            });
+            temp.reverse();
+            array.push( temp );
+          });
+          return array;
+        };
+
+        var addSearchStrings = function( searchString, suggestions ){
+          
+          var searchStringArray = searchString.split( ' ' );
+          if( suggestions == null || suggestions.length < 2 ){
+            return suggestions;
+          }
+
+          // Get everything but the latest search string
+          searchStringArray.splice( searchStringArray.length - 1, 1  );
+          // Get everything but the latest search suggestion
+          suggestions = suggestions.splice( suggestions.length - 1, 1 );
+
+          var searchStringTemp = "";
+          searchStringArray.forEach( function( vSearchString ){
+            searchStringTemp += vSearchString + " ";
+          });
+          
+          suggestions.forEach( function( vSuggestion ){
+            vSuggestion.forEach( function( vInnerSuggestion ){
+              vInnerSuggestion.word = searchStringTemp + vInnerSuggestion.word;
+            });
+          });
+          return suggestions;
+        };
+
+        var highlightLatestWord = function( searchString, suggestions ){
+          suggestions.forEach( function( vSuggestion ){
+            vSuggestion.forEach( function( vInnerSuggestion ){
+              vInnerSuggestion.word = vInnerSuggestion.word.replace( searchString, '<span class="word">' + searchString + '</span>' );
+            });
+          });
+        };
+
+        var toLowerCase = function( array ){
+          array.forEach( function( vArray, iArray ){
+            vArray.forEach( function( inner ){
+              inner.word = inner.word.toLowerCase();
+            });
+          });
+        };
+
+        var removeExactSearchStringMatch = function( searchString, suggestions ){
+          suggestions.forEach( function( vSuggestion, iSuggestion ){
+            vSuggestion.forEach( function( vInner, iInner ){
+              if( vInner.word.length == searchString.length ){
+                //if( vSuggestion.length > 1 ){
+                  vSuggestion.splice( iInner, 1 );
+                //}
+              }
+            });
+          });
+        };
+
+        var createGhost = function( searchString, suggestions ){
+
+          if( suggestions == null || suggestions[ 0 ] == null ){
+            return;
+          }
+
+          // If the user had moved the selectedIndex of the default
+          if( $scope.selectedItemIndex!= -1 && $scope.selectedItemIndex < suggestions[ 0 ].length - 1 ){
+            $scope.ghostText = suggestions[ 0 ][ $scope.selectedItemIndex ].word;
+            return;
+          }
+
+          var firstSuggestion = suggestions[ 0 ][ suggestions[ 0 ].length - 1 ];
+          if( firstSuggestion != null && firstSuggestion.word.lastIndexOf( '>' ) != firstSuggestion.word.length - 1  ){
+            $scope.ghostText = firstSuggestion.word;
+            return;
+          }
+
+          var secondSuggestion = suggestions[ 0 ][ suggestions[ 0 ].length - 2 ];
+          if( secondSuggestion != null ){
+            $scope.ghostText = secondSuggestion.word;
+          }
+        };
+
+        var handleQueryUpdate = function( nValue, oValue ){
+          $scope.results = [];
+          $scope.hasDrug = false;
+          $scope.hasRead= false;
+          var ghostText = "";
+          $scope.ghostText = "";
+          if( nValue != oValue ){
+            if( nValue.length > 0 ){
+
+              var aliasIndex = nValue.indexOf(':');
+
+              if( aliasIndex > -1 ){
+                var vAlias = getAliases()[ nValue.substr( 0, aliasIndex ) ];
+                value = nValue.substr( aliasIndex + 1 ).trim();
+                if( vAlias != null ){
+                  createDisplayString( value, vAlias, function( aliasInfo ){
+                    updateResults({ id: 0, term: aliasInfo.labeltemplate, aliasinfo: aliasInfo });
+                  });
+                }
+              } else {
+                var aliasMatches = [];
+                var readMatches = [];
+                var aliasCount = 0;
+                angular.forEach( getAliases(), function( aliasValue, aliasIndex ){
+                  if( aliasCount < getAliases().count ){
+                    createDisplayString( nValue, aliasValue, function( aliasInfo ){
+                      aliasMatches.push({ id: 0, term: aliasInfo.labeltemplate, aliasinfo: aliasInfo });
+                    });
+                  }
+                  aliasCount++;
+                });
+
+                if( nValue.endsWith( ' ' || new Number( nValue ) != Number.NaN ) ){
+                    closeOverlays();
+                }else{
+                  //FULL SEARCH IN HERE
+                  var searchStringArray = nValue.split( ' ' );
+                  var lastSearchString = searchStringArray[ searchStringArray.length - 1 ];
+
+                   Search.suggest( nValue.toUpperCase(), [], 7, function( data ){
+                    var suggestions = convertToArray( data.words );
+                    toLowerCase( suggestions );
+                    suggestions = addSearchStrings( nValue, suggestions );
+                    //removeExactSearchStringMatch( nValue, suggestions );
+                    highlightLatestWord( nValue, suggestions );
+                    createGhost( nValue, suggestions );
+                    
+                    $timeout( function(){
+                      $scope.suggestions = suggestions;
+                      $timeout( function(){
+                        repositionContainers();
+                      });
+                    });
+                  });
+                }
+                /*vnSearchFactory.substringMatcher( new DataStore().patients ).call( this, nValue, function( matches ){
+                  matches.sort( function (a, b) {
+                      if (a.name > b.name) {
+                        return 1;
+                      }
+                      if (a.name < b.name) {
+                        return -1;
+                      }
+                      return 0;
+                    });
+                    matches.reverse();
+                    readMatches = matches;
+                });*/
+                var results = readMatches.concat( aliasMatches );
+                //results.unshift( {} );
+                //results.unshift( {} );
+                $scope.results = results;
+
+                
+              }
+              
+              
+            }else{
+              $scope.suggestions = [];
+            }
+            $timeout( function(){
+              repositionContainers();
+            });
+          } 
+        };
+        var unregisterQueryWatcher;
+        var setQueryWatcher = function(){
+          unregisterQueryWatcher = $scope.$watch('query', function( nValue, oValue ) {
+            if( nValue != null && nValue != oValue ){
+              $scope.query = $scope.query.replace( / {2,}/, ' ' );
+              handleQueryUpdate( nValue, oValue );
+            }
+          });
+        };
+        setQueryWatcher();
+
+        $scope.$watch( "results", function( nValue, oValue ){
+            //$scope.selectedItemIndex = ( vValues[1].length > 0 ) ? vValues[1].length - 1  : vValues[0].length - 1;
+            if( nValue != null && nValue != oValue ){
+                $scope.suggestions = [];
+            }
+        });
+
+        $scope.$watch( "suggestions", function( nValue, oValue ){
+          if( nValue != null && nValue != oValue ){
+            $scope.selectedItemIndex = $scope.results.length - 1;
+          }
+        });
+
+        $scope.$watch( "selectedItemIndex", function( nValue, oValue ){
+          if( nValue != null && nValue != oValue ){
+            createGhost( $scope.query, $scope.suggestions );
+          }
+        });
+
+        var repositionContainers = function(){
+          resultsContainer.css( "top", "-" + ( resultsContainer.height() + 25 )  + "px" );
+          suggestionsContainer.css( "top", "-" + ( suggestionsContainer.height() + 20 ) + "px" );
+        };
+        
+        $scope.handleKeydown = function( e ){
+          if( e.keyCode != ARROW_UP 
+          && e.keyCode != ARROW_DOWN
+          && e.keyCode != ARROW_RIGHT
+          && e.keyCode != RETURN 
+          && e.keyCode != ESC
+          || e.keyCode.shiftKey == true ){
+            return;
+          }
+
+          if( e.keyCode == ESC ){
+            closeOverlays();
+          }
+          
+
+          if( $scope.results != null && $scope.results.length > 0 ){
+            length = $scope.results.length;
+          }else if( $scope.suggestions[0] != null ){
+            length = $scope.suggestions[0].length;
+          }else{
+            length = 0;
+          }
+
+          if( length < 1 ){
+            if( e.keyCode == RETURN  ){
+              fullSearch();
+            }
+            return;
+          }
+          
+          if( e.keyCode == ARROW_UP ){
+            if( $scope.selectedItemIndex > 0 ){
+              $scope.selectedItemIndex--;
+            }else if( $scope.selectedItemIndex < 0 ){
+              $scope.selectedItemIndex = length - 1;
+            }else if( $scope.selectedItemIndex == 0 ){
+              $scope.selectedItemIndex = length - 1;
+            }
+            e.preventDefault();
+          }else if( e.keyCode == ARROW_DOWN ){
+            if( $scope.selectedItemIndex < 0 ){
+              $scope.selectedItemIndex = 0;
+            }else if( $scope.selectedItemIndex < length - 1 ){
+              $scope.selectedItemIndex++;
+            }else if( $scope.selectedItemIndex == length - 1 ){
+              $scope.selectedItemIndex = 0;
+            }
+            e.preventDefault();
+          }else if( e.keyCode == ARROW_RIGHT ){
+            if( $scope.ghostText.length > 0 && ( $scope.ghostText.length > $scope.query.length ) ){
+              var query = $scope.ghostText.replace(/<\/?[^>]+>/gi, '').trim();
+              $scope.query = query.replace( /(&#160;)/g, ' ' );
+              $timeout( function(){
+                if( $scope.ghostText.length <= $scope.query.length  ){
+                  $scope.ghostText = "";
+                }
+              });
+            }
+          }else if( e.keyCode == RETURN  ){
+            if(  $scope.selectedItemIndex > -1 ){
+              selectItem();
+            }else{
+              fullSearch();
+            }
+          }
+        };
+        
+
+        var fullSearch = function( callback ){
+          var words = []
+          if( $scope.model.selectedItem != null && $scope.model.selectedItem.word != null ){
+            words = [ $scope.model.selectedItem ];
+          }
+          Search.find( $scope.query, words, '', 20, function( results ){
+            $timeout( function(){
+              console.log( results );
+              var drug = [];
+              var read = [];
+              
+              results.data.forEach( function( vResult ){
+                vResult.term = vResult.term.replace( '<', '&lt;' );
+                vResult.term = vResult.term.replace( '>', '&gt;' );
+                if( vResult.group == 'D' ){
+                  drug.push( vResult );
+                }else{
+                  read.push( vResult );
+                }
+              });
+              drug.reverse();
+              read.reverse();
+              $scope.firstDrugIndex = 0;
+              $scope.hasDrug = drug.length > 0;
+              $scope.firstReadIndex = drug.length;
+              $scope.hasRead = read.length > 0;
+              $scope.results = drug.concat( read );
+              
+              $timeout( function(){
+                if( $scope.results.length > 0 ){
+                  $scope.selectedItemIndex = $scope.results.length - 1;
+                }
+                $scope.ghostText = '';
+                repositionContainers();
+                if( callback != null ){
+                  callback();
+                }
+              });
+            });
+          });
+        };
+
+        $scope.handleClick = function( e ){
+            $scope.selectedItemIndex = this.$index;
+            selectItem();
+        };
+
+        var removeSpan = function( value ){
+          value = value.replace( '<span class="word">', '' );
+          value = value.replace( '</span>', '' );
+          return value;
+        };
+
+        var selectItem = function(){
+          if( $scope.suggestions != null 
+            && $scope.suggestions.length > 0){
+            $scope.model.selectedItem = $scope.suggestions[0][ $scope.selectedItemIndex ];
+            unregisterQueryWatcher();
+            $scope.query = removeSpan( $scope.model.selectedItem.word );
+            setQueryWatcher();
+            fullSearch( function(){
+              $scope.model.selectedItem = null;
+              $scope.selectedItemIndex = $scope.results.length - 1;
+              $scope.ghostText = '';
+            });
+          }else{
+            $scope.model.selectedItem = $scope.results[ $scope.selectedItemIndex ];
+            $scope.query = '';
+            $scope.ghostText = '';
+          }
+        };
+      },
+      templateUrl: function(elem, attr){
+        return 'search/vnsearch.html';
+      }
+    };
+  });

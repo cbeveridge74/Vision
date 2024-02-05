@@ -1,0 +1,16 @@
+<vn-css vn-id="vnbanner" vn-css-file="patient/vnbanner.css"></vn-css>
+<div class="banner" ng-controller="vnBannerController" ng-init="init();" ng-show="isPatientContext()">
+	<div class="name">{{ patient.Surname }}, {{ patient.Forename }} ({{patient.Title}})</div>
+	<div class="remove" ng-show="{{contextButton}}" ng-click="handleContextClick()">Clear patient</div>
+	
+	<div class="detail">
+		<div class="preferred label">Preferred Name</div>
+		<div class="preferred value">{{ patient.Forename }}</div>
+		<div class="dob label">Born</div>
+		<div class="dob value">{{ patient.DOB }}</div>
+		<div class="gender label">Gender</div>
+		<div class="gender value">Unknown</div>
+		<div class="nhs label">NHS Number</div>
+		<div class="nhs value">{{patient.PatientNumber}}</div>
+	</div>
+</div>

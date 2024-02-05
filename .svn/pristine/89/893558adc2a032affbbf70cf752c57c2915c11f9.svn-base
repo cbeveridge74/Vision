@@ -1,0 +1,55 @@
+.login {
+	height: 100%;
+}
+
+.login .content {
+	width: 40%;
+	margin: 9em auto 3em auto;
+	padding: 3em;
+	background-color: #FFF;
+}
+
+.login .simple-form{
+	width: 100%;
+}
+
+.login .splash {
+	padding: 4em 0 0em 0em;
+	text-align: center;
+}
+
+.login .title {
+	font-family: "Segoe UI", "Arial Rounded MT Bold";
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 4em;
+	margin-top: 0.5em;
+}
+
+.login .splash img{
+	width: 12em;
+	vertical-align: top;
+}
+
+.login .button-area{
+	width: 40%;
+	margin: 2em auto;
+	text-align: right;
+}
+
+.login .button-area .md-raised{
+	/*line-height: 25px;
+	width: 10em;
+	height: 5em;
+	background-color: #BBB;*/
+}
+
+
+
+.login .version {
+	position: absolute;
+	font-size: 0.7em;
+	color: #DDDDDD;
+	bottom: 0.8em;
+	right: 1em;
+}

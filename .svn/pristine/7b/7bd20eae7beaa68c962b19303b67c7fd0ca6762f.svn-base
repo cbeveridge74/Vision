@@ -1,0 +1,254 @@
+.mainsection{
+	width: 70%;
+	height: 100%;
+	position: absolute;
+	display: inline-block;
+	white-space: nowrap;
+	background-color: #FFF;
+}
+
+.sidesection{
+	width: 30%;
+	height: 100%;
+	float: right;
+	border-left: solid;
+}
+
+.sidesection .ui-widget-header {
+	border: none;	
+}
+
+.whole-screen{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.command-buttons {
+	text-align: right;
+	vertical-align: bottom;
+	position: absolute;
+	bottom: 4em;
+	left: 5em;
+	
+}
+
+.command-buttons input{
+	vertical-align: bottom;
+}
+
+.entity-choices {
+	font-weight: lighter;	
+}
+
+.entity-user-choices{
+	font-weight: bolder;
+	font-style: oblique;
+}
+
+.formcomponent, .mainsection .components .component {
+	background: url(mockup.png) top center;
+	display: block; 
+	text-indent: -99999px; 
+	overflow: hidden; 
+	background-repeat: no-repeat;
+	height: 22px;
+	width: 180px;
+}
+
+.textareacomponent, .mainsection .components .textareacomponent{
+	background-position: 25px -48px;
+	height: 72px;
+	width: 200px;
+}
+
+.textinputcomponent, .mainsection .components .textinputcomponent{
+	background-position: 25px -1px;
+	height: 25px;
+}
+
+.dropdowncomponent, .mainsection .components .dropdowncomponent{
+	background-position: 25px -150px;
+}
+
+.searchcomponent, .mainsection .components .searchcomponent{
+	background-position: 25px -250px;
+}
+
+.numericcomponent, .mainsection .components .numericcomponent{
+	background-position: 25px -200px;
+	width: 70px
+}
+
+.hiddencomponent, .mainsection .components .hiddencomponent{
+	background-position: 25px -300px;
+}
+
+.datecomponent, .mainsection .components .datecomponent{
+	height: 25px;
+	background-position: 25px -370px;
+}
+
+.sidesection .formcomponent{
+	margin: 2em 0 2em 0;
+}
+
+.componentdock{
+	width: 100%;
+	height: 0.5em;
+	border: medium dashed #BBBBBB;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	-khtml-border-radius: 1em;
+}
+
+.mainsection .componentdock{
+	margin: 1em 0 1em 1em;
+	height: 3em;
+	padding: 0.5em 0 0 0;
+	width: 50%;
+	display:inline-block;
+	white-space: nowrap;
+	
+}
+
+.mainsection .components .componentwrapper{
+	margin: 1em 0 1em 2em;
+	padding: 0.5em 0 0.5em 0;
+	border: medium solid #BBBBBB;
+	width: 100%;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	-khtml-border-radius: 1em;
+	white-space: nowrap;
+}
+
+.mainsection .components .componentwrapper.form-fragment-field, .mainsection .section-containter .componentwrapper.form-fragment-field {
+	display: none;	
+}
+
+.mainsection .componentdock .droptext{
+	padding: 0 0 0 0.75em;
+	font-size: 2em;
+	color: #BBBBBB;
+	font-family: tahoma;
+}
+
+.mainsection .components {
+	margin: 1em 0 0 0;
+}
+
+.new-area-hover {
+	background-color: #DDDDDD;
+}
+
+.droppable-area-hover {
+	background-color: orange;
+}
+
+.component-label{
+	display: inline-block;	
+}
+
+.field-label{
+	display: inline-block;	
+	margin: 0 1em 0 1em;
+}
+
+.field-value{
+	display: inline-block;	
+}
+
+.component-buttons{
+	display: inline-block;
+	padding: 0 0.5em 0em 0;
+}
+
+.component-screen-part{
+	width: 33%;
+	display: inline-block;
+	text-align: right;
+	white-space: nowrap;
+	height: 1.2em;
+}
+
+.component-screen-part.left-component, .component-screen-part.right-component{
+	text-align: left; 
+	
+}
+
+.component-screen-part.right-component{
+	margin-left: 5em;
+}
+
+.delete-image {
+	height: 18px;
+	width: 16px;
+	background-image:url("mockup.png");
+	background-position: -27px -336px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	display: inline-block;
+	margin: 0 0 0em 0;
+	cursor: pointer;
+}
+
+.settings-image {
+	height: 15px;
+	width: 16px;
+	background-image:url("mockup.png");
+	background-position: -5px -338px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	display: inline-block;
+	margin: 0 0 0em 0;	
+	cursor: pointer;
+}
+
+.form-part {
+	width: inherit;
+	text-align: right;
+}
+
+/*** STUFF FROM DATAENTRY ***/
+span.inps_dataentry_class_search_code{
+	display: inline-block;
+	text-align: right;
+	margin-right: 0.5em;
+	width: 5em;
+	font-weight: lighter;
+}
+
+span.inps_dataentry_class_search_code_no_results{
+	display: inline-block;
+	margin: 0em 0.5em 0em 0 !important;
+	padding: 0em 0 0em 0 !important;
+	width: 0%;
+}
+
+
+
+span.inps_dataentry_class_search_code_more_results{
+	display: inline-block;
+	margin: 0em 0.5em 0em 0 !important;
+	color: #7B7557;
+	width: 100%;
+	padding: 0em 0 0em 0 !important;
+	text-align: center;
+	font-size: small;
+}
+
+span.inps_dataentry_class_search_code_more_results_ie7_workaround{
+	display: inline-block;
+	margin: 0em 0.5em 0em 0 !important;
+	color: #7B7557;
+	width: 100%;
+	padding: 0em 0 0em 0 !important;
+	text-align: center;
+	font-size: small;
+}
+/******/
+
+/* .hiddencomponent, .mainsection .components .hiddencomponent{ */
+/* 	background-position: 30px -300px; */
+/* } */

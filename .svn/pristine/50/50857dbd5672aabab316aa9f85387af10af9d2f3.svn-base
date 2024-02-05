@@ -1,0 +1,3 @@
+<div ng-controller="vnNeedsAttentionController" ng-right-click="handleRightClick( $event, this )">
+Needs attention
+</div>

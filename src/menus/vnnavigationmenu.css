@@ -1,0 +1,25 @@
+.navigation {
+	background-color: #60636A;
+}
+
+.navigation{
+	position: absolute;
+	top: -5em;
+	height: 5em;
+	width: 100%;
+	z-index: 3;
+}
+
+.navigation.open{
+	top: 0em;
+}
+
+.navigation .input{
+	position: absolute;
+	right: 1em;
+	top: 1.3em;
+}
+
+.navigation .input-group input{
+	width: 20em;
+}

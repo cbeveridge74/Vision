@@ -1,0 +1,105 @@
+angular.module('vnTaskModule', [],function () {})
+.controller('vnTaskController', function ( 
+	$scope, 
+	$rootScope,
+	visionFactory, 
+	vnTaskFactory,
+	vnScreenManagementFactory,
+	vnNavigationFactory,
+	vnActivitiServiceFactory
+	) {
+	$scope.init = function ( callback ) {
+		$rootScope.$watch( $scope.screenToWatch, function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      });
+	    
+	};
+
+	var handleShow = function(){
+		vnTaskFactory.retrieveTasksFor( $rootScope.user.id, handleTasksRetrieved );
+	};
+
+	$scope.handleRightClick = function( event, element ){
+		vnScreenManagementFactory.handleItemClick( event, element, {}, taskRightCommands, true );
+	};
+
+	$scope.handlePatientClick = function( event ){
+        visionFactory.handlePatientClick( this.item.patient.id );
+        event.stopPropagation();
+	};
+
+	$scope.handleAddClick = function( event ){
+		if( !vnScreenManagementFactory.isDoubleClick() ){
+			//vnNavigationFactory.switchScreens( 'home', 'taskform' );
+		}
+	};
+
+	var handleTasksRetrieved = function( tasks ){
+		
+        if( tasks != null ){
+          angular.forEach( tasks, function( value, index ){
+          	value.patientdisplay = value.patient.Surname.toUpperCase() + ", " + value.patient.Forename + " (" + value.patient.DOB + ")";
+          } );
+          $scope.$apply(function(){
+            $scope.taskreminders = tasks;
+            $scope.patientcentric = false;
+          });
+        }
+      };
+})
+.factory('vnTaskFactory', function( 
+	visionFactory ){
+	var factory = {};
+
+	factory.retrieveTasksFor = function( assigneeId, callback ){
+		var index = 'by_id';
+		var bounds = null;
+
+		/*if( $scope.patientspecific == "true" ){
+			index = 'by_patient';
+			bounds = { start: $rootScope.patientid,
+	          end: $rootScope.patientid
+	        };
+		}*/
+		var item1 = {};
+		item1.item = database[ TASK ].name;
+		item1.bounds = {start: assigneeId, end: assigneeId };
+		item1.index = "by_assignee";
+		item1.count = 100;
+
+
+		var item2 = {};
+		item2.item = database[ CLINICAL_DOCS ].name;
+		item2.count = 100;
+
+		visionFactory.retrieveDataWithJoin( [ item1, item2 ], ["clinicaldocid", "id"],
+			function( tasks ){
+				if( tasks == null || tasks.length < 1 ){
+					callback( tasks );
+					return;
+				}
+				visionFactory.retrieveDataAggregateWithResults( tasks, "patient", database[PATIENT].name, { start: "clinicaldocs.patientid", end:  "clinicaldocs.patientid" },
+				function( resultsWithDocs ){
+					visionFactory.retrieveDataAggregateWithResults( resultsWithDocs, "actiontype", database[ACTION_TYPES].name, { start: "actiontypeid", end:  "actiontypeid" },
+					function( results ){
+						callback( results );
+					} )
+				} );
+			}
+		);
+	};
+
+	return factory;
+})
+.directive('vnTask', function() {
+    return {
+      restrict: 'E',
+      scope: {
+      	patientspecific: '@vnPatientSpecific',
+      	screenToWatch: '@vnWatch'
+      },
+      templateUrl: 'apps/components/tasks/vntask.html'
+    };
+  });

@@ -1,0 +1,19 @@
+<vn-css vn-id="vnmailtaskmenu" vn-css-file="apps/visionmail/parts/vnmailtaskmenu.css"></vn-css>
+
+<!-- 
+To get the individual/bulk options back put this in and take out the hard coded 'one-task-only'
+ng-class="{'one-task-only' : getSelectedItems() == null || getSelectedItems().length < 2 }" 
+-->
+<div class="task-menu menu one-task-only" ng-click="$event.stopPropagation()" >
+	<div class="preferences">
+		<div class="title">Options</div>
+		<md-radio-group ng-model="task.option">
+	      <md-radio-button value="{{INDIVIDUAL}}" class="preference">Individual tasks</md-radio-button>
+	      <md-radio-button value="{{BULK}}" class="preference">1 bulk task</md-radio-button>
+	    </md-radio-group>
+	</div>
+	<div class="menu-container">
+		<div ng-repeat="item in taskMenu" class="option" ng-click="handleTaskCreateClicked( $event )">{{item.label}}</div>
+	</div>
+	
+</div>

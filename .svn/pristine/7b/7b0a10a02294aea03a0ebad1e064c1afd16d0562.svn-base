@@ -1,0 +1,184 @@
+﻿/*angular.element($( ".vision-parent-module" )).ready(function() {
+    // Manually setting up angular as need to load the DB first
+    setTimeout( function(){
+      angular.bootstrap($( ".vision-parent-module" ), [ 'vnVisionModule' ]);
+
+    }, 2 );
+      
+});*/
+angular.module('vnVisionModule', [
+        'vnDatabaseModule',
+        'vnScrollModule',
+        'vnAssemblerModule',
+        'vnSearchModule',
+        'vnBannerModule',
+        'vnNavigationMenuModule',
+        'vnBarModule',
+        'vnTitleBarModule',
+        'vnCommandMenuModule',
+        'vnActionModule',
+        'vnLoginModule',
+        'vnReceptionModule',
+        'vnVisionAppointmentsModule',
+        'vnHubCategoryModule',
+        'vnScreenManagementModule',
+        'vnNavigationModule',
+        'vnAppMenuModule',
+        'vnAppManagementModule',
+        'vnTourModule',
+        'vnUserMenuModule'],function () {
+  }).config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {   
+        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+        var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+        + '|chrome-extension:'
+        +currentImgSrcSanitizationWhitelist.toString().slice(-1);
+        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+    }
+])//'ngRoute', 'ngTouch', 'ngAnimate'
+
+.controller('VisionController', function ( $scope, $window ) {
+  $window.addEventListener("online", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Online' );
+      indicator.removeClass( 'offline' );
+      indicator.addClass( 'online' );
+      indicator.fadeTo( 1000, 0, function(){ 
+        indicator.removeClass( 'online' );
+        indicator.attr( 'style', '' );
+        indicator.text( '' );
+         } );
+    }, true);
+
+    $window.addEventListener("offline", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Offline' );
+      indicator.addClass( 'offline' );
+      indicator.removeClass( 'online' );
+    }, true);
+    
+})
+
+.factory('visionFactory',  function( 
+  $rootScope, 
+  token, 
+  vnAssemblerFactory, 
+  vnDatabaseFactory, 
+  vnNavigationFactory, 
+  vnScrollFactory ){
+  
+  var factory = {};
+  var service;
+  
+
+  factory.TASK = vnDatabaseFactory.TASK;
+  
+
+  if( config.mode === "webservice" ){
+    //service = new WebServices( $http, token, vnAssemblerFactory, databaseFactory );
+  }else{
+    service = new DemoServices( vnAssemblerFactory, vnDatabaseFactory );
+  }
+
+  var dataServices = new DataServices( service );
+
+  factory.updateData = function( item, data, callback ){
+    return dataServices.updateData( item, data, callback  );
+  };
+  
+  factory.retrieveData = function( item, callback, index, bounds, count ){
+    return dataServices.retrieveData( item, callback, index, bounds, count );
+  };
+
+  factory.authenticate = function( username, password, callback ){
+    return dataServices.authenticate( username, password, callback );
+  };
+
+  factory.handlePatientClick = function( patientid ){
+      if( vnScrollFactory.isScrolling() ){
+        return;
+      }
+      $rootScope.patientid = patientid;
+      vnNavigationFactory.switchScreens( 'VN_REP__PATIENT' );
+  };
+
+  return factory;
+})
+
+.run(function(
+  $rootScope, 
+  $window, 
+  $timeout,
+  vnDatabaseFactory, 
+  vnScreenManagementFactory,
+  vnNavigationFactory,
+  visionFactory){
+
+  vnDatabaseFactory.open( function(){
+    $rootScope.dbloaded = true;
+  });
+  $rootScope.extensionUrl = "chrome-extension://"+chrome.runtime.id; 
+
+  vnNavigationFactory.switchScreens( 'VN_LOGIN' ); 
+  vnScreenManagementFactory.initialiseAppBarIcons( defaultAppBar );
+  
+  visionFactory.retrieveData( database[ APP_INFO ].name, function( results ){
+      
+      if( results[0].firstuse == true ){
+        $rootScope.$watch( 'screens.VN_LOGIN', function( value ){
+          if( !value ){
+              $timeout( function(){
+                $( "vn-tour[vn-first-time='true']" ).find( ".tour-container" ).effect("fade", { duration: 300, queue: false }, "easeOutCirc");
+              }, 2000 );
+
+              $timeout( function(){
+                $( "vn-tour[vn-first-time='true']" ).find( ".tour-container" ).fadeOut();
+              }, 8000 );
+          }
+        });
+        results[0].firstuse = false;
+        visionFactory.updateData( database[ APP_INFO ].name, results[0], null );
+      }
+    },null, null);
+})
+.value('DATE_FORMAT', 'yyyy-MM-dd')
+.value('token', '')
+.value( "patientid", null )
+.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                fn(scope, {$event:event});
+            });
+        });
+    };
+});
+
+/*
+This is how a right click menu could be created
+
+$scope.handleRightClick = function( event ){
+    console.log( event );
+    if( !vnScreenManagementFactory.isDoubleClick() ){
+        clientX = event.target.x + 30;
+        clientY = event.target.y - 80;
+        $( ".menu.context" ).css( "left", clientX );
+        $( ".menu.context" ).css( "top", clientY );
+        vnScreenManagementFactory.openMenu( ".menu.context" );
+      }
+  };
+
+<div class="menu context">
+        <div>Create new message...</div>
+        <div>Create new task...</div>
+    </div>
+
+
+         ng-right-click="handleRightClick( $event );"
+  */
+
+

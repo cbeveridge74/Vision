@@ -1,0 +1,67 @@
+angular.module('vnScrollModule', [],function () {})
+.controller('vnScrollController', function( $scope, $rootScope, vnScrollFactory ){
+	$scope.init = function(){
+		console.log( $scope.vnWatch );
+		$rootScope.$watch($scope.vnWatch, function( value ){
+			if( value ){
+				vnScrollFactory.createScroller( "." + $scope.vnClassSelector + " .iscroll-wrapper"  );
+			}
+			
+		});
+	};
+})
+.factory('vnScrollFactory',  function( $rootScope, $timeout ){
+	var factory = {};
+	var scroller = {};
+	var scrolling;
+
+  	factory.createScroller = function( selector ){
+
+  		if( scroller[ selector ] == null ){
+
+          $timeout( function(){
+            scroller[ selector ] = new IScrollZoom(selector, {
+              mouseWheel: true,
+              scrollbars: true,
+              scrollX: true,
+              scrollY: false,
+              zoom: true,
+              zoomStart: 1,
+              zoomMin: 0.8,
+              zoomMax: 1,
+              tap: true,
+              click: true,
+              interactiveScrollbars: true
+            });
+            scroller[ selector ].on('scrollStart', handleScrollStart);
+            scroller[ selector ].on('scrollEnd', handleScrollEnd);
+          }, 100, true );
+
+          var handleScrollStart = function(){
+	        scrolling = true;
+	      };
+
+	      var handleScrollEnd = function(){
+	        setTimeout(function(){
+	          scrolling = false;
+	        }, 500);
+	      };
+        }
+  	};
+
+  	factory.checkIfScrolling = function(){
+	    return scrolling;//$rootScope.homeScroll.moved || $rootScope.scrolling;
+	};
+	return factory;
+})
+.directive('vnScroll', function() {
+	return {
+	  restrict: 'E',
+	  transclude: true,
+	  scope: {
+      	vnClassSelector: '@vnClassSelector',
+      	vnWatch: '@vnWatch'
+      },
+	  templateUrl: 'layout/vnscroll.html'
+	};
+});

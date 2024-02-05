@@ -1,0 +1,26 @@
+{
+  "name": "Vision Practice",
+  "short_name": "Vision Practice",
+  "description": "Vision Chrome App",
+  "version": "0.0.0.51",
+  "manifest_version": 2,
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "http://*/*", 
+    "https://*/*",
+    "*://*/*/",
+    "notifications",
+    {"fileSystem": ["write", "retainEntries", "directory"]}
+  ],
+  "sandbox": {
+     "pages": ["apps/visiontasks/ocr.html"],
+     "content_security_policy":"sandbox allow-scripts;"
+  },
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "images/Vision_32.png", "128": "images/Vision_128.png" }
+}

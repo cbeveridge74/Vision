@@ -1,0 +1,70 @@
+<vn-css vn-id="vndetailview" vn-css-file="apps/components/dialog/vndetailview.css"></vn-css>
+<div class="detail-view menu" ng-controller="vnDetailViewController" ng-init="init()" ng-click="handleGeneralClick( $event );"> 
+    <div class="left">
+    	<div class="sender-container">
+    		<div class="sender">
+    			<div class="icon">
+    				<img ng-src="{{model.assigner.image}}">
+    			</div>
+    			<div class="name">
+    				{{model.assigner.shortlabel}}
+    			</div>
+    		</div>
+    		<div class="task-info">
+    			<div class="sent">
+    				Sent: {{model.sent | date:'dd-MMM-yyyy'}}
+    			</div>
+    			<div class="due">
+    				Due:<span ng-hide="model.due == null"> {{model.due | date:'dd-MMM-yyyy'}}</span><span ng-show="model.due == null"> No due date</span>
+    			</div>
+    			<div class="urgency-container">
+                    <div class="icon urgent fa fa-arrow-up" ng-show="model.urgency == 'Urgent'"></div>
+                    <div class="icon fa fa-arrow-down" ng-show="model.urgency == 'Routine'"></div>
+    				<div ng-class="model.urgency == 'Urgent' ? 'urgency urgent' : 'urgency'">{{model.urgency}}</div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="attachments">
+    		<div class="patient-container">
+    			<div class="icon fa fa-user"></div>
+    			<div class="patient" ng-repeat="patient in model.attachments.selectedPatients">
+    				<div>{{ patient.title }}</div>
+    			</div>
+    			<div class="none-label" ng-show="model.attachments.selectedPatients == null || model.attachments.selectedPatients.length < 1">No patients attached</div>
+    		</div>
+    		<div class="document-container">
+    			<div class="icon fa fa-paperclip"></div>
+    			<div class="document" ng-repeat="document in model.attachments.attachedDocs">
+    				{{ document.label }}
+    			</div>
+    			<div class="none-label" ng-show="model.attachments.attachedDocs == null || model.attachments.attachedDocs.length < 1">No documents attached</div>
+    		</div>
+    		<div class="comment-container">
+    			<div class="icon fa fa-comment-o"></div>
+                <div class="comments-count" ng-if="model.commentscount != null && model.commentscount > 0">{{ model.commentscount }} comment<span ng-if="model.commentscount > 1">s</span></div>
+    			<div class="none-label" ng-if="model.commentscount == null || model.commentscount < 1">No comments</div>
+    		</div>
+    		<div ng-hide="model.taskCount == null" class="workflow-container" ng-click="handleWorkflowClick()">
+    			{{ model.taskCount }} task<span ng-if="model.taskCount > 1">s</span> in this workflow
+    		</div>
+    	</div>
+    </div>
+    <div class="right">
+    	<div class="subject">
+    		{{model.tasksubjects.label}}
+    	</div>
+    	<div class="recipients-container">
+    		<div class="label">To</div>
+    		<div class="recipients" ng-repeat="assignee in model.assigneefull">
+    			{{ assignee.title }}<span ng-if="$index < model.assigneefull.length - 1">,&#160;</span>
+    		</div>
+    	</div>
+    	<div class="content">
+            {{ model.description }}
+    	</div>
+    	<vn-comments ng-model="model"></vn-comments>
+    </div>
+    <div class="actions" ng-if="actions.length > 0">
+        <div ng-click="handleActionClick()" class="action" ng-repeat="action in actions">{{action.label | uppercase }}</div>
+    </div>
+</div>

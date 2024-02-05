@@ -1,0 +1,23 @@
+angular.module('vnUserMenuModule', [],function () {})
+.controller('vnUserMenuController', function( $scope, $rootScope, vnTourFactory, vnNavigationFactory ){
+	$scope.tipslabel = "Show hints";
+	$scope.handleTourToggleClick = function(){
+		if( $scope.tipslabel == "Hide hints" ){
+			$scope.tipslabel = "Show hints";
+		}else{
+			$scope.tipslabel = "Hide hints";
+		}
+		vnTourFactory.toggleTips();
+	};
+
+	$scope.handleSignOutClick = function(){
+		$rootScope.user = null;
+		vnNavigationFactory.switchScreens( "VN_LOGIN" );
+	};
+})
+.directive('vnUserMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'menus/vnusermenu.html'
+    };
+  });;

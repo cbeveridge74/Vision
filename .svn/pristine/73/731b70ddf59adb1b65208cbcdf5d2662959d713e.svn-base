@@ -1,0 +1,189 @@
+angular.module('vnDetailViewModule', [],function () {})
+.factory('vnDetailViewFactory', function( $rootScope ){
+	var factory = {};
+	var model;
+
+	factory.setModel = function( value ){
+		model = value
+		$rootScope.$broadcast( "DETAIL_VIEW_UPDATED" );
+	};
+
+	factory.getModel = function(){
+		return model;
+	};
+
+	factory.clearModel = function(){
+		factory.setModel({});
+	};
+	factory.clearModel();
+
+	return factory;
+})
+.controller('vnDetailViewController', function ( 
+	$scope,
+	$rootScope,
+	$timeout,
+	visionFactory,
+	vnTaskFactory,
+	vnTaskActionFactory,
+	vnCommentsFactory,
+	vnActionFactory,
+	vnScrollFactory,
+	vnDetailViewFactory,
+	vnAnnouncementsFactory,
+	vnScreenManagementFactory,
+	vnNotificationsFactory) {
+
+	$rootScope.$on( vnScreenManagementFactory.GENERAL_CLICK, function( event ){
+		closeDialog();
+	});
+
+	$rootScope.$on( "DETAIL_VIEW_UPDATED", function(){
+		vnCommentsFactory.setCommentsId( vnDetailViewFactory.getModel().commentsid );
+		retrieveData();
+	});
+
+	var retrieveData = function(){
+		var model = vnDetailViewFactory.getModel();
+		//Bit of task specific stuff here
+		if( model != null && model.workflowid != null ){
+			visionFactory.retrieveData( database[ TASK_WORKFLOW ].name, function( workflow ){
+				workflow = workflow[0];
+				var count = 0;
+				angular.forEach( workflow.tasks, function( task, taskIndex ){
+					count += task.length; 
+				});
+				model.taskCount = count;
+				$scope.model = model;
+				$scope.$apply();
+				initialiseCommentCount();
+
+				
+				initialiseActions();
+
+			}, null, { start: model.workflowid, end: model.workflowid });
+		}else{
+			$scope.actions = null;
+			$scope.model = model;
+			initialiseCommentCount();
+		}
+		
+	};
+
+	var initialiseActions = function(){
+		$scope.actions = vnTaskFactory.actions[ vnDetailViewFactory.getModel().status ];
+	};
+
+	var initialiseCommentCount = function(){
+		
+		visionFactory.retrieveData( database[ COMMENTS ].name, function( comments ){
+			comments = comments[0];
+			
+			if( comments == null || comments.comments.length < 1 ){
+				
+				$timeout( function(){
+					$scope.model.commentscount = 0;
+				} );
+			}else{
+				$timeout( function(){
+					$scope.model.commentscount = comments.comments.length;
+				} );
+			}
+		}, null, {start: $scope.model.commentsid, end: $scope.model.commentsid} );
+	};
+
+	$rootScope.$on( "COMMENTS_UPDATED", function( event, data ){
+		if( data.commentid == $scope.model.commentsid ){
+			retrieveData();
+			createNotification();
+		}
+	});
+
+	var createNotification = function(){
+		var model = vnDetailViewFactory.getModel();
+		var assignees = model.assignee.slice();
+		var userIndex = $.inArray( model.assigner.id, assignees );
+		var newCommentCount = 1;
+		if( userIndex < 0 ){
+			assignees = assignees.concat( [ model.assigner.id ] );
+		}
+		
+		vnNotificationsFactory.retrieveNotifications( null, function( notifications ){
+			if( notifications != null ){
+				angular.forEach( notifications, function( vNotification, iNotification ){
+					if( ( vNotification.data[0].commentsid == $scope.model.commentsid ) ){
+						if( vNotification.data[1] == null ){
+							vNotification.data[1] = 0;
+						}
+						vNotification.data[1]++;
+						// Want to send it to the sender as well in this case
+						vNotification.relevantto = assignees;
+						vnNotificationsFactory.updateNotification( vNotification );
+						newCommentCount = -1;
+					}
+				});
+			}
+			if( newCommentCount > -1 ){
+				vnNotificationsFactory.addNotification( 
+				{ label: "Comments updated", 
+				status: 0, 
+				relevantto: assignees,
+				action: vnActionFactory.TASK_DETAIL,
+				data: [ model, newCommentCount ],
+				sender: $rootScope.user.id,
+				type: vnNotificationsFactory.TASK_TYPE } );
+			}
+		});
+
+		
+		
+	};
+
+	$scope.init = function () {
+
+	};
+
+	
+	var handleShow = function(){
+		
+	};
+
+	var closeDialog = function(){
+		var detailView = $( ".menu.detail-view" );
+		if( detailView.hasClass( "open" ) ){
+			detailView.removeClass( "open" );
+			detailView.attr( "style", "" );
+			vnScrollFactory.enableScrolling();
+		}
+		//vnCommentsFactory.clearCommentsId();
+	};
+
+	$scope.handleWorkflowClick = function(){
+		vnActionFactory.needHelpWith( vnActionFactory.GENERAL, [ this.model ], function(){});
+		closeDialog();
+	};
+
+	$scope.handleGeneralClick = function( event ){
+		if( event != null ){
+	      	event.stopPropagation();
+	    }
+	};
+
+	$scope.handleActionClick = function(){
+		var action = this.action;
+		vnTaskActionFactory.handleAction( action, vnDetailViewFactory.getModel(), function(){
+			if( action.id == CRDCLM ){
+				initialiseActions();
+				return;
+			}
+			closeDialog();
+		});
+	};
+
+	
+}).directive('vnDetailView', function() {
+	return {
+	  restrict: 'E',
+	  templateUrl: 'apps/components/dialog/vndetailview.html'
+	};
+});

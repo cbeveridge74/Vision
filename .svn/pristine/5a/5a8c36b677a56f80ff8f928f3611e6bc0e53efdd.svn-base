@@ -1,0 +1,23 @@
+angular.module('vnTaskCreateModule', [],function () {})
+.controller('vnTaskCreateController', function ( 
+	$scope, 
+	$rootScope
+	) {
+	$scope.init = function ( callback ) {
+		$rootScope.$watch( $scope.screenToWatch, function( value ){
+			if( value ){
+				handleShow();
+	    	}
+      });  
+	};
+
+	var handleShow = function(){
+		
+	};
+})
+.directive('vnTaskCreate', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/components/tasks/vntaskcreate.html'
+    };
+  });

@@ -1,0 +1,66 @@
+.validation-container{
+	position: relative;
+	height: 0;
+	width: 0;
+	opacity: 0.9;
+	z-index: 3;
+	
+}
+
+.validation-container.noshow{
+	display: none;
+}
+
+.validation-item span{
+	font-size: 0.9em;
+	white-space: normal;
+}
+
+.validation-item{
+	position: absolute;
+	//background: #CCC;
+	background-color: red;
+	border-radius: 5px;
+	text-align: left;
+	color: #FFF;
+	padding: 0em;
+	top: 7em;
+	left: 1em;
+	height: 0em;
+	width: 14em;
+}
+
+
+
+.validation-arrow{
+	position: absolute;
+	width: 0; 
+	height: 0; 
+
+	top: 6.3em;
+	left: 6.9em;
+}
+
+.validation-arrow.up {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid red;
+}
+
+.validation-arrow.down {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid red;
+}
+
+.validation-arrow.left {
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid red;
+}
+
+.validation-arrow.right {
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid red;
+}

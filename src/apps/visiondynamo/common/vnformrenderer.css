@@ -1,0 +1,65 @@
+.vision-dynamo-form-renderer{
+	padding-top: 5em;
+	padding-bottom: 5em;
+	padding-left: 1em;
+	height: 100%;
+	white-space: nowrap;
+}
+
+.vision-dynamo-form-renderer .form-list,
+.vision-dynamo-form-renderer .form-renderer
+{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.vision-dynamo-form-renderer .form-list{
+	background-color: #666;
+	height: 100%;
+	width: 25%;
+}
+
+.vision-dynamo-form-renderer a.list-group-item{
+	cursor: pointer;
+}
+
+.vision-dynamo-form-renderer .form-renderer{
+	width: 75%;
+	padding-left: 5em;
+}
+
+.vision-dynamo-form-renderer .form-renderer > div > div> *{
+	display: inline-block;
+}
+
+.vision-dynamo-form-renderer .form-renderer .units {
+	color: #AAA;
+	font-size: 0.8em;
+}
+
+.vision-dynamo-form-renderer .vn-label{
+	color: white;
+	margin-left:  1em;
+	margin-top: 1em;
+}
+
+.vision-dynamo-form-renderer button, 
+.vision-dynamo-form-renderer input, 
+.vision-dynamo-form-renderer optgroup, 
+.vision-dynamo-form-renderer select, 
+.vision-dynamo-form-renderer textarea {
+	margin-left: 1em;
+	font-size: 1em;
+}
+
+.vision-dynamo-form-renderer input,
+.vision-dynamo-form-renderer select,
+.vision-dynamo-form-renderer textarea{
+	height: 1.5em;
+	width: 10em;
+}
+
+.vision-dynamo-form-renderer textarea {
+	height: 10em;
+	width: 20em;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Vision Test",
+  "short_name": "Vision Test",
+  "description": "Vision Chrome App",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "http://*/*", "https://*/*",
+    "notifications"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "Vision_32.png", "128": "Vision_128.png" }
+}

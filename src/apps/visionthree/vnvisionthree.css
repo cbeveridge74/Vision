@@ -1,0 +1,596 @@
+.vision-three{
+	height: 100%;
+	width: 100%;
+	background-color: #FFF;
+	
+}
+
+.vision-three,
+.vision-three .ui-widget{
+	font-family: 'Microsoft Sans Serif';
+	font-size: 8pt;
+}
+
+.vision-three .loader{
+	position: absolute;
+	background-color: #2B2B2B;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0.5;
+	vertical-align: middle;
+}
+
+.vision-three .loader .message-container{
+	font-size: 2em;
+	color: #FFF;
+	background-color: #000;
+	height: 5em;
+	width: 20em;
+	opacity: 1;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 15em;
+	border-radius: 3em;
+	padding-top: 1em;
+}
+
+.vision-three .loader .message-container .message {
+	margin-bottom: 0.5em;
+}
+
+.vision-three .fa.fa-cog {
+	font-size: 1.5em;
+}
+
+
+.journal .fa.fa-caret-right {
+	font-size: 1.1em;
+}
+
+.journal-tab .date{
+	//min-width: 6em;
+	min-width: 8%;
+}
+
+.journal-tab .priority{
+	//min-width: 3em;
+	min-width: 4.5%;
+}
+
+.journal-tab .clinician{
+	//min-width: 4em;
+	min-width: 10%;
+}
+
+.journal-tab .user{
+	//min-width: 2em;
+	min-width: 2.5%;
+}
+
+.journal-tab .description{
+	//min-width:43.7em;
+	min-width: 70%
+}
+
+.journal-tab .journal-row .description{
+	//min-width:43.2em;
+	min-width: 70%;
+}
+
+.journal-header,
+.journal-row
+{
+	
+}
+
+.journal-row .data-container{
+	min-width: 70%;
+}
+
+.journal-header{
+	border-bottom: solid #888 1px;
+	background-color: #D6D3CE;
+	border-top: solid #888 1px;
+}
+
+.journal-header .date,
+.journal-header .priority,
+.journal-header .clinician,
+.journal-header .user,
+.journal-header .description{
+	background-color: #D6D3CE;
+	padding: 0.2em;
+	padding-left: 0.5em;
+	margin-right: -0.23em;
+	border: none;
+	border-right: outset 1px;
+}
+.journal-header .date,
+.journal-header .priority,
+.journal-header .clinician,
+.journal-header .user,
+.journal-header .description,
+.journal-row .date,
+.journal-row .priority,
+.journal-row .clinician,
+.journal-row .user,
+.journal-row .data-container,
+.journal-row .data .icon,
+.journal-row .data .description{
+	display:inline-block;
+}
+
+.journal-row .date,
+.journal-row .clinician,
+.journal-row .user{
+	color: #0600FF
+}
+
+.journal-row .data{
+	margin-bottom: 0.5em;
+}
+
+.journal-row .data .icon,
+.journal-row .data .icon img,
+.journal-row .data .description,
+.journal-row .date,
+.journal-row .priority,
+.journal-row .clinician,
+.journal-row .user{
+	vertical-align: top;
+}
+.journal-row {
+
+}
+
+.journal-row .data .icon{
+	
+}
+
+.journal-row .data .icon img{
+	width: 1em;
+}
+
+.journal-row .data .description{
+	color: #B80200;
+	font-weight: lighter;
+}
+
+.journal-row.new .data .description{
+	color: green;
+}
+
+
+/* TABS - Start */
+.vision-three,
+.vision-three .ui-widget-header{
+	//font-family: Tahoma;
+}
+
+.vision-three .ui-widget-header,
+.vision-three .ui-state-active a,
+.vision-three .ui-state-default a{
+ 	background-color: #D6D3CE;
+	border: #D6D3CE;
+}
+
+.vision-three .ui-state-active a, 
+.vision-three .ui-state-active a:link,
+.vision-three .ui-state-default a, 
+.vision-three .ui-state-default a:link,
+.vision-three .ui-state-hover,
+.vision-three .ui-state-default,
+.vision-three .menu-bar .menu-bar-item{
+	color: #000;
+	font-weight: normal;
+	padding: 0.1em 0.5em;
+	border: outset 1px;
+	cursor: default;
+	
+}
+
+.vision-three button{
+	
+}
+
+.vision-three .ui-state-active, .ui-widget-content .ui-state-active, 
+.vision-three .ui-widget-header .ui-state-active{
+	border: #FFF;
+}
+
+.ui-tabs .ui-tabs-nav li {
+	margin: 0;
+}
+
+.vision-three .ui-tabs .ui-tabs-nav{
+	padding: 0;
+	border-radius: 0;
+}
+
+.vision-three .ui-tabs .ui-tabs-panel{
+	padding: 0;
+}
+/* TABS - End */
+
+.vision-three button {
+	border: outset 2px;
+	background-color:  #D6D3CE;
+	width: 5em;
+}
+
+.vision-three .title-bar{
+	background-color: #08246B;
+	color: #FFF;
+	font-weight: bold;
+	padding: 0.2em 0;
+	height: initial;
+}
+
+.vision-three .title-bar .icon,
+.vision-three .title-bar .label{
+	display: inline-block;
+}
+
+.vision-three .title-bar .icon{
+	padding: 0 0.4em
+}
+
+.vision-three .title-bar .label{
+	
+}
+
+.vision-three .title-bar .icon img{
+	width: 1em;
+}
+
+.vision-three .menu-bar,
+.vision-three .icon-bar,
+.vision-three .status-bar{
+	background-color: #D6D3CE;
+}
+
+.vision-three .menu-bar .menu-bar-item{
+	display: inline-block;
+	margin: 0 0.4em 0.2em 0.4em;
+	border: solid 1px #D6D3CE;
+	padding: 0.3em 0.3em;
+}
+
+.vision-three .menu-bar .menu-bar-item:hover{
+	border-top: solid 1px #EBEBEB;
+	border-left: solid 1px #EBEBEB;
+	border-right: solid 1px #555555;
+	border-bottom: solid 1px #555555;
+}
+
+.vision-three .icon-bar{
+	border-top: solid 1px #BBB;
+}
+
+.vision-three .icon-bar .icon-bar-item{
+	display: inline-block;
+	margin: 0 0.2em;
+	border: solid 1px #D6D3CE;
+	padding: 0.3em;
+}
+
+.vision-three .icon-bar .icon-bar-item:hover{
+	border-top: solid 1px #EBEBEB;
+	border-left: solid 1px #EBEBEB;
+	border-right: solid 1px #555555;
+	border-bottom: solid 1px #555555;
+}
+
+.vision-three .icon-bar .icon-bar-item.selected {
+	border: inset 2px;
+}
+
+.vision-three .icon-bar .icon-bar-item img{
+	width: 1em;
+}
+
+.vision-three .main-container{
+	border: ridge 5px;
+	height: calc( 100% - 85px );
+	white-space: nowrap;
+}
+
+.vision-three .main-container .title-bar{
+
+}
+
+.vision-three .status-bar{
+	padding: 0.3em 0.7em;
+	white-space: nowrap;
+}
+
+.vision-three  .status-bar .left,
+.vision-three  .status-bar .right{
+	display: inline-block;
+
+}
+
+.vision-three  .status-bar .left{
+	width: 40%;
+}
+
+.vision-three .status-bar .right{
+	text-align: right;
+	width: 60%;
+}
+
+.vision-three .status-bar .right .indications,
+.vision-three .status-bar .right .name,
+.vision-three .status-bar .right .consultation-type,
+.vision-three .status-bar .right .date,
+.vision-three .status-bar .right .start-time,
+.vision-three .status-bar .right .end-time{
+	display: inline-block;
+	border: inset 2px;
+}
+
+.vision-three .status-bar .right .indications{
+	border: outset 1px;
+	padding: 0.2em;
+}
+
+.vision-three .status-bar .right .name{
+	width: 15em;
+	text-align: left;
+}
+
+.vision-three .status-bar .right .consultation-type{
+	width: 7em;
+	text-align: left;
+}
+
+.vision-three .main-container .left-container,
+.vision-three .main-container .middle-container,
+.vision-three .main-container .right-container{
+	display: inline-block;
+	vertical-align: top;
+	border: inset 1px #D6D3CE;
+}
+
+.vision-three .main-container .left-container,
+.vision-three .main-container .middle-container,
+.vision-three .main-container .right-container{
+	height: calc( 100% - 16px );
+}
+
+.vision-three .main-container .left-container{
+	width: 15%;
+}
+
+.vision-three .main-container .middle-container{
+	width: 65%
+}
+
+.vision-three .main-container .ui-widget-content,
+.vision-three .main-container .middle-container .journal{
+	height: calc( 100% - 25px );
+}
+
+.vision-three .main-container .right-container .ui-widget-content{
+	background-color: #FFF;
+	border: none
+}
+
+.vision-three .main-container .right-container .problems{
+	height: calc( 100% - 60px );
+}
+
+
+.vision-three .main-container .left-container{
+	
+}
+
+.vision-three .main-container .left-container .search-icon{
+	position: absolute;
+	top: 0;
+	right: 0.1em;
+	background-color: #D6D3CE;
+	padding: 0.25em;
+	color: #3D61AB
+}
+
+.vision-three .main-container .left-container .search-container{
+	position: relative;
+}
+
+.vision-three .main-container .left-container input{
+	width: 100%;
+}
+
+.vision-three .main-container .left-container .filters,
+.vision-three .main-container .left-container .bottom{
+	//width: 14em;
+	overflow-x: auto
+}
+
+.vision-three .main-container .left-container .bottom{
+	overflow-x: hidden;
+}
+
+.vision-three .main-container .left-container .filters .filter-item{
+	margin: 0.3em 0.5em; 
+}
+
+.vision-three .main-container .left-container .filters .filter-item .count,
+.vision-three .main-container .left-container .filters .filter-item .name,
+.vision-three .main-container .left-container .filters .filter-item .icon{
+	display: inline-block
+}
+
+.vision-three .main-container .left-container .filters .filter-item .count{
+	
+}
+
+.vision-three .main-container .left-container .filters .filter-item .name{
+	
+}
+
+.vision-three .main-container .left-container .filters .filter-item .icon{
+
+}
+
+.vision-three .main-container .left-container .filters .filter-item .icon img{
+	width: 1.2em;
+	height: 1.2em;
+}
+
+.vision-three .main-container .left-container .bottom{
+	
+}
+
+.vision-three .main-container .left-container .bottom .health{
+	
+}
+
+.vision-three .main-container .left-container .bottom .health .header{
+	background-color: #D6D3CE;
+	padding: 0.4em;
+	border: outset 1px;
+}
+
+.vision-three .main-container .left-container .bottom .health .header .icon,
+.vision-three .main-container .left-container .bottom .health .title .icon,
+.vision-three .main-container .left-container .bottom .health .title .label{
+	display: inline-block;
+
+}
+
+.vision-three .main-container .left-container .bottom .health .header .icon img,
+.vision-three .main-container .left-container .bottom .health .title .icon img{
+	width: 1.2em;
+	margin: 0.2em;
+}
+
+.vision-three .main-container .left-container .bottom .health .title {
+	font-weight: bold;
+}
+
+.vision-three .main-container .left-container .bottom .health .title .icon img{
+	
+}
+
+.vision-three .main-container .left-container .bottom .health .title .label{
+	vertical-align: top;
+	padding-bottom: 0em;
+}
+
+.vision-three .main-container .left-container .bottom .health .content{
+	text-indent: 1em;
+	padding-bottom: 0.4em;
+}
+
+
+.vision-three .main-container .left-container .bottom .info{
+	border-top: outset #D6D3CE;
+}
+
+.vision-three .main-container .left-container .bottom .info .info-row{
+	
+}
+
+.vision-three .main-container .left-container .bottom .info .info-row .icon,
+.vision-three .main-container .left-container .bottom .info .info-row .label{
+	display: inline-block;
+	padding-top: 0.3em;
+}
+
+.vision-three .main-container .left-container .bottom .info .info-row .icon{
+	
+}
+
+.vision-three .main-container .left-container .bottom .info .info-row .icon img{
+	width: 1em;
+}
+
+.vision-three .main-container .left-container .bottom .info .info-row .label{
+	
+}
+
+/*
+<div class="info">
+	<div class="info-row">
+		<div class="icon">
+			<img src="images/inps_logo_blue_32.png">
+		</div>
+		<div class="label">Diabetes Quality Indicators v28.0.00</div>
+	</div>
+	<div class="info-row">
+		<div class="icon">
+			<img src="images/inps_logo_blue_32.png">
+		</div>
+		<div class="label">Hypertension Quality Indicators v2...</div>
+	</div>
+	<div class="info-row">
+		<div class="icon">
+			<img src="images/inps_logo_blue_32.png">
+		</div>
+		<div class="label">CVD Primary Prevention Quality In...</div>
+	</div>
+</div>
+*/
+
+.vision-three .main-container .middle-container{
+	background-color: #D6D3CE;
+}
+
+.vision-three .main-container .middle-container .tab-content{
+	background-color: #FFF
+}
+
+.vision-three .main-container .middle-container .journal{
+
+}
+
+.vision-three .main-container .middle-container .data-entry{
+	width: 100%;
+	white-space: nowrap;
+	background-color: #D6D3CE;
+}
+
+.vision-three .main-container .middle-container .data-entry .top .left,
+.vision-three .main-container .middle-container .data-entry .top .right {
+	display: inline-block;
+	width: 49%;
+}
+
+.vision-three .main-container .middle-container .data-entry .top .left .icon,
+.vision-three .data-entry .top .left .label{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.vision-three .main-container .middle-container .data-entry .top .left .icon{
+	padding: 0 0.4em
+}
+
+.vision-three .main-container .middle-container .data-entry .top .left .label{
+	font-weight: bold;
+}
+
+.vision-three .main-container .middle-container .data-entry .top .left .icon img{
+	width: 1em;
+}
+
+
+
+.vision-three .main-container .middle-container .data-entry .top .right{
+	text-align: right;
+}
+
+.vision-three .main-container .right-container {
+	width:19em;
+}
+
+.vision-three .main-container .right-container .problems{
+	
+}
+
+.vision-three .main-container .right-container .reference{
+	
+}

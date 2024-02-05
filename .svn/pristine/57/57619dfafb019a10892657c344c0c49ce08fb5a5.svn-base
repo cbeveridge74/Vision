@@ -1,0 +1,134 @@
+angular.module('vnScrollModule', [],function () {})
+.controller('vnScrollController', function( $scope, $rootScope, $timeout, vnScrollFactory ){
+	$scope.init = function(){
+		$rootScope.$watch($scope.vnWatch, function( value ){
+			if( value ){
+				vnScrollFactory.createScroller( 
+					"." + $scope.vnClassSelector + " .iscroll-wrapper",
+					$scope.vnXScroll,
+					$scope.vnTopOffset,
+					$scope.vnUseZoomVersion,
+					$scope.vnOnCreatedCallback  );
+			}
+		});
+	};
+})
+.factory('vnScrollFactory',  function( $rootScope, $timeout, $window ){
+	var factory = {};
+	var scroller = {};
+	var scrolling;
+
+	factory.retrieveScroller = function( selector ){
+		var scrollerObject = scroller[ "." + selector + " .iscroll-wrapper" ];
+		if( scrollerObject != null ){
+			return scrollerObject.iScrollWidget;
+		}else{
+			return null;
+		}
+	};
+
+  	factory.createScroller = function( selectorValue, xScroll, topOffsetValue, useZoomVersion, onCreatedCallback ){
+
+  		if( scroller[ selectorValue ] == null ){
+  			scroller[ selectorValue ] = {};
+  		}else{
+  			return;
+  		}
+
+  		var yScroll;
+				
+		if( xScroll == null || xScroll == "true"){
+			xScroll = true;
+			yScroll = false;
+		}else{
+			xScroll = false;
+			yScroll = true;
+			$( selectorValue + " .iscroll" ).css( "width", "100%" );
+		}
+
+		if( useZoomVersion == null ){
+			useZoomVersion = "true";
+		}
+
+  		var handleScrollStart = function(){
+	        scrolling = true;
+	      };
+
+	    var handleScrollEnd = function(){
+	        $timeout(function(){
+	          scrolling = false;
+	        }, 500);
+	    };
+	   
+		scroller[ selectorValue ].selector = selectorValue;
+		scroller[ selectorValue ].topOffset = topOffsetValue;
+		if(useZoomVersion == "true"){
+			scroller[ selectorValue ].iScrollWidget = new IScrollZoom(selectorValue, {
+			mouseWheel: true,
+			scrollbars: true,
+			scrollX: xScroll,
+			scrollY: yScroll,
+			zoom: true,
+			zoomStart: 1,
+			zoomMin: 0.8,
+			zoomMax: 1,
+			tap: true,
+			click: true,
+			interactiveScrollbars: true });
+		}else{
+			scroller[ selectorValue ].iScrollWidget = new IScrollProbe(selectorValue, {
+	          mouseWheel: true,
+	          probeType: 3,
+	          scrollbars: false,
+	          scrollX: xScroll,
+	          scrollY: yScroll,
+	          tap: true,
+	          click: true,
+	          zoom: false
+	        });
+		}
+
+		scroller[ selectorValue ].iScrollWidget.on('scrollStart', handleScrollStart);
+		scroller[ selectorValue ].iScrollWidget.on('scrollEnd', handleScrollEnd);
+		if( onCreatedCallback ){
+			onCreatedCallback();
+		}
+		handleResize( selectorValue );
+		
+  	};
+
+  	factory.handleResize = function( selectorValue ){
+  		handleResize( "." + selectorValue + " .iscroll-wrapper" );
+  	};
+
+  	var handleResize = function( selectorValue ){
+  		var scrollerObject = scroller[ selectorValue ];
+  		if( scrollerObject != null ){
+			$( scrollerObject.selector ).width( $window.innerWidth );
+			$( scrollerObject.selector ).height( $window.innerHeight - scrollerObject.topOffset );
+			if( scrollerObject.iScrollWidget != null ){
+				scrollerObject.iScrollWidget.refresh();
+			}
+		}
+  	};
+
+  	factory.isScrolling = function(){
+	    return scrolling;//$rootScope.homeScroll.moved || $rootScope.scrolling;
+	};
+	return factory;
+})
+.directive('vnScroll', function() {
+	return {
+	  restrict: 'E',
+	  transclude: true,
+	  scope: {
+      	vnClassSelector: '@vnClassSelector',
+      	vnWatch: '@vnWatch',
+      	vnXScroll: '@vnXScroll',
+      	vnTopOffset: '@vnTopOffset',
+      	vnUseZoomVersion : '@vnUseZoomVersion',
+      	vnOnCreatedCallback : '&vnOnCreatedCallback'
+      },
+	  templateUrl: 'layout/vnscroll.html'
+	};
+});

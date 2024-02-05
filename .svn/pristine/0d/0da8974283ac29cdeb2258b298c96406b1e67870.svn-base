@@ -1,0 +1,102 @@
+angular.module('vnPeopleModule', [],function () {})//'ngRoute', 'ngTouch', 'ngAnimate'
+.controller('vnPeopleController', function($scope, $rootScope, visionFactory, vnPeopleFactory, vnScreenManagementFactory){
+
+	$scope.init = function ( callback ) {
+        visionFactory.retrieveData( database[ PERSON ].name, function( results ){
+			retrievePeopleHandler( results );
+			if( callback ){
+            	callback();
+            }
+		},null, null, 17);
+	};
+
+	var retrievePeopleHandler = function( results ){
+	    $scope.$apply(function(){
+	      $scope.persons = results;
+	    });
+	  };
+
+	  var clientX = 0;
+	  var clientY = 0;
+
+	  $scope.handlePersonClick = function( event ){
+	  	if( !vnScreenManagementFactory.isDoubleClick() ){
+	  		clientX = event.target.x -90;
+		  	clientY = event.target.y -80;
+		  	visionFactory.retrieveData( 
+	  		database[ PERSON ].name, 
+	  		retrievePersonHandler, 
+	  		null, 
+	  		{start: this.person.id, end: this.person.id}, 
+	  		null);
+	  	}
+	  };
+
+	  var retrievePersonHandler = function( result ){
+		var person = result[0];
+		person.statusdescription = vnPeopleFactory.retrieveRoleFullDescription( person.status );
+	  	
+	  	$scope.$apply( function(){
+	  		$scope.person = person;
+	  	});
+	  	$( ".menu.card" ).css( "left", clientX );
+	  	$( ".menu.card" ).css( "top", clientY );
+	  	vnScreenManagementFactory.openMenu( ".menu.card" );
+	  };
+
+	  $scope.handleFilterOptionClick = function( event, deselectElement ){
+	  	if( !vnScreenManagementFactory.isDoubleClick() ){
+	  		if( deselectElement != null ){
+	  			$( deselectElement ).removeClass( "selected" );
+	  		}
+		  	var people = $( ".person" );
+		  	var clickedButton = $( event.currentTarget );
+		  	clickedButton.toggleClass( "selected" );
+		  	var selectedFilters = $( ".section .selected" );
+		  	if( selectedFilters.length > 0 ){
+		  		$rootScope.filteron = true;
+		  	} else {
+		  		$rootScope.filteron = false;
+		  	}
+		  	angular.forEach( people, function( value, key ){
+		    	var person = $( value );
+		    	var tags = person.attr( "tags" );
+		    	person.removeClass( 'hide' );
+		    	if( tags!= null ){
+		    		$.each( selectedFilters, function( selectedKey, selectedValue ){
+			    		if( tags.indexOf( $( selectedValue ).attr( "tags" ) ) < 0 ){
+			    			person.addClass( 'hide' );
+			    			return false;
+				    	}
+			    	});
+		    	}
+		    });
+		}
+	    event.stopPropagation();
+	  };
+	
+})
+.factory('vnPeopleFactory', function(){
+	var factory = {};
+	factory.retrieveRoleFullDescription = function( shortstatus ){
+		if( shortstatus == "free" ){
+			return "Available";
+		}else if( shortstatus == "incon" ){
+			return "In Consultation";
+		}else if( shortstatus == "busy" ){
+			return "Busy";
+		}else{
+			return shortstatus;
+		}
+	};
+	return factory;
+})
+.directive('vnPeople', function() {
+    return {
+      restrict: 'E',
+      scope: {
+      	path: '@vnPath'
+      },
+      templateUrl: 'apps/components/people/vnpeople.html'
+    };
+  });

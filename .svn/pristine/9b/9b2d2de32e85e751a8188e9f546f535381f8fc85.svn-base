@@ -1,0 +1,49 @@
+angular.module('vnCardModule', [],function () {})
+.controller('vnCardController', ['$scope', '$rootScope', 'vnScreenManagementFactory', function( $scope, $rootScope, vnScreenManagementFactory){
+
+
+  $scope.init = function(){
+      
+  };
+
+  /* Doing this using mousedown etc to get more control over when the card looks pressed */
+  $scope.mousedown = function( e ){
+    if( !$( e.target ).hasClass( 'action' ) ){
+      $( e.currentTarget ).addClass( 'pressed' );
+    }
+  };
+
+  $scope.mouseup = function( e ){
+    $( e.currentTarget ).removeClass( 'pressed' );
+  };
+
+  $scope.supress = function( e ){
+    if( vnScreenManagementFactory.isDoubleClick() ){
+      return;
+    }
+
+    e.stopPropagation();
+  }; 
+
+  $scope.handleActionClick = function(){
+    if( vnScreenManagementFactory.isDoubleClick() ){
+      return;
+    }
+    console.log( $scope.cardentity );
+  };
+}])
+.directive('vnCard', function() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: {
+        onfilterimage: '@vnOnFilterImage',
+        offfilterimage: '@vnOffFilterImage',
+        cardactions: '=vnCardActions',
+        cardentity: '=vnCardEntity'
+      },
+      templateUrl: function(elem, attr){
+        return 'layout/vncard.html';
+      }
+    };
+});

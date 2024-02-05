@@ -1,0 +1,14 @@
+<div class="vision-dynamo-text-input" ng-controller="vnTextInputController">
+	<vn-css vn-id="vndynamotextinput" vn-css-file="apps/visiondynamo/common/component/textinput/vntextinput.css"></vn-css>
+	<div class="vn-label">{{ label }}</div>
+	<input id="{{ target }}" ng-blur="handleChange();" ng-model="value">
+	<vn-validation-message
+        vn-item-top="0.5em"
+        vn-item-left="0em"
+        vn-item-height="3.5em"
+        vn-item-width="12.5em"
+        vn-arrow-top="0em"
+        vn-arrow-left="6em"
+        vn-arrow-direction="up"
+        vn-text="{{message}}"></vn-validation-message>
+</div>

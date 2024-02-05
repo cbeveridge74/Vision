@@ -1,0 +1,20 @@
+<vn-css vn-id="vnstats" vn-css-file="apps/visiontasks/stats/vnstats.css"></vn-css>
+<div class="vision-stats">
+	<vn-title-bar 
+		vn-title="Stats"
+		vn-show-back-button="true"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false">
+	</vn-title-bar>
+	<div class="chart-title">Completed &amp; overdue tasks per user</div>
+	<div class="chart" ng-if="showCharts"
+		bar-chart 
+		bar-data= 'personData'
+		bar-x='name'
+		bar-y='["complete", "overdue"]'
+		bar-labels='["Completed Today", "Overdue"]'
+		bar-colors='["#31C0BE", "#c7254e"]'>
+	</div>
+	<vn-stats-menu></vision-stats-menu>
+	<vn-overdue-task-notification></vn-overdue-task-notification>
+</div>

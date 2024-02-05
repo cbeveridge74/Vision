@@ -1,0 +1,11 @@
+angular.module('vnRecurrenceModule', [],function () {})
+.controller('vnRecurrenceController', function( $scope ){
+	$scope.repeats = 1;
+	$scope.enddatechoice = 1;
+})
+.directive('vnRecurrence', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vnrecurrence.html'
+    };
+});

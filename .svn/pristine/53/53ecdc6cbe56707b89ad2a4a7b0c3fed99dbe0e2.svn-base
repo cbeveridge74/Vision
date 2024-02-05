@@ -1,0 +1,181 @@
+angular.module('vnActivitiServiceModule', [],function () {})
+.factory('vnActivitiServiceFactory', function( $http, vnDatabaseFactory, user ){
+	var factory = {};
+	factory.createUsers = function( callback ){
+		
+		var req = {
+				 method: 'GET',
+				 url: 'http://localhost:8080/activiti-rest/service/identity/users',
+				 headers: {
+				   'Content-Type': 'application/json',
+				   'Accept': 'application/json'
+				   ,'Authorization': 'Basic ' + btoa( "kermit:kermit" )
+				 }
+				};
+
+		$http(req).
+		success(function(data, status, headers, config) {
+			if( data.data.length < 4 ){
+				vnDatabaseFactory.retrieveData( database[ PERSON ].name, function( data ){
+			 	if( data.length > 0 ){
+
+			 		var req = {
+					 method: 'POST',
+					 url: 'http://localhost:8080/activiti-rest/service/identity/users',
+					 headers: {
+					   'Content-Type': 'application/json',
+					   'Accept': 'application/json'
+					   ,'Authorization': 'Basic ' + btoa( "kermit:kermit" )
+					 }
+					};
+
+			 		angular.forEach( data, function( user, userIndex ){
+			 			req.data = {
+							  "id": user.email,
+							  "firstName":user.firstname,
+							  "lastName":user.lastname,
+							  "email":user.email,
+							  "password":user.password
+							};
+						$http(req).
+						success(function(data, status, headers, config) {
+							if( callback != null ){
+								callback( data, status, headers, config );
+							}
+							
+						}).
+						error(function(data, status, headers, config) {
+							console.log( data );
+						});
+			 		});
+			 	}
+		 	});
+			}
+			
+		}).
+		error(function(data, status, headers, config) {
+			console.log( "fail" );
+		});
+	};
+
+	factory.retrieveTasksForAssignee = function( assignee, callback ){
+
+		var req = {
+		 method: 'GET',
+		 url: 'http://localhost:8080/activiti-rest/service/runtime/tasks/5035',
+		 headers: {
+		   'Content-Type': 'application/json',
+		   'Accept': 'application/json'
+		   ,'Authorization': 'Basic ' + user.token
+		 },
+		 data:{
+			  "taskId" : 5035
+			}
+		};
+
+		$http(req).
+		success(function(data, status, headers, config) {
+			if( callback != null ){
+				callback( data, status, headers, config );
+			}
+		}).
+		error(function(data, status, headers, config) {
+			console.log( data );
+		});
+	};
+
+	factory.startProcess = function( processDefinitionId,
+									 consentRequired,
+									 consentGiven,
+									 appointmentRequired,
+									 patientToViewDocument,
+									 callback ){
+
+		var req = {
+		 method: 'POST',
+		 url: 'http://localhost:8080/activiti-rest/service/runtime/process-instances',
+		 headers: {
+		   'Content-Type': 'application/json',
+		   'Accept': 'application/json',
+		   'Authorization': 'Basic ' + user.token
+		 },
+		 data:{
+			   "processDefinitionId":"process:4:7504",
+			   "variables": [
+			      {
+			        "name":"processDefinitionId",
+			        "value":processDefinitionId
+			      },
+			       {
+			        "name":"consentRequired",
+			        "value":consentRequired
+			      },
+			       {
+			        "name":"consentGiven",
+			        "value":consentGiven
+			      },
+			       {
+			        "name":"appointmentRequired",
+			        "value":appointmentRequired
+			      },
+			      {
+			        "name":"patientToViewDocument",
+			        "value":patientToViewDocument
+			      }
+			   ]
+			}
+		};
+
+		$http(req).
+		success(function(data, status, headers, config) {
+			if( callback != null ){
+				callback( data, status, headers, config );
+			}
+		}).
+		error(function(data, status, headers, config) {
+			console.log( data );
+		});
+	};
+
+	factory.addTask = function( 
+		assignee, 
+		delegationState, 
+		description, 
+		dueDate, 
+		name, 
+		owner, 
+		parentTaskId, 
+		priority,
+		callback ){
+		var req = {
+		 method: 'POST',
+		 url: 'http://localhost:8080/activiti-rest/service/runtime/tasks',
+		 headers: {
+		   'Content-Type': 'application/json',
+		   'Accept': 'application/json'
+		   ,'Authorization': 'Basic ' + user.token
+		 },
+		 data:{
+			  "assignee" : assignee,
+			  "delegationState" : delegationState,
+			  "description" : description,
+			  "dueDate" : dueDate,
+			  "name" : name,
+			  "owner" : owner,
+			  "parentTaskId" : parentTaskId,
+			  "priority" : priority
+			}
+		};
+
+		$http(req).
+		success(function(data, status, headers, config) {
+			if( callback != null ){
+				callback( data, status, headers, config );
+			}
+		}).
+		error(function(data, status, headers, config) {
+			console.log( data );
+		});
+	};
+	return factory;
+});

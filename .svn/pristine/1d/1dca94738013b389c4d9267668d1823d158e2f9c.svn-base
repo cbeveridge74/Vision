@@ -1,0 +1,40 @@
+<vn-css vn-id="vnworkflow" vn-css-file="apps/visiontasks/workflow/vnworkflow.css"></vn-css>
+<div class="vision-workflow">
+	<vn-title-bar 
+		vn-title="Task Advanced"
+		vn-show-back-button="true"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false"
+		vn-show-commands="true"
+		vn-commands="workflowInformCommands"></vn-title-bar>
+	<div class="attached" ng-show="attacheddocument != null">
+		<div class="close" ng-click="handleAttachmentDeleteClick()">&#215;</div>
+		<div class="title">{{attacheddocument.name}}</div>
+		<div class="subtitle">{{attacheddocument.patient.Surname | uppercase }}, {{ attacheddocument.patient.Forename }} ({{ attacheddocument.patient.DOB | date:'dd-MMM-yyyy' }})</div>
+	</div>
+	
+	<vn-scroll 
+		vn-class-selector="vision-workflow"  
+		vn-watch="screens.VN_TASK__WORKFLOW"
+		vn-x-scroll="true"
+		vn-top-offset="102">
+
+		<div class="start">
+			<div class="circle"></div>
+		</div>
+		
+		<div class="brick" ng-repeat="outeritem in taskoutercreators">
+			<div class="arrow">
+				&#10143;
+			</div>
+			<vn-brick></vn-brick>
+		</div>
+	</vn-scroll>
+	<div class="attach-options menu">
+		<div class="attach-option" ng-click="handlePatientClick( $event )">Patient</div>
+		<div class="attach-option" ng-click="handleClinicalDocumentClick( $event )">Clinical Document</div>
+	</div>
+</div>
+	
+	
+	

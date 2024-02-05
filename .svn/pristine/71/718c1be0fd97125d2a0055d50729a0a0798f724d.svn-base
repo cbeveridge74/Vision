@@ -1,0 +1,152 @@
+<div class="detail-container">
+	<div ng-show="currentMailItem != null">
+		<div class="title">{{ currentMailItem.type.displayname }}</div>
+		<div class="information fa fa-info-circle " ng-click="handleInformationClick()"></div>
+		
+	</div>
+	<div class="content" ng-if="currentMailItem.file == null" ng-show="currentMailItem != null">
+		<div class="tests" ui-sortable="sortableOptions" ng-model="currentMailItem.results">
+		<!-- | orderBy:'testname'" -->
+			<div class="test" 
+				 ng-repeat="result in currentMailItem.results"
+				 ng-class="{ 'abnormal' : parseFloat( result.testvalue ) < parseFloat( result.testlimits.low ) || parseFloat( result.testvalue ) > parseFloat( result.testlimits.high ) }">
+
+				<div class="name-container">
+					<div class="name">{{ result.testname }}</div>
+					<div class="units">({{result.testlimits.low}} - {{result.testlimits.high}} {{ result.testunits }})</div>
+				</div>
+				<div class="gutter">
+					<div ng-if="parseFloat( result.testvalue ) > parseFloat( result.testlimits.high )" class="fa fa-hand-o-up"></div>
+					<div ng-if="parseFloat( result.testvalue ) < parseFloat( result.testlimits.low )" class="fa fa-hand-o-down"></div>
+				</div>
+				<div class="value">{{ result.testvalue }}</div>
+			</div>
+
+		</div>
+		
+		<div class="charts" ng-if="currentMailItem.type.displayname == 'Haematology'">
+				<div class="chart">
+				<!--xaxistickvalues="xAxisTickFormat()"-->
+			        <nvd3-sparkline-chart
+				    	data="haemData"
+				        id="haem"
+				        width="130"
+				        height="70"
+				        x="xFunction()"
+				        y="yFunction()"
+				        interactive="false"
+					    margin="{left:30, top:30, bottom:0, right:40}">
+				        	<svg></svg>
+				    </nvd3-sparkline-chart>
+				    <div class="label">MCV</div>
+				</div>
+				<div class="chart">
+			        <nvd3-sparkline-chart
+				    	data="bloodData"
+				        id="blood"
+				        width="130"
+				        height="50"
+				        x="xFunction()"
+				        y="yFunction()"
+				        interactive="false"
+					    showValue="false"
+					    margin="{left:30, top:30, bottom:0, right:40}"
+					    alignValue="false">
+				        	<svg></svg>
+				    </nvd3-sparkline-chart>
+				    <div class="label">Hct</div>
+				</div>
+				<div class="chart">
+			        <nvd3-sparkline-chart
+				    	data="mcvData"
+				        id="mcv"
+				        width="130"
+				        height="50"
+				        x="xFunction()"
+				        y="yFunction()"
+				        interactive="false"
+					    showValue="false"
+					    margin="{left:30, top:30, bottom:0, right:40}"
+					    alignValue="false">
+				        	<svg></svg>
+				    </nvd3-sparkline-chart>
+				    <div class="label">Ferritin</div>
+				</div>
+
+				<div class="chart">
+			        <nvd3-sparkline-chart
+				    	data="haemData"
+				        id="haem1"
+				        width="130"
+				        height="50"
+				        x="xFunction()"
+				        y="yFunction()"
+				        interactive="false"
+					    showValue="false"
+					    margin="{left:30, top:30, bottom:0, right:40}"
+					    alignValue="false">
+				        	<svg></svg>
+				    </nvd3-sparkline-chart>
+				    <div class="label">B12</div>
+				</div>
+				<div class="chart">
+			        <nvd3-sparkline-chart
+				    	data="bloodData"
+				        id="blood1"
+				        width="130"
+				        height="50"
+				        x="xFunction()"
+				        y="yFunction()"
+				        interactive="false"
+					    showValue="false"
+					    margin="{left:30, top:30, bottom:0, right:40}"
+					    alignValue="false">
+				        	<svg></svg>
+				    </nvd3-sparkline-chart>
+				    <div class="label">Folate</div>
+				</div>
+			</div>
+		<div class="meta menu">
+			<div class="left">
+				<div>
+					<div class="label">Date</div>
+					<div class="value">{{ currentMailItem.meta.reportdate | date:'dd-MMM' }}</div> 
+				</div>
+				<div>
+					<div class="label">Report Id</div>
+					<div class="value">{{ currentMailItem.meta.reportid }}</div> 
+				</div>
+				<div>
+					<div class="label">Order Id</div>
+					<div class="value">Unavailable</div> 
+				</div>
+				<div>
+					<div class="label">Comments</div>
+					<div class="value">None</div> 
+				</div>
+			</div>
+			<div class="right">
+				<div>
+					<div class="label">Request</div>
+					<div class="value">{{ currentMailItem.type.displayname }}</div> 
+				</div>
+				<div>
+					<div class="label">Type</div>
+					<div class="value">{{ currentMailItem.type.displayname }}</div> 
+				</div>
+				<div>
+					<div class="label">Source</div>
+					<div class="value">{{ currentMailItem.type.displayname }}</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="scan-image" ng-if="currentMailItem.file != null">
+		<div class="overlay">
+			<div class="fa fa-cog" ng-click="handleScanClick()"></div>
+		</div>
+		
+     	<img ng-src="/data/clinicaldocs/{{ currentMailItem.file }}">
+    </div>
+</div>

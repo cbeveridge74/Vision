@@ -1,0 +1,119 @@
+
+
+
+<script src="apps/visionforms/legacy/mainscree.js" type="text/javascript" ></script> 
+<script src="apps/visionforms/legacy/jquery.qtip-1.0.0-rc3.min.js"></script>
+<script src="apps/visionforms/legacy/search.js"></script>
+<script src="apps/visionforms/legacy/FieldObject.js"></script>
+<script src="apps/visionforms/legacy/FieldModel.js"></script>
+<script src="apps/visionforms/legacy/FormObject.js"></script>
+<script src="apps/visionforms/legacy/FormModel.js"></script>
+<script src="apps/visionforms/legacy/XMLUtil.js"></script>
+<script src="apps/visionforms/legacy/EntityModel.js"></script>
+<script src="apps/visionforms/legacy/EntityObject.js"></script>
+<script src="apps/visionforms/legacy/DateComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/HiddenComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/SearchComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/NumericComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/TextComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/DropDownComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/GenericComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/mainscreen.js"></script>
+<script src="apps/visionforms/legacy/mainscreen.css"></script>
+<script src="apps/visionforms/legacy/ComponentUtil.js"></script>
+<script src="apps/visionforms/legacy/settings.js"></script>
+<script src="apps/visionforms/legacy/existingforms.js"></script>
+<script src="apps/visionforms/legacy/save.js"></script>
+<script src="apps/visionforms/legacy/landingscreen.js"></script>
+<script src="apps/visionforms/legacy/configuration.js"></script>
+<script src="apps/visionforms/legacy/inps_form_workflow_framework.js"></script>
+<script src="apps/visionforms/legacy/FormBuilderState.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroXMLUtil.js"></script>
+<script src="apps/visionforms/legacy/macro/macromainscreen.js"></script>
+<script src="apps/visionforms/legacy/macro/macroexistingforms.js"></script>
+<script src="apps/visionforms/legacy/macro/macroconfiguration.js"></script>
+<script src="apps/visionforms/legacy/macro/macrosettingsscreen.js"></script>
+<script src="apps/visionforms/legacy/macro/macroformfragmentfieldchoices.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroFieldModel.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroFormBuilderState.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroScreenBreakComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroScreenSectionComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroQuestionnaireComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/macro/MacroFormFragmentComponentSettings.js"></script>
+<script src="apps/visionforms/legacy/jquery.json2xml.js"></script>
+<script src="apps/visionforms/legacy/jquery.tools.min.js"></script>
+<script src="apps/visionforms/legacy/jquery.jec-1.3.3.js"></script>
+
+<link rel="stylesheet" type="text/css" href="apps/visionforms/legacy/mainscreen.css">
+<link rel="stylesheet" type="text/css" href="apps/visionforms/legacy/macro/macromainscreen.css">
+<link rel="stylesheet" type="text/css" href="apps/visionforms/legacy/settings.css">
+<link rel="stylesheet" type="text/css" href="apps/visionforms/legacy/configuration.css">
+<link rel="stylesheet" type="text/css" href="apps/visionforms/legacy/jquery-ui-1.8.13.custom.css">
+<link rel="stylesheet" type="text/css" href="apps/visionforms/legacy/inps_community.css">
+
+
+	<div class="whole-screen">
+		<div id="mainsection" class="mainsection" >
+			<div class="components"><!-- REQUIRED -->
+			</div>
+			<div class="componentdock">
+				<div class="droptext" >Drop component here...</div>
+			</div>
+			<div class="componentdock right">
+				<div class="droptext" >Drop component here...</div>
+			</div>
+			<div id="divMask">
+			</div>
+		</div>
+		<div id="sidesection" class="sidesection" >
+		 	<div class="tab-container">
+			 	<ul>
+					<li><a href="#widgets">Widgets</a></li>
+					<!--<li><a href="#entities">Entities</a></li>-->
+					<li><a href="#info">Form Information</a></li>
+				</ul>
+				<div id="widgets">
+					<div class="formcomponent textinputcomponent"><!-- REQUIRED --></div>
+					<div class="formcomponent dropdowncomponent"><!-- REQUIRED --></div>
+					<div class="formcomponent numericcomponent"><!-- REQUIRED --></div>
+					<div class="formcomponent searchcomponent"><!-- REQUIRED --></div>
+					<div class="formcomponent hiddencomponent"><!-- REQUIRED --></div>
+					<div class="formcomponent datecomponent"><!-- REQUIRED --></div>
+				</div>
+			 	<!--<div id="entities">
+					<inps-form-field:search id='entitySearch' 
+						name=""
+						labelName="READ_TERM"
+						label=''
+						uniqueId="entity"
+						source="FormBuilderState.mainScreenInstance.entitySearchService"
+						forInclusionInForm="true"
+						ignoreUserInputOnSearching="true"
+						customisedSearchResultsRenderer="FormBuilderState.mainScreenInstance.renderEntityResult"
+						hasFocus="false"
+						minChars="2"
+						onSelect="FormBuilderState.mainScreenInstance.handleEntitySearchSelect"
+						placeholder="Choose entity..."
+						/>
+					<table id="attributeListTableMapping"></table>
+				</div>-->
+				<div id="info">
+					<div class="form-item"><div class="field-label">Title</div>
+					<input id="formtitle" type="text" class="field-value"></input></div>
+				</div>
+		 	</div>
+		</div>
+	
+	<div class="command-buttons">
+		<input type="button" value="Save" id="mainSaveButton"=></input>
+		
+		<!--<input type="button" value="Preview" onclick="FormBuilderState.mainScreenInstance.createPreview();"></input>
+		<input type="button" value="Cancel" onclick="FormBuilderState.mainScreenInstance.handleCancelMainscreen( event );"></input>-->
+	</div>
+	<div id="configurationDialog"><!-- REQUIRED --></div>
+	<div id="settingsDialog"><!-- REQUIRED --></div>
+	<div id="saveDialog"><!-- REQUIRED --></div>
+	<div id="formsDialog"><!-- REQUIRED --></div>
+</div>
+
+

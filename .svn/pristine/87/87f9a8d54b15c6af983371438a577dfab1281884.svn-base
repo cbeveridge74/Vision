@@ -1,0 +1,74 @@
+angular.module('vnTrackingModule', [],function () {})
+.factory('vnTrackingFactory', function( $rootScope ){
+  var factory = {};
+  factory.TRACKING_UPDATED = "TRACKING_UPDATED";
+  var tracking;
+
+  factory.clearTracking = function(){
+     factory.setTracking({
+        assigneeChange: { selected: false, label: "assignees", type: "t" },
+        commentChange: { selected: false, label: "comments", type: "t" },
+        idle: { selected: false, label: "idle time", type: "p" },
+        idleTime: { selected: false, label: "", type: "p" },
+      });
+  };
+
+  factory.setTracking = function( value ){
+    tracking = value;
+    $rootScope.$broadcast( factory.TRACKING_UPDATED );
+  };
+
+  factory.getTracking = function(){
+    return tracking;
+  };
+
+  factory.hasTracking = function(){
+    var hasTracking = false;
+    angular.forEach( factory.getTracking(), function( trackValue, trackIndex ){
+      if( trackValue.selected != null && trackValue.selected == true ){
+        hasTracking = true;
+      }
+    });
+    return hasTracking;
+  };
+  return factory;
+})
+.controller('vnTrackingController', function( 
+  $scope, 
+  $rootScope, 
+  vnNavigationFactory, 
+  vnWorkflowFactory,
+  vnTrackingFactory ){
+  
+  $scope.informCommands = trackingInformCommands;
+
+  $scope.initTracking = function () {
+    $scope.$watch( 
+      "screens.VN_TASK__TRACKING", function( value ){
+        if( value ){
+          handleShow();
+        }
+      });
+  };
+
+  var handleShow = function(){
+    $scope.track = vnTrackingFactory.getTracking();
+  };
+
+	$rootScope.$on( "INFORM_COMMAND_SELECTED", function( scope, value ){
+  		if( value == TRKSVE ){
+        vnTrackingFactory.setTracking( $scope.track );
+  			vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory ( vnNavigationFactory.SCREEN_PREVIOUS ) );
+  		}else if( value == TRKCNL ){
+  			vnNavigationFactory.switchScreens( vnNavigationFactory.retrieveScreenFromHistory ( vnNavigationFactory.SCREEN_PREVIOUS ) );
+  		}
+  	});
+})
+.directive('vnTracking', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visiontasks/workflow/vntracking.html'
+    };
+});
+
+

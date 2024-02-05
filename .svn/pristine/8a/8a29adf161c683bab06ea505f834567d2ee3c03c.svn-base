@@ -1,0 +1,188 @@
+var config = {
+	system: "CLOUD_PRACTICE_1",
+	web_server: "https://www.inpsprototypes.co.uk",
+	socket_server: "https://www.inpsprototypes.co.uk",
+	local_database_version: 19,
+	mode: "demoservices",
+	start_date: "2014-07-11",
+	end_date: "2014-07-30"
+};
+
+var DEFAULT_APP = "VN_DYNAMO";
+
+// Cross app helpers
+var BOOK_SLOT = {
+	name: "BOOK_SLOT",
+	description: "booking a slot"
+};
+
+var TASK 		= 0;
+var THERAPY 	= 1;
+var APPOINTMENT = 2;
+var MAIL 		= 3;
+var REMINDER 	= 4;
+var PERSON 		= 5;
+var DISCUSSION 	= 6;
+var PATIENT 	= 7;
+var APP_INFO 	= 8;
+var ENTITY 		= 9;
+var ATTRIBUTE	= 10;
+var FORMS		= 11;
+var CLINICIANS	= 12;
+var FORMS		= 13;
+
+var database = [{
+	name: 'task',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_date",
+		key: "date"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleTasks",
+	data: "demoDataTasks"
+},
+{
+	name: 'therapy',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleTherapies",
+	data: "demoDataTherapies"
+},
+{
+	name: 'appointment',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_date",
+		key: "date"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleAppointments",
+	data: "demoDataAppointments"
+},
+{
+	name: 'mail',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleMail",
+	data: "demoDataMail"
+},
+{
+	name: 'reminder',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_patient",
+		key: "patient.id"
+	}],
+	assembler: "assembleReminders",
+	data: "demoDataReminders"
+},
+{
+	name: 'person',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assemblePersons",
+	data: "demoDataPersons"
+},
+{
+	name: 'discussion',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleDiscussions",
+	data: "demoDataDiscussions"
+},{
+	name: 'patient',
+	index: [{
+		name: "by_id",
+		key: "Id"
+	}],
+	assembler: "assemblePatients",
+	data: "patients"
+},
+{
+	name: 'appinfo',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleAppInfo",
+	data: "appInfo"
+},
+{
+	name: 'entity',
+	index: [{
+		name: "by_id",
+		key: "FIELD1"
+	}],
+	assembler: "assembleEntity",
+	data: "demoEntityData"
+},
+{
+	name: 'attribute',
+	index: [{
+		name: "by_id",
+		key: "id"
+	}],
+	assembler: "assembleAttributes",
+	data: "demoAttributesData"
+},
+{
+	name: 'forms',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_name",
+		key: "name"
+	}],
+	assembler: "assembleForms",
+	data: "demoFormsData"
+},
+{
+	name: 'clinicians',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_name",
+		key: "name"
+	}],
+	assembler: "assembleClinicians",
+	data: "demoClinicians"
+},
+{
+	name: 'dynamoforms',
+	index: [{
+		name: "by_id",
+		key: "id"
+	},{
+		name: "by_name",
+		key: "name"
+	}],
+	assembler: "assembleDynamoForms",
+	data: "demoDynamoForms"
+}];

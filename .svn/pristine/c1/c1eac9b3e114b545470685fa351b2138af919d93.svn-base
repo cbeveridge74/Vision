@@ -1,0 +1,103 @@
+.bar {
+	height:2.7em;
+	width: 100%;
+	top: 0;
+}
+
+.bar img, .bar > div {
+	position: absolute;
+	cursor: pointer;
+	top: 0.2em;
+	color: #FFF;
+	height: 32px;
+}
+
+.bar .options img{
+	position: relative;
+	width: 1.1em;
+	padding-top: 0.5em;
+	margin-right: 0.3em;
+	margin-left: 0.3em;
+}
+
+.bar .options img,
+.bar .options .option{
+	display: inline-block;
+	vertical-align: top;
+}
+
+
+
+.bar .user{
+	left: 3em;
+	font-size: 1.2em;
+}
+
+.bar .user {
+	padding-top: 0.3em;
+}
+
+.bar .right-button-container{
+	position: absolute;
+	right: 0.5em;
+	top: 0em;
+	width:20em;
+	text-align: right;
+}
+
+.bar .right-button-container img{
+	position: relative;
+}
+
+
+.bar .menu {
+	position: absolute;
+	display: none;
+	top: 2.7em;
+	background-color: #073763; 
+	z-index: 3;
+}
+
+.bar .user-menu {
+	font-size: 1.2em;
+	width: 15em;
+	height: 12em;
+	padding: 0.5em;
+	top: 0em;
+	left: 2em;
+	font-family: "Arial";
+}
+
+
+
+.bar .user-menu .detail{
+	padding: 0.3em 0 0.8em 0;
+	font-size: 0.8em;
+}
+
+.bar .user-menu .option {
+	padding: 0.8em 0 0 0;
+}
+
+.bar .inps-logo {
+	left: 0.5em;
+}
+
+.bar .hamburger {
+	right: 0.5em;
+	z-index: 1;
+}
+
+.bar .user-menu.open {
+	display: inline-block;
+	left: 2.5em;
+}
+
+.bar .button{
+	opacity: 0.9;
+}
+
+.bar .button:hover
+{
+	opacity: 1;
+}

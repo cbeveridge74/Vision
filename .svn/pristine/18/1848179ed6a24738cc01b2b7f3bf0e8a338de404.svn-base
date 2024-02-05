@@ -1,0 +1,219 @@
+.vision-docman{
+	width: 100%;
+	height: 100%;
+	background-color: #FFF;
+}
+
+.vision-docman .title-bar .awesome-icon {
+	-webkit-transition: width 0.3s ease;
+	width: 3em;
+}
+
+.vision-docman .title-bar .awesome-icon.focused {
+	text-align: right;
+	padding-right: 0.5em;
+	width: 16em;
+}
+
+.vision-docman .title-bar .awesome-icon.focused:hover {
+	background-color: transparent;
+}
+
+.vision-docman .title-bar .awesome-icon.focused .fa{
+	color: #20335E;
+}
+
+.vision-docman .absolute-tether {
+	position: relative;
+}
+
+.vision-docman  .vision-patient-chips{
+	position: absolute;
+	right: 3em;
+	top: -4em;
+	background-color: transparent;
+	z-index: 2;
+	display: none;
+	
+}
+
+.vision-docman  .vision-patient-chips .chipsInput{
+	line-height: 20px;
+	margin-top: 1em;
+	margin-left: 0.5em;
+	text-indent: 0.3em;
+}
+
+
+.vision-docman md-tabs {
+	overflow: visible;
+}
+
+.vision-docman .frequent-filters {
+	position: absolute;
+	width: 30em;
+	height: 5em;
+	z-index: 1;
+	left: calc( 100vw / 3 );
+	top: -5.5em;
+}
+
+.vision-docman  .title-bar .inform-command-buttons {
+	margin-top: 1.5em;
+}
+
+.vision-docman .document-item{
+	height: 3em;
+	margin: 1em;
+	font-size: 1.5em;
+}
+
+.vision-docman .document-item .name{
+	margin: auto 0em;
+}
+
+.vision-docman .document-item .patient{
+	font-size: 0.7em;
+}
+
+.vision-docman .md-whiteframe-z1 {
+	margin: 1em;
+	cursor: pointer;
+
+}
+
+.vision-docman .md-whiteframe-z1.selected{
+	border: solid 1px orange;
+}
+
+.vision-docman .md-whiteframe-z1:active{
+	-webkit-transform: translate(1px,1px);
+}
+
+
+/* Filters */
+.vision-docman .frequent-filters{
+	text-align: center;
+	white-space: nowrap;
+}
+
+.vision-docman .frequent-filters .frequent-filter,
+.vision-docman .include-filter {
+	position: relative;
+	display: inline-block;
+	margin: 1em;
+	cursor: pointer;
+	width: 5em;
+	text-align: center;	
+}
+
+.vision-docman .frequent-filters .frequent-filter .count {
+	position: absolute;
+	top: -0.7em;
+	right: 0.5em;
+	background-color: red;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 0.75em;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.vision-docman .frequent-filters .frequent-filter .image:hover {
+	background-color: #E7EFF3
+}
+
+.vision-docman .docman-filter-menu md-select{
+	padding-bottom: 1em;
+}
+
+.vision-docman .include-filter .image,
+.vision-docman .frequent-filters .frequent-filter .image{
+	font-size: 2.5em;
+	color: #20335E;
+	border: solid 1px #20335E;
+	border-radius: 5px;
+	width: 2em;
+	height: 1.8em;
+	padding-top: 0.1em;
+}
+
+.vision-docman .frequent-filters .frequent-filter .image{
+	width: 2em;
+	height: 2em;
+	font-size: 1.5em;
+	margin: 0 auto;
+}
+
+.vision-docman .include-filter .label,
+.vision-docman .frequent-filters .frequent-filter .label {
+	font-size: 0.8em;
+	white-space: nowrap;
+}
+
+.vision-docman .include-filter{
+	text-align: left;
+}
+
+.vision-docman .include-filter .image,
+.vision-docman .include-filter .label{
+	text-align: center;
+	color: #FFF;
+	border-color: #FFF;
+}
+
+.vision-docman .include-filter .image:hover{
+	background-color: #3B5588;
+}
+
+.vision-docman .docman-filter-menu, .vision-docman .docman-sort-menu
+{
+	position: absolute;
+	top: 0em;
+	display: none;
+	background-color: #20335E;
+	color: #FFF;
+	right: 3.5em;
+	z-index: 2;
+	width: 32em;
+	padding: 0.5em;
+}
+
+
+.vision-docman .docman-filter-menu md-select-label{
+	width: 100%;
+}
+
+.vision-docman .docman-sort-menu{
+	right: 7.5em;
+}
+
+.vision-docman .docman-sort-menu.open{
+	right: 8em;
+}
+
+.vision-docman .docman-filter-menu.open{
+	right: 4em;
+}
+
+.vision-docman .docman-filter-menu .clear-button{
+	text-align: right;
+	padding: 1em;
+	padding-bottom: 0;
+}
+
+.vision-docman .docman-filter-menu .filter-section-title{
+	text-align: left;
+	font-size: 1.5em;
+}
+
+.vision-docman .docman-filter-menu .filter-section md-select.md-default-theme .md-select-label.md-placeholder,
+.vision-docman .docman-filter-menu .filter-section md-select.md-default-theme:not([disabled]):focus .md-select-label {
+	color: #FFF;
+}
+
+.vision-docman .docman-filter-menu .filter-section{
+	background-color: #264586;
+	margin: 1em 0.5em;
+	padding: 0.1em 0;
+}

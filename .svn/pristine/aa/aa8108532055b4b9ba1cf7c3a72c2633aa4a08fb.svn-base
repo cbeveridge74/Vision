@@ -1,0 +1,32 @@
+<vn-css vn-id="vntracking" vn-css-file="apps/visiontasks/workflow/vntracking.css"></vn-css>
+<div class="vision-tracking" ng-controller="vnTrackingController" ng-init="initTracking()">
+	<vn-title-bar 
+		vn-title="Tracking"
+		vn-show-back-button="false"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false"
+		vn-show-commands="true"
+		vn-commands="informCommands"></vn-title-bar>
+	
+	    <form name="userForm">
+	    	<section>
+				<md-subheader class="md-primary">Task</md-subheader>
+				<div class="content">
+					<md-checkbox layout="center center" aria-label="task assignee change" ng-model="track.assigneeChange.selected" class="md-primary">
+					    task assignee change
+					</md-checkbox>
+					<md-checkbox layout="center center" aria-label="comment added" ng-model="track.commentChange.selected" class="md-primary">
+					    comment added
+					</md-checkbox>
+				</div>
+			</section>
+			<section>
+				<md-subheader class="md-primary">General</md-subheader>
+				<div class="general content">
+					<md-checkbox aria-label="no activity" ng-model="track.idle.selected" class="md-primary noactivity">notify me every </md-checkbox><input ng-model="track.idleTime.selected" class="noactivity"><div class="noactivity"> hours if no activity</div>
+				</div>
+
+			</section>
+		</form>
+	
+</div>

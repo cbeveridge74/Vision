@@ -1,0 +1,78 @@
+angular.module('vnTitleBarModule', [],function () {})
+.controller('vnTitleBarController', function( 
+  $scope, 
+  $rootScope, 
+  vnSearchFactory, 
+  vnScreenManagementFactory ){
+	
+  
+
+  var hasBeenShown = false;
+
+  $scope.init = function(){
+    if( !hasBeenShown ){
+      if( $scope.showsearch ){
+          $('.title-bar .typeahead').typeahead({
+            hint: false,
+            highlight: true,
+            minLength: 1
+          },
+          {
+            name: 'patients',
+            displayKey: 'name',
+            source: vnSearchFactory.substringMatcher(new DataStore().patients)
+          });
+
+          $('.title-bar .typeahead').on( 'typeahead:selected', handleSelected );
+      }else{
+        //Don't show
+      }
+      hasBeenShown = true;
+    }
+
+    if( $scope.backbuttonimg == null ){
+      $scope.backbuttonimg = "images/left_arrow_blue.svg";
+    }
+  };
+
+  $scope.handleInformCommandClick = function( e ){
+    $rootScope.$broadcast( "INFORM_COMMAND_SELECTED", this.informCommand.id, e );
+  };
+
+  $scope.handleBackButtonClick = function(){
+    $scope.backbuttonHandler();
+    if( vnScreenManagementFactory.isDoubleClick() ){
+      return;
+    }
+  };
+
+  function handleSelected (event, selected){
+      if( vnScreenManagementFactory.isDoubleClick() ){
+        return;
+      }
+      $('.title-bar .typeahead').typeahead('val', '');
+      $rootScope.patientid = selected.id;
+      $scope.searchHandler();
+  }
+})
+.directive('vnTitleBar', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        title: '@vnTitle',
+        backbutton: '=vnShowBackButton',
+        backbuttonimg: '@vnBackButtonImg',
+        showsearch: '=vnShowSearch',
+        showcommands: '=vnShowCommands',
+        commands: '=vnCommands',
+        backbuttonHandler: '&vnBackbuttonHandler',
+        searchHandler: '&vnSearchHandler'
+      },
+      link: function(element, attr, scope){
+        scope.backbuttonhandler = attr.backbuttonhandler;
+      },
+      templateUrl: function(elem, attr){
+        return 'layout/vntitlebar.html';
+      }
+    };
+});

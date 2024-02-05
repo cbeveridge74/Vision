@@ -1,0 +1,151 @@
+.tasks-cat .list-group{
+	position: fixed;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 10px;
+	min-height: 40.2em; 
+}
+
+.tasks-cat .no-data{
+	height: 100%;
+	margin-top: 1em;
+	font-size: 1.5em;
+	text-align: center;
+	color: #1e81e7;
+}
+
+
+.category .tasks.list-group-item{
+	margin-bottom: 2em;
+	width: 25em;
+	vertical-align: bottom;
+	box-shadow: 3px 3px 5px #888888;
+	margin-right: 1em;
+	border-radius: 3px;
+}
+
+.taskreminders > div {
+	vertical-align: top;
+	display: inline-block;
+	height: 6em;
+}
+
+.taskreminders .actions {
+	display: block;
+	height: 1.8em;
+	background-color: #2F4B9B;
+	color: white;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.taskreminders .action {
+	padding-top: 0.2em;
+	text-align: right;
+	padding-right: 1em;
+	font-weight: light;
+}
+
+.taskreminders > div > div {
+	margin: auto 0;
+	display: block;
+	margin-left:5px;
+}
+
+.tasks .status{
+	width: 2em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+.tasks .status img{
+	width: 2em;
+	height: 2em;
+}
+
+.taskreminders .patient > div{
+	display: inline-block;
+}
+
+.taskreminders .subject{
+	font-size: 0.9em;
+	height: 1em;
+	margin-top: -0.3em;
+	color: #999;
+}
+
+.taskreminders .workflow {
+	font-size: 1.1em;
+	margin-top: 0em;
+	color: #000
+}
+
+.taskreminders .patient {
+	margin-top: 0.8em;
+	height: 2em;
+	font-size: 0.75em;
+	padding-left: 0.5em;
+	cursor: pointer;
+}
+
+.taskreminders .patient img {
+	width: 1em;
+	vertical-align: top;
+	padding-top: 0.1em;
+	margin-right: 0.2em;
+}
+
+.taskreminders .image {
+	padding-top: 0.2em;
+}
+
+.taskreminders .image img{
+	width: 2.1em;
+}
+
+.tasks{
+	color: #20335E
+}
+
+.tasks .assigner,
+.tasks .subject{
+	display: inline-block;
+	width: 50%
+}
+
+.tasks .status {
+	padding-left: 0.5em;
+}
+
+.tasks .topline {
+	
+}
+
+.tasks .subject {
+	font-size: 1.5em;
+}
+
+.tasks .assigner {
+	text-align: right;
+}
+
+.tasks .description {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+
+.tasks .patientname {
+	padding-top: 1em;
+	vertical-align: bottom;
+	font-weight: bold;
+}
+
+
+
+.tasks .documentname {
+	
+}

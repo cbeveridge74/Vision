@@ -1,0 +1,519 @@
+/*angular.element($( ".vision-parent-module" )).ready(function() {
+    // Manually setting up angular as need to load the DB first
+    setTimeout( function(){
+      angular.bootstrap($( ".vision-parent-module" ), [ 'vnVisionModule' ]);
+
+    }, 2 );
+      
+});*/
+angular.module('vnVisionModule', [
+        'vnDatabaseModule',
+        'vnScrollModule',
+        'vnAssemblerModule',
+        'vnSearchModule',
+        'vnBannerModule',
+        'vnNavigationMenuModule',
+        'vnBarModule',
+        'vnTitleBarModule',
+        'vnCommandMenuModule',
+        'vnActionModule',
+        'vnLoginModule',
+        //'vnDynamoModule',
+        'vnReceptionModule', //***********
+        //'vnVisionAppointmentsModule', //*************  REMEMBER TO TURN GA BACK ON IN VLAUES AT BOTTOM!!!
+        'vnVisionDocumentManagementModule', //********
+        'vnScanModule',
+        'vnVisionTasksModule', //************
+        'vnVisionAnnouncementsModule', //*************
+        'vnHubCategoryModule',
+        'vnLoaderModule',
+        'vnCardModule',
+        'vnDocumentModule', //*************
+        'vnScreenManagementModule',
+        'vnNavigationModule',
+        'vnAppMenuModule',
+        'vnAppManagementModule',
+        'vnTourModule',
+        'vnUserMenuModule',
+        'vnActivitiServiceModule',
+        'vnValidationMessageModule',
+        'ngMaterial',
+        'vnChipsModule',
+        'vnUserChipsModule',
+        'vnPatientChipsModule',
+        'vnCommentsModule',
+        'vnSnoozeModule',
+        'vnNotificationsModule',
+        'ngTouch',
+        'angular.morris-chart',
+        'vnStatsModule',
+        //'vnVisionThreeModule',
+        'ngSanitize'
+        //'vnFormsModule',
+        //'vnDataEntryModule'
+        ],function () {
+  }).config( [
+    '$compileProvider',
+    '$mdThemingProvider',
+    function( $compileProvider, $mdThemingProvider )
+    {   
+        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+        var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+        + '|chrome-extension:'
+        +currentImgSrcSanitizationWhitelist.toString().slice(-1);
+        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('blue')
+            .accentPalette('indigo');
+
+
+    }
+
+
+])//'ngRoute', 'ngTouch', 'ngAnimate'
+
+.controller('VisionController', function ( $scope, $window, gaConfig ) {
+
+
+
+  $window.addEventListener("online", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Online' );
+      indicator.removeClass( 'offline' );
+      indicator.addClass( 'online' );
+      indicator.fadeTo( 1000, 0, function(){ 
+        indicator.removeClass( 'online' );
+        indicator.attr( 'style', '' );
+        indicator.text( '' );
+         } );
+    }, true);
+
+    $window.addEventListener("offline", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Offline' );
+      indicator.addClass( 'offline' );
+      indicator.removeClass( 'online' );
+    }, true);
+
+    gaConfig.addCallback(
+    /** @param {!analytics.Config} config */
+    function(config) {
+      
+      config.setTrackingPermitted(true);
+      // If "permitted" is false the library will automatically stop
+      // sending information to Google Analytics and will persist this
+      // behavior automatically.
+    });
+
+})
+
+.factory('visionFactory',  function( 
+  $rootScope, 
+  user, 
+  vnAssemblerFactory, 
+  vnDatabaseFactory, 
+  vnNavigationFactory, 
+  vnScrollFactory ){
+  
+  var factory = {};
+  var service;
+  
+
+  factory.TASK = vnDatabaseFactory.TASK;
+  
+
+  if( config.mode === "webservice" ){
+    //service = new WebServices( $http, token, vnAssemblerFactory, databaseFactory );
+  }else{
+    service = new DemoServices( vnAssemblerFactory, vnDatabaseFactory );
+  }
+
+  var dataServices = new DataServices( service );
+
+  factory.updateData = function( item, data, callback ){
+    return dataServices.updateData( item, data, callback  );
+  };
+  
+  factory.retrieveData = function( item, callback, index, bounds, count, overrideDBLoaded, passthroughData ){
+    return dataServices.retrieveData( item, callback, index, bounds, count, overrideDBLoaded, passthroughData );
+  };
+
+  factory.retrieveDataByKey = function( item, key, callback ){
+    return dataServices.retrieveDataByKey( item, key, callback );
+  }
+
+  factory.retrieveDataWithJoin = function( item1, item2, joinOn, callback ){
+    return dataServices.retrieveDataWithJoin( item1, item2, joinOn, callback );
+  };
+
+  factory.retrieveDataAggregateWithResults = function( resultSet, item, resultSetAttribute, index, bounds, count, callback ){
+    return dataServices.retrieveDataAggregateWithResults( resultSet, item, resultSetAttribute, index, bounds, count, callback );
+  };
+
+  factory.authenticate = function( username, password, callback ){
+    return dataServices.authenticate( username, password, function(){
+      if( callback != null ){
+        callback();
+        user.token = btoa( username + ":" + password );
+      }
+    });
+  };
+
+  factory.handlePatientClick = function( patientid ){
+      if( vnScrollFactory.isScrolling() ){
+        return;
+      }
+      $rootScope.patientid = patientid;
+      vnNavigationFactory.switchScreens( 'VN_REP__PATIENT' );
+  };
+
+  return factory;
+})
+.factory('vnTrackingManagerFactory',  function( 
+  visionFactory,
+  vnWorkflowFactory,
+  $rootScope ){
+  
+  var factory = {};
+
+  /* WORKFLOW TRACKING */
+  factory.TASK_STATUS_TRACKING   = "TASK_STATUS_TRACKING";
+
+
+  // Task status updated
+  factory.taskStatusUpdated = function( task ){
+    vnWorkflowFactory.retrieveWorkflow( task.workflowid, function( workflowDefinition ){
+      var workflowDefinition = workflowDefinition[0];
+      // Set the information
+      factory.setTrackingData( factory.TASK_STATUS_TRACKING, task, function( trackingData ){});
+      
+      // See if this user is the creator of the workflow 
+      if( workflowDefinition.assigner == $rootScope.user.id ){
+        // If they are listening for a task status change then broadcast
+        if( workflowDefinition.attachments.trackingSummary != null 
+          && workflowDefinition.attachments.trackingSummary.statusChange != null 
+          && workflowDefinition.attachments.trackingSummary.statusChange.selected == true ){
+          $rootScope.$broadcast( factory.TASK_STATUS_TRACKING);
+        }
+      }
+    });
+  };
+
+  // Get all the tracking data
+  factory.retrieveTaskTrackingData = function( callback ){
+    visionFactory.retrieveData( database[ TRACKING_DATA ].name, function( trackingData ){
+      var list = new Array();
+      angular.forEach( trackingData, function( value, index ){
+        //Don't want to get all the patient events again
+        if( value.patientid == null ){
+          list.push( value );
+        }
+      });
+
+      if( callback != null ){
+        callback( list );
+      }
+    },"by_userid", {start: $rootScope.user.id, end: $rootScope.user.id});
+  }
+
+  factory.setTrackingData = function( event, task, callback ){
+    var inputData = {
+      eventdata: task,
+      trackingevent: event,
+      userid: task.assigner.id
+    };
+    
+    visionFactory.updateData( database[ TRACKING_DATA ].name, inputData, function( trackingData ){
+        if( callback != null ){
+          callback( trackingData );
+        }
+      });
+  };
+
+
+  /* PATIENT TRACKING */
+  factory.PATIENT_APPOINTMENT_STATUS_TRACKING   = "PATIENT_APPOINTMENT_STATUS_TRACKING";
+  factory.PATIENT_CLINICAL_RECORDINGS_TRACKING  = "PATIENT_CLINICAL_RECORDINGS_TRACKING";
+  factory.PATIENT_DOCUMENT_FILING_TRACKING      = "PATIENT_DOCUMENT_FILING_TRACKING";
+  factory.PATIENT_STATUS_TRACKING               = "PATIENT_STATUS_TRACKING";
+
+  var initPatientTracking = function(){
+    return {
+      appointments: {
+        trackingevent: factory.PATIENT_APPOINTMENT_STATUS_TRACKING, 
+        selected: false
+      },
+      clinicalrecordings: {
+        trackingevent: factory.PATIENT_CLINICAL_RECORDINGS_TRACKING, 
+        selected: false
+      },
+      documentfiling: {
+        trackingevent: factory.PATIENT_DOCUMENT_FILING_TRACKING, 
+        selected: false
+      }
+    };
+  };
+
+  // Updates patient tracking options for this user
+  factory.updatePatientTracking = function( patientId, tracking ){
+    tracking.patientid = patientId;
+    tracking.userid = $rootScope.user.id;
+    visionFactory.updateData( database[ TRACKING ].name, tracking, function( patientTracking ){});
+  };
+
+  // Retrieve patient tracking options for this user per patient
+  factory.retrievePatientTracking = function( patientId, callback ){
+    visionFactory.retrieveData( database[ TRACKING ].name, function( patientTracking ){
+        if( callback != null ){
+          if( patientTracking.length < 1 ){
+            patientTracking = [ initPatientTracking() ];
+          }
+          callback( patientTracking[0] );
+        }
+      }, "by_patientid_and_userid", { start: [parseInt( patientId ), parseInt( $rootScope.user.id )], end: [parseInt( patientId ), parseInt( $rootScope.user.id )] });
+  };
+  /********** END OF PATIENT TRACKING ****************/
+
+  factory.updateTracking = function( tracking ){
+    tracking.userid = $rootScope.user.id;
+    visionFactory.updateData( database[ TRACKING ].name, tracking, function( tracking ){});
+  };
+
+
+  // Retrieve tracking options for this user
+  factory.retrieveTracking = function( callback ){
+    visionFactory.retrieveData( database[ TRACKING ].name, function( allTracking ){
+        if( callback != null ){
+          callback( allTracking );
+        }
+      }, "by_userid", { start: $rootScope.user.id, end: $rootScope.user.id });
+  };
+
+  // Retrieve all tracking data globally
+  factory.retrieveTrackingData = function( callback ){
+    visionFactory.retrieveData( database[ TRACKING_DATA ].name, function( trackingData ){
+      if( callback != null ){
+        callback( trackingData );
+      }
+    },"by_trackingevent");
+  };
+
+  factory.retrieveTrackingDataForUser = function( callback ){
+    
+    factory.retrieveTrackingData( function( trackingData ){
+        var list = new Array();
+        factory.retrieveTracking( function( trackingSettings ){
+        angular.forEach( trackingSettings, function( trackingSetting, trackingSettingIndex ){
+          angular.forEach( trackingSetting, function( trackingValue, trackingIndex ){
+            angular.forEach( trackingData, function( trackingDataValue, trackingDataIndex ){
+              if( trackingValue.selected == true 
+              && trackingDataValue.patientid == trackingSetting.patientid
+              && trackingDataValue.trackingevent == trackingValue.trackingevent ){
+                list.push( trackingDataValue );
+              }
+            });
+         });
+        });
+        if( callback != null ){
+          callback( list );
+        }
+      });
+    });
+  };
+  
+  // Firstly set the data.  Then determine if this user is listening for this event.
+  factory.notifyTrackingEvent = function( event, data ){
+    var patientId = data[0];
+    factory.setPatientTrackingData( event, patientId, data, function(){});
+    if( event == factory.PATIENT_APPOINTMENT_STATUS_TRACKING ){
+      factory.retrievePatientTracking( patientId, function( tracking ){
+        if( tracking.appointments.selected == true ){
+          $rootScope.$broadcast( factory.PATIENT_STATUS_TRACKING);
+        }
+      });
+    }
+  };
+
+  // Set the tracking data
+  factory.setPatientTrackingData = function( event, patientId, data, callback ){
+    
+    var inputData = {
+      eventdata: data[1],
+      trackingevent: event,
+      userid: $rootScope.user.id,
+      patientid: patientId
+    };
+    
+    visionFactory.updateData( database[ TRACKING_DATA ].name, inputData, function( patientTrackingData ){
+        if( callback != null ){
+          callback();
+        }
+      });
+  };
+  return factory;
+})
+.run(function(
+  $rootScope, 
+  $window, 
+  $timeout,
+  vnAppManagementFactory,
+  vnDatabaseFactory, 
+  vnScreenManagementFactory,
+  vnNavigationFactory,
+  visionFactory){
+
+  $rootScope.commandBroadcaster = {};
+
+  vnDatabaseFactory.open( function(){
+    $rootScope.dbloaded = true;
+    $rootScope.$apply();
+  });
+  $rootScope.extensionUrl = "chrome-extension://"+chrome.runtime.id; 
+
+  //vnNavigationFactory.switchScreens( 'VN_LOGIN' ); //***********
+  /* This is for V3 demo only */
+  visionFactory.retrieveData( database[ PERSON ].name, function( result ){
+      $rootScope.user = result[0];
+      vnNavigationFactory.switchScreens( vnAppManagementFactory.getDefaultApp().screens[0] );
+    }, "by_email", {start: "stuart.acans@inps.net", end: "stuart.acans@inps.net"} );
+
+
+
+
+  vnScreenManagementFactory.initialiseAppBarIcons( defaultAppBar );
+  /*visionFactory.retrieveData( database[ APP_INFO ].name, function( results ){
+      
+      if( results[0].firstuse == true ){
+        $rootScope.$watch( 'screens.VN_LOGIN', function( value ){
+          if( !value ){
+              $timeout( function(){
+                $( "vn-tour[vn-first-time='true']" ).find( ".tour-container" ).effect("fade", { duration: 300, queue: false }, "easeOutCirc");
+              }, 2000 );
+
+              $timeout( function(){
+                $( "vn-tour[vn-first-time='true']" ).find( ".tour-container" ).fadeOut();
+              }, 8000 );
+          }
+        });
+        results[0].firstuse = false;
+        visionFactory.updateData( database[ APP_INFO ].name, results[0], null );
+      }
+    },null, null);*/
+})
+.value('DATE_FORMAT', 'yyyy-MM-dd')
+.value('user', {})
+.value( "patientid", null )
+.value( "gaConfig", analytics.getService('INPS_Demonstrator').getConfig() )
+.value( "gaTracker", new function(){ this.sendEvent = function(){}; this.sendAppView = function(){}; } )//analytics.getService('INPS_Demonstrator').getTracker('UA-54200302-7') )
+.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                fn(scope, {$event:event});
+            });
+        });
+    };
+})
+.directive('stopEvent', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attr) {
+                element.bind(attr.stopEvent, function (e) {
+                    e.stopPropagation();
+                });
+            }
+        };
+     })
+.directive('vnCss', function( ) {
+  var styleSheets = {};
+
+    return {
+      restrict: 'E',
+      link: function(scope, element, attrs){
+    if( styleSheets[ attrs.vnId ] == null ){
+          styleSheets[ attrs.vnId ] = true;
+          $( 'body' ).append( "<link id='" + attrs.vnId + "' href='" + attrs.vnCssFile + "' type='text/css' rel='stylesheet' />" );
+        }
+      }
+    }
+})
+.directive('ngEnter', function() {
+  return function(scope, element, attrs) {
+      element.bind("keydown keypress", function(event) {
+          if(event.which === 13) {
+              scope.$apply(function(){
+                  scope.$eval(attrs.ngEnter, {'event': event});
+              });
+
+              event.preventDefault();
+          }
+      });
+  };
+});
+
+/*.directive('ngClick', function ($timeout) {
+    var delay = 300;
+
+    return {
+        restrict: 'A',
+        priority: -1,
+        link: function (scope, elem) {
+            function onClick(evt) {
+              
+                if (ngClickDisabled) {
+                    evt.preventDefault();
+                    evt.stopImmediatePropagation();
+                } else {
+                    ngClickDisabled = true;
+                    $timeout(function () { ngClickDisabled = false; }, delay, false);
+                }
+                
+            }
+            scope.$on('$destroy', function () { elem.off('click', onClick); });
+            elem.on('click', onClick);
+        }
+    };
+});
+var ngClickDisabled = false;*/
+var jqClickDisabled = false;
+
+document.addEventListener('click', function(e) {
+    if (jqClickDisabled ) {
+        e.stopPropagation();
+    } else {
+        jqClickDisabled = true;
+        setTimeout(function () { jqClickDisabled = false; }, 300 );
+    }
+}, true);
+
+
+
+
+/*
+This is how a right click menu could be created
+
+$scope.handleRightClick = function( event ){
+    console.log( event );
+    if( !vnScreenManagementFactory.isDoubleClick() ){
+        clientX = event.target.x + 30;
+        clientY = event.target.y - 80;
+        $( ".menu.context" ).css( "left", clientX );
+        $( ".menu.context" ).css( "top", clientY );
+        vnScreenManagementFactory.openMenu( ".menu.context" );
+      }
+  };
+
+<div class="menu context">
+        <div>Create new message...</div>
+        <div>Create new task...</div>
+    </div>
+
+
+         ng-right-click="handleRightClick( $event );"
+  */
+
+

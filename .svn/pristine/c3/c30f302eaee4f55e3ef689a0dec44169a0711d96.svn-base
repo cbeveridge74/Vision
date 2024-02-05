@@ -1,0 +1,4 @@
+<vn-css vn-id="vntemperature" vn-css-file="apps/visionthree/forms/vntemperature.css"></vn-css>
+<div class="temperature">
+	TEMPERATURE
+</div>

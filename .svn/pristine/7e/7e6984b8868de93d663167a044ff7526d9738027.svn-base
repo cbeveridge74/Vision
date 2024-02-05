@@ -1,0 +1,36 @@
+angular.module('vnReceptionModule', [ 
+	'vnPeopleModule', 
+	'vnDiscussionsModule',
+	'vnAppointmentsModule'],function () {})
+.controller('vnReceptionController', function( $scope, vnAppManagementFactory, vnNavigationFactory ){
+	$scope.backbutton = false;
+	var HOME 	= 'VN_REP__HOME';
+	var PATIENT = 'VN_REP__PATIENT';
+
+	vnAppManagementFactory.registerApp( 
+		{ id: "VN_REP", 
+		name: "Vision Reception",
+		defaultapp: true,
+		icon: "images/reception_bell.svg",
+		screens: [
+			HOME,
+			PATIENT
+		],
+		helpmeto:[
+			"BOOK_SLOT"
+		]});
+
+	$scope.handleSearchSelected = function(){
+        vnNavigationFactory.switchScreens( PATIENT );
+    };
+
+    $scope.handleBackButton = function(){
+    	vnNavigationFactory.switchScreens( HOME);
+    };
+})
+.directive('vnReception', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'apps/visionreception/vnreception.html'
+    };
+});

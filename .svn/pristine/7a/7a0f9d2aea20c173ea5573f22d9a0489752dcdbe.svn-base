@@ -1,0 +1,41 @@
+.vision-snooze{
+	position: absolute;
+	z-index: 2;
+	background-color: #FFF;
+	height: 25em;
+	width: 30em;
+	box-shadow: 1px 1px 4px #CCC;
+	color: #20335E;
+	top: 10em;
+	left: 10em;
+	display: none;
+	padding: 1em;
+	padding-top: 0;
+}	
+
+.vision-snooze.open {
+	display: inline-block;
+}
+
+.vision-snooze .title {
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+	margin-top: 1em;
+}
+
+.vision-snooze .label {
+	padding: 1em 0;
+	padding-left: 1em;
+	cursor: pointer;
+	font-size: 1.2em;
+	opacity: 0.6
+}
+
+.vision-snooze .label:hover {
+	background-color: #EEE;
+}
+
+.vision-snooze .date {
+	margin-left: 2em;
+}
+	

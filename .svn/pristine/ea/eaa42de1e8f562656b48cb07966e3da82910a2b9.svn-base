@@ -1,0 +1,13 @@
+.vision-mail .task-snippet {
+    position: absolute;
+    width: 42em;
+    height: 12em;
+    bottom: 4em;
+    padding-top: 5em;
+    padding-left: 10em;
+}
+
+.vision-mail .create-view .attachment-area,
+.vision-mail .create-view .patient {
+    display: none;
+}

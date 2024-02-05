@@ -1,0 +1,13 @@
+<vn-css vn-id="vndocumentreview" vn-css-file="apps/components/document/vndocumentreview.css"></vn-css>
+<div class="document-review" ng-controller="vnDocumentReviewController" ng-init="init()">
+	<vn-title-bar 
+			vn-title="Document Review"
+			vn-show-back-button="true"
+			vn-backbutton-handler="handleBackButton()"
+			vn-show-search="false"
+			vn-show-commands="true"
+			vn-commands="informCommands"></vn-title-bar>
+	<div class="document-content">
+		<pre>{{documents.content}}</pre>
+	</div>
+</div>

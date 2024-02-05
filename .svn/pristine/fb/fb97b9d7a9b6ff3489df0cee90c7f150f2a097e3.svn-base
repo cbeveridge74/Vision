@@ -1,0 +1,152 @@
+﻿angular.element($( ".vision-parent-module" )).ready(function() {
+    // Manually setting up angular as need to load the DB first
+  
+
+
+    angular.bootstrap($( ".vision-parent-module" ), [
+        'vnVisionModule' ]);
+  });
+
+angular.module('vnVisionModule', [
+        'vnDatabaseModule',
+        'vnScrollModule',
+        'vnAssemblerModule',
+        'vnSearchModule',
+        'vnBannerModule',
+        'vnNavigationMenuModule',
+        'vnBarModule',
+        'vnTitleBarModule',
+        'vnCommandMenuModule',
+        'vnActionModule',
+        'vnLoginModule',
+        'vnReceptionModule',
+        'vnVisionAppointmentsModule',
+        'vnHubCategoryModule',
+        'vnScreenManagementModule',
+        'vnNavigationModule',
+        'vnAppMenuModule',
+        'vnAppManagementModule'],function () {
+  }).config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {   
+        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+        var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+        + '|chrome-extension:'
+        +currentImgSrcSanitizationWhitelist.toString().slice(-1);
+        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+    }
+])//'ngRoute', 'ngTouch', 'ngAnimate'
+
+.controller('VisionController', function ( $scope, $window ) {
+  $window.addEventListener("online", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Online' );
+      indicator.removeClass( 'offline' );
+      indicator.addClass( 'online' );
+      indicator.fadeTo( 1000, 0, function(){ 
+        indicator.removeClass( 'online' );
+        indicator.attr( 'style', '' );
+        indicator.text( '' );
+         } );
+    }, true);
+
+    $window.addEventListener("offline", function () {
+      var indicator = $( '.connectivity-indicator' );
+      indicator.text( 'Offline' );
+      indicator.addClass( 'offline' );
+      indicator.removeClass( 'online' );
+    }, true);
+    
+})
+
+.factory('visionFactory',  function( $rootScope, token, vnAssemblerFactory, vnDatabaseFactory, vnScreenManagementFactory ){
+  var factory = {};
+  var service;
+  
+
+  factory.TASK = vnDatabaseFactory.TASK;
+  
+
+  if( config.mode === "webservice" ){
+    //service = new WebServices( $http, token, vnAssemblerFactory, databaseFactory );
+  }else{
+    service = new DemoServices( vnAssemblerFactory, vnDatabaseFactory );
+  }
+
+  var dataServices = new DataServices( service );
+
+  
+  factory.retrieveData = function( item, callback, index, bounds, count ){
+    return dataServices.retrieveData( item, callback, index, bounds, count );
+  };
+
+  factory.authenticate = function( username, password, callback ){
+    return dataServices.authenticate( username, password, callback );
+  };
+
+  factory.handlePatientClick = function( patientid ){
+      if( vnScreenManagementFactory.checkIfScrolling() ){
+        return;
+      }
+      $rootScope.patientid = patientid;
+      vnScreenManagementFactory.switchScreens( 'home', 'patient' );
+  };
+
+  return factory;
+})
+
+.run(function(
+  $rootScope, 
+  $window, 
+  vnDatabaseFactory, 
+  vnScreenManagementFactory,
+  vnNavigationFactory){
+
+  vnDatabaseFactory.open( function(){
+    $rootScope.dbloaded = true;
+  });
+  $rootScope.extensionUrl = "chrome-extension://"+chrome.runtime.id; 
+
+  vnNavigationFactory.switchScreens( 'VN_LOGIN' ); 
+  vnScreenManagementFactory.initialiseAppBarIcons( defaultAppBar );
+})
+.value('DATE_FORMAT', 'yyyy-MM-dd')
+.value('token', '')
+.value( "patientid", null )
+.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                fn(scope, {$event:event});
+            });
+        });
+    };
+});
+
+/*
+This is how a right click menu could be created
+
+$scope.handleRightClick = function( event ){
+    console.log( event );
+    if( !vnScreenManagementFactory.isDoubleClick() ){
+        clientX = event.target.x + 30;
+        clientY = event.target.y - 80;
+        $( ".menu.context" ).css( "left", clientX );
+        $( ".menu.context" ).css( "top", clientY );
+        vnScreenManagementFactory.openMenu( ".menu.context" );
+      }
+  };
+
+<div class="menu context">
+        <div>Create new message...</div>
+        <div>Create new task...</div>
+    </div>
+
+
+         ng-right-click="handleRightClick( $event );"
+  */
+
+

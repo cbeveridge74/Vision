@@ -1,0 +1,9 @@
+<vn-css vn-id="vntracking" vn-css-file="apps/visiontasks/workflow/vntracking.css"></vn-css>
+<div class="vision-tracking">
+	<vn-title-bar 
+		vn-title="Tracking"
+		vn-show-back-button="true"
+		vn-backbutton-handler="handleBackButton()"
+		vn-show-search="false"
+		vn-show-commands="false"></vn-title-bar>
+</div>

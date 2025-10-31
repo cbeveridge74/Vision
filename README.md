@@ -1,3 +1,6 @@
+[![Profile](https://img.shields.io/badge/Author-Craig_Beveridge-2b3137?style=flat&logo=github)](https://github.com/cbeveridge74)
+[![View Skills Summary](https://img.shields.io/badge/View%20My-Skills%20Summary-blue?style=flat&logo=markdown)](https://github.com/cbeveridge74)
+
 # Vision
 
 **Vision** was developed as a **Chrome App** (sunsetted in 2023) around **2014**, designed to **demo new healthcare concepts** and offer users an **immersive, interactive experience**.  

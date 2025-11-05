@@ -1,42 +1,43 @@
 [![Profile](https://img.shields.io/badge/Author-Craig_Beveridge-2b3137?style=flat&logo=github)](https://github.com/cbeveridge74)
 [![View Skills Summary](https://img.shields.io/badge/View%20My-Skills%20Summary-blue?style=flat&logo=markdown)](https://github.com/cbeveridge74)
 
+# 2014
+
 # Vision
 
-**Vision** was developed as a **Chrome App** (sunsetted in 2023) around **2014**, designed to **demo new healthcare concepts** and offer users an **immersive, interactive experience**.  
-It served both as a **prototype for feedback collection** and as a **demonstration tool** showcased at **seminars across the UK**.
+**Vision** was developed as a **Chrome App** (Chrome Apps was sunsetted in 2023), designed to **demo new healthcare concepts** and offer users an **immersive, interactive experience**.  It served both as a **prototype for feedback collection** and as a **demonstration tool** showcased at **seminars across the UK**.
 
 ---
 
 ## Overview
 
-The app was **fully offline**, powered by **mock clinical data**, and focused on exploring future directions for digital healthcare interfaces.  
-Its goal was to provide a **hands-on environment** where clinicians and stakeholders could experiment with potential workflows and features.
+The app was **fully offline**, powered by **mock clinical data** stored in **indexeddb**, and focused on exploring future directions for digital healthcare interfaces.  Its offline nature allowed it to be used for demos in any location, the goal to provide a **hands-on environment** where clinicians and stakeholders could experiment with potential workflows and features.
 
 ---
 
 ## Core Functional Areas
 
 ### Appointments
-Simulated patient appointment management, including scheduling and summaries.
+Simulated patient appointment management, including scheduling and summaries.  
 
+  
 ### Consultations
-Displayed and managed mock clinical consultations for demonstration purposes.
+Displayed and managed mock clinical consultations for demonstration purposes.  
 
 ### Clinical Messaging
-Modeled secure messaging between clinical users to illustrate real-time communication.
+Modeled secure messaging between clinical users to illustrate real-time communication.  
 
 ### Fast Clinical Search
 Offered **rapid and intelligent search** capabilities for:
 - **Drugs**
-- **Clinical codes (SNOMED CT)**
+- **Clinical codes (SNOMED CT)**  
 
 ### OCR of Clinical Correspondence
 Integrated **Tesseract OCR** to scan and extract text from clinical documents,  
-helping users **quickly identify and confirm key patient data**.
+helping users **quickly identify and confirm key patient data**.  
 
 ### Tasks & Workflow
-Enabled users to **create and manage custom workflows**, simulating a flexible task-driven clinical environment.
+Enabled users to **create and manage custom workflows**, simulating a flexible task-driven clinical environment.  
 
 ---
 

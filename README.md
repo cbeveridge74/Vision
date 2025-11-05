@@ -5,7 +5,7 @@
 
 # Vision
 
-**Vision** was developed as a **Chrome App** (Chrome Apps was sunsetted in 2023), designed to **demo new healthcare concepts** and offer users an **immersive, interactive experience**.  It served both as a **prototype for feedback collection** and as a **demonstration tool** showcased at **seminars across the UK**.
+**Vision** was developed as a **Chrome App** (Chrome Apps were sunsetted in 2023), designed to **demo new healthcare concepts** and offer users an **immersive, interactive experience**.  It served both as a **prototype for feedback collection** and as a **demonstration tool** showcased at **seminars across the UK**.
 
 ---
 
